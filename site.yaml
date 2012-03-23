@@ -29,8 +29,14 @@ context:
                 name: Code
                 description: Code
                 css_class: code
-                type: node
+                type: url
                 url: https://github.com/stucchio
+            -
+                name: Work
+                description: Work
+                css_class: work
+                type: node
+                url: /work.html
 meta:
     nodemeta: meta.yaml
     created: !!timestamp 2010-01-01 00:00:00
