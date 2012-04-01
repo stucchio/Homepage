@@ -28,13 +28,13 @@ Items with a higher quality will be returned first.
 
 To query Hobo, use the thrift interface. It has one method:
 
-    find(1:string category_name, 2:list<string> features, 3:byte red, 4:byte green, 5:byte blue, 6:double colorDist, 7:i32 cost_min, 8:i32 cost_max, 9:i32 page):
+    find(category_name, features, red, green, blue, colorDist, cost_min, cost_max, page)
 
-Most fields are self explanatory - `colorDist` represents how similar hobo will require the color to be, and `page` represents which page of the results should be returned.
+Most fields are self explanatory - `colorDist` represents how similar hobo will require the color to be, and `page` represents which page of the results should be returned. The field `features` should be a list of feature id's (represented as strings).
 
-### Color Distance - the [CIELab Metric](http://en.wikipedia.org/wiki/Color_difference)
+### Color Distance - the CIELab Metric
 
-Color distance is calculated using the [CIELab Metric](http://en.wikipedia.org/wiki/Color_difference). The [CIELab metric](http://en.wikipedia.org/wiki/Color_difference) is a way of assigning a numerical distance to a pair of colors, representing how similar they are. A similarity of 0 implies the colors are equal.
+Color distance is calculated using the [CIELab Metric](http://en.wikipedia.org/wiki/Color_difference), which is a method of assigning a numerical distance to a pair of colors that represents how similar they are. A similarity of 0 implies the colors are equal. Humans tend to perceive colors with distance in the region of 0-3 as being identical, and 0-10 as reasonably similar.
 
 The CIELab Metric has been formulated to model human perception of color. It is far more accurate than doing things like, for example, `sqrt( (x.red-y.red)^2+(x.blue-y.blue)^2+(x.green-y.green)^2 )`.
 
