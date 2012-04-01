@@ -1,3 +1,5 @@
 content/blog/tags/*
 deploy/*
 .hyde_deps
+s3cfg
+
