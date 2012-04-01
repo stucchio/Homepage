@@ -3,9 +3,9 @@
 {% block main %}
 <section class="archives">
 <h1 class="tag title">{{ tag.name }}</h1>
-<ul class="posts clear">
+<ul class="posts">
 {% for resource in walker() -%}
-<li class="post clear">
+<li class="post">
     <time datetime="{{ resource.meta.created.strftime('%Y-%m-%d') }}">
         {{ resource.meta.created.strftime('%a, %d %b %Y') }}
     </time>
