@@ -8,12 +8,13 @@ description: Home page for the BASIC hyde template
 {% filter markdown|typogrify -%}
 # Welcome
 
-I'm a software developer with a focus on backends and data analysis.
+I'm a software developer with a focus on backends and data analysis. Whatever you are looking for is probably in the nav bar, to the right.
 
 {%- endfilter %}
 {% from "macros.j2" import render_excerpt with context %}
 
 <section class="blog_excerpt">
+<h2>From the Blog</h2>
 {% set latest = site.content.walk_resources_sorted_by_time()|first %}
 
 {% if latest -%}
