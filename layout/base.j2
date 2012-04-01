@@ -38,14 +38,22 @@
   {% endblock favicons %}
 
   {% block css %}
-  <link rel="stylesheet" href="{{ media_url('css/site.css') }}">
-  <link rel="stylesheet" href="{{ media_url('css/syntax.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ media_url('css/reset.css') }}" media="screen" title="html5doctor.com Reset Stylesheet" />
+
+  <!-- in the CSS3 stylesheet you will find examples of some great new features CSS has to offer -->
+  <link rel="stylesheet" type="text/css" href="{{ media_url('css/css3.css') }}" media="screen" />
+
+  <!-- general stylesheet contains some default styles, you do not need this, but it helps you keep a uniform style -->
+  <link rel="stylesheet" type="text/css" href="{{ media_url('css/general.css') }}" media="screen" />
+
+  <!-- grid's will help you keep your website appealing to your users, view 52framework.com website for documentation -->
+  <link rel="stylesheet" type="text/css" href="{{ media_url('css/grid.css') }}" media="screen" />
   {% endblock css %}
 
   {% block headjs %}
   <!-- All JavaScript at the bottom, except for Modernizr which
         enables HTML5 elements & feature detects -->
-    <script src="{{ media_url('js/libs/modernizr-1.7.min.js') }}"></script>
+    <script src="{{ media_url('js/modernizr-1.7.min.js') }}"></script>
   {% endblock headjs %}
   {% block endhead %}{% endblock endhead %}
 </head>
@@ -54,25 +62,35 @@
   <div id="container">
       {% block container %}
       <div id="main" role="main">
+	<div class="row">
           <header class="banner clearfix">
           {% block header -%}
+	  <div class="logo col_9 col">
             <h1>Chris Stucchio</h1>
             <h2>{{ resource.meta.title }}</h2>
+	    </div>
           {%- endblock %}
-          {% block nav %}
-          {% from "macros.j2" import render_nav with context %}
-          {{ render_nav(menu, 'main_nav') }}
-          {% endblock %}
+	    <nav class="col_7 col">
+              {% block nav %}
+              {% from "macros.j2" import render_nav with context %}
+              {{ render_nav(menu, 'main_nav') }}
+              {% endblock %}
+	    </nav>
           </header>
-          <section class="content">
+	</div>
+          <section class="row" id="styled">
+	    <article>
           {% block main %}
           {% endblock main %}
+	    </article>
           </section>
       </div>
     {% endblock container %}
   </div> <!--! end of #container -->
-  <footer>
+  <footer class="row">
+    <div class="col_16 col">
       Powered by <a href="http://ringce.com/hyde">hyde</a>.
+    </div>
   </footer>
   {% endblock content%}
   {% block js %}
