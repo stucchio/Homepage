@@ -1,5 +1,5 @@
 ===
-title: BASIC blog full text feed
+title: Chris Stucchio's Blog
 extends: atom.j2
 listable: false
 ===
