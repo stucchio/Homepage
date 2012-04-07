@@ -1,5 +1,9 @@
   {% extends "base.j2" %}
 
+  {% block endhead %}
+  <link href="/blog/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+  {% endblock %}
+
   {% block main -%}
 
    <article class="post">
