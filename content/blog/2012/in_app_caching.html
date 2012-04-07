@@ -40,9 +40,12 @@ The template might look something like this:
 
 This is not the fastest way to render the view. When the currency field is accessed inside the template, a second sql query is made to retrieve the currency object:
 
-    SELECT "trading_security"."id", "trading_security"."name", "trading_security"."description", "trading_security"."currency_id" FROM "trading_security" WHERE "trading_security"."id" = 142271
+    SELECT "trading_security"."id", "trading_security"."name", "trading_security"."description",
+           "trading_security"."currency_id" FROM "trading_security"
+	   WHERE "trading_security"."id" = 142271
 
-    SELECT "trading_currency"."id", "trading_currency"."name" FROM "trading_currency" WHERE "trading_currency"."id" = 136
+    SELECT "trading_currency"."id", "trading_currency"."name" FROM "trading_currency"
+            WHERE "trading_currency"."id" = 136
 
 In my setup (a couple of large instances on EC2), these two queries took 2-3ms each. There isn't much that we can do in the way of database optimization to speed this up - the network latency between these two boxes is 1.8ms:
 
@@ -64,9 +67,11 @@ Django has a built in solution for this - [select_related](https://docs.djangopr
 
 The resulting SQL query retrieves both the security and the currency:
 
-    SELECT "trading_security"."id", "trading_security"."name", "trading_security"."description", "trading_security"."currency_id",
-           "trading_currency"."id", "trading_currency"."name" FROM "trading_security" LEFT OUTER JOIN "trading_currency" ON
-                ("trading_security"."currency_id" = "trading_currency"."id") WHERE "trading_security"."id" = 146076
+    SELECT "trading_security"."id", "trading_security"."name", "trading_security"."description",
+           "trading_security"."currency_id", "trading_currency"."id", "trading_currency"."name"
+           FROM "trading_security" LEFT OUTER JOIN "trading_currency" ON
+                ("trading_security"."currency_id" = "trading_currency"."id")
+	        WHERE "trading_security"."id" = 146076
 
 This takes me 2-6ms to run, an improvement but not a big one. It is a considerably bigger improvement when accessing many `Security` objects simultaneously (e.g., `[ i.currency for i in Security.objects.all()[0:50] ]`) - the latencies involved in repeatedly querying for the currency definitely add up.
 
@@ -109,18 +114,22 @@ Another possible solution to this problem is to use memcached. We might define `
 
     def get_currency(self):
         result = cache.get(currency_by_id' + str(self.currency_id))
-	if not result:
-	    result = Currency.objects.get(id=self.currency_id)
-	    cache.set(currency_by_id' + str(self.currency_id), result)
-	return result
+        if not result:
+            result = Currency.objects.get(id=self.currency_id)
+            cache.set(currency_by_id' + str(self.currency_id), result)
+        return result
 
 The problem with this approach is that it's not much faster than just querying the database. In a simple test measuring the time it takes to run `[ i.get_currency() for i in Security.objects.all()[0:50] ]` (each currency was already in the cache), I found that this approach took about 40ms to run. For comparison, `[i.currency for i in Security.objects.all()[0:50] ]` took about 50ms.
 
-Of course, if your memcached server is on the same box as the webserver, latency won't be a problem.
+(I use nice round numbers to avoid the appearance of false precision - these numbers varied from moment to moment, presumably due to variations in network speed in EC2.)
 
 The reason for this is network latency - it's impossible for `cache.get` to return a result more quickly than about 1ms.
 
 For comparison, the in-app has latency lower than 1us (1 microsecond). Using the in-app cache, `[ i.get_currency() for i in Security.objects.all()[0:50] ]` runs in 5-7ms.
+
+Of course, if your memcached server is on the same box as the webserver, latency won't be a problem.
+
+(Side note: I believe the reason the database was nearly as fast as memcached is because the `Currency` table was already sitting in the operating system's disk cache, minimizing disk seeks. This is possible due again to how few currencies actually exist.)
 
 ## Use Django's Managers to do it automatically
 
