@@ -71,6 +71,8 @@ article>ul>li {
 	list-style: none;
 }
 
+
+
 article>ul>li p li {
 	list-style: circle;
 }
@@ -100,6 +102,10 @@ dd {
 
 ul li, ol li {
 	line-height: 20px;
+}
+
+ol li {
+	list-style: decimal;
 }
 
 li ul, li ol {
