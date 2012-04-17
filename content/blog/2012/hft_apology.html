@@ -15,9 +15,12 @@ In this blog post, I'll attempt to explain the basics of how high frequency trad
 
 {%- endmark %}
 
+
+Also, after you are done reading, go read the [HN Comments](http://news.ycombinator.com/item?id=3852341). Many of them are excellent. In particular, some clarification and correction is made to what I've posted - e.g., [Midpoint Passive Liquidity](http://usequities.nyx.com/markets/nyse-arca-equities/order-types) orders are discussed, which is a partial exception to my talk of the subpenny rule.
+
 ## Mechanics of HFT
 
-Any serious discussion of HFT needs to begin with an explanation of the mechanics of how HFT works. The fundamental object in HFT (or exchange-traded securities in general) is the order book. Suppose Mal comes along and wishes to purchase some shares of some stock. He'll probably have in mind some quantity he wishes to purchase, and he probably has some maximum price in mind. So Mal approaches a matching engine (e.g., [ARCA](http://www.nyxdata.com/page/1084), [BATS](http://batstrading.com/)) and places his order there:
+Any serious discussion of HFT needs to begin with an explanation of the mechanics of how HFT works. The fundamental object in HFT (or exchange-traded securities in general) is the order book. Suppose Mal comes along and wishes to purchase some shares of Blue Sun. He'll probably have in mind some quantity he wishes to purchase, and he probably has some maximum price in mind. So Mal approaches a matching engine (e.g., [ARCA](http://www.nyxdata.com/page/1084), [BATS](http://batstrading.com/)) and places his order there:
 
     BUY(owner=Mal, max_price=20.00, quantity=100)
 
