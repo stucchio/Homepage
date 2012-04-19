@@ -3,8 +3,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,blockquote,pre,a,abbr,
 
 
 pre {
-	overflow-x: scroll;
-	overflow-y: hidden;
+	overflow: hidden;
 	border: 1px solid #BFBFBF;
 	padding: 10px;
 	margin: 20px 0;
