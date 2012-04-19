@@ -12,7 +12,8 @@ However, I ran into problems immediately after restarting it:
 
     #!bash
     $ hadoop fsck /
-    Exception in thread "main" java.io.IOException: Server returned HTTP response code: 503 for URL: http://0.0.0.0:50070/fsck?path=%2F
+    Exception in thread "main" java.io.IOException: \
+                        Server returned HTTP response code: 503 for URL: http://0.0.0.0:50070/fsck?path=%2F
        at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1441)
        at org.apache.hadoop.hdfs.tools.DFSck.run(DFSck.java:123)
        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:65)
@@ -28,8 +29,11 @@ Apart from this, my data seemed to be in good shape. However, the task tracker a
     11/02/20 22:00:05 INFO mapred.JobClient:  map 100% reduce 0%
     11/02/20 22:03:59 INFO mapred.JobClient: Task Id : attempt_201102202150_0001_m_000001_0, Status : FAILED
     Too many fetch-failures
-    11/02/20 22:03:59 WARN mapred.JobClient: Error reading task outputServer returned HTTP response code: 503 for URL: http://stylewok-hadoop:50060/tasklog?plaintext=true&amp;taskid=attempt_201102202150_0001_m_000001_0&amp;filter=stdout
-    11/02/20 22:03:59 WARN mapred.JobClient: Error reading task outputServer returned HTTP response code: 503 for URL: http://stylewok-hadoop:50060/tasklog?plaintext=true&amp;taskid=attempt_201102202150_0001_m_000001_0&amp;filter=stderr
+    11/02/20 22:03:59 WARN mapred.JobClient: Error reading task outputServer returned\
+        HTTP response code: 503 for URL:
+        http://stylewok-hadoop:50060/tasklog?plaintext=true&amp;taskid=attempt_201102202150_0001_m_000001_0&amp;filter=stdout
+    11/02/20 22:03:59 WARN mapred.JobClient: Error reading task outputServer returned HTTP response code: 503 for URL:
+        http://stylewok-hadoop:50060/tasklog?plaintext=true&amp;taskid=attempt_201102202150_0001_m_000001_0&amp;filter=stderr
     11/02/20 22:04:06 INFO mapred.JobClient:  map 93% reduce 0%
 
 A quick google search turned up only another person who ran into this problem, but no solution. So I'm posting here, in the hope that this post is helpful to other people who run into this issue.
@@ -42,12 +46,15 @@ It's definitely uninitialized. From the namenode log:
     $ less /var/log/hadoop/hadoop-namenode-HOSTNAME-hadoop.log
     ...
     2011-02-20 22:38:31,789 INFO org.mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
-    2011-02-20 22:38:31,835 INFO org.apache.hadoop.http.HttpServer: Port returned by webServer.getConnectors()[0].getLocalPort() before open() is -1. Opening the listener on 50070
+    2011-02-20 22:38:31,835 INFO org.apache.hadoop.http.HttpServer: Port returned by webServer.getConnectors()[0].getLocalPort()
+        before open() is -1. Opening the listener on 50070
     2011-02-20 22:38:31,836 INFO org.apache.hadoop.http.HttpServer: listener.getLocalPort() returned 50070
     webServer.getConnectors()[0].getLocalPort() returned 50070
     2011-02-20 22:38:31,836 INFO org.apache.hadoop.http.HttpServer: Jetty bound to port 50070
     2011-02-20 22:38:31,836 INFO org.mortbay.log: jetty-6.1.14
-    2011-02-20 22:38:31,932 WARN org.mortbay.log: Failed startup of context org.mortbay.jetty.webapp.WebAppContext@7c19f9d2/,file:/usr/local/hadoop/webapps/hdfs java.util.zip.ZipException: error in opening zip file
+    2011-02-20 22:38:31,932 WARN org.mortbay.log: Failed startup of context\
+         org.mortbay.jetty.webapp.WebAppContext@7c19f9d2/,file:/usr/local/hadoop/webapps/hdfs\
+         java.util.zip.ZipException: error in opening zip file
        at java.util.zip.ZipFile.open(Native Method)
        at java.util.zip.ZipFile.(ZipFile.java:114)
        at java.util.jar.JarFile.(JarFile.java:135)
