@@ -7,6 +7,7 @@
   {% block main -%}
 
    <article class="post">
+   <h3>{{ resource.meta.title }}</h3>
       <time datetime="{{ resource.meta.created.strftime('%Y-%m-%d') }}">
         Posted: {{ resource.meta.created.strftime('%a, %d %b %Y') }}
       </time>
@@ -44,7 +45,7 @@
       {%- endfilter %}
     </article>
 
-    <div class="row">
+    <div class="row" id="pagination">
       <div class="col col_16">
       <a class="backlink" href="{{ content_url(resource.node.url) }}"> Back to list</a>
       <a class="prev{{' disabled' if not resource.prev_by_time }}" title="{{ resource.prev_by_time.meta.title }}" {% if resource.prev_by_time %}href="{{ content_url(resource.prev_by_time.url) }}"{% endif %}> Previous </a>

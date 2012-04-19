@@ -1,10 +1,5 @@
 <!doctype html>
-<!-- https://github.com/paulirish/html5-boilerplate/blob/master/index.html -->
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js">
 <head>
   {% block starthead %}{% endblock starthead %}
   <meta charset="{{ resource.meta.charset }}">
@@ -26,16 +21,8 @@
   {% endblock favicons %}
 
   {% block css %}
-  <link rel="stylesheet" type="text/css" href="{{ media_url('css/reset.css') }}" media="screen" title="html5doctor.com Reset Stylesheet" />
-
-  <!-- in the CSS3 stylesheet you will find examples of some great new features CSS has to offer -->
-  <link rel="stylesheet" type="text/css" href="{{ media_url('css/css3.css') }}" media="screen" />
-
-  <!-- general stylesheet contains some default styles, you do not need this, but it helps you keep a uniform style -->
-  <link rel="stylesheet" type="text/css" href="{{ media_url('css/general.css') }}" media="screen" />
-
-  <!-- grid's will help you keep your website appealing to your users, view 52framework.com website for documentation -->
-  <link rel="stylesheet" type="text/css" href="{{ media_url('css/grid.css') }}" media="screen" />
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="{{ media_url('css/style.css') }}" media="screen" title="Main Stylesheet" />
   {% endblock css %}
 
   {% block headjs %}
@@ -60,39 +47,38 @@
 </head>
 <body id="{{ resource.meta.id if resource.meta.id else resource.slug }}">
   {% block content %}
-  <div id="container">
-      {% block container %}
-      <div id="main" role="main">
-	<div class="row">
-          <header class="banner clearfix">
-          {% block header -%}
-	  <div class="logo col_9 col">
-            <h1>Chris Stucchio</h1>
-            <h2>{{ resource.meta.title }}</h2>
-	    </div>
-          {%- endblock %}
-	    <nav class="col_7 col">
-              {% block nav %}
-              {% from "macros.j2" import render_nav with context %}
-              {{ render_nav(menu, 'main_nav') }}
-              {% endblock %}
-	    </nav>
-          </header>
+<div id="container">
+	{% block container %}
+	<div id="main" role="main">
+		<div class="row">
+			<header class="banner clearfix">
+			{% block header -%}
+				<div class="logo col_9 col">
+					<h1>Chris Stucchio</h1>
+				</div>
+			{%- endblock %}
+				<nav class="col_7 col">
+					{% block nav %}
+					{% from "macros.j2" import render_nav with context %}
+					{{ render_nav(menu, 'main_nav') }}
+					{% endblock %}
+				</nav>
+			</header>
+		</div>
+		<section class="row" id="styled">
+			<article>
+			{% block main %}
+			{% endblock main %}
+			</article>
+		</section>
 	</div>
-          <section class="row" id="styled">
-	    <article>
-          {% block main %}
-          {% endblock main %}
-	    </article>
-          </section>
-      </div>
     {% endblock container %}
-  </div> <!--! end of #container -->
-  <footer class="row">
-    <div class="col_16 col">
-      Powered by <a href="http://ringce.com/hyde">hyde</a>.
-    </div>
-  </footer>
+</div> <!--! end of #container -->
+<footer class="row">
+	<div class="col_16 col">
+		Powered by <a href="http://ringce.com/hyde">hyde</a>.
+	</div>
+</footer>
   {% endblock content%}
   {% block js %}
   <!-- Javascript at the bottom for fast page loading -->
