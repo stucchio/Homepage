@@ -44,7 +44,8 @@
       {% block post -%}{%- endblock %}
       {%- endmark %}
       {%- endfilter %}
-    </article>
+
+   </article>
 
     <div class="row" id="pagination">
       <div class="col col_16">
@@ -53,6 +54,21 @@
       <a class="next{{' disabled' if not resource.next_by_time }}" title="{{ resource.next_by_time.meta.title }}" {% if resource.next_by_time %} href="{{ content_url(resource.next_by_time.url) }}"{% endif %}> Next </a>
       </div>
     </div>
+
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+	var disqus_shortname = 'chrisstucchiosblog';
+	var disqus_identifier = "{{resource.meta.title}}-{{resource.meta.created}}";
+	var disqus_url = "http://www.chrisstucchio.com{{resource.url}}";
+ 	(function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
