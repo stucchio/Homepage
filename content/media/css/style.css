@@ -190,6 +190,7 @@ header .logo {
 }
 
 header.banner h1 {
+	font-size: 46px;
 	color: #C46D3B;
 }
 
@@ -281,6 +282,9 @@ article.post {
 
 #pagination {
 	text-align: center;
+	border-top: 1px solid #BFBFBF;
+	padding: 10px 0;
+	margin-top: 20px;
 	overflow: hidden;
 }
 
