@@ -152,7 +152,7 @@ body {
 }
 
 a {
-	color: #324654;
+	color: rgb(126,0,0);
 	-webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
