@@ -28,6 +28,8 @@
 	</div>
 
 	<div class="col col_7">
+	  <a href="http://news.ycombinator.com/submit" class="hn-share-button" data-title="{{resource.meta.title}}" >Vote on HN</a>
+
 	  <div id="twitter_share">
 	    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="{{ tweet_via }}">Tweet</a>
 	    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
@@ -88,5 +90,16 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
 </script>
+
+<script>
+    //Hacker news button
+    (function(d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.src = '/media/js/hnbutton.js';
+        s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+</script>
+
 
   {%- endblock %}
