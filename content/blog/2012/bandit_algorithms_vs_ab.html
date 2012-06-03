@@ -176,3 +176,7 @@ There is a theorem proven in the [paper](http://homes.dsi.unimi.it/~cesabian/Pub
 This value will *always* be larger than either `num_plays * (1-e/2)` or `num_plays * (1 - Err)` provided `num_plays` is sufficiently large.
 
 This means that UCB1 will always beat both A/B testing and "20 lines of code...". (Though actually, UCB1 will take only marginally more than 20 lines of code.)
+
+# Conclusion
+
+If you don't do any of this stuff (A/B, epsilon-greedy, MAB), pick whichever one is easiest and do it. Any of these fine optimization methods are *vastly* better than nothing. If you really want to be optimal, try UCB1 or any of the more modern adaptive bandit methods. They are marginally better than A/B tests.
