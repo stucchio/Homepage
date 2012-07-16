@@ -1,6 +1,6 @@
 ---
 title: Minimize your cloud costs with GLPK and Haskell
-created: !!timestamp '2012-07-16 10:00:00'
+created: !!timestamp '2012-07-16 8:00:00'
 tags:
     - linear programming
     - haskell
@@ -43,7 +43,7 @@ Here, `x` is a finite dimensional vector, in computational terms, an array with 
 
 The constraint takes the form `M*x >= v`, where `M` is a matrix, and `v` is a vector. Inequality is interpreted pointwise. A simple example:
 
-    find argmax 2*x+y
+    find argmax 1.5*x+y
     subject to:
         x >= 0
         y >= 0
@@ -53,9 +53,11 @@ The constraints demand that the solution `(x, y)` lives in a bounded set, specif
 
 So where can the solution lie?
 
-The first fact to observe is that it can't lie on the *interior* of the triangle. It must be on one of the edges. To see why this is so, imagine the maximum were at some point`(x0, y0)` inside the triangle but not on the edge. In that case, I can find a very small value `d` for which `(x0+d, y0)` is still inside the triangle - specifically, I just pick `d` equal to half the distance to the edge. If I compute `f(x0+d,y0) = 2*x0+2*d+y0`, then this value is bigger than `f(x0,y)=2*x0+y0`. This means that `(x0, y0)` was not really the maximum.
+The first fact to observe is that it can't lie on the *interior* of the triangle. It must be on one of the edges. To see why this is so, imagine the maximum were at some point`(x0, y0)` inside the triangle but not on the edge. In that case, I can find a very small value `d` for which `(x0+d, y0)` is still inside the triangle - specifically, I just pick `d` equal to half the distance to the edge. If I compute `f(x0+d,y0) = 1.5*x0+1.5*d+y0`, then this value is bigger than `f(x0,y)=1.5*x0+y0`. This means that `(x0, y0)` was not really the maximum.
 
 I can make similar arguments about the edges. Suppose `p` is a point on the edge of triangle (but not the corner), and suppose `d` is a vector pointing along the edge. By the linearity of the objective function, `f(p+d)=f(p)+f(d)`. If `f(d) > 0`, then I can increase the objective function by moving in the direction of `d`, otherwise I can increase it by moving in the direction of `-d`. This means the maximum can't be on the edge either, except in the special case that `f(d)=0`.
+
+![diagram illustrating reasoning](polygon_diagram.png)
 
 So since the maximum of the objective function doesn't live inside the triangle or on the side, we find it must like at one of the corners of the triangle.
 
@@ -68,7 +70,6 @@ This observation gives rise to the [simplex algorithm](https://en.wikipedia.org/
 5. Declare victory.
 
 In practice, you need to be a lot more careful than this. But in principle, this is the core of the simplex algorithm.
-
 
 
 How it's used
@@ -118,11 +119,14 @@ from [glpk-hs](http://hackage.haskell.org/package/glpk-hs), which translates thi
     dailyCost :: Map.Map [Char] Double -> LinFunc [Char] Double
     dailyCost loadPattern = let
         periods = Map.keys loadPattern
-        reservationFixedCostsObj = [ ( cost / 365.0, "reservation_" ++ kind) | (kind, cost) <- reservationFixedCosts ] -- cost of reserving an instance
-        reservationVariableCostsObj = [ (cost*8, "reserved_" ++ kind ++ "_" ++ period) -- cost of *running* the reserved instance
+        reservationFixedCostsObj = [ ( cost / 365.0, "reservation_" ++ kind)
+	                             | (kind, cost) <- reservationFixedCosts ] -- cost of reserving an instance
+        reservationVariableCostsObj = [ (cost*8, "reserved_" ++ kind ++ "_" ++ period)
                                      | (kind, cost) <- reservationVariableCosts,
                                      period <- periods ]
-        onDemandVariableCostsObj = [ (onDemandHourlyCost*8, "onDemand_" ++ p) | p <- periods ] -- cost of running on-demand instances
+				     -- cost of *running* the reserved instance
+        onDemandVariableCostsObj = [ (onDemandHourlyCost*8, "onDemand_" ++ p) | p <- periods ]
+	                           -- cost of running on-demand instances
                             in
                             linCombination (reservationFixedCostsObj ++ reservationVariableCostsObj ++ onDemandVariableCostsObj)
 
@@ -130,7 +134,11 @@ Now we need to actually represent the problem to glpk. We do this using our cons
 
 The first constraint is that we actually need to meet our capacity requirements:
 
-    capacityConstraints loadPattern = [ (linCombination ([ (1.0, "onDemand_" ++ period) ] ++ [(1.0, "reserved_" ++ k ++ "_" ++ period) | k <- reservationTypes]), load)
+    capacityConstraints loadPattern = [ (linCombination (
+                                             [ (1.0, "onDemand_" ++ period) ]
+                                          ++ [(1.0, "reserved_" ++ k ++ "_" ++ period) | k <- reservationTypes]
+                                         ),
+                                         load)
                                             | (period, load) <- (Map.assocs loadPattern)]
 
 This set of constraints means that in any period, the number of on-demand instances running plus the number of reserved instances running must be high enough to meet capacity in that period. I.e.:
@@ -139,7 +147,8 @@ This set of constraints means that in any period, the number of on-demand instan
 
 The second constraint tells GLPK that in order to *use* a reserved instance, we need to reserve it first.
 
-    reservationConstraints loadPattern = [ (linCombination [ (1.0, "reservation_" ++ k), (-1.0, "reserved_" ++ k ++ "_" ++ p) ], 0.0)  |
+    reservationConstraints loadPattern = [ linCombination [ (1.0, "reservation_" ++ k),
+                                           (-1.0, "reserved_" ++ k ++ "_" ++ p) ], 0.0  |
                                            p <- (Map.keys loadPattern),
                                            k <- reservationTypes ]
 
@@ -208,8 +217,24 @@ This applies to the particular case that we need 12 servers at night, 25 in the 
 
     Success!
     Cost: 289.9164931506849
-    Variables: fromList [("onDemand_evening",0.0),("onDemand_morning",0.0),("onDemand_night",0.0),("reservation_heavy",26.0),("reservation_light",28.0),("reservation_medium",0.0),("reserved_heavy_evening",26.0),("reserved_heavy_morning",26.0),("reserved_heavy_night",13.0),("reserved_light_evening",28.0),("reserved_light_morning",0.0),("reserved_light_night",0.0),("reserved_medium_evening",0.0),("reserved_medium_morning",0.0),("reserved_medium_night",0.0)]
+    Variables: fromList [("onDemand_evening",0.0),
+                         ("onDemand_morning",0.0),
+			 ("onDemand_night",0.0),
+			 ("reservation_heavy",26.0),
+			 ("reservation_light",28.0),
+			 ("reservation_medium",0.0),
+			 ("reserved_heavy_evening",26.0),
+			 ("reserved_heavy_morning",26.0),
+			 ("reserved_heavy_night",13.0),
+			 ("reserved_light_evening",28.0),
+			 ("reserved_light_morning",0.0),
+			 ("reserved_light_night",0.0),
+			 ("reserved_medium_evening",0.0),
+			 ("reserved_medium_morning",0.0),
+			 ("reserved_medium_night",0.0)]
+
+(Output formatted slightly for the web.)
 
 So now we know what we need to do. We make 26 heavy reservations and 28 light ones. At night we run 13 heavy reserved instances. In the morning we run 26 heavy reserved instances. In the evening, we run 26 heavy reserved instances and 28 light reserved instances.
 
-As this post shows, linear programming is fairly straightforward to use. This post only contains 30 lines of code, ignoring the `printLPSolution` function. And once you learn it, it's a great tool to have in your toolbox. A surprisingly large number of problems can be solved using linear programming, and calling glpk is virtually always easier than writing your own code to solve the problem.
+As this post shows, linear programming is fairly straightforward to use. The original code only contains about 30 lines of code, ignoring the `printLPSolution` function (this blog post contains a few more lines of code, since I reformatted a bit for the web). And once you learn it, it's a great tool to have in your toolbox. A surprisingly large number of problems can be solved using linear programming, and calling glpk is virtually always easier than writing your own code to solve the problem.
