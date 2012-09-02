@@ -1,19 +1,41 @@
 ---
-extends: base.j2
+extends: homeBase.j2
 default_block: main
-title: Home
-description: Home page for the BASIC hyde template
+title: Chris Stucchio
+description: I'm a software developer with a focus on backends and data analysis.
 ---
 
-{% filter markdown|typogrify -%}
+<div class="homepageTileContainer">
+	<div class="liveTile" id="aboutTile">
+		<h1>Chris Stucchio</h1>
+		<h2>Software Developer</h2>
+	</div>
+	
+	<div class="liveTile" id="blogTile">
+		<h1>Read my latest blog article</h1>
+		<h2>Why Multi-armed bandit algorithms are superior</h2>
+	</div>
+	
+	<div class="liveTile" id="publicationsTile">
+		<h1>Some of my publications</h1>
+		<h2>Write a sexy intro to your interesting publications</h2>
+	</div>
+	
+	<div class="liveTile" id="linksTile">
+		<h1>Stay informed</h1>
+		<h2>on Github &amp; Hacker News</h2>
+	</div>
+</div>
+
+<!--{% filter markdown|typogrify -%}
 # Welcome
 
 I'm a software developer with a focus on backends and data analysis. Whatever you are looking for is probably in the nav bar, to the right.
 
 {%- endfilter %}
-{% from "macros.j2" import render_excerpt with context %}
+{% from "macros.j2" import render_excerpt with context %}-->
 
-<section class="blog_excerpt">
+<!--<section class="blog_excerpt">
 <h2>From the Blog</h2>
 {% set latest = site.content.walk_resources_sorted_by_time()|first %}
 
@@ -25,5 +47,5 @@ I'm a software developer with a focus on backends and data analysis. Whatever yo
 
 {%- endif %}
 
-</section>
+</section>-->
 
