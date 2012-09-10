@@ -49,32 +49,16 @@
   {% block content %}
 <div id="container">
 	{% block container %}
-	<div id="main" role="main">
-		<div class="row">
-			<header class="banner clearfix">
+			<div class="header">
 			{% block header -%}
-				<div class="logo col_9 col">
-					<h1>Chris Stucchio</h1>
-				</div>
+				<h1 class="homePageLogo"><a href="/">Chris Stucchio</a></h1>
 			{%- endblock %}
-				<nav class="col_7 col">
-					{% block nav %}
-					{% from "macros.j2" import render_nav with context %}
-					{{ render_nav(menu, 'main_nav') }}
-					{% endblock %}
-				</nav>
-			</header>
-		</div>
-		<section class="row" id="styled">
-			<article>
+			</div>
 			{% block main %}
 			{% endblock main %}
-			</article>
-		</section>
-	</div>
     {% endblock container %}
 </div> <!--! end of #container -->
-<footer class="row">
+<footer>
 	<small class="footer">&copy; 2012, Chris Stucchio</small>
 </footer>
   {% endblock content%}

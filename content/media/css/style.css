@@ -148,7 +148,6 @@ blockquote p {
 
 body {
 	color: #686868;
-	background: #f9f9f9;
 }
 
 a {
@@ -177,12 +176,74 @@ a:hover {
 
 /* SITE WIDE */
 
+body {
+	background: url('styleImages/common/bodyBG.jpg') no-repeat top center;
+	background-size: 100%;
+	border-top: 5px solid #ff9600;
+}
+
 #container {
-	max-width: 900px;
+	max-width: 960px;
 	margin: 20px auto;
-	padding: 20px;
-	border: 1px solid #BFBFBF;
-	background: white;
+}
+
+.homePageLogo {
+	background: url('styleImages/common/logoHome.png') no-repeat center;
+	width: 115px;
+	height: 115px;
+	text-indent: -9999px;
+	margin: 0 auto;
+}
+
+.homePageLogo a {
+	display: block;
+	width: 115px;
+	height: 115px;
+}
+
+/* HOMEPAGE TILES */
+
+.homepageTileContainer {
+	overflow: hidden;
+	margin: 0 auto;
+	width: 912px;
+	margin-top: 35px;
+}
+
+.liveTile {
+	float: left;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.liveTile h1, .liveTile h2{
+	color: #fff;
+	font-weight: normal;
+}
+
+#aboutTile, #linksTile {
+	background: url('styleImages/homepage/aboutTileBG.jpg') no-repeat center;
+	width: 342px;
+	height: 177px;
+	border: 1px solid #ff9600;
+	margin-right: 30px;
+}
+
+#blogTile, #publicationsTile {
+	background: url('styleImages/homepage/blogTileBG.jpg') no-repeat center;
+	width: 496px;
+	height: 177px;
+	border: 1px solid #c12106;
+}
+
+#publicationsTile {
+	background: url('styleImages/homepage/publicationsTileBG.jpg') no-repeat center;
+	margin-right: 30px;
+}
+
+#linksTile {
+	background: url('styleImages/homepage/linksTileBG.jpg') no-repeat center;
+	margin-right: 0;
 }
 
 header.banner {
