@@ -151,7 +151,7 @@ body {
 }
 
 a {
-	color: rgb(126,0,0);
+	color: #ff9600;
 	-webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
@@ -182,8 +182,20 @@ body {
 	border-top: 5px solid #ff9600;
 }
 
+body.blogPage {
+	background: url('styleImages/blog-heads/01.jpg') no-repeat top center;
+	background-size: 100%;
+	border-top: 0
+}
+
+.contentBlock {
+	background: url('styleImages/blog-heads/blogHeadBG.png') repeat-x top;
+	padding-top: 50px;
+overflow: hidden;
+}
+
 #container {
-	max-width: 960px;
+	max-width: 900px;
 	margin: 20px auto;
 }
 
@@ -213,7 +225,7 @@ body {
 .liveTile {
 	float: left;
 	padding: 10px;
-	margin-bottom: 30px;
+	margin-bottom: 18px;
 }
 
 .liveTile h1, .liveTile h2{
@@ -226,7 +238,7 @@ body {
 	width: 342px;
 	height: 177px;
 	border: 1px solid #ff9600;
-	margin-right: 30px;
+	margin-right: 18px;
 }
 
 #blogTile, #publicationsTile {
@@ -238,7 +250,7 @@ body {
 
 #publicationsTile {
 	background: url('styleImages/homepage/publicationsTileBG.jpg') no-repeat center;
-	margin-right: 30px;
+	margin-right: 18px;
 }
 
 #linksTile {
@@ -249,7 +261,17 @@ body {
 header.banner {
 	padding: 25px 0;
 	overflow: hidden;
-	border-bottom: 1px solid #bfbfbf;
+}
+
+.blogHeader {
+	background: #fff;
+	margin-top: 150px; 
+}
+
+.blogHeader header.banner {
+	width: 900px;
+	margin: 0 auto;
+	padding: 15px 0;
 }
 
 header .logo {
@@ -257,8 +279,9 @@ header .logo {
 }
 
 header.banner h1 {
-	font-size: 46px;
-	color: #C46D3B;
+	font-size: 48px;
+	color: #acacac;
+	line-height: 1;
 }
 
 nav.col_7 {
@@ -272,7 +295,7 @@ nav.main_nav ul li {
 
 .main_nav a {
 	display: block;
-	margin: 11px 15px;
+	margin: 15px;
 }
 
 ul li article {
@@ -282,6 +305,17 @@ ul li article {
 
 ul li article h3 {
 	margin-bottom: 10px;
+	font-size: 36px;
+	line-height: 40px;
+
+}
+
+ul li article h3 a {
+	color: #919191;
+}
+
+ul li article h3 a:hover {
+	color: #ff9600;
 }
 
 ul li article time,

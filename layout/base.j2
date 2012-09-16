@@ -45,12 +45,12 @@
       })();
 </script>
 </head>
-<body id="{{ resource.meta.id if resource.meta.id else resource.slug }}">
+<body id="{{ resource.meta.id if resource.meta.id else resource.slug }}" class="blogPage">
   {% block content %}
-<div id="container">
+
 	{% block container %}
 	<div id="main" role="main">
-		<div class="row">
+		<div class="row blogHeader">
 			<header class="banner clearfix">
 			{% block header -%}
 				<div class="logo col_9 col">
@@ -65,6 +65,8 @@
 				</nav>
 			</header>
 		</div>
+  <div class="contentBlock">
+  <div id="container">
 		<section class="row" id="styled">
 			<article>
 			{% block main %}
@@ -73,6 +75,7 @@
 		</section>
 	</div>
     {% endblock container %}
+  </div>
 </div> <!--! end of #container -->
 <footer class="row">
 	<small class="footer">&copy; 2012, Chris Stucchio</small>
