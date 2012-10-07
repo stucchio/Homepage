@@ -78,8 +78,8 @@ article>ul>li p li {
 }
 
 p {
-	font-size: 14px;
-	line-height: 20px;
+	font-size: 17px;
+	line-height: 25px;
 	margin: 10px 0;
 }
 
@@ -342,11 +342,28 @@ nav.main_nav ul li {
 .main_nav a {
 	display: block;
 	margin: 15px;
+	color: #aeaeae;
+	font-family: 'FuturaBT-Bold';
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+.main_nav a:hover {
+	color: #ff9600;
 }
 
 ul li article {
 	padding: 10px 0;
 	border-bottom: 1px solid #f1f1f1;
+}
+
+ul li article p {
+	font-family: 'FuturaBT-Book';
+	color: #929292;
+}
+
+ul li article p a {
+	text-decoration: underline;
 }
 
 ul li article h3, .post h3 {
