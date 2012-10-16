@@ -22,6 +22,7 @@
 
   {% block css %}
   <link rel="stylesheet" type="text/css" href="{{ media_url('css/webfont.css') }}" media="screen" title="Main Stylesheet" />
+  <link rel="stylesheet" type="text/css" href="{{ media_url('css/mosaic.css') }}" media="screen" />
   <link rel="stylesheet" type="text/css" href="{{ media_url('css/style.css') }}" media="screen" title="Main Stylesheet" />
   {% endblock css %}
 
@@ -68,9 +69,19 @@
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.5.1.min.js">\x3C/script>')</script>
+  <script src="{{ media_url('js/mosaic.1.0.1.min.js') }}"></script>
   {% endblock jquery %}
 
   {% block scripts %}
+  <script type="text/javascript"> 	
+$(document).ready(function($){
+	$('.liveTile').mosaic({
+		animation	:	'slide',	//fade or slide
+		anchor_y	:	'bottom',		//Vertical anchor position
+		hover_y		:	'40px'		//Vertical position on hover
+	});
+});
+</script>
   {% endblock scripts %}
 
 

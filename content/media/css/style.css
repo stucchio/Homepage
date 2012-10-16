@@ -268,7 +268,6 @@ overflow: hidden;
 }
 
 #aboutTile, #linksTile {
-	background: url('styleImages/homepage/aboutTileBG.jpg') no-repeat center;
 	width: 341px;
 	height: 177px;
 	border: 1px solid #ff9600;
@@ -288,19 +287,45 @@ overflow: hidden;
 }
 
 #blogTile, #publicationsTile {
-	background: url('styleImages/homepage/blogTileBG.jpg') no-repeat center;
 	width: 496px;
 	height: 177px;
 	border: 1px solid #c12106;
 }
 
-#publicationsTile {
+#aboutTile a.mosaic-overlay {
+	background: url('styleImages/homepage/aboutTileBG.jpg') no-repeat center;
+	display: inline;
+	bottom:0;
+	left:0;
+}
+
+#blogTile a.mosaic-overlay {
+	background: url('styleImages/homepage/blogTileBG.jpg') no-repeat center;
+		display: inline;
+	bottom:0;
+	left:0;
+}
+
+#publicationsTile a.mosaic-overlay{
 	background: url('styleImages/homepage/publicationsTileBG.jpg') no-repeat center;
+		display: inline;
+	bottom:0;
+	left:0;
+	
+}
+
+#publicationsTile {
 	margin-right: 18px;
 }
 
-#linksTile {
+#linksTile a.mosaic-overlay{
 	background: url('styleImages/homepage/linksTileBG.jpg') no-repeat center;
+		display: inline;
+	bottom:0;
+	left:0;
+}
+
+#linksTile {
 	margin-right: 0;
 }
 
