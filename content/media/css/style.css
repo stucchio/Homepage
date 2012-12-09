@@ -413,6 +413,7 @@ nav.main_nav ul li {
 ul li article {
 	padding: 10px 0;
 	border-bottom: 1px solid #f1f1f1;
+	overflow: hidden;
 }
 
 ul li article p {
@@ -500,6 +501,32 @@ article.post {
 	float: right;
 	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 30px;
+}
+
+.listingReadMoreButton {
+	float: right;
+	font-size: 14px;
+	font-weight: bold;
+	border: 1px solid;
+	padding: 3px 20px;	
+}
+
+.listingReadMoreButton:hover {
+	background: #FF9600;
+	color: #fff;
+	border: 1px solid;
+	text-decoration: none;
+}
+
+.metaInfo {
+	float: left;
+	width: 130px;
+}
+
+.blogPostListContent {
+	float: left;
+	width: 730px;
+	margin-left: 25px;
 }
 
 #pagination {
