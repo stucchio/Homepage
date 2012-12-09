@@ -465,11 +465,19 @@ ul li article h3 a:hover {
 }
 
 ul li article time,
-article.post time {
+article.post time, .disqusCommentCount {
+	font-family: 'FuturaBT-Bold', sans-serif;
+	text-transform: uppercase;
+	line-height: 14px;
 	font-size: 12px;
-	color: #AAA;
+	color: #AEAEAE;
 	margin: 5px 0;
 	display: block;
+}
+
+.disqusCommentCount {
+	margin: 20px 0;
+	line-height: 20px;
 }
 
 article.post {

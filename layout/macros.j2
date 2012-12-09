@@ -5,7 +5,7 @@
 		<time datetime="{{ res.meta.created.strftime('%Y-%m-%d') }}">
 		    {{ res.meta.created.strftime('%d %b %Y') }}
 		</time>
-		<a href="{{ content_url(res.url) }}#disqus_thread">{{ post.image|markdown|typogrify }}</a>
+		<a href="{{ content_url(res.url) }}#disqus_thread" class="disqusCommentCount">{{ post.image|markdown|typogrify }}</a>
 	</div>
 	<div class="blogPostListContent">
 		<h3><a href="{{ content_url(res.url) }}">{{ res.meta.title }}</a></h3>
