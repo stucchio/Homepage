@@ -417,7 +417,7 @@ nav.main_nav ul li {
 
 ul li article {
 	padding: 10px 0;
-	border-bottom: 1px solid #f1f1f1;
+	margin-bottom: 30px;
 	overflow: hidden;
 }
 
@@ -455,6 +455,7 @@ article.post time {
 
 article.post {
 	margin: 10px 0;
+	overflow: hidden;
 }
 
 .tags {
@@ -487,7 +488,7 @@ article.post {
 
 .prev {
 	float: left;
-	font-family: 'Open Sans Condensed', sans-serif;
+	font-family: 'FuturaBT-Light', sans-serif;
 	font-size: 30px;
 }
 
@@ -504,7 +505,7 @@ article.post {
 
 .next {
 	float: right;
-	font-family: 'Open Sans Condensed', sans-serif;
+	font-family: 'FuturaBT-Light', sans-serif;
 	font-size: 30px;
 }
 
@@ -536,9 +537,8 @@ article.post {
 
 #pagination {
 	text-align: center;
-	border-top: 1px solid #BFBFBF;
 	padding: 10px 0;
-	margin-top: 20px;
+	margin: 30px 0;
 	overflow: hidden;
 }
 
