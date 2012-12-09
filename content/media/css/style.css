@@ -394,7 +394,7 @@ header.banner h1 {
 
 nav.col_7 {
 	float: right;
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 nav.main_nav ul li {
@@ -404,15 +404,34 @@ nav.main_nav ul li {
 
 .main_nav a {
 	display: block;
-	margin: 15px;
+	background: url('styleImages/common/navicons.jpg') no-repeat left center;
+	margin: 15px 10px;
 	color: #aeaeae;
 	font-family: 'FuturaBT-Bold';
 	text-transform: uppercase;
 	font-size: 12px;
+	line-height: 10px;
+	padding-left: 15px;
 }
 
 .main_nav a:hover {
 	color: #ff9600;
+}
+
+.main_nav a.home {
+	background-position: 0 0;
+}
+
+.main_nav a.blog {
+	background-position: 0 -11px;
+}
+
+.main_nav a.code {
+	background-position: 0 -22px;
+}
+
+.main_nav a.work {
+	background-position: 0 -32px;
 }
 
 ul li article {
