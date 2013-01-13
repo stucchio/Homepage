@@ -1,6 +1,6 @@
 ---
-title: The Metrics Manifesto
-created: !!timestamp '2013-01-04 10:00:00'
+title: The Metrics Manifesto - Why you need a metric
+created: !!timestamp '2013-01-15 10:00:00'
 tags:
     - metrics
     - data analysis
@@ -26,11 +26,13 @@ The `x` axis represents a control variable - think of it as representing a state
 
 In practice, we obviously cannot always choose arbitrary `x`. Some world states might be inaccessible - I don't know how to move to a world state where my bank account has $20B in it, for example. Sometimes you don't know which world state your actions will cause you to switch to. These are important issues, but they are a topic for another post. None of these issues change the fact that you need an objective function on world states - they just create further difficulty when you try to optimize it.
 
+**Who should read this:** My original plan was to write a single blog post about how to come up with good metrics. After it swelled to thousands of words, I decided to break it up. This post deals solely with what an objective function is and why you need one. If you are already convinced you should define an objective function and use it to make decisions, skip this post and wait for the next one.
+
 ### An example
 
 Consider Steve, a software engineer, who is trying to choose between several jobs.
 
-1. Quantitative Analyst at the Goldberg-Stannis Investment Bank. They pay $200k/year, but the work environment is a bit political, long hours are required, and the work is only moderately interesting.
+1. Quantitative Analyst at the Goldberg-Stannis Investment Bank. They pay $200k/year, but the work environment is a cutthroat and political, long hours are required, and the work is only moderately interesting.
 2. Data Scientist at Legacy Systems Media Corporation. They pay $150k/year, have a friendly work environment (but with moderate corporate BS), reasonable hours and interesting work.
 3. Engineer at Hyperlocal Social Hipster Labs, an early stage startup. They pay $90k/year, have a friendly work environment (no corporate BS), long hours, and interesting work. He also really likes his potential boss.
 
@@ -45,11 +47,19 @@ Using this metric, Steve can now make a decision. The first job is worth $200k t
 
 Constructing the objective function is merely a way for Steve to force himself to decide exactly how much he values both the monetary and non-monetary aspects of his job.
 
+#### But you can't reduce everything to money
+
+You need to reduce everything to a single common value, but using dollars is just an arbitrary choice. We could easily use units of [Utilons](http://wiki.lesswrong.com/wiki/Utility), which (roughly speaking) are increments of happiness. At the simplest level, we could simply declare `$1 = 4 utilons` and express our metric in Utilons, in which case Steve chooses job (2) which gives him 820 utilons.
+
+In some cases this might be a better choice than money, because it enables you to express the law of diminishing marginal returns. Going from $200k/year to $205k/year will not bring you as much happiness as going from $20k/year to $25k/year. If we define our objective function in units of utilons, and choose the value of money to be `10k * sqrt(money/$1000)` (or any function with decreasing first derivative), we can represent this idea quantitatively.
+
+Defining an objective function is not about ignoring non-monetary values. If you do that, you are doing it wrong. Defining an objective function is merely about deciding beforehand how much your non-monetary values are worth - how much of one you are willing to trade for the other, and under what circumstances.
+
 ## A metric is equivalent to a consistent decision making process
 
 A common critique of metric-driven decision making is that "you can't reduce the whole world down to a single number". This philosophy is simply incorrect. I will assert that any consistent and complete decision making process is fundamentally identical to a metric.
 
-Suppose you have a  decision making process. What I mean by this is that you can, given any two scenarios, decide which scenario is more desirable. Suppose further that this process is transitive, which means that if A is preferable to B and state B is preferable to C, then A is preferable to C. In that case, you can construct a well defined mapping from world states to numbers [1] - this is an exercise in elementary topology.
+Suppose you have a  decision making process. What I mean by this is that you can, given any two scenarios, decide which scenario is more desirable. Suppose further that this process is transitive, which means that if A is preferable to B and state B is preferable to C, then A is preferable to C. In that case, you can construct a well defined mapping from world states to numbers  - this is an exercise in elementary topology.
 
 To understand this example, consider a world with three states:
 
@@ -63,19 +73,21 @@ Another equally valid metric would be:
 
     m = { "A" : 100, "B" : 1000000, "C" : 1e27 }
 
-The numbers here don't actually matter - all that matters is the relative ordering. You can do this even for infinite sets, provided you believe in the axiom of choice.
+The numbers here don't actually matter - all that matters is the relative ordering.
+
+This vague idea can always be extended. (Skip this paragraph if you find it too mathy.) Consider another element in the state space, perhaps `X`. Consider the set of all elements in state space to which we've already assigned a value, and divide them into elements inferior to `X` (call this set `LT`), and elements superior to `X` (call this set `GT`). Then set the value of `m(X)` equal to `0.5 * ( max(LT) + MIN(GT))`. Apply induction and you find you have a metric on a countably infinite set. (Note that I just used the [axiom of choice](https://en.wikipedia.org/wiki/Axiom_of_choice).) This shows that a consistent decision making process is always equivalent to a metric on countably infinite sets.
 
 The key idea here: an objective function is nothing more than a convenient way to rank which world states you consider more desirable. If you consider Bipasha Basu to be more beautiful than Megan Fox, `m(girlfriend == Bipasha Basu) > m(girlfriend == Megan Fox)`. If you felt the opposite, the inequality should be reversed. Don't be fooled by the presence of mathematics - this is a very simple idea.
 
 ### Understand your tradeoffs
 
-The critical part of defining an objective function is figuring out what your tradeoffs are. In an educational setting, we want students to understand both mathematics and English. In a world of limited resources, we unfortunately cannot improve both of these skills as much a we might like. At some point, we must answer the question: "how much math skill will we give up to improve English skill?"
+The critical part of defining an objective function is figuring out what your tradeoffs are. In an educational setting, we want students to understand both mathematics and English. In a world of limited resources, we cannot improve both of these skills as much a we might like. At some point, we must answer the question: "how much math skill will we give up to gain a unit of English skill?"
 
 If we define the metric as `3 * math + 2 * english` (assuming math and english both vary from 1 to 10), we are explicitly stating that we will give up 3 units of english for every 2 units of math we might gain (or vice versa).
 
-You can't have everything, and if you don't know how much you value one goal relative to another, you don't really understand what you want.
+You can't have everything. If you can't define how much you value one goal relative to another, you don't really understand what you want.
 
-### There can be only one
+## There can be only one
 
 It is a fundamental fact of optimization that you can only have one objective function. You simply cannot simultaneously maximize two different functions, because the maxima of one might not be the maxima of the other. See the following graph:
 
@@ -89,126 +101,41 @@ Once a set of tradeoffs has been made, a decision is clear.
 
 Coming up with a single, well defined metric is nothing more than the process of thinking clearly and deciding what you want. You don't know what you want until you know your objective function.
 
-## Focus on *intrinsic* values
+## Inconsistent decisionmaking
 
-Consider a professor teaching a calculus class. He is in the process of devising his objective function, namely the grading system which will be used for his students. I will assume that the professor's only goal is to maximize his student's differentiation and integration skills. I.e., mathematical skill is an [intrinsic good](http://plato.stanford.edu/entries/value-intrinsic-extrinsic/), everything else is extrinsic. His initial idea is that a student's score will be 50 pts for the midterm (testing differentiation skills) and 50 pts for the final (testing integration skills).
+Suppose you lack a metric, or equivalently a consistent decision making process. What this means is that the decisions you make are not necessarily consistent with each other, and you may become a [Money Pump](http://lesswrong.com/lw/1dr/money_pumping_in_general/?sort=old). A money pump is a theoretical construct by which you make a series of decisions that bring you back to where you started, but slightly poorer than before.
 
-His colleague points out that students who attend class tend to do better on tests, so therefore he should adopt the grading scheme 45 midterm, 45 final, and 10 class attendance (the extrinsic term).
+The real life risk of becoming a money pump is low, mainly because it requires a malicious actor to understand and exploit your preferences. However, there is a real life risk that your decisionmaking will be path-dependent.
 
-This objective function is flawed because it incorporates an extrinsic good which is already represented by the intrinsic measurement. All else held equal, we do not care if students attend class or not - we merely think attendance will increase their mathematical skill. I'll treat the student's grade as being on a scale of [0,100].
+Consider the following scenario (numerical example shamelessly ripped off from Eliezer Yudkowsky). You must choose between one of the two options:
 
-Now suppose we wish to use our objective function to choose between two possible interventions - intervention (A) involves telling more jokes to encourage attendance (resulting in 10% greater attendance), while intervention (B) involves more difficult classroom exercises resulting in a direct 1.11% increase in skill (I choose 1.11% because 1.11% of 90 = 1). Due to time constraints we are unable to do both.
+    A) 34% chance of winning $2,400.
+    B) 33% chance of winning $2,700.
 
-The assumption that attendance improves skill may or may not be true. Let us consider both cases:
+Most people will choose option (B), as was demonstrated in an early economics experiment (see Allais, M. (1953). Le comportement de l'homme rationnel devant le risque: Critique des postulats et axiomes de l'ĂŠcole amĂŠricaine. Econometrica, 21, 503-46.).
 
-1. **Attendance helps**. Suppose attending 10% more classes improves a student's score by 1 pt. In this case, intervention (A) will increase his skill by 1%, while intervention (B) will increase skill by 1.11%. Our objective function reports an increase of 1.9 as result of telling jokes - 1 pt from increased classroom attendance and 0.9 pts from the 1% improvement in skill. In contrast, intervention (B) only improves the objective function by 1 pt, from the 1.11% increase in skill. We choose intervention (A) even though it is suboptimal, because our objective function  *double counts* the benefits of classroom attendance.
-2. **Attendence does not help**. In this case, intervention (A) increases attendance, improving the students score by 1 pt. Intervention (B) increases skill, resulting in a similar 1 pt increase in student scores. We are now ambivalent between (A) and (B), and will sometimes choose (A) in spite of it being useless.
+Now consider the following alternate path, a sequence of two decisions:
 
-Attendance may or may not improve student performance, but either way, incorrect decisions will be made if we include it in the objective function. *Just because an assumption is true does not mean it should be included in the metric.* The problem is that when you assign value to intrinsically valueless quantities, the best way to increase your score might be to improve the valueless quantity rather than the valuable one.
+    W) Win $24 with certainty.
+    X) A 33/34 chance of winning $27.
 
-The key point is that the original metric, based exclusively on exams, captures the entirety of what we want to optimize. If attendance improves performance then our skill-based metric will capture this, so there is no need to explicitly include it.
+Most people will choose (W) over (X). After this decision is made, you have the option of betting all your winnings from the previous decision:
 
-### Other examples
+    Y) 34% chance of winning $100 for every $1 you put in.
+    Z) Don't bet, and keep your money.
 
-**Users who comment are more likely to return**. Suppose we wish to maximize our page views on a website. We have observed that users who comment are more likely to return to the site, perhaps to look for replies to their comment. If we score users by treating a page view as 1 pt, but a comment as 2, we are double counting the value of a comment. If comments cause users to return to the site, the page view metric already captures this.
+Although I have no experimental evidence to back it up, I suspect most people would choose (Y) - your expected return from this gamble is 3,300%.
 
-**Preferred pedagogical methods**. It is fairly common practice when evaluating teachers for a peer reviewer to observe a teacher's behavior, and assign them a score based on whether their teaching methods conform to some pedagogical "best practice". This is unnecessary and counterproductive - if the pedagogical best practices improve student outcomes, then a [VAM score](https://en.wikipedia.org/wiki/Value-added_modeling) will already capture this. If pedagogical best practices do not improve student outcomes, then we are rewarding a teacher for unhelpful practices.
+Here is where things get dicey - choosing (W) and then (Y) is equivalent to choosing (A).
 
-**Subsidizing specific technologies**. Reducing pollution is a common government function. There are many ways to reduce pollution - producing energy via clean methods, reducing energy usage, or even increasing the efficiency of dirty methods. Depending on the circumstances, any of these methods may be the most efficient one. But a common practice of many governments is to choose one specific method to subsidize - solar energy, for example. Rather than rewarding solar cells, we should instead penalize pollution in proportion to it's emission. Solar energy might be the best way to achieve it, but we'll never know that unless we reward all pollution reduction (regardless of method).
+In reality, either situation (A) or (B) is better - for simplicity I'll assume (B). But if you approach this choice via a different decisionmaking path, applying heuristics as you go, you will suboptimally choose (A) at least some of the time.
 
-### The key test
+I.e., if your decisionmaking is inconsistent, it must be wrong at least some of the time.
 
-Whenever you have a metric comprised of multiple factors (say `m=X+Y`), ask yourself: "How much `X` am I willing to give up to get more of `Y`?"
+Without getting into too much math, it is impossible for us to get into this situation if our decisions are driven by an objective function. Our objective function cares only about the state of the world, and not what choices you made to get there - i.e., `m(A) = m(W -> Y)`, and `m(B) = m(X -> Y)`. Thus, if we consider `m(A) > m(B)`, we will also consider `m(W -> Y) > m(X -> Y)`, and vice versa if `m(B) > m(A)`. See [here](http://lesswrong.com/lw/my/the_allais_paradox/) and [here](http://lesswrong.com/lw/1dr/money_pumping_in_general/?sort=old) for more details.
 
-In practice: "How much student skill will I give up to get more classroom attendance?" "How many page views should I give up to receive more comments?" If the answer is none, then `Y` is likely an extrinsic good which is already captured by `X`.
+## Conclusion
 
-### When to include extrinsic measures
+The world is too complicated to reduce to a single number - this claim is not in dispute. Defining an objective function is not about reducing the world to a single number. It's about reducing your *decision process* to a single function (of potentially many inputs). It's nothing more than a way to keep yourself honest and consistent. It is only the first step in making good decisions, but it's an essential one.
 
-The only time it is useful to include extrinsic measures in an objective function is when the intrinsic measures are unavailable. Consider, for example, a 3 year trial of a drug designed to reduce blood pressure and prevent strokes.
-
-The assumption being made is that reducing blood pressure prevents strokes. The intrinsic measurement would be to observe the total # of strokes in a population receiving the drug, and compare that to the # of strokes in the control group. However, a 3 year trial may be too short a time to observe whether strokes occur or not. In this case, because the *intrinsic* measure we are interested in is unavailable, we substitute the *extrinsic* measure as a proxy for it.
-
-This avoids double counting since we don't actually count our intrinsic measure. Unfortunately, using proxy measures is still only as good as our assumption - if high blood pressure does not cause strokes, then the drug might be useless even if it does successfully reduce blood pressure. For this reason, intrinsic measures are always preferable - they have fewer assumptions baked in.
-
-## Good things always increase the metric
-
-In mathematics, a function `f: A->B` on ordered sets `A` and `B` is considered [monotonic](https://en.wikipedia.org/wiki/Monotonic_function) if it preserves the order of the two sets:
-
-    a < b implies that f(a) < f(b)
-
-In graphical terms, a monotonic function on the real numbers is a function for which increasing `x` always results in increasing `f(x)`. They look something like this:
-
-![Several monotonic functions](metrics_manifesto/monotonic_functions.png)
-
-When designing an objective function, monotonicity is vital. Your objective function `m(x)` should be monotonic in things you consider good.
-
-For example, if you are an educator, `m(x)` should always increase (or at least remain constant) whenever a student gains a new piece of knowledge. I.e., if a student knows how to both integrate and differentiate, his score should be at least equal to that of a student who only knows how to differentiate. If you are building a website, `m(x)` should always increase when you get more page views.
-
-If you are familiar with calculus, then a simple way to check this is with derivatives - compute `gradient m(x)` and determine that for all "good" directions `d`, `dot(gradient m(x), d) >= 0`.
-
-### Non-monotonic metrics
-
-### The ratio of two good things
-
-Consider a consumer facing website which wants to measure user engagement. They might consider measuring page views per user.
-
-This metric is deeply flawed  since it consists of the ratio of two good things. If `m=a/b`, the problem with using ratios is simply that `dm/db = -a/b^2`; this bit of calculus shows that by increasing `b` we cause the metric to go down! I.e., good things reduce our score.
-
-Following our example of page views per user, the official metric is `m = total page views / users`. Suppose that at the start, we have 1000 page views and 100 users. Then `m=10`. Suppose then we engage in an intervention - we use [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization) to drive new users to our site. This causes an influx of 100 *additional* users who collectively view 200 pages. When we compute our metric again, we get `m=1200/200=6`. That's a 40% drop!
-
-But think about what happened - we still have our 100 old users, who are highly engaged. We also have 100 new users who are only weakly engaged. That's a good thing! It's not as good as having 100 new highly engaged users, but it's better than nothing.
-
-If you are running an advertisement driven site, a better solution would simply be to choose `m=page views`. In that case, as a result of our SEO experiment, `m` has increased 20% from 1000 to 1200.
-
-If user engagement is very important to you, then you might need to do a bit more math. Suppose a user isn't merely the sum of his page views - in that case, you might instead choose `user_m(single user) = (page views)^a` (for some `a > 1`). You could then choose `m = sum (page_views_user[i])`. If `a=2`, then the value of an individual user is that user's page views *squared*. Following the same example we have, we might have started with 100 users having 10 page views each (so each user contributes 100 to `m`), resulting in `m=10000`. After our SEO campaign, we have those same users, plus 100 more users each of whom contributes only 4 to `m`. The net result is that `m` has increased from 10,000 to 10,400 (a 4% increase).
-
-Which of these metrics best reflects your reality is a subjective question based on your individual
-
-### Penalizing variation
-
-Consistency is important - it's often desirable to provide a certain level of quality to all customers. Consider an engineer manufacturing hard drives - he wants his disks to be last as long as possible before failing.
-
-In that case, an obvious metric to choose might be `m=average drive lifetime`, or equivalently `m = sum drive[i].lifetime`.
-
-However, this metric is insufficient. No matter what the *average* is, it is undesirable if 50% of your drives fail within the first month of use. Consider the following sample set of drives:
-
-    drive_lifetimes_a = [0,8,0,8,0,8,0,0,8,8]
-
-In this case, `m=4`, since half of the drives last 8 years, while the other half are dead at the moment of unboxing. Oops!
-
-It might be a better situation if all drives lasted exactly 3 years. A common (naive) method of improving one's objective function is to tweak it, and add a penalty term for variance:
-
-    m=average - const * variance
-
-(For simplicity, we'll take `const=1`.) Choosing this metric yields `m=4-16=-12` for the case of `drive_lifetimes_a`. In contrast, if the drive lifetimes were more consistent,
-
-    drive_lifetimes_b = [3,3,3,3,3,3,3,3]
-
-then we'd have `m=3-0=3`.
-
-The problem with this approach is that variance is not monotonic in good things. We always consider it a good thing if our disk drives last longer. So consider what happens when we increase the lifetime of 2 drives:
-
-    drive_lifetimes_c = [8,3,3,3,10,3,3,3]
-
-A disk drive from `drive_lifetimes_c` is at least as good as any drive from `drive_lifetimes_b`, and has a 25% chance of being dramatically better. That's good, right?
-But unfortunately, the variance of this data set is 7, yielding `m=3-7=-4`. Making 25% of our disk drives better (and none of them worse) just hurt our score!
-
-A notable example of this mistake is a frequently cited World Health Organization report on [health care rankings](http://www.who.int/whr/2000/en/whr00_en.pdf). This report purports to rank the health care system of various nations, but fully 50% of the metric they choose is comprised of variance-like terms (Health Inequality, Financial Inequality and Responsiveness Inequality) which penalize non-uniformity.
-
-#### Penalize failure, not variance
-
-The right way to go would be to penalize disk drives which last less than two years, and provide a proportionately smaller reward to drives which last a very long time. Taking the sum of the logarithms of the lifetimes fits the bill - as expressed in python/numpy:
-
-    def m1(drive_lifetime):
-        log( drive_lifetime + 0.01 ).sum()
-
-This function will always go up, but increasing a drive's lifetime from 3 years to 10 will only increase your score by 1.2. In contrast, *decreasing* the lifetime of a drive from 3 years to 1 year will lower your score by 5.7. I.e., failure is heavily penalized, but isolated success is only lightly rewarded.
-
-Another obvious choice would simply be to ignore drive lifetime after 5 years (i.e., a drive lasting 10 years is counted as lasting only 5), and assign a high penalty to drives lasting less than 2 years, i.e.:
-
-    def m2(drive_lifetime):
-        numpy.minimum(drive_lifetime, 5) - 10*(drive_lifetime <= 2).sum()
-
-The tradeoff here is that `m2` increases your score significantly if you improve drive lifetime from 1.9 years to 2.1, but gives you very little benefit for improving from 1.7 years to 1.9. In contrast, `m1` rewards you more the closer your improvements are to 0 - i.e., 0.1 to 0.3 years is a bigger gain than 0.3 to 0.5, etc. Which one is better for is a value judgement, most likely informed by the marketing department and product warranty.
-
-[1] I'm lying a little bit here. Technically, all you can do is construct a mapping from world states to some [totally ordered set](https://en.wikipedia.org/wiki/Total_order). If the set of world states is countably infinite or smaller, that totally ordered set can always be a subset of the real numbers. In mathematics there are all sorts of totally ordered sets which are not subsets of the real numbers, e.g., 2^{continuum} (where [continuum](https://en.wikipedia.org/wiki/Cardinality_of_the_continuum) is the cardinality of the real numbers). However, these are mathematical curiosities rather than practical counterexamples.
+In future posts I'll describe the properties of a good metric.
