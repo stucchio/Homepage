@@ -1,5 +1,5 @@
 ---
-title: The Metrics Manifesto - Why you need a metric
+title: The Metrics Manifesto - Why you need an objective function
 created: !!timestamp '2013-01-15 10:00:00'
 tags:
     - metrics
@@ -8,13 +8,35 @@ tags:
 
 {% mark excerpt -%}
 
-You can't optimize what you can't measure. Except in a few politicized fields such as education, this is a generally accepted truth and is typically too cliched to repeat. But once you decide to measure something it is very important to figure out a good metric. At the end of the day, given a metric `m(d)`, you will make a decision based primarily on the numerical value of `m(d)` - greater than some threshold implies "Go", while below that threshold means "Stop".
+Hypst is an early stage startup - the elevator pitch is "like Facebook, before it became mainstream". The founders of Hypst have read a lot about A/B testing and statistics, and they decide to use the techniques they learned to improve engagement.
 
-If you pick the wrong metric, you'll make the wrong decision, so it's very important to get this right. Your metric is a clear and consistent way of deciding what it is you actually want.
+The first thing they notice is that not enough people are inviting their cool friends. So they come up with alternate captions, and discover that "invite only your cool friends" achieves 20% more invitations than "invite your buddies". They commit this version to master and continue. Then they notice that no one is clicking on their "liked it before it was cool" button. They come up with alternate designs, run an A/B test, and discover that a green button achieves 20% more clicks than a blue one. The third thing they notice is that people don't engage with the Irony Feed. They tweak their algorithm, run another A/B test, and discover that a wider Irony Feed gets 20% more clicks than the original design.
+
+All their tests were run with proper statistical methods and clean experiment design. All the aforementioned test results were statistically valid. Yet somehow, after running these three tests and implementing the best version, they observe that clicks are down 2.8% across all categories. WTF just happened?
 
 {%- endmark %}
 
-I'll begin by restricting discussion in thie article to metrics which form an *objective function*. In the field of [optimization](https://en.wikipedia.org/wiki/Mathematical_optimization), an *objective function* is a quantity that you wish to maximize. I.e., your goal is to find an objective function `m(x)` such that whenever you choose an `x` which makes `m(x)` larger, the outcome of your organization is improved. I'll use the terms "metric" and "objective function" interchangeably.
+In the first test, they increased invitations by 20%. They also reduced clicks on the "liked it before it was cool" button and the "irony feed" by 10%. Since the goal was to increase invitations, they went ahead.
+
+In the second test, they increased Likes by 20%, but reduced clicks on invitations and irony by 10%. Since the goal was increasing Likes, they implemented the change.
+
+In the third test, they increased clicks on the feed by 20%, and again reduced clicks on the other two parts of the site by 10%.
+
+The net result is that each part of the site experienced a 20% improvement and 2 10% decreases - 120% x 90% x 90% = 97.2%, a 2.8% drop in overall engagement. It's a bit ironic that 3 good decision processes together lead to a bad decision.
+
+What Hypst needed was an *objective function* - a single number to represent how close they are to their overall goal, and which they use to make all decisions.
+
+**Who should read this:** My original plan was to write a single blog post about how to come up with good metrics. After it swelled to thousands of words, I decided to break it up. This post deals solely with what an objective function is and why you need one. If you are already convinced of this point, skip this post.
+
+## Objective Functions
+
+[Mathematical optimization](https://en.wikipedia.org/wiki/Mathematical_optimization) is the field of study devoted to the following problem:
+
+> Given a function `m(x)`, find the value of `x` which makes `m(x)` as large as possible.
+
+The function `m(x)` is called your *objective function*.
+
+In real world terms, `m(x)` is a success metric for your organization or process. It should be designed so that whenever you choose an `x` which makes `m(x)` larger, the outcome of your organization is improved. I'll use the terms "metric" and "objective function" interchangeably.
 
 For example, at a for-profit company the obvious choice of `m(x)` would be profit, and `x` would be the set of states of the world. The goal is then to choose actions the company can take which will cause the resulting input `x` to maximize `m(x)` (which can be constrained to exclude some actions, such as "don't be evil" in the case of Google).
 
@@ -25,35 +47,6 @@ A picture is worth a thousand words, so here is our first picture:
 The `x` axis represents a control variable - think of it as representing a state of the world (e.g., a world in which we give a patient `x` mg of a drug). The `y` value represents our objective function, or how much we value the outcome given a choice of `x`. Given two different values of `x`, we can always choose which one we prefer - we always prefer the `x` value for which the corresponding `y` value is greater.
 
 In practice, we obviously cannot always choose arbitrary `x`. Some world states might be inaccessible - I don't know how to move to a world state where my bank account has $20B in it, for example. Sometimes you don't know which world state your actions will cause you to switch to. These are important issues, but they are a topic for another post. None of these issues change the fact that you need an objective function on world states - they just create further difficulty when you try to optimize it.
-
-**Who should read this:** My original plan was to write a single blog post about how to come up with good metrics. After it swelled to thousands of words, I decided to break it up. This post deals solely with what an objective function is and why you need one. If you are already convinced you should define an objective function and use it to make decisions, skip this post and wait for the next one.
-
-### An example
-
-Consider Steve, a software engineer, who is trying to choose between several jobs.
-
-1. Quantitative Analyst at the Goldberg-Stannis Investment Bank. They pay $200k/year, but the work environment is a cutthroat and political, long hours are required, and the work is only moderately interesting.
-2. Data Scientist at Legacy Systems Media Corporation. They pay $150k/year, have a friendly work environment (but with moderate corporate BS), reasonable hours and interesting work.
-3. Engineer at Hyperlocal Social Hipster Labs, an early stage startup. They pay $90k/year, have a friendly work environment (no corporate BS), long hours, and interesting work. He also really likes his potential boss.
-
-The first thing Steve should do is figure out his objective function, which is a simple way of asking him to decide what he values in life. The simplest unit in which to measure this is dollars.
-
-Steve is willing to work long hours, but he decides that reasonable hours are worth $20k/year to him. A friendly work environment is very important to him - avoiding politics is worth $15k, and avoiding corporate BS is worth another $5k. Interesting work is worth another $20k to him, and liking his boss is worth $10k. Steve's objective function is therefore:
-
-    m = salary + $20k*(reasonable hours) + $15k*(no politics) + $5k*(no corporate BS)
-          + $20k*(interesting work) + $10k*(boss quality)
-
-Using this metric, Steve can now make a decision. The first job is worth $200k to him, the second is worth $150+15+20+20=$205, the third is worth $90+15+5+20+10=$140k.
-
-Constructing the objective function is merely a way for Steve to force himself to decide exactly how much he values both the monetary and non-monetary aspects of his job.
-
-#### But you can't reduce everything to money
-
-You need to reduce everything to a single common value, but using dollars is just an arbitrary choice. We could easily use units of [Utilons](http://wiki.lesswrong.com/wiki/Utility), which (roughly speaking) are increments of happiness. At the simplest level, we could simply declare `$1 = 4 utilons` and express our metric in Utilons, in which case Steve chooses job (2) which gives him 820 utilons.
-
-In some cases this might be a better choice than money, because it enables you to express the law of diminishing marginal returns. Going from $200k/year to $205k/year will not bring you as much happiness as going from $20k/year to $25k/year. If we define our objective function in units of utilons, and choose the value of money to be `10k * sqrt(money/$1000)` (or any function with decreasing first derivative), we can represent this idea quantitatively.
-
-Defining an objective function is not about ignoring non-monetary values. If you do that, you are doing it wrong. Defining an objective function is merely about deciding beforehand how much your non-monetary values are worth - how much of one you are willing to trade for the other, and under what circumstances.
 
 ## A metric is equivalent to a consistent decision making process
 
@@ -130,9 +123,31 @@ Here is where things get dicey - choosing (W) and then (Y) is equivalent to choo
 
 In reality, either situation (A) or (B) is better - for simplicity I'll assume (B). But if you approach this choice via a different decisionmaking path, applying heuristics as you go, you will suboptimally choose (A) at least some of the time.
 
-I.e., if your decisionmaking is inconsistent, it must be wrong at least some of the time.
+I.e., if your decisionmaking is inconsistent, it must be wrong at least some of the time. This is exactly what happened to Hypst - at least one of their design changes was bad.
 
 Without getting into too much math, it is impossible for us to get into this situation if our decisions are driven by an objective function. Our objective function cares only about the state of the world, and not what choices you made to get there - i.e., `m(A) = m(W -> Y)`, and `m(B) = m(X -> Y)`. Thus, if we consider `m(A) > m(B)`, we will also consider `m(W -> Y) > m(X -> Y)`, and vice versa if `m(B) > m(A)`. See [here](http://lesswrong.com/lw/my/the_allais_paradox/) and [here](http://lesswrong.com/lw/1dr/money_pumping_in_general/?sort=old) for more details.
+
+## What Hypst should have done
+
+At the beginning of their testing program, Hypst should have decided what their overall goal is. All else held equal, it's always better to have more invitations, more clicks on the like button, and more interaction with the Irony Feed. But in the real world, all else was not held equal. In each experiment, one of these factors went up while the others went down.
+
+What Hypst should have done was choose an objective function. The objective function represents their overall goals and tradeoffs.
+
+For example, suppose Hypst values 1 invitation the same as 5 "I liked it before it was cool" clicks or 10 Irony Feed interactions. They might choose the objective function:
+
+    m = 10 x invitations + 2 x "like clicks" + 1 x ironic interactions
+
+Now suppose they used this objective function for their tests.
+
+The first test would have increased invitations by 20%, and reduced like clicks and ironic interactions by 10% each. Suppose that to begin, there were 20 invitations, 100 likes and 100 ironic interactions. To begin with, `m=700`. After the first test (the 20% improvement on the invitations), `m` would improve to 750.
+
+The second test would increase likes by 20%, but reduce everything else by 10%. This would *reduce* the objective function from 750 to 729, leading the second modification to be rejected. That is because, as an early stage startup, Hypst values invitations a lot but likes considerably less. The increase in likes is just not worth the decrease in invitations.
+
+Similarly, the modification (the wider Irony Feed) would increase ironic interactions by 20% but likes and invitations by 10%. This would reduce the objective function from 750 to 702, leading Hypst to reject the modified Irony feed as well.
+
+At the end of the day Hypst has chosen to keep the "invite only your cool friends" button, but discard the green "liked it before it was cool" button and the wider Irony feed. As a result, they now have 20% more invitations, 10% fewer likes and 10% fewer ironic interactions. Because they value invitations more than likes and irony, this is considered a success - presumably Hypst is increasing it's user base.
+
+That's considerably better than their previous decisionmaking procedure which resulted in a decrease in *all* categories. That's a clear failure.
 
 ## Conclusion
 
