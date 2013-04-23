@@ -17,7 +17,7 @@ In this blog post I'll describe one of my favorite bandit algorithms, the Bayesi
 
 ## The problem to be solved, and the underlying model
 
-Ultimately the problem we want to solve is the following. Consider an article being published on a website. The author or editor has come up with several possible titles - "Murder victim found in adult entertainment venue", "Headless Body found in Topless Bar", etc. We want to choose the title with the best click through rate (CTR). Let us represent each CTR by $\theta_i$ - i.e., $\theta_i$ is the probability that an individual user will click on the i-th title. As a simplifying assumption, we assume that these rates $\theta_i$ do not change over time.
+Ultimately the problem we want to solve is the following. Consider an article being published on a website. The author or editor has come up with several possible titles - "Murder victim found in adult entertainment venue", "Headless Body found in Topless Bar", etc. We want to choose the title with the best click through rate (CTR). Let us represent each CTR by $@\theta_i$@ - i.e., $@\theta_i$@ is the probability that an individual user will click on the i-th title. As a simplifying assumption, we assume that these rates $@\theta_i$@ do not change over time.
 
 The goal of the bandit algorithm is to do the following. To begin with, it should display both titles to a random selection of users. It will also measure which titles are clicked on more. Over time, it will use these observations to infer which articles have the higher CTR. Then, once the estimation of the CTR becomes more precise, it will preferentially display articles with the higher CTR.
 
@@ -25,11 +25,11 @@ The ultimate goal here is simply to maximize the CTR rate.
 
 ## The Bayesian Approach
 
-In the model described above, we have $N$ possible story titles, each of which has a click through rate $\theta_i$. Unfortunately we do not know what $\theta_i$ is. Since we are following a Bayesian approach, we will construct a *probability distribution* which represents our *belief* about what the actual value of $\theta_i$ is. Although there is a real $\theta_i$ out there somewhere, we simply don't know what it is.
+In the model described above, we have $@N$@ possible story titles, each of which has a click through rate $@\theta_i$@. Unfortunately we do not know what $@\theta_i$@ is. Since we are following a Bayesian approach, we will construct a *probability distribution* which represents our *belief* about what the actual value of $@\theta_i$@ is. Although there is a real $@\theta_i$@ out there somewhere, we simply don't know what it is.
 
 ![](bayesian_bandit/beliefs_about_theta.png)
 
-In the figure above, we believe that $\theta_i$ is somewhere between 0.1 and 0.7, with values of 0.3-0.4 being considerably more likely than values of 0.1-0.2 or 0.6-0.7. For those who forgot STATS 101, the area under this curve between the points a and b is the probability thta $\theta_i$ lies between a and b. I.e.:
+In the figure above, we believe that $@\theta_i$@ is somewhere between 0.1 and 0.7, with values of 0.3-0.4 being considerably more likely than values of 0.1-0.2 or 0.6-0.7. For those who forgot STATS 101, the area under this curve between the points a and b is the probability thta $@\theta_i$@ lies between a and b. I.e.:
 
 $$ P(\theta_i < \theta_i < b) = \int_a pdf(x) dx $$
 
@@ -41,13 +41,13 @@ For mathematical simplicity, we will choose the [beta distribution](https://en.w
 
 $$ P(\theta_i=x) = \frac{ x^{\alpha_i-1}(1-x)^{\beta_i-1} }{B(\alpha_i, \beta_i)} \equiv f_{\alpha_i,\beta_i}(x) $$
 
-The parameters $\alpha_i, \beta_i > 1$ are the prior parameters. One reasonable choice is $\alpha_i=\beta_i=1$, which amounts to the uniform distribution on $[0,1]$. What this means is that we are assuming that all possible values of $\theta_i$ are equally likely.
+The parameters $@\alpha_i, \beta_i > 1$@ are the prior parameters. One reasonable choice is $@\alpha_i=\beta_i=1$@, which amounts to the uniform distribution on $@[0,1]$@. What this means is that we are assuming that all possible values of $@\theta_i$@ are equally likely.
 
 ### Updating our beliefs
 
 Now we address the question of using evidence.
 
-After showing title $i$ to $n_i$ visitors, we have observed that $s_i$ of them have actually clicked on the title. We now want to compute the *posterior* distribution, which is to say the distribution that represents our beliefs *after* we have evidence.
+After showing title $@i$@ to $@n_i$@ visitors, we have observed that $@s_i$@ of them have actually clicked on the title. We now want to compute the *posterior* distribution, which is to say the distribution that represents our beliefs *after* we have evidence.
 
 This is done with Bayes rule:
 
@@ -55,19 +55,19 @@ $$ P(\theta_i = x | n_i, s_i) = \frac{ P(n_i, s_i | \theta_i=x) P(\theta_i=x) }{
 
 (Readers who dislike math should jump ahead to the graph.)
 
-Now, because I chose the beta distribution as the prior, I can avoid doing a lot of algebraic work.  The rough idea here is the following. Ignoring constants (numbers which do not vary with $x$), we know that $P(n_i, s_i | \theta_i=x) = x^{s_i}(1-x)^{n_i-s_i}$ - this is the binomial distribution. Substituting this as well as the definition of the prior in, we find that:
+Now, because I chose the beta distribution as the prior, I can avoid doing a lot of algebraic work.  The rough idea here is the following. Ignoring constants (numbers which do not vary with $@x$@), we know that $@P(n_i, s_i | \theta_i=x) = x^{s_i}(1-x)^{n_i-s_i}$@ - this is the binomial distribution. Substituting this as well as the definition of the prior in, we find that:
 
 $$ P(\theta_i = x | n_i, s_i) = C x^{s_i}(1-x)^{n_i-s_i} x^{\alpha_i-1} (1-x)^{\beta_i-1} = C x^{\alpha_i+s_i-1} (1-x)^{\beta_i+n_i-s_i-1} = f_{\alpha_i+s_i, \beta_i+n_i-s_i}(x) $$
 
-I'm glossing over the details showing that $C = 1/B(\alpha_i+s_i, \beta_i+n_i-s_i)$ because they are not very interesting.
+I'm glossing over the details showing that $@C = 1/B(\alpha_i+s_i, \beta_i+n_i-s_i)$@ because they are not very interesting.
 
-The key idea here is that to update our probability distribution describing $\theta_i$, we need only update the parameters of our beta distribution.
+The key idea here is that to update our probability distribution describing $@\theta_i$@, we need only update the parameters of our beta distribution.
 
-So what does this mean in practice? As we run more experiments, our probability distribution on where $\theta_i$ lives becomes sharper:
+So what does this mean in practice? As we run more experiments, our probability distribution on where $@\theta_i$@ lives becomes sharper:
 
 ![](bayesian_bandit/beta_distribution_evolution.png)
 
-Before we run any experiments, $\theta_i$ could be anything (as represented by the blue line). Once we have run 700 experiments, yielding 175 click throughs, we are reasonably confident that $\theta_i$ lives roughly between 0.2 and 0.3.
+Before we run any experiments, $@\theta_i$@ could be anything (as represented by the blue line). Once we have run 700 experiments, yielding 175 click throughs, we are reasonably confident that $@\theta_i$@ lives roughly between 0.2 and 0.3.
 
 So what we've done so far is figured out how to estimate what our click through rates actually are based on empirical evidence. But that doesn't actually give us a method of optimizing them yet.
 
@@ -77,13 +77,13 @@ Now that we have a method of representing our beliefs about CTRs, it is useful t
 
 But my new favorite method is a [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method) method which I'll describe now.
 
-The ultimate goal of the bandit algorithm is to display to the user whichever title has the highest CTR. One method of estimating the CTRs of the articles is to *sample* the posterior distribution. I.e., suppose we have two possible titles, from which we have drawn $n_0=200, s_0=64$ and $n_1=180, n_2=40$. Then one possible set of samples we might observe is this:
+The ultimate goal of the bandit algorithm is to display to the user whichever title has the highest CTR. One method of estimating the CTRs of the articles is to *sample* the posterior distribution. I.e., suppose we have two possible titles, from which we have drawn $@n_0=200, s_0=64$@ and $@n_1=180, n_2=40$@. Then one possible set of samples we might observe is this:
 
 ![](bayesian_bandit/beta_distribution_sampling1.png)
 
-For title 0, our sample of $\theta_0$ has worked out to be 0.35, while our sample of $\theta_1$ is only 0.28. Since $\theta_0 = 0.35 > \theta_1 = 0.28$, we will display title 0 to the user.
+For title 0, our sample of $@\theta_0$@ has worked out to be 0.35, while our sample of $@\theta_1$@ is only 0.28. Since $@\theta_0 = 0.35 > \theta_1 = 0.28$@, we will display title 0 to the user.
 
-However, there was no guarantee that things worked out this way. It was possible, although less likely, that $\theta_1$ could come out larger than $\theta_0$:
+However, there was no guarantee that things worked out this way. It was possible, although less likely, that $@\theta_1$@ could come out larger than $@\theta_0$@:
 
 ![](bayesian_bandit/beta_distribution_sampling2.png)
 
@@ -115,7 +115,7 @@ Lets go back to our running example of title selection. We have two possible tit
 
 This is important data, and it would be great to incorporate it into our bandit algorithm. For many methods (e.g., [UCB](/blog/2012/bandit_algorithms_vs_ab.html)) it's somewhat difficult to do this - there is no obvious parameter to tune as a result of our prior empirical data. The beauty of a Bayesian method is that it gives you a clear and meaningful place to plug this information in, namely the prior.
 
-The first step is to fit a theoretical distribution to the empirical data. Due to the fact that I chose the empirical data to be very nice, a beta distribution fits well [1] - specifically beta distributions with $(\alpha_0, \beta_0) = (9,20)$ and $(\alpha_1, \beta_1) = (4,20)$.
+The first step is to fit a theoretical distribution to the empirical data. Due to the fact that I chose the empirical data to be very nice, a beta distribution fits well [1] - specifically beta distributions with $@(\alpha_0, \beta_0) = (9,20)$@ and $@(\alpha_1, \beta_1) = (4,20)$@.
 
 ![](bayesian_bandit/theoretical_prior.png)
 
