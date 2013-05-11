@@ -94,7 +94,7 @@ A very important note - the only reason I'm choosing the beta distribution is ma
 
 ### Putting the pieces together
 
-**Warning:** A significant chunk of algebra lies ahead. Feel free to skip it and skip straight to the conclusion if you want.
+**Warning:** A significant chunk of algebra lies ahead. Feel free to skip straight to the conclusion if you want.
 
 Remember again that Bayes rule says:
 
@@ -136,7 +136,7 @@ First of all, we have our confidence intervals. We are virtually certain that th
 
 We can also compute the possibility that the conversion rate is at least 1%::
 
-$$ \int_0.01^1 f_{1.1+12, 30+794-12}(\theta) d\theta = 0.068773104864051637 $$
+$$ \int_{0.01}^1 f_{1.1+12, 30+794-12}(\theta) d\theta = 0.068773104864051637 $$
 
 This was computed by me with the following python code:
 
