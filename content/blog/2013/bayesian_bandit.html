@@ -1,6 +1,6 @@
 ---
-title: Why Bayesian Bandit algorithms are cool
-created: !!timestamp '2013-04-13 21:00:00'
+title: Bayesian Bandits - optimizing click throughs with statistics
+created: !!timestamp '2013-05-21 21:00:00'
 tags:
     - statistics
     - bayesian reasoning
@@ -9,13 +9,15 @@ tags:
 
 {% mark excerpt -%}
 
-Consider the problem - you have two possible titles for a news story - "Murder victim found in adult entertainment venue" and "Headless Body found in Topless Bar". Once upon a time, deciding which title to run was a matter for a news editor to decide. Those days are now over - the geeks now rule the earth. Title selection is now primarily an algorithmic problem, not an editorial one.
+Consider the problem - there are two possible titles for a news story - "Murder victim found in adult entertainment venue" and "Headless Body found in Topless Bar". Once upon a time, deciding which title to run was a matter for a news editor to decide. Those days are now over - the geeks now rule the earth. Title selection is now primarily an algorithmic problem, not an editorial one.
 
 One common approach is to display both potential versions of the title on the homepage or news feed, and measure the Click Through Rate (CTR) of each version of the title. At some point, when the measured CTR for one title exceeds that of the other title, you'll switch to the one with the highest for all users. Algorithms for solving this problem are called [bandit algorithms](https://en.wikipedia.org/wiki/Multi-armed_bandit).
 
 In this blog post I'll describe one of my favorite bandit algorithms, the Bayesian Bandit, and show why it is an excellent method to use for problems which give us more information than typical bandit algorithms.
 
 {%- endmark %}
+
+Unless you are deeply familiar with statistics, I strongly recommend reading the [previous blog post](/blog/2013/bayesian_analysis_conversion_rates.html). That post provides much introductory material, and I'll depend on it heavily.
 
 ## The problem to be solved, and the underlying model
 
@@ -37,13 +39,11 @@ The basic idea behind Bayesian methods is to update our beliefs based on evidenc
 
 As in all Bayesian inference, we need to choose a *prior*. The prior is something we believe to be true *before we have any evidence* - i.e., before we have shown the title to any visitors. This is just a starting point - after enough evidence is gathered, our prior will play a very minimal role in what we actually believe. Choosing a good prior is important both for mathematical simplicity, and because if your prior is accurate, you don't need as much evidence to get the correct answer.
 
-In this problem I'll choose the [beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) because that will give us a [conjugate prior](https://en.wikipedia.org/wiki/Conjugate_prior):
+I'll follow the approach I described in a [previous blog post](/blog/2013/bayesian_analysis_conversion_rates.html), and I'll use a [beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) as the prior:
 
 $$ P(\theta_i=x) = \frac{ x^{\alpha_i-1}(1-x)^{\beta_i-1} }{B(\alpha_i, \beta_i)} \equiv f_{\alpha_i,\beta_i}(x) $$
 
-There are lots of other distributions I could have chosen - algebraic simplicity (see the next section) is the only compelling reason for the beta distribution.
-
-The parameters $@\alpha_i, \beta_i > 1$@ are the prior parameters. One reasonable choice is $@\alpha_i=\beta_i=1$@, which amounts to the uniform distribution on $@[0,1]$@. What this means is that we are assuming that all possible values of $@\theta_i$@ are equally likely.
+The parameters $@\alpha_i, \beta_i > 1$@ are the prior parameters. One reasonable choice is $@\alpha_i=\beta_i=1$@, which amounts to the uniform distribution on $@[0,1]$@. What this means is that we are assuming that all possible values of $@\theta_i$@ are equally likely. Depending on the circumstances (which I'll explain shortly), we might want to choose other possible values.
 
 ### Updating our beliefs
 
@@ -51,17 +51,9 @@ Now we address the question of using evidence.
 
 After showing title $@i$@ to $@n_i$@ visitors, we have observed that $@s_i$@ of them have actually clicked on the title. We now want to compute the *posterior* distribution, which is to say the distribution that represents our beliefs *after* we have evidence.
 
-This is done with Bayes rule:
+I did a little bit of algebra [previously](/blog/2013/bayesian_analysis_conversion_rates.html), in which I showed that if the prior is $@f_{\alpha_i, \beta_i}(\theta_i)$@, then the posterior distribution is:
 
-$$ P(\theta_i = x | n_i, s_i) = \frac{ P(n_i, s_i | \theta_i=x) P(\theta_i=x) }{ P(n_i, s_i)} $$
-
-(Readers who dislike math should jump ahead to the graph.)
-
-Now, because I chose the beta distribution as the prior, I can avoid doing a lot of algebraic work.  The rough idea here is the following. Ignoring constants (numbers which do not vary with $@x$@), we know that $@P(n_i, s_i | \theta_i=x) = x^{s_i}(1-x)^{n_i-s_i}$@ - this is the binomial distribution. Substituting this as well as the definition of the prior in, we find that:
-
-$$ P(\theta_i = x | n_i, s_i) = C x^{s_i}(1-x)^{n_i-s_i} x^{\alpha_i-1} (1-x)^{\beta_i-1} = C x^{\alpha_i+s_i-1} (1-x)^{\beta_i+n_i-s_i-1} = f_{\alpha_i+s_i, \beta_i+n_i-s_i}(x) $$
-
-I'm glossing over the details showing that $@C = 1/B(\alpha_i+s_i, \beta_i+n_i-s_i)$@ because they are not very interesting.
+$$ \textrm{posterior} = f_{\alpha_i+s_i, \beta_i+n_i-s_i}(\theta_i) $$
 
 The key idea here is that to update our probability distribution describing $@\theta_i$@, we need only update the parameters of our beta distribution.
 
@@ -71,7 +63,7 @@ So what does this mean in practice? As we run more experiments, our probability 
 
 Before we run any experiments, $@\theta_i$@ could be anything (as represented by the blue line). Once we have run 700 experiments, yielding 175 click throughs, we are reasonably confident that $@\theta_i$@ lives roughly between 0.2 and 0.3.
 
-So what we've done so far is figured out how to estimate what our click through rates actually are based on empirical evidence. But that doesn't actually give us a method of optimizing them yet.
+What we've done so far is figured out how to estimate what our click through rates actually are based on empirical evidence. But that doesn't actually give us a method of optimizing them yet.
 
 ## Optimizing click throughs
 
@@ -107,17 +99,17 @@ The results of this algorithm are exactly what any good bandit algorithm should 
 
 Source code to generate this graph is available [here](https://gist.github.com/stucchio/5383015#file-beta_bandit_test-py). This method is called [Thompson Sampling](https://en.wikipedia.org/wiki/Thompson_sampling) and is a a fairly popular method in Bayesian AI techniques. For the remainder of this post, I'll call this method the Bayesian Bandit.
 
-## Modularity and Priors
+## Incorporating common sense
 
-The key advantage that the Bayesian Bandit has over other bandit algorithms is not that it converges more quickly than other bandit algorithms (at least in the standard case). Rather, the key advantage of the Bayesian Bandit is that it is modular - you can very easily combine the Bayesian Bandit with other sources of knowledge using only simple probability theory. I'll illustrate with an example.
+Anyone with common sense is now scoffing at the geekiness embodied in this post. Even before using statistics, it was fairly obvious that "Headless Body found in Topless Bar" was going to beat "Murder victim found in adult entertainment venue". The former just sounds catchier and any good editor would run with it.
 
-Lets go back to our running example of title selection. We have two possible titles to consider - "Murder victim found in adult entertainment venue" and "Headless Body found in Topless Bar". Even without any evidence, we can speculate that the catchy title will drive more clicks. Suppose further that we actually did a study - we had editors rate a collection of titles as "catchy" or "not catchy". We then measured the CTR for both sets of titles, and discovered that in aggregate, "catchy" titles had a better CTR. I.e., our empirical data looks something like this:
+The wonderful thing about Bayesian methods is that we can modify them to take into account our prior knowledge. Suppose we believe editors intuition is a real thing - can we quantify it? Certainly. We can do this with a fairly simple experiment. We require editors to rate a collection of titles as "catchy" or "not catchy", run them on the site, and then measure the CTR of the "catchy" and "not catchy" samples. Suppose we did such an experiment, and observed the following aggregate results:
 
 ![](bayesian_bandit/empirical_prior.png)
 
-This isn't a solid win - some catchy titles have low CTRs, and some boring titles have good CTRs. But nevertheless, this is important data - a catchy title is *usually* better.
+This isn't a solid win for the editor - some catchy titles have low CTRs, and some boring titles have good CTRs. But nevertheless, it's better for a story to have catchy title than not.
 
-What we want to do is incorporate this information into our bandit algorithm. For many methods (e.g., [UCB](/blog/2012/bandit_algorithms_vs_ab.html)) it's somewhat difficult to do this - there is no obvious parameter to tune as a result of our prior empirical data. The beauty of a Bayesian method is that it gives you a clear and meaningful place to plug this information in, namely the prior.
+What we want to do is incorporate this information into our bandit algorithm. The beauty of a Bayesian method is that it gives you a clear and meaningful place to plug this information in, namely the prior. In contrast, for many other methods (e.g., [UCB](/blog/2012/bandit_algorithms_vs_ab.html)) it's somewhat difficult to do this - there is no obvious parameter to tune as a result of our prior empirical data.
 
 The first step is to fit a theoretical distribution to the empirical data. Due to the fact that I chose the "empirical" (i.e., made up) data to be very nice, a beta distribution fits well [1] - specifically beta distributions with $@(\alpha_0, \beta_0) = (9,20)$@ and $@(\alpha_1, \beta_1) = (4,20)$@.
 
@@ -129,7 +121,7 @@ $$ P(\theta_0=x) = \frac{ x^{9-1}(1-x)^{20-1} }{B(9, 20)} $$
 
 $$ P(\theta_1=x) = \frac{ x^{4-1}(1-x)^{20-1} }{B(4, 20)} $$
 
-Everything else remains unchanged.
+Everything else remains unchanged. In terms of modifications to source code, this is only a very small change to the previous code - an implementation can be found [here](https://gist.github.com/stucchio/5478642).
 
 ### Empirics of including priors
 
