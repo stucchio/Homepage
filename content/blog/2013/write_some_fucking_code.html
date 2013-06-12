@@ -10,7 +10,7 @@ tags:
 
 At their most basic, monads are a monoid in the category of endofunctors. But that's an explanation that only appears to mathematicians. They are also a design pattern, but that's an explanation that only appeals to computer geeks.
 
-You've read many [monad tutorials](http://www.haskell.org/haskellwiki/Monad_tutorials_timeline). For instance, [monads are like monsters](http://www.haskell.org/pipermail/haskell-cafe/2006-November/019190.html). No wait, monads are like space suits, and functions of type `A -> M B` are like space brothels where you take off your suit, get space herpes and then put your suit back on. But this post is the ultimate in monad tutorials - this is the one that will finally cause them to make sense in your mind.
+You've read many [monad tutorials](http://www.haskell.org/haskellwiki/Monad_tutorials_timeline). For instance, [monads are like monsters](http://www.haskell.org/pipermail/haskell-cafe/2006-November/019190.html). No wait, monads are like space suits, and functions of type `a -> M b` are like space brothels where you take off your suit, get space herpes and then put your suit back on. But this post is the ultimate in monad tutorials - this is the one that will finally cause them to make sense in your mind.
 
 So consider a program being used to run a dildo factory. The most basic underlying type is the `Dildo`:
 
@@ -18,7 +18,7 @@ So consider a program being used to run a dildo factory. The most basic underlyi
 
 We also have a data type representing the box:
 
-    data Box Dildo = Box Dildo
+    data Box a = Box a
 
 Now consider one of the midgets, who's job it is to do work to a dildo and put it into a box. In the abstract, the type signature of the midget is `Dildo -> Box Dildo`. But sometimes the midgets need to take a dildo out of the box, do some work on it, and put it back into the box. Monads to the rescue.
 
