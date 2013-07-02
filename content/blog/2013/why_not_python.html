@@ -120,7 +120,7 @@ In Scala, the excellent [Spray Caching](http://spray.io/documentation/1.2-M8/spr
         ...body...
 	}
 
-Under the hood, cache is implemented roughly like this:
+Under the hood, the cache is implemented roughly like this:
 
     val fromCache = cache.get(key)
     if (fromCache != null) {
@@ -129,11 +129,11 @@ Under the hood, cache is implemented roughly like this:
         val result = Future { // This block is run in a different thread!
 	    ...body...
 	    }
-        cache.put(body)
+        cache.put(result)
 	return result
     }
 
-Unlike the python equivalent this block of code returns instantly. The actual `...body...` is not actually run in the current thread. The net result is that repeated calls to `f(x)` return the same `Future`, and the result of the computation is available to all callers of `f(x)` as soon as it is computed.
+Unlike the python equivalent this block of code returns instantly. The actual `...body...` is not actually run in the current thread. The net result is that repeated calls to `f(x)` return the same `Future`, and the result of the computation is available to all callers of `f(x)` as soon as it is computed. I.e., suppose it takes 100ms to compute `f(x1)`. Suppose Thread A calls `f(x1)` at `t=0`, and Thread B calls `f(x1)` at `t=50`. Then the result of `f(x1)` (i.e., the same memory location, which hopefully refers to an immutable object) is available to both Thread A and Thread B at `t=100`.
 
 One possible implementation of such a strategy in Python would be to not expose the external cache directly, but rather to hide it behind some API which would then push the result to clients when it has been computed. This is certainly possible to build, though of course you do suffer the serialization and memory duplication overhead described in the previous section. The implementation would also likely be considerably more complicated than the [160 linues of code](https://github.com/spray/spray/blob/master/spray-caching/src/main/scala/spray/caching/LruCache.scala) that the Spray Cache uses.
 
