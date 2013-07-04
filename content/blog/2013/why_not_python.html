@@ -110,7 +110,7 @@ Whenever `f(x)` is called, the result is cached, and future results are pulled f
 
 Now consider a forked web application (e.g., gunicorn), with perhaps 4-8 workers. The first problem is simply memory duplication - the cache is duplicated 4-8 times, and stores the same thing. The second problem is the thundering herds problem. Consider a new input to `f(x)`, which becomes available at time `t=0`. At time `t=0`, the application is hit with multiple requests for this input. As a result, *each process* blocks while computing `f(new input)`.
 
-Memory duplication has a relatively simple solution, namely using external cache such as redis. But the thundering herds problem remains. At time `t=0`, each process receives a request for `f(new input)`. Each process looks in the cache, finds it empty, and begins computing `f(new input)`. As a result *every single process is blocked*.
+Memory duplication has a relatively simple solution, namely using external cache such as redis. But the thundering herds problem remains. At time `t=0`, each process receives a request for `f(new input)`. Each process looks in the cache, finds it empty, and begins computing `f(new input)`. As a result *every single process is blocked*. **Update** - I'm told that one can [build locks with redis](http://www.dr-josiah.com/2012/01/creating-lock-with-redis.html), so this might not be as difficult as I thought. I'm also told that [dogpile.cache](https://dogpilecache.readthedocs.org/en/latest/usage.html) provides this.
 
 ### The Scala Solution
 
@@ -135,7 +135,7 @@ Under the hood, the cache is implemented roughly like this:
 
 Unlike the python equivalent this block of code returns instantly. The actual `...body...` is not actually run in the current thread. The net result is that repeated calls to `f(x)` return the same `Future`, and the result of the computation is available to all callers of `f(x)` as soon as it is computed. I.e., suppose it takes 100ms to compute `f(x1)`. Suppose Thread A calls `f(x1)` at `t=0`, and Thread B calls `f(x1)` at `t=50`. Then the result of `f(x1)` (i.e., the same memory location, which hopefully refers to an immutable object) is available to both Thread A and Thread B at `t=100`.
 
-One possible implementation of such a strategy in Python would be to not expose the external cache directly, but rather to hide it behind some API which would then push the result to clients when it has been computed. This is certainly possible to build, though of course you do suffer the serialization and memory duplication overhead described in the previous section. The implementation would also likely be considerably more complicated than the [160 linues of code](https://github.com/spray/spray/blob/master/spray-caching/src/main/scala/spray/caching/LruCache.scala) that the Spray Cache uses.
+One possible implementation of such a strategy in Python would be to not expose the external cache directly, but rather to hide it behind some API which would then push the result to clients when it has been computed. This is certainly possible to build, though of course you do suffer the serialization and memory duplication overhead described in the previous section. The implementation would also likely be considerably more complicated than the [160 lines of code](https://github.com/spray/spray/blob/master/spray-caching/src/main/scala/spray/caching/LruCache.scala) that the Spray Cache uses.
 
 ## Scripting vs Systems
 
