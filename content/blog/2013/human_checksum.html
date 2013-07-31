@@ -21,7 +21,7 @@ After some discussion in the comments of his blog post we reached a conclusion t
 
 In information theory, one of our goals is to transmit information as efficiently as possible in a noisy channel. To set up the problem, consider a $@ k $@ bit message of the form $$ ( m_1, m_2, \ldots, m_k) \in \\{0,1\\}^k $$.
 
-We wish to use additional bits of information to encode the message in such a way that random errors which flip a bit will be correctable. In formal mathematics, for some $l \> k$, we wish to find a function $$ f: \\{0,1\\}^k \rightarrow \\{0,1\\}^l $$ with the property that for a sufficiently small number of errors, we can still reconstruct the original message.
+We wish to use additional bits of information to encode the message in such a way that random errors which flip a bit will be correctable. In formal mathematics, for some $@l \> k$@, we wish to find a function $$ f: \\{0,1\\}^k \rightarrow \\{0,1\\}^l $$ with the property that for a sufficiently small number of errors, we can still reconstruct the original message.
 
 The key concept in understanding error correcting codes is the notion of *Hamming distance*. I'll denote the Hamming distance between two messages $@ x, y $@ by $@ h(x,y) $@. The Hamming distance between any two messages is the number of bit flips necessary to transform one message into the other. Since errors in transmission are modelled as bit flips, the Hamming distance between two messages is a measure of how many errors need to be made before one might mistake message $@ x $@ for message $@ y $@.
 
@@ -94,4 +94,4 @@ In essence, this is a human checksum. The mechanical turk is returning a single 
 
 In principle, for many types of human error, the checksum turk should be statistically independent of the turk who performed the initial tagging task. If the tagging turk clicks incorrectly due to a mouse positionining error, boredom or the like, there is no reason to expect the checksum turk to make the same error. The only place we would expect the turk's errors to be correlated is in difficult cases - a dirty blond or a woman with auburn hair, to follow the example I'm using here.
 
-So in reality, the answer to Panos' question is yes. You can use checksums and other techniques from information theory to improve the accuracy of a mechanical turk. In industry, we already do a limited version of this - we just don't describe it in information theoretic terms.
+So the answer to Panos' question is yes. You can use checksums and other techniques from information theory to improve the accuracy of a mechanical turk. In industry, we already do a limited version of this - we just don't describe it in information theoretic terms.
