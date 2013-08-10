@@ -36,7 +36,7 @@ The function $@f(x)$@ represents our beliefs about $@\theta$@ - it is an inheren
 
 ### Why do we care?
 
-Given the posterior distribution, we can come up with many useful conclusions. For example, given $@f(x)$@, it is relatively straightforward to compute confidence intervals. Suppose we can find $@a$@ and $@b$@ so that:
+Given the posterior distribution, we can come up with many useful conclusions. For example, given $@f(x)$@, it is relatively straightforward to compute credible intervals. Suppose we can find $@a$@ and $@b$@ so that:
 
 $$ \int_a^b f(\theta) d\theta > 0.95 $$
 
@@ -130,7 +130,7 @@ $$ \textrm{posterior} = f_{\alpha+K, \beta+N-K}(\theta) $$
 
 ## So what is the conclusion?
 
-First of all, we have our confidence intervals. We are virtually certain that the true conversion rate $@\theta \in [0.005, 0.03]$@. Unfortunately that's a pretty wide range - it's possible that our conversion rate is nearly zero and we only signed up 12 visitors via a fluke.
+First of all, we have our credible intervals. We are virtually certain that the true conversion rate $@\theta \in [0.005, 0.03]$@. Unfortunately that's a pretty wide range - it's possible that our conversion rate is nearly zero and we only signed up 12 visitors via a fluke.
 
 We can also compute the possibility that the conversion rate is at least 1%::
 
