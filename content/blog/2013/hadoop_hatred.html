@@ -1,0 +1,46 @@
+---
+title: Don't use Hadoop
+
+created: !!timestamp '2013-09-11 07:50:00'
+tags:
+    - big data
+    - buzzwords
+    - hadoop
+---
+
+{% mark excerpt -%}
+
+"So, how much experience do you have with Big Data and Hadop?" they asked me. I told them that I use Hadoop all the time, but rarely for jobs larger than a few TB. I'm basically a big data neophite - I know the concepts, I've written code, but never at scale.
+
+The next question they asked me. "Could you use Hadoop to do a simple group by and sum?" Of course I could, and I just told them I needed to see an example of the file format.
+
+They handed me a flash drive with all 600MB of their data on it. For reasons I can't understand, they were unhappy when my solution involved `pandas.read_csv` rather than Hadoop.
+
+{%- endmark %}
+
+
+Hadoop is limiting. Hadoop allows you to run one general computation, which I'll illustrate in pseudocode:
+
+Scala-ish pseudocode:
+
+    collection.flatMap( (k,v) => F(k,v) ).groupBy( _._1 ).map( _.reduce( (k,v) => G(k,v) ) )
+
+SQL-ish pseudocode:
+
+    SELECT G(...) FROM table GROUP BY F(...)
+
+The *only* thing you are permitted to touch is `F(k,v)` and `G(k,v)`, except of course for performance optimizations (usually not the fun kind!) at intermediate steps. Everything else is fixed.
+
+It forces you to write every computation in terms of a map, a group by, and an aggregate, or perhaps a sequence of such computations. Hadoop is a straightjacket that for some reason half the world wants to wear.
+
+## But my data is hundreds of megabytes! Excel won't load it.
+
+Too big for Excel is not "Big Data". There are excellent tools out there - my favorite is [Pandas](http://pandas.pydata.org/) which is built on top of [Numpy](http://www.numpy.org/). You can load hundreds of megabytes into memory in an efficient vectorized format. On my 3 year old laptop, it takes numpy the blink of an eye to multiply 100,000,000 floating point numbers together. Matlab and R are also excellent tools.
+
+Hundreds of megabytes is also typically amenable to a simple python script that reads your file line by line, processes it, and writes to another file.
+
+## But my data is 10 gigabytes!
+
+I just bought a new laptop. I paid $144.39 extra for 16GB of ram (upgraded from 4) and about $200 extra for a 256gb SSD. Additionally, if you load a 10 GB csv file into [Pandas](http://pandas.pydata.org/), it will often be considerably smaller in memory - the result of storing the numerical string "17284932583" as a 4 or 8 byte integer, or storing "284572452.2435723" as an 8 byte double.
+
+## But my data is 100 gigabytes!
