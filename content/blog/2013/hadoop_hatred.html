@@ -1,7 +1,7 @@
 ---
-title: Don't use Hadoop
+title: Don't use Hadoop - your data isn't that big
 
-created: !!timestamp '2013-09-11 07:50:00'
+created: !!timestamp '2013-09-14 07:50:00'
 tags:
     - big data
     - buzzwords
@@ -29,9 +29,19 @@ SQL-ish pseudocode:
 
     SELECT G(...) FROM table GROUP BY F(...)
 
+Or, as I [explained](../2011/mapreduce_explained.html) a couple of years ago:
+
+>Goal: count the number of books in the library.
+>
+>Map: You count up shelf #1, I count up shelf #2. (The more people we get, the faster this part goes. )
+>
+>Reduce: We all get together and add up our individual counts.
+
 The *only* thing you are permitted to touch is `F(k,v)` and `G(k,v)`, except of course for performance optimizations (usually not the fun kind!) at intermediate steps. Everything else is fixed.
 
-It forces you to write every computation in terms of a map, a group by, and an aggregate, or perhaps a sequence of such computations. Hadoop is a straightjacket that for some reason half the world wants to wear.
+It forces you to write every computation in terms of a map, a group by, and an aggregate, or perhaps a sequence of such computations. Running computations in this manner is a straightjacket, and many calculations are better suited to some other model. The only reason to put on this straightjacket is that by doing so, you can scale up to extremely large data sets. Most likely your data is orders of magnitude smaller.
+
+But because "Hadoop" and "Big Data" are buzzwords, half the world wants to wear this straightjacket even if they don't need to.
 
 ## But my data is hundreds of megabytes! Excel won't load it.
 
@@ -39,8 +49,26 @@ Too big for Excel is not "Big Data". There are excellent tools out there - my fa
 
 Hundreds of megabytes is also typically amenable to a simple python script that reads your file line by line, processes it, and writes to another file.
 
-## But my data is 10 gigabytes!
+### But my data is 10 gigabytes!
 
-I just bought a new laptop. I paid $144.39 extra for 16GB of ram (upgraded from 4) and about $200 extra for a 256gb SSD. Additionally, if you load a 10 GB csv file into [Pandas](http://pandas.pydata.org/), it will often be considerably smaller in memory - the result of storing the numerical string "17284932583" as a 4 or 8 byte integer, or storing "284572452.2435723" as an 8 byte double.
+I just bought a new laptop. The [16GB of ram](http://www.amazon.com/gp/product/B0076W9Q5A/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B0076W9Q5A&linkCode=as2&tag=christuc-20) cost me $141.98 and about the 256gb SSD was $200 extra. Additionally, if you load a 10 GB csv file into [Pandas](http://pandas.pydata.org/), it will often be considerably smaller in memory - the result of storing the numerical string "17284932583" as a 4 or 8 byte integer, or storing "284572452.2435723" as an 8 byte double.
 
-## But my data is 100 gigabytes!
+Worst case, you might actually have to not load everything into ram simultaneously.
+
+### But my data is 100GB/500GB/1TB!
+
+A [2 terabyte hard drive](http://www.amazon.com/gp/product/B005T3GRN2/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B005T3GRN2&linkCode=as2&tag=christuc-20) costs $94.99, [4 terabytes](http://www.amazon.com/gp/product/B005T3GRN2/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B005T3GRN2&linkCode=as2&tag=christuc-20) is $169.99. Buy one and stick it in your desktop computer or server. Then install [Postgres](http://www.postgresql.org/) on it.
+
+## Hadoop << SQL, Python Scripts
+
+In terms of expressing your computations, Hadoop is strictly inferior to SQL. There is no computation you can write in Hadoop which you cannot write more easily in either SQL, or with a simple Python script that scans your files.
+
+ SQL is a straightforward query language with minimal leakage of abstractions, commonly used by business analysts as well as programmers. Queries in SQL are generally pretty simple. They are also usually very fast - if your database is properly indexed, multi-second queries will be uncommon.
+
+Hadoop does not have any conception of indexing. Hadoop has only full table scans. Hadoop is full of leaky abstractions - at my last job I spent more time fighting with [java memory errors](gc_overhead_limit.html), file fragmentation and cluster contention than I spent actually worrying about the mostly straightforward analysis I wanted to perform.
+
+## But my data is more than 5TB!
+
+God help you - you are stuck with Hadoop. You don't have many other choices (though big servers with many hard drives are still in play), and most of your other choices are considerably more expensive.
+
+The only benefit to using Hadoop is scaling. If you have a single table containing many terabytes of data, Hadoop might be a good option for running full table scans on it. If you don't have such a table, avoid Hadoop like the plague. It isn't worth the hassle and you'll get results with less effort and in less time if you stick to traditional methods.
