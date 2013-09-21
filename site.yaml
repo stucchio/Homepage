@@ -11,7 +11,7 @@ plugins:
     - hyde.ext.plugins.textlinks.TextlinksPlugin
 context:
     data:
-        tweet_via: ringce
+        tweet_via: stucchio
         menu:
             -
                 name: Home
