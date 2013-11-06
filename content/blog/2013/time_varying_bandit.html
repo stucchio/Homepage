@@ -1,0 +1,154 @@
+---
+title: Bandit Algorithms when the Conversion Rate Changes
+created: !!timestamp '2013-11-07 08:00:00'
+tags:
+    - statistics
+    - bayesian reasoning
+    - bandit algorithms
+---
+
+{% mark excerpt -%}
+
+As the owner of the spamblog [http://www.iwishiwastaller.com](http://www.iwishiwastaller.com), I've run into the following problem. I'm selling some height enhancing pills full of organic free range snake oil. I've come up with several different calls to action:
+
+* Tired of finding pants that fit? Click here for the solution.
+* Click here if you find airplane seats too comfortable.
+* The NBA hates him! Click here to learn *one weird trick* for becoming taller!
+
+For obvious reasons, my first thought was to try an A/B test to figure out the best one. It gave me an answer - "one weird trick" was the winner. But just out of curiosity, I ran the test again the next day and discovered that "Tired of finding pants that fit" was the winner. Curious now, I repeated my test several more times, and discovered that the best version changed over time!
+
+This is a problem. A/B testing cannot give me the best solution. Neither can most traditional bandit algorithms. So I decided I had to cook up my own.
+
+{%- endmark %}
+
+One of the major assumptions made by bandit algorithms is that the conversion rate does not vary with time. A/B tests are a little more robust, and allow conversion rates to vary with time *provided one version maintains it's superiority*. In this blog post I'll provide a method that handles the case when conversion rates vary with time according to a random walk.
+
+## The Model
+
+To begin with I'll focus solely on a single conversion rate. Call this rate $@X=X_t$@, where $@t$@ is time. We need to construct a random walk model for $@X_t$@ which ensures that $@X_t$@ remains in $@[0,1]$@. Fortunately there is a standard model of this nature, namely Jacobi Diffusion. I'll be following the analysis of section 2.4 of [this paper](http://www.stt.msu.edu/~mcubed/LMS.pdf), so to begin define $@ Z_t = 2 X_t-1$@. Jacobi diffusion for $@ Z_t $@ takes the form:
+
+$$ d Z_t = - \theta \left(Z_t - \frac{b-a}{a+b+2} \right) dt + \sqrt{ \frac{2 \theta}{a+b+2} (1-Z_t^2) } dW_t $$
+
+where $@dW_t$@ is a Gaussian random walk.
+
+This transformation is done at the start simply to avoid a lot of annoying calculations down the line. This is equivalent to:
+
+$$ 2 d x_t = - \theta \left((2 X_t-1) - \frac{b-a}{a+b+2} \right) dt + \sqrt{ \frac{\theta}{2(a+b+2)} X_t(1-X_t) } dW_t $$
+
+This is a fairly common model in the financial world and is used for modelling interest rates.
+
+The plan going forward is to use the [Bayesian Bandit](bayesian_bandit.html) approach to construct a bandit algorithm, so we wish to derive a probability distribution for $@ X_t $@ at some future time given a value (or distribution) of $@ X_t $@ now. This is traditionally accomplished via deriving a [Fokker-Planck equation](https://en.wikipedia.org/wiki/Fokker%E2%80%93Planck_equation) from the equation of the random walk.
+
+The relevant Fokker-Planck equation, following standard methods, is:
+
+$$ \frac{\partial f(z,t) }{\partial t} = \frac{\partial }{\partial z} \theta \left[ z - \frac{b-a}{a+b+2} \right] f(z,t) + \frac{\partial^2 }{\partial z ^2} \sigma \sqrt{1-z^2} f(z,t)$$
+
+So for example, if $@f(z,0)$@ is the probability distribution representing the uncertainty in $@z$@ at time 0, then $@f(z,t)$@ is the probability distribution representing the uncertainty at time $@t$@.
+
+It turns out (yay [Sturm-Liouville theory](https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory)) that this sort of PDE has a fairly straightforward method of solution. Suppose we find an eigenfunction of the right hand side, i.e.:
+
+$$ \frac{\partial }{\partial z} \theta \left[ z - \frac{b-a}{a+b+2} \right] f(z) + \frac{\partial^2 }{\partial z ^2} \sigma \sqrt{1-z^2} f(z) = -\lambda f(z)$$
+
+(This equation is called the eigenvalue equation.)
+
+Then the function
+
+$$ f(z,t) = \exp(-\lambda t) f(z) $$
+
+is a solution of the partial differential equation. More general solutions can be found by computing sums of such solutions.
+
+As luck would have it, rather than doing a bunch of work, we can actually just consult Wikipedia and discover that [Jacobi Polynomials](https://en.wikipedia.org/wiki/Jacobi_polynomials) are the solution to the eigenvalue equation. Specifically,
+
+$$ q_n(z) = (1-z)^a (1+z)^b P^{(a,b)}_n (z) \frac{2n+a+b+1}{2^{(a+b+1)}} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
+
+form a set of eigenvectors with corresponding eigenvalues
+
+$$ \lambda_n = \frac{\theta n(n+a+b+1)}{a+b+2} $$
+
+for $@n=0,1,2,\ldots$@.
+
+Everything I've done here is sketchy, but it is proven in the paper [Fractional Pearson Diffusions](http://www.stt.msu.edu/~mcubed/LMS.pdf) that if a strong solution exists, it is given by:
+
+$$ f(z,t) = \sum_{n=0}^{\infty} f_n e^{-\lambda_n t} q_n(z) $$
+
+We can also rewrite the eigenfunctions in terms of $@x$@ as:
+
+$$ q_n(x) = (1-x)^a x^b P^{(a,b)}_n (2x-1) \frac{2n+a+b+1}{2} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
+
+### Properties of the solution
+
+The first important fact to recognize is that this model has a stationary solution corresponding to $@n=0$@:
+
+$$ q_0(x) = \textrm{const}(1-x)^a x^b$$
+
+This is a beta distribution with parameters $@(a,b)$@. This means that if our uncertainty about the conversion rate is modelled by $@q_0(x)$@, it will remain $@q_0(x)$@ forever.
+
+The second important fact is that all other solutions $@q_n(z)$@ decay exponentially with time, with the slowest decay rate being $@\theta$@. So any information we have about the distribution of $@x$@ vanishes after a time proportional to $@O(\theta)$@.
+
+## Computing a posterior on $@x$@
+
+Now suppose we have a prior distribution $@f(x)$@ on the conversion rate. Suppose we run an experiment. If a conversion occurs, we can compute the posterior:
+
+$$ posterior = \frac{ x f(x) } { \int x f(x) dx } $$
+
+Conversely, if no conversion occurred, the posterior would be:
+
+$$ posterior = \frac{ (1-x) f(x) } { \int (1-x) f(x) dx } $$
+
+
+If $@f(x)$@ were comprised of Jacobi polynomials, we can make use of the following recurrence relation:
+
+$$ A_n
+ P^{(a,b)}_{n+1}(z)
+ = B_n
+ [C_n z + D]
+ P^{(a,b)}_n (z)
+- [E_n]
+P{n-1}^{(a,b)}(z)
+$$
+
+$$ A_n=2(n+1)(n+a+b+1)(2n+a+b) $$
+
+$$ B_n = (2n+a+b+1) $$
+
+$$ C_n=(2n+a+b+2)(2n+a+b) $$
+
+$$ D = a^2-b^2 $$
+
+$$ E_n = 2(n+a)(n+b)(2n+a+b+2)$$
+
+Rearranging and substituting $@2x-1$@ for $@z$@ yields:
+
+$$ x P_n^{(a,b)}(2x-1) = \frac{1}{2C_n} \left[
+\frac{A_n}{B_n}P_{n+1}^{(a,b)}(2x-1)
+-(D-2C_n) P^{(a,b)}_n (z)
++\frac{E_n}{B_n}P_n-1^{(a,b)}(z)
+\right]$$
+
+Computing $@(1-x) P_n^{(a,b)}(2x-1)$@ can be done in the same way.
+
+So if we represent our prior $@f(x)$@ in terms of Eigenfunctions, i.e.
+
+$$ f(x) = \sum_{n=0}^{\infty} f_n q_n(2x-1) $$
+
+then computing a posterior is a matter of multiplying the vector $@[f_0, f_1, ..., f_n]^T$@ by a [tri-diagonal matrix](https://en.wikipedia.org/wiki/Tridiagonal_matrix) followed by a normalization step. Let us let $@X$@ denote that matrix.
+
+Similarly, let $@U(t)=\textrm{diag}[e^{-\lambda_0 t}, e^{-\lambda_1 t}, \ldots, e^{-\lambda_n t}]$@ denote the time evolution operator of solutions to the random walk itself.
+
+### An algorithm for computing our posterior
+
+Suppose now we run a sequence of experiments, $@S_0, S_1, ..., S_n$@ at times $@ t_0 < t_1 < \ldots < t_n$@. Suppose for simplicity we take as our prior $@\vec{f}_0 = [1, 0, 0, \ldots]$@. At time $@t_0 + \delta$@, we can compute the posterior:
+
+$$ \vec{f}(t_0+\delta) = \textrm{normalize} \left[ U(\delta) S_0 U(t_0) \vec{f}_0 \right] $$
+
+where $@S_0=X$@ if the experiment $@S_0$@ resulted in a conversion, and $@S_0=(1-X)$@ otherwise.
+
+Similarly, at $@t_1+\delta$@ we obtain:
+
+$$ \vec{f}(t_1+\delta) = \textrm{normalize}  \left[  U(\delta)S_1 U(t_1-t_0) S_0 U(t_0) \vec{f}_0 \right] $$
+
+Computing the posterior at various future points is the same process, repeated ad nauseum.
+
+## The Bayesian Bandit
+
+Now we have a method, albeit a somewhat involved one, for computing the posterior distribution on a *changing variable* based on a sequence of observations. The uncertainty in the posterior distribution now comes from two sources - experimental error during our measurements, and the possibility that the variable changed between the measurements and the present. But this is ok - conceptually, the posterior still represents our uncertainty as to what the true conversion rate is.
