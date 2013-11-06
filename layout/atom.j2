@@ -23,7 +23,11 @@
         <entry>
             <title type="html">{{ res.meta.title }}</title>
             <author><name>{{ res.meta.author }}</name></author>
+	    {% if res.meta.remoteurl %}
+            <link href="{{res.meta.remoteurl}}"/>
+            {% else %}
             <link href="http://www.chrisstucchio.com{{ content_url(res.url) }}"/>
+            {% endif %}
             <updated>{{ res.meta.created|xmldatetime }}</updated>
             <published>{{ res.meta.created|xmldatetime }}</published>
             <id>{{ content_url(res.url) }}</id>
