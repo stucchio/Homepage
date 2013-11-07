@@ -1,6 +1,6 @@
 ---
 title: Bandit Algorithms when the Conversion Rate Changes
-created: !!timestamp '2013-11-07 08:00:00'
+created: !!timestamp '2013-11-11 08:00:00'
 tags:
     - statistics
     - bayesian reasoning
@@ -21,7 +21,9 @@ This is a problem. A/B testing cannot give me the best solution. Neither can mos
 
 {%- endmark %}
 
-One of the major assumptions made by bandit algorithms is that the conversion rate does not vary with time. A/B tests are a little more robust, and allow conversion rates to vary with time *provided one version maintains it's superiority*. In this blog post I'll provide a method that handles the case when conversion rates vary with time according to a random walk.
+One of the major assumptions made by bandit algorithms is that the conversion rate does not vary with time. A/B tests are a little more robust, and allow conversion rates to vary with time *provided one version maintains it's superiority*. In the situation I describe above, A/B tests fail just as surely as any other bandit algorithm which assumes conversion rates maintain their ordering.
+
+In this blog post I'll provide a method that handles the case when conversion rates vary with time according to a certain mathematically tractable random walk. The general strategy follows the [Bayesian Bandit](/blog/2013/bayesian_bandit.html) approach I've described before, but we need to make some forays into PDEs to reach that point.
 
 ## The Model
 
@@ -135,7 +137,7 @@ then computing a posterior is a matter of multiplying the vector $@[f_0, f_1, ..
 
 Similarly, let $@U(t)=\textrm{diag}[e^{-\lambda_0 t}, e^{-\lambda_1 t}, \ldots, e^{-\lambda_n t}]$@ denote the time evolution operator of solutions to the random walk itself.
 
-### An algorithm for computing our posterior
+### An algorithm for computing the posterior
 
 Suppose now we run a sequence of experiments, $@S_0, S_1, ..., S_n$@ at times $@ t_0 < t_1 < \ldots < t_n$@. Suppose for simplicity we take as our prior $@\vec{f}_0 = [1, 0, 0, \ldots]$@. At time $@t_0 + \delta$@, we can compute the posterior:
 
@@ -153,6 +155,7 @@ Computing the posterior at various future points is the same process, repeated a
 
 Now we have a method, albeit a somewhat involved one, for computing the posterior distribution on a *changing variable* based on a sequence of observations. The uncertainty in the posterior distribution now comes from two sources - experimental error during our measurements, and the possibility that the variable changed between the measurements and the present. But this is ok - conceptually, the posterior still represents our uncertainty as to what the true conversion rate is.
 
+The [Bayesian Bandit](/blog/2013/bayesian_bandit.html) approach is the following. At each step, based on evidence we've already seen, we compute a posterior distribution on each bandit variation. We draw a sample from each variation, and choose the one with the largest conversion probability.
 
 ## Other relevant work
 
