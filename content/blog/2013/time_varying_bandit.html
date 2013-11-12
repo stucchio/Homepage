@@ -27,7 +27,11 @@ In this blog post I'll provide a method that handles the case when conversion ra
 
 ## The Model
 
-To begin with I'll focus solely on a single conversion rate. Call this rate $@X=X_t$@, where $@t$@ is time. We need to construct a random walk model for $@X_t$@ which ensures that $@X_t$@ remains in $@[0,1]$@. Fortunately there is a standard model of this nature, namely Jacobi Diffusion. I'll be following the analysis of section 2.4 of [this paper](http://www.stt.msu.edu/~mcubed/LMS.pdf), so to begin define $@ Z_t = 2 X_t-1$@. Jacobi diffusion for $@ Z_t $@ takes the form:
+To begin with I'll focus solely on a single conversion rate. Call this rate $@X=X_t$@, where $@t$@ is time. The value $@X_t$@ denotes the probability that at time $@t$@, a given call to action will result in a conversion.
+
+I will assume that the conversion rate $@X_t$@ follows a random walk. For mathematical simplicity I'll choose a standard model called Jacobi Diffusion.
+
+We need to construct a random walk model for $@X_t$@ which ensures that $@X_t$@ remains in $@[0,1]$@. Fortunately there is a standard model of this nature, namely Jacobi Diffusion. I'll be following the analysis of section 2.4 of [this paper](http://www.stt.msu.edu/~mcubed/LMS.pdf), so to begin define $@ Z_t = 2 X_t-1$@. Jacobi diffusion for $@ Z_t $@ takes the form:
 
 $$ d Z_t = - \theta \left(Z_t - \frac{b-a}{a+b+2} \right) dt + \sqrt{ \frac{2 \theta}{a+b+2} (1-Z_t^2) } dW_t $$
 
@@ -76,6 +80,8 @@ $$ f(z,t) = \sum_{n=0}^{\infty} f_n e^{-\lambda_n t} q_n(z) $$
 We can also rewrite the eigenfunctions in terms of $@x$@ as:
 
 $$ q_n(x) = (1-x)^a x^b P^{(a,b)}_n (2x-1) \frac{2n+a+b+1}{2} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
+
+For more information on using eigenvalue/eigenvectors (aka [spectral methods](https://en.wikipedia.org/wiki/Spectral_method)) to solve partial differential equations, I highly recommend the book [Chebyshev and Fourier Spectral Methods](http://www.amazon.com/gp/product/0486411834/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0486411834&linkCode=as2&tag=christuc-20) by John Boyd.
 
 ### Properties of the solution
 
