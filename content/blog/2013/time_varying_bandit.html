@@ -39,15 +39,23 @@ where $@dW_t$@ is a Gaussian random walk.
 
 This transformation is done at the start simply to avoid a lot of annoying calculations down the line. This is equivalent to:
 
-$$ 2 d x_t = - \theta \left((2 X_t-1) - \frac{b-a}{a+b+2} \right) dt + \sqrt{ \frac{\theta}{2(a+b+2)} X_t(1-X_t) } dW_t $$
+$$ 2 d x_t = - \theta \left((2 X_t-1) - \frac{a-b}{a+b+2} \right) dt + \sqrt{ \frac{\theta}{2(a+b+2)} X_t(1-X_t) } dW_t $$
 
-This is a fairly common model in the financial world and is used for modelling interest rates.
+This is a fairly common model in the financial world and is used for modelling interest rates. To get a picture of what this equation means, I'll plot 3 different trajectories for this model, with $@a=0,b=3$@:
+
+![random walk](time_varying_bandit/random_walk.png)
+
+All three trajectories started at CTR=0.6. They stayed in this neighborhood for a short time, but then their random motion caused the information we had to be lost.
 
 The plan going forward is to use the [Bayesian Bandit](bayesian_bandit.html) approach to construct a bandit algorithm, so we wish to derive a probability distribution for $@ X_t $@ at some future time given a value (or distribution) of $@ X_t $@ now. This is traditionally accomplished via deriving a [Fokker-Planck equation](https://en.wikipedia.org/wiki/Fokker%E2%80%93Planck_equation) from the equation of the random walk.
 
 The relevant Fokker-Planck equation, following standard methods, is:
 
 $$ \frac{\partial f(z,t) }{\partial t} = \frac{\partial }{\partial z} \theta \left[ z - \frac{b-a}{a+b+2} \right] f(z,t) + \frac{\partial^2 }{\partial z ^2} \sigma \sqrt{1-z^2} f(z,t)$$
+
+for
+
+$$ \sigma^2 = \frac{ \theta }{ 2(a+b+2) } $$
 
 So for example, if $@f(z,0)$@ is the probability distribution representing the uncertainty in $@z$@ at time 0, then $@f(z,t)$@ is the probability distribution representing the uncertainty at time $@t$@.
 
@@ -162,6 +170,33 @@ Computing the posterior at various future points is the same process, repeated a
 Now we have a method, albeit a somewhat involved one, for computing the posterior distribution on a *changing variable* based on a sequence of observations. The uncertainty in the posterior distribution now comes from two sources - experimental error during our measurements, and the possibility that the variable changed between the measurements and the present. But this is ok - conceptually, the posterior still represents our uncertainty as to what the true conversion rate is.
 
 The [Bayesian Bandit](/blog/2013/bayesian_bandit.html) approach is the following. At each step, based on evidence we've already seen, we compute a posterior distribution on each bandit variation. We draw a sample from each variation, and choose the one with the largest conversion probability.
+
+## Checking your work
+
+Is it possible we made a mistake in our calculations? Did I lose a factor of 2, or flip a minus sign?
+
+Fortunately this is something that is reasonably straightforward to check. We can start with our random walk model, and use a numerical integrator to solve it:
+
+    gaussian_var = norm()
+    def dW(dt):
+        return norm.rvs() / sqrt(dt)
+
+    def random_walk(z0, tmax, dt, times = None):
+        def rhs(z,t):
+            return -theta*(z-(a-b)/(a+b+2)) + sqrt(2*theta*(1-z*z)/(a+b+2))*dW(dt)
+        if (times is None):
+            times = arange(0,tmax,dt)
+        z = zeros(shape=times.shape, dtype=float)
+        z[0] = z0
+        for i in range(1,z.shape[0]):
+            z[i] = z[i-1] + rhs(z[i-1], times[i])*dt
+            if abs(z[i]) > 1:
+                z[i] = z[i] / abs(z[i])
+        return (times, z)
+
+Then we can run the simulation many times. Following that, we can fit a probability distribution to the resulting data and compare it to the theoretical result. I did this, and the result is plotted below:
+
+![long_term_random_walk_result](time_varying_bandit/long_term_random_walk_result.png)
 
 ## Other relevant work
 
