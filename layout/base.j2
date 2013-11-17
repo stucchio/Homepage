@@ -46,15 +46,19 @@
 </script>
 <script type="text/javascript">var _paq = _paq || [];
 (function(){
-    var u=(("https:" == document.location.protocol) ? "https://embed.bayesianwitch.com" : "http://embed.bayesianwitch.com");
-    _paq.push(['setSiteId', "cdfdf2e8-8937-4fa8-9a5b-7595f8b3487f"]);
-    _paq.push(['setTrackerUrl', "http://r.bayesianwitch.com"]);
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'/bayesianwitch.js';
-    s.parentNode.insertBefore(g,s); })();
+   var u=(("https:" == document.location.protocol) ? "https://embed.bayesianwitch.com" : "http://embed.bayesianwitch.com");
+   _paq.push(['setSiteId', "cdfdf2e8-8937-4fa8-9a5b-7595f8b3487f"]);
+   _paq.push(['setTrackerUrl', "http://r.bayesianwitch.com"]);
+   _paq.push(['enableLinkTracking']);
+   _paq.push(['setCookieDomain', '*.chrisstucchio.com']);
+   _paq.push(['setDomains', '*.chrisstucchio.com']);
+   _paq.push(['trackPageView']);
+   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+   g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'/bayesianwitch.js';
+   s.parentNode.insertBefore(g,s);
+})();
 </script>
+
 </head>
 <body id="{{ resource.meta.id if resource.meta.id else resource.slug }}">
   {% block content %}
