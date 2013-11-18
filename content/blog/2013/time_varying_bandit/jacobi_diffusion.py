@@ -88,10 +88,18 @@ def propagate_jacobi(pc, t):
     return exp(-l*t)*pc
 
 def pde_solve(prior, t):
-    result = zeros(shape=(prior.shape[0], t.shape[0]), dtype=float)
-    result[:,0] = prior
+    result = zeros(shape=(t.shape[0], prior.shape[0]), dtype=float)
+    result[0,:] = prior
     for i in range(1,t.shape[0]):
-        result[:,i] = propagate_jacobi(result[:,i-1], t[i]-t[i-1])
+        result[i,:] = propagate_jacobi(result[i-1,:], t[i]-t[i-1])
+    return result
+
+def transform_to_x(pdf, x):
+    result = zeros(shape=(pdf.shape[0], x.shape[0]), dtype=float)
+    for i in range(0, pdf.shape[0]):
+        p = jacobi_to_poly(pdf[i,:])
+        result[i,:] = p(x)
+        result[i,:] /= result[i,:].sum()
     return result
 
 prior = beta(3,10)
