@@ -73,7 +73,7 @@ is a solution of the partial differential equation. More general solutions can b
 
 As luck would have it, rather than doing a bunch of work, we can actually just consult Wikipedia and discover that [Jacobi Polynomials](https://en.wikipedia.org/wiki/Jacobi_polynomials) are the solution to the eigenvalue equation. Specifically,
 
-$$ q_n(z) = (1-z)^a (1+z)^b P^{(a,b)}_n (z) \frac{2n+a+b+1}{2^{(a+b+1)}} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
+$$ q_n(z) = (1-z)^b (1+z)^a P^{(b,a)}_n (z) \frac{2n+a+b+1}{2^{(a+b+1)}} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
 
 form a set of eigenvectors with corresponding eigenvalues
 
@@ -87,7 +87,7 @@ $$ f(z,t) = \sum_{n=0}^{\infty} f_n e^{-\lambda_n t} q_n(z) $$
 
 We can also rewrite the eigenfunctions in terms of $@x$@ as:
 
-$$ q_n(x) = (1-x)^a x^b P^{(a,b)}_n (2x-1) \frac{2n+a+b+1}{2} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
+$$ q_n(x) = (1-x)^b x^a P^{(b,a)}_n (2x-1) \frac{2n+a+b+1}{2} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
 
 For more information on using eigenvalue/eigenvectors (aka [spectral methods](https://en.wikipedia.org/wiki/Spectral_method)) to solve partial differential equations, I highly recommend the book [Chebyshev and Fourier Spectral Methods](http://www.amazon.com/gp/product/0486411834/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0486411834&linkCode=as2&tag=christuc-20) by John Boyd.
 
@@ -197,6 +197,8 @@ Fortunately this is something that is reasonably straightforward to check. We ca
 Then we can run the simulation many times. Following that, we can fit a probability distribution to the resulting data and compare it to the theoretical result. I did this, and the result is plotted below:
 
 ![long_term_random_walk_result](time_varying_bandit/long_term_random_walk_result.png)
+
+The result is imperfect due to sampling, but it appears more or less correct. To be precise, it's correct the second time I tried - the first version of my math did make a stupid calculation mistake (lost a factor of 2 somewhere), which this method revealed.
 
 ## Other relevant work
 
