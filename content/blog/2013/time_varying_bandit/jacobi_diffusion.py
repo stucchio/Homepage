@@ -10,6 +10,10 @@ b = 3.0
 theta=1.0
 sigma=sqrt(theta/(2*(a+b+2)))
 
+tscale = 0.05
+
+invariant_distribution = poly1d( [-1 for x in range(int(a))], True)*poly1d( [1 for x in range(int(b))], True)
+
 def eigenvalue(n):
     return theta*n*(n+a+b+1)/(a+b+2)
 
@@ -18,6 +22,7 @@ def dW(dt):
     return norm.rvs() / sqrt(dt)
 
 def random_walk(y0, tmax, dt, times = None):
+    dt = dt * tscale
     def rhs(y,t):
         return -theta*(y-(a-b)/(a+b+2)) + sqrt(2*theta*(1-y*y)/(a+b+2))*dW(dt)
     if (times is None):
@@ -63,7 +68,7 @@ def make_first_set_of_plots():
     legend()
     savefig("long_term_random_walk_result.png")
 
-def beta(s, f):
+def beta_prior(s, f):
     return poly1d(ones(shape=(s,)), True)*poly1d(-1*ones(shape=(f,)), True)
 
 def poly_to_jacobi(x):
@@ -78,13 +83,13 @@ def poly_to_jacobi(x):
 def jacobi_to_poly(x):
     result = poly1d([0])
     for i in range(x.shape[0]):
-        result = result + jacobi(i,a,b)*x[i]
+        result = result + (jacobi(i,a,b)*invariant_distribution)*x[i]
     return result
 
 def propagate_jacobi(pc, t):
     """Takes jacobi coefficients and propagates them"""
     n = arange(pc.shape[0], dtype=float)
-    l = theta*n*(n+a+b+1.0)/(a+b+2.0)
+    l = theta*n*(n+a+b+1.0)/(a+b+2.0)*tscale
     return exp(-l*t)*pc
 
 def pde_solve(prior, t):
@@ -102,7 +107,31 @@ def transform_to_x(pdf, x):
         result[i,:] /= result[i,:].sum()
     return result
 
-prior = beta(3,10)
+tmax = 4
+prior = beta_prior(40, 20)
 prior_in_jacobi = poly_to_jacobi(prior)
-imshow(pde_solve(prior_in_jacobi, arange(0,3,0.1)))
+solution_as_jacobi = pde_solve(prior_in_jacobi, arange(0,tmax,0.1))
+x = arange(-1,1,0.01)
+solution_as_x = transform_to_x(solution_as_jacobi, x)
+
+axis([0,1,0,0.04])
+plot((x+1)/2, solution_as_x[0], label="$f(x,0)$")
+plot((x+1)/2, solution_as_x[15], label="$f(x,1.5)$")
+plot((x+1)/2, solution_as_x[39], label="$f(x,3.9)$")
+legend()
+xlabel("CTR")
+ylabel("pdf")
+show()
+
+imshow(solution_as_x.transpose(), origin='lower', extent=[0,tmax,0,1])
+xlabel("time")
+ylabel("CTR")
+title("Probability Density of random walk")
+colorbar()
+
+for i in range(3):
+    t, y = random_walk(0.35*2-1, tmax, 0.01)
+    x[i] = y[-1]
+    plot(t, (y+1)/2.0, 'k')
+
 show()

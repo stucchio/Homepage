@@ -47,9 +47,11 @@ This is a fairly common model in the financial world and is used for modelling i
 
 All three trajectories started at CTR=0.6. They stayed in this neighborhood for a short time, but then their random motion caused the information we had to be lost.
 
-The plan going forward is to use the [Bayesian Bandit](bayesian_bandit.html) approach to construct a bandit algorithm, so we wish to derive a probability distribution for $@ X_t $@ at some future time given a value (or distribution) of $@ X_t $@ now. This is traditionally accomplished via deriving a [Fokker-Planck equation](https://en.wikipedia.org/wiki/Fokker%E2%80%93Planck_equation) from the equation of the random walk.
+The plan going forward is to use the [Bayesian Bandit](bayesian_bandit.html) approach to construct a bandit algorithm, so we wish to derive a probability distribution for $@ X_t $@ at some future time given a value (or distribution) of $@ X_t $@ now. We will use [Ito's Lemma](https://en.wikipedia.org/wiki/It%C5%8D's_lemma), a common technique in mathematical finance. This will allow us to derive a a [Fokker-Planck equation](https://en.wikipedia.org/wiki/Fokker%E2%80%93Planck_equation) from the equation of the random walk. For thos familiar with the methodology, this is exactly how [Black-Scholes](https://en.wikipedia.org/wiki/Black%E2%80%93Scholes) is derived.
 
-The relevant Fokker-Planck equation, following standard methods, is:
+The reason we do this is to derive an equation governing the function $@f(z,t)$@, which represents the probability density of $@ Z_t $@ given a specific time.
+
+I'm going to skip the arithmetic details, and just jump straight to the relevant Fokker-Planck Partial Differential equation (PDE):
 
 $$ \frac{\partial f(z,t) }{\partial t} = \frac{\partial }{\partial z} \theta \left[ z - \frac{b-a}{a+b+2} \right] f(z,t) + \frac{\partial^2 }{\partial z ^2} \sigma \sqrt{1-z^2} f(z,t)$$
 
@@ -57,7 +59,95 @@ for
 
 $$ \sigma^2 = \frac{ \theta }{ 2(a+b+2) } $$
 
-So for example, if $@f(z,0)$@ is the probability distribution representing the uncertainty in $@z$@ at time 0, then $@f(z,t)$@ is the probability distribution representing the uncertainty at time $@t$@.
+The underlying function $@f(z,t)$@ is the probability distribution representing the uncertainty at time $@t$@. I.e., if we plug in a specific value of $@ t$@ - say $@ t=2 $@, then $@ f(z,2) = P(Z=z | t=2)$@ is the probability density for the variable $@Z_2$@.
+
+So we use this function for computing a posterior as follows. Suppose at time $@ t=0 $@ we have some distribution on $@ z $@, call it $@ p_0(z) $@. For example, suppose at exactly $@ t=0 $@, we showed the call to action to 40 people. At this time, there were 14 clicks. We then computed a posterior $@ p_0(z) $@ based on the techniques in [this blog post](bayesian_analysis_conversion_rates.html).
+
+Now suppose we've waited until $@ t = 0.2 $@. We want to know the posterior *now*, which is not the same as the posterior at $@ t=0 $@. So we do the following. We solve the Fokker-Planck equation for $@ f(z,0.2) $@ with $@ f(z,0) = p_0(z) $@, and this represents our new posterior.
+
+I'm not actually going to describe how to solve this PDE right now (hint: Fourier came up with *One Weird Trick*, use that and [Sturm-Liouville theory](https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory), noting that it's a Jacobi Equation). Instead I'm simply going to discuss the important components of the solution.
+
+### Stationary Distribution
+
+The first important fact to recognize is that this model has a stationary solution corresponding to $@n=0$@:
+
+$$ q_0(x) = \textrm{const}(1-x)^a x^b$$
+
+This is a beta distribution with parameters $@(a,b)$@. This means that if our prior modelled by $@q_0(x)$@, it will remain $@q_0(x)$@ forever.
+
+This stationary solution gives a great method of checking whether I screwed up my calculations somewhere (e.g., flipping a minus sign, losing a factor of 2). We can start with our random walk model, and use a numerical integrator to solve it:
+
+    gaussian_var = norm()
+    def dW(dt):
+        return norm.rvs() / sqrt(dt)
+
+    def random_walk(z0, tmax, dt, times = None):
+        def rhs(z,t):
+            return -theta*(z-(a-b)/(a+b+2)) + sqrt(2*theta*(1-z*z)/(a+b+2))*dW(dt)
+        if (times is None):
+            times = arange(0,tmax,dt)
+        z = zeros(shape=times.shape, dtype=float)
+        z[0] = z0
+        for i in range(1,z.shape[0]):
+            z[i] = z[i-1] + rhs(z[i-1], times[i])*dt
+            if abs(z[i]) > 1:
+                z[i] = z[i] / abs(z[i])
+        return (times, z)
+
+Then we can run the simulation many times, and save the value `z` at the end of the simulation. If we choose `tmax` to be sufficiently large, the distribution of these values should approach the stationary solution of the PDE. So if we fit a beta distribution to that data, it should agree with the theoretical result.
+
+I did this, and plotted the result below. The first plot is a histogram of the terminal positions of `z`, while the second is the best fit and theoretical distributions:
+
+![long_term_random_walk_result](time_varying_bandit/long_term_random_walk_result.png)
+
+The result is imperfect due to sampling, but it appears more or less correct. To be precise, it's correct the second time I tried - the first version of my math did make a stupid calculation mistake (lost a factor of 2 somewhere), which this method revealed.
+
+### Behavior of the solution
+
+The second important fact to understand is the solution is dissipative. What this means is that we lose information with time. If we start with a very sharp probability distribution, after some time that solution will spread out and our uncertainty will increase.
+
+I've plotted here the solution of the PDE for a fairly sharp initial condition. At `time=0`, we are extremely confident that the CTR is somewhere between [0.25, 0.45]. At the end of the simulation, all we can say is that it's located somewhere in [0.05, 0.40]. Due to the random walk, our knowledge becomes stale with time.
+
+![dissipative solution](time_varying_bandit/probability_density_random_walk.png)
+
+The black lines are 3 examples of a random walk superimposed on the plot of the density.
+
+Another way to visualize the data is to simply plot the value of $@ f(z,t) $@ for various specific times $@ t $@. Our confidence about what the CTR is is decreasing over time.
+
+![dissipative solution](time_varying_bandit/probability_dist_various_times.png)
+
+## Computing a posterior on $@x$@
+
+Now lets suppose that at time $@ t=0.2 $@, we computed a posterior $@ f(x, 0.2) $@. Suppose that at this time we display the given call to action to some specific user. If a conversion occurs, we can compute the posterior:
+
+$$ \textrm{posterior}(x) = \frac{ x f(x, 0.2) } { \int x f(x, 0.2) dx } $$
+
+Conversely, if no conversion occurred, the posterior would be:
+
+$$ \textrm{posterior}(x) = \frac{ (1-x) f(x, 0.2) } { \int (1-x) f(x, 0.2) dx } $$
+
+Now the question arises - what information do we have at time $@ t=0.3 $@? At time $@ t = 0.2 $@, we know that the CTR is distributed according to $@ \textrm{posterior}(x) $@. So to figure out what we know about the distribution of the CTR at $@ t=0.3 $@, we solve the PDE again. But this time, we take $@ f(x, 0.2) = \textrm{posterior}(x) $@ as our initial condition, and solve the equation for an additional $@ 0.1 $@ seconds into the future (from $@ t=0.2 $@ to $@t=0.3$@).
+
+## The Bayesian Bandit
+
+Now we have a method, albeit a somewhat involved one, for computing the posterior distribution on a *changing variable* based on a sequence of observations. The uncertainty in the posterior distribution now comes from two sources - experimental error during our measurements, and the possibility that the variable changed between the measurements and the present. But this is ok - conceptually, the posterior still represents our uncertainty as to what the true conversion rate is.
+
+We'll now use these posterior distributions and apply the [Bayesian Bandit](/blog/2013/bayesian_bandit.html) technique.
+
+So suppose that for each call to action, we have computed a posterior distribution on it $@ f_1(x,t) $@, $@ f_2(x,t)$@, etc. Now at time $@ t=0.5$@ a user has clicked on the site. We need to figure out which call to action to display to him. The algorithm consists of drawing a sample $@ x_1 $@ from $@ f_1(x,0.5)$@, $@ x_2 $@ from $@ f_2(x,0.5) $@, etc. We then figure out which one is the largest and display that call to action to the user.
+
+After the user has either clicked or not clicked, we then update that particular probability distribution as necessary, just as described in the previous section.
+
+## Other relevant work
+
+The paper [A stochastic diffusion process for the Dirichlet Equation](http://arxiv.org/pdf/1303.0217.pdf) does something similar, but for the Dirichlet Distribution rather than the Beta Distribution. Could come in handy if you need to bucket into more than 2 categories (e.g., `[ NoConvert, ConvertToX, ConvertToY]`).
+
+Also relevant is [The Pearson diffusions: A class of statistically tractable diffusion processes](http://www.econ.au.dk/fileadmin/site_files/filer_oekonomi/Working_Papers/CREATES/2007/rp07_28.pdf) and [On Properties of Analytically Solvable Families of Local Volatility Diffusion Models](http://www.wlu.ca/documents/44066/solvmod.pdf).
+
+I imagine there is more out there in the literature than this. But I've never been much good at literature searches, and most of it is probably behind an academic paywall anyway. But if anyone has pointers, I'd love to see them.
+
+## Appendix: Solving the PDE
+
 
 It turns out (yay [Sturm-Liouville theory](https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory)) that this sort of PDE has a fairly straightforward method of solution. Suppose we find an eigenfunction of the right hand side, i.e.:
 
@@ -90,27 +180,6 @@ We can also rewrite the eigenfunctions in terms of $@x$@ as:
 $$ q_n(x) = (1-x)^b x^a P^{(b,a)}_n (2x-1) \frac{2n+a+b+1}{2} \frac{\Gamma(n+1)\Gamma(n+a+b+1)}{\Gamma(n+a+1)\Gamma(n+b+1)} \frac{\Gamma(a+b+2)}{\Gamma(b+1)\Gamma(a+1) 2^{a+b+1}}$$
 
 For more information on using eigenvalue/eigenvectors (aka [spectral methods](https://en.wikipedia.org/wiki/Spectral_method)) to solve partial differential equations, I highly recommend the book [Chebyshev and Fourier Spectral Methods](http://www.amazon.com/gp/product/0486411834/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0486411834&linkCode=as2&tag=christuc-20) by John Boyd.
-
-### Properties of the solution
-
-The first important fact to recognize is that this model has a stationary solution corresponding to $@n=0$@:
-
-$$ q_0(x) = \textrm{const}(1-x)^a x^b$$
-
-This is a beta distribution with parameters $@(a,b)$@. This means that if our uncertainty about the conversion rate is modelled by $@q_0(x)$@, it will remain $@q_0(x)$@ forever.
-
-The second important fact is that all other solutions $@q_n(z)$@ decay exponentially with time, with the slowest decay rate being $@\theta$@. So any information we have about the distribution of $@x$@ vanishes after a time proportional to $@O(\theta)$@.
-
-## Computing a posterior on $@x$@
-
-Now suppose we have a prior distribution $@f(x)$@ on the conversion rate. Suppose we run an experiment. If a conversion occurs, we can compute the posterior:
-
-$$ posterior = \frac{ x f(x) } { \int x f(x) dx } $$
-
-Conversely, if no conversion occurred, the posterior would be:
-
-$$ posterior = \frac{ (1-x) f(x) } { \int (1-x) f(x) dx } $$
-
 
 If $@f(x)$@ were comprised of Jacobi polynomials, we can make use of the following recurrence relation:
 
@@ -151,7 +220,8 @@ then computing a posterior is a matter of multiplying the vector $@[f_0, f_1, ..
 
 Similarly, let $@U(t)=\textrm{diag}[e^{-\lambda_0 t}, e^{-\lambda_1 t}, \ldots, e^{-\lambda_n t}]$@ denote the time evolution operator of solutions to the random walk itself.
 
-### An algorithm for computing the posterior
+
+### Appendix: An algorithm for computing the posterior
 
 Suppose now we run a sequence of experiments, $@S_0, S_1, ..., S_n$@ at times $@ t_0 < t_1 < \ldots < t_n$@. Suppose for simplicity we take as our prior $@\vec{f}_0 = [1, 0, 0, \ldots]$@. At time $@t_0 + \delta$@, we can compute the posterior:
 
@@ -164,44 +234,3 @@ Similarly, at $@t_1+\delta$@ we obtain:
 $$ \vec{f}(t_1+\delta) = \textrm{normalize}  \left[  U(\delta)S_1 U(t_1-t_0) S_0 U(t_0) \vec{f}_0 \right] $$
 
 Computing the posterior at various future points is the same process, repeated ad nauseum.
-
-## The Bayesian Bandit
-
-Now we have a method, albeit a somewhat involved one, for computing the posterior distribution on a *changing variable* based on a sequence of observations. The uncertainty in the posterior distribution now comes from two sources - experimental error during our measurements, and the possibility that the variable changed between the measurements and the present. But this is ok - conceptually, the posterior still represents our uncertainty as to what the true conversion rate is.
-
-The [Bayesian Bandit](/blog/2013/bayesian_bandit.html) approach is the following. At each step, based on evidence we've already seen, we compute a posterior distribution on each bandit variation. We draw a sample from each variation, and choose the one with the largest conversion probability.
-
-## Checking your work
-
-Is it possible we made a mistake in our calculations? Did I lose a factor of 2, or flip a minus sign?
-
-Fortunately this is something that is reasonably straightforward to check. We can start with our random walk model, and use a numerical integrator to solve it:
-
-    gaussian_var = norm()
-    def dW(dt):
-        return norm.rvs() / sqrt(dt)
-
-    def random_walk(z0, tmax, dt, times = None):
-        def rhs(z,t):
-            return -theta*(z-(a-b)/(a+b+2)) + sqrt(2*theta*(1-z*z)/(a+b+2))*dW(dt)
-        if (times is None):
-            times = arange(0,tmax,dt)
-        z = zeros(shape=times.shape, dtype=float)
-        z[0] = z0
-        for i in range(1,z.shape[0]):
-            z[i] = z[i-1] + rhs(z[i-1], times[i])*dt
-            if abs(z[i]) > 1:
-                z[i] = z[i] / abs(z[i])
-        return (times, z)
-
-Then we can run the simulation many times. Following that, we can fit a probability distribution to the resulting data and compare it to the theoretical result. I did this, and the result is plotted below:
-
-![long_term_random_walk_result](time_varying_bandit/long_term_random_walk_result.png)
-
-The result is imperfect due to sampling, but it appears more or less correct. To be precise, it's correct the second time I tried - the first version of my math did make a stupid calculation mistake (lost a factor of 2 somewhere), which this method revealed.
-
-## Other relevant work
-
-The paper [A stochastic diffusion process for the Dirichlet Equation](http://arxiv.org/pdf/1303.0217.pdf) does something similar, but for the Dirichlet Distribution rather than the Beta Distribution. Could come in handy.
-
-Also relevant is [The Pearson diffusions: A class of statistically tractable diffusion processes](http://www.econ.au.dk/fileadmin/site_files/filer_oekonomi/Working_Papers/CREATES/2007/rp07_28.pdf) and [On Properties of Analytically Solvable Families of Local Volatility Diffusion Models](http://www.wlu.ca/documents/44066/solvmod.pdf).
