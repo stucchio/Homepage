@@ -72,7 +72,13 @@ def beta_prior(s, f):
     return poly1d(ones(shape=(s,)), True)*poly1d(-1*ones(shape=(f,)), True)
 
 def poly_to_jacobi(x):
-    """x is a poly1d object"""
+    """x is a poly1d object representing a function *after dividing by the invariant_distribution*.
+
+    This means that:
+    jacobi_to_poly(poly_to_jacobi(p)) == invariant_distribution * p
+
+    up to numerical errors.
+    """
     xc = x.coeffs
     N = x.order+1
     matrix = zeros(shape=(N,N), dtype=float)
