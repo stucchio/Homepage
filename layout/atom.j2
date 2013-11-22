@@ -37,17 +37,18 @@
                         label="{{ tag|title }}" />
             {% endfor %}
 
-            <content type="html">
+            <summary type="html">
                 {% refer to res.url as article -%}
-                {% filter forceescape -%}
                 {% if resource.meta.excerpts_only -%}
                 {{ article.image|markdown|typogrify }}
                 {{ article.excerpt|markdown|typogrify }}
                 {%- else %}
-                {{ article.post|markdown|typogrify }}
+                {{ article.excerpt|markdown|typogrify }}
                 {%- endif %}
-                {%- endfilter %}
-            </content>
+		{% if not res.meta.nolinkback %}
+		<a href="http://www.chrisstucchio.com{{ content_url(res.url) }}?utm_medium=rss&utm_source=rss&utm_campaign=rss">Read more on the blog, most feed readers can't handle my formatting...</a>>
+		{% endif %}
+            </summary>
         </entry>
     {% endfor %}
 </feed>
