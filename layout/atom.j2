@@ -24,9 +24,9 @@
             <title type="html">{{ res.meta.title }}</title>
             <author><name>{{ res.meta.author }}</name></author>
 	    {% if res.meta.remoteurl %}
-            <link href="{{res.meta.remoteurl}}?utm_medium=rss&utm_source=chris_blog&utm_campaign=merged_rss"/>
+            <link href="{{res.meta.remoteurl}}?utm_medium=rss&amp;utm_source=chris_blog&amp;utm_campaign=merged_rss"/>
             {% else %}
-            <link href="http://www.chrisstucchio.com{{ content_url(res.url) }}?utm_medium=rss&utm_source=rss&utm_campaign=rss"/>
+            <link href="http://www.chrisstucchio.com{{ content_url(res.url) }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss"/>
             {% endif %}
             <updated>{{ res.meta.created|xmldatetime }}</updated>
             <published>{{ res.meta.created|xmldatetime }}</published>
@@ -39,15 +39,8 @@
 
             <summary type="html">
                 {% refer to res.url as article -%}
-                {% if resource.meta.excerpts_only -%}
-                {{ article.image|markdown|typogrify }}
-                {{ article.excerpt|markdown|typogrify }}
-                {%- else %}
-                {{ article.excerpt|markdown|typogrify }}
-                {%- endif %}
-		{% if not res.meta.nolinkback %}
-		<a href="http://www.chrisstucchio.com{{ content_url(res.url) }}?utm_medium=rss&utm_source=rss&utm_campaign=rss">Read more on the blog, most feed readers can't handle my formatting...</a>>
-		{% endif %}
+                  <a href="http://www.chrisstucchio.com{{ content_url(res.url) }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss">Read on the blog, most feed readers can't handle my formatting. .</a>
+                  I haven't figured out how to make this atom feed include excerpts properly, and MathJax makes things even more complicated.
             </summary>
         </entry>
     {% endfor %}
