@@ -103,6 +103,8 @@ It also violates separation of concerns. Fundamentally, handling concurrency is 
 
 Lets be concrete. Suppose that for whatever reason, no more than 10 database queries should be running simultaneously. If we use Actors to manage concurrency, there are two places this must be configured - in the `ActorSystem` itself, and in the `Router` which routes requests to the actors. Suppose the database were upgraded and could now handle 20 concurrent queries. If we only increase the thread limit in the actor system but forget to increase the number of actors, we will continue running only 10 concurrent queries.
 
+But really, you shouldn't use your `ActorSystem`'s thread pool to manage the number of concurrent database queries either. Your `ActorSystem` should manage your `Thread` resources - your database connection pool should actually be what is used to manage database concurrency. It's highly unlikely that your home grown concurrency system will be faster than [BoneCP](http://jolbox.com/).
+
 In contrast, if we used futures, then the change need only be made in one place.
 
 ## Actors are for state
