@@ -5,11 +5,11 @@
         {% block title %}{{ resource.meta.title|default(feed_title) }}{% endblock %}
     </title>
     {% block self_url %}
-    <link href="http://www.chrisstucchio.com{{ resource.url }}" rel="self" />
+    <link href="{{ resource.url }}" rel="self" />
     {% endblock %}
 
     {% block site_url %}
-    <link href="http://www.chrisstucchio.com{{ content_url('') }}"/>
+    <link href="{{ content_url('') }}"/>
     {% endblock %}
 
     {% block feed_extra %}
@@ -21,7 +21,7 @@
 
     {% for res in resource.node.walk_resources_sorted_by_time() %}
         <entry>
-            <title type="html">{{ res.meta.title }}</title>
+            <title type="html">{{ res.meta.title|forceescape }}</title>
             <author><name>{{ res.meta.author }}</name></author>
 	    {% if res.meta.remoteurl %}
             <link href="{{res.meta.remoteurl}}?utm_medium=rss&amp;utm_source=chris_blog&amp;utm_campaign=merged_rss"/>
@@ -37,11 +37,19 @@
                         label="{{ tag|title }}" />
             {% endfor %}
 
-            <summary type="html">
-                {% refer to res.url as article -%}
-                  <a href="http://www.chrisstucchio.com{{ content_url(res.url) }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss">Read on the blog, most feed readers can't handle my formatting. .</a>
-                  I haven't figured out how to make this atom feed include excerpts properly, and MathJax makes things even more complicated.
-            </summary>
+            <content type="html">
+                {% refer to res.relative_path as article -%}
+                {% filter forceescape -%}
+		{% if res.meta.nolinkback %}
+                    {{ article.image|markdown|typogrify }}
+                    {{ article.post|markdown|typogrify }}
+                {% else %}
+                    {{ article.image|markdown|typogrify }}
+                    {{ article.excerpt|markdown|typogrify }}
+                    <a href="http://www.chrisstucchio.com{{ content_url(res.url) }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss">Read the rest on the blog</a>
+                {% endif %}
+                {%- endfilter %}
+            </content>
         </entry>
     {% endfor %}
 </feed>
