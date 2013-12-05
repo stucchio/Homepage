@@ -224,7 +224,7 @@ Here is [actual runnable code](https://gist.github.com/stucchio/7578539) (rather
 
 ### The effect of flukes
 
-The answer is of course yes. If by some improbablye fluke, the true conversion rate is 20%, but you observe empirically that it is 100%, your estimates will be off. This is unavoidable.
+The answer is of course yes. If by some improbable fluke, the true conversion rate is 20%, but you observe empirically that it is 100%, your estimates will be off. This is unavoidable.
 
 But when you observe flukes caused by a *small sample size*, these will not affect your estimates as much as you might expect. Consider the following simulation, identical to the previous one, except that I've reduced the sample size, i.e. `nsamples = 10`. I ran a simulation where at `t=2` an improbable fluke occurs - the empirical conversion rate was 60% (6/10) even though the actual conversion rate was about 25%. Although unlikely, this will occur occasionally. The result is plotted below.
 
