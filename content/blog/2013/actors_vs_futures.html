@@ -230,3 +230,5 @@ In this example, `MyHttpServer` is not encapsulating state (although in principl
 ## Conclusion
 
 Actors are awesome. But they aren't the only abstraction we have. Futures are another great abstraction which work very well with purely functional code. Actors are great for maintaining state, futures are great for everything else.
+
+P.S. In the [reddit thread](http://www.reddit.com/r/scala/comments/1sa888/use_actors_for_state_and_futures_for_concurrency/) on this post, eigenfutz (now [deleted]) raised the concern that the quantity of work being performed by threads is uncontrollable. I don't believe his points arguing for actors over futures are valid (and explain why there), but the discussion is useful nonetheless. In particular, it is a good argument for [work pulling](http://blog.goconspire.com/post/64901258135/akka-at-conspire-part-5-the-importance-of-pulling).
