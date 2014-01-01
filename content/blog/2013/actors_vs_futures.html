@@ -36,7 +36,7 @@ Before continuing, I'll give a concrete example of what I consider to be a bad u
 
 Elsewhere in the code, `FooActor` is used as follows:
 
-    val fooResult: Future[Any] = fooActor ! FooRequest(...)
+    val fooResult: Future[Any] = fooActor ? FooRequest(...)
 
 The key feature to note about `FooActor` is that *it has no mutable state*. Nothing internal to `FooActor` is altered when it receives a message. However, because `FooActor` is implemented as an actor, Akka has no choice but to run it in a single threaded manner.
 
@@ -60,8 +60,8 @@ Elsewhere:
 
 The first benefit of using futures rather than actors is that your concurrency situation is drastically improved. Consider the following code:
 
-    val r1 = fooActor ! request1
-    val r2 = fooActor ! request2
+    val r1 = fooActor ? request1
+    val r2 = fooActor ? request2
     for {
       result1 <- r1
       result2 <- r2
