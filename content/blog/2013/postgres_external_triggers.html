@@ -53,14 +53,14 @@ One solution to this is to tie the notification system to the database connectio
 
     class NotifyingDatabaseConnection(object):
         def notify(self, message):
-	    self.__messages__.append(message)
+            self.__messages__.append(message)
 
         def commit(self):
-	    self.__connection__.commit()
-	    self.__event_bus__.send_notifications(self.__messages__)
-	    self.__messages__ = []
+            self.__connection__.commit()
+            self.__event_bus__.send_notifications(self.__messages__)
+            self.__messages__ = []
 
-The Haskell style approach would be to define your SQL monad as `WriterT [Notification] YourTransactionMonadIO`, and similarly send off the notifications only after the transaction has committed. As far as I'm aware, neither Django nor Rails implement any functionality of this nature. At the time I wrote this, the only implementation I was aware of is a half-backed prototype of the monadic approach which I built at AOL/Patch on a suggestion from [Jim Powers](https://twitter.com/corruptmemory). However, Ben Bangert (in a comment on this post) pointed out to me that the [Pyramid](http://docs.pylonsproject.org/projects/pyramid_tm/en/latest/#transaction-usage) framework also handles this.
+The Haskell style approach would be to define your SQL monad as `WriterT [Notification] YourTransactionMonadIO`, and similarly send off the notifications only after the transaction has committed. As far as I'm aware, neither Django nor Rails implement any functionality of this nature. At the time I wrote this post, the only implementation I was aware of is a half-assed prototype of the monadic approach which I built at AOL/Patch on a suggestion from [Jim Powers](https://twitter.com/corruptmemory). However, Ben Bangert (in a comment on this post) pointed out to me that the [Pyramid](http://docs.pylonsproject.org/projects/pyramid_tm/en/latest/#transaction-usage) framework also handles this.
 
 Another situation where things become problematic is when multiple rows are updated in the database but the application does not know which ones:
 
