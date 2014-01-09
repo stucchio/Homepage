@@ -1,0 +1,112 @@
+---
+title: Learning Spire - cfor aka Scala is SLOW
+
+created: !!timestamp '2014-01-09 08:30:00'
+tags:
+    - scala
+    - spire
+    - math
+    - array programming
+---
+
+{% mark excerpt -%}
+
+Another cool feature offered by [Spire](https://github.com/non/spire) is the `cfor` macro. `cfor` is basically just a C-style for loop:
+
+    cfor(0)(i => i < maxSize, i => i + 1)( i => {
+      result = result + i*i
+    })
+
+The purpose of `cfor` is not to do anything you can't do with ordinary Scala iterator primitives. The sole purpose of `cfor` is performance, since unfortunately ordinary scala iteration performance is pretty terrible.
+
+{%- endmark %}
+
+Consider the following problem. We want to apply the linear transformation `(x:Double) => 2.0*x+3.0` to an `Array[Double]`. The idiomatic way to define it is as follows:
+
+    object CFor {
+      def mapMultiply(x: Array[Double]): Array[Double] = x.map(x => 2.0*x+3.0)
+    }
+
+Now lets benchmark this. We can build a benchmark class using the `scala.testing.Benchmark` library:
+
+    class MultiplyBenchmark(func: Array[Double] => Array[Double]) extends testing.Benchmark {
+      var x: Array[Double] = null
+
+      override def setUp() = {
+        val isNull = (x == null)
+        if (isNull) {
+          x = new Array(8*1024*1024)
+          cfor(0)(_ < x.size, _ + 1)(i => {
+            x(i) = java.lang.Math.random()
+          })
+        } else { //Stupid hack to avoid running Math.random() over and over again
+          cfor(0)(_ < x.size, _ + 1)(i => {
+            x(i) = x(i) / 2.0
+          })
+        }
+      }
+
+      def run = func(x)
+    }
+
+    object CForTest {
+      val CForTest = new MultiplyBenchmark(CFor.cforMultiply)
+      val MapTest = new MultiplyBenchmark(CFor.mapMultiply)
+    }
+
+Running this in the console on my machine yields:
+
+    scala> CForTest.MapTest.runBenchmark(100).sum / 100.0
+    res2: Double = 240.03
+
+(This number is in milliseconds.)
+
+Suppose we implemented the same function as idiomatic C, translated to Scala:
+
+    def cforMultiply(x: Array[Double]): Array[Double] = {
+      val result = new Array[Double](x.size)
+      cfor(0)(_ < x.size, _ + 1)(i => {
+        result(i) = 2.0*x(i) + 3.0
+      })
+      result
+    }
+
+The identical benchmark runs over 10x faster:
+
+    scala> CForTest.CForTest.runBenchmark(100).sum / 100.0
+    res1: Double = 21.42
+
+Now lets consider an example with two arrays:
+
+    def cforDotProd(x: Array[Double], y: Array[Double]): Array[Double] = {
+      val result = new Array[Double](x.size)
+      cfor(0)(_ < x.size, _ + 1)(i => {
+        result(i) = x(i)*y(i)
+      })
+      result
+    }
+
+    def zipDotProd(x: Array[Double], y: Array[Double]): Array[Double] = x.zip(y).map( x => x._1 * x._2 )
+
+The `cforDotProd` takes 26.1ms to run. The `zipDotProd` takes 7.468 *seconds* to run! Holy shit, idiomatic scala is slow.
+
+## Scala - only 5x slower than python
+
+For comparison, here is multiply in idiomatic python:
+
+    2.0*x+3.0
+
+And the benchmarks:
+
+    In [3]: timeit.timeit('2.0*x+3.0',
+                          setup="""from numpy import *;
+                                x = random.rand(8*1024*1024)""",
+                          number=100)
+    <timeit-src>:2: SyntaxWarning: import * only allowed at module level
+    Out[3]: 4.537637948989868
+
+Dot product implemented as `x*y` takes 2.75ms.
+
+## Lessons learned
+
+Python is still the clear winner for scientific code. Even with dirty performance hacks, Scala is 5x slower than idiomatic Python. Hopefully those of us who like both Scala and scientific computing can improve this situation.a
