@@ -1,5 +1,5 @@
 ---
-title: Learning Spire - cfor aka Scala is SLOW
+title: Learning spire - Scala is Slow, cfor helps
 
 created: !!timestamp '2014-01-09 08:30:00'
 tags:
@@ -21,7 +21,7 @@ The purpose of `cfor` is not to do anything you can't do with ordinary Scala ite
 
 {%- endmark %}
 
-Consider the following problem. We want to apply the linear transformation `(x:Double) => 2.0*x+3.0` to an `Array[Double]`. The idiomatic way to define it is as follows:
+Consider the following problem. We want to apply the affine transformation `(x:Double) => 2.0*x+3.0` to an `Array[Double]`. The idiomatic way to define it is as follows:
 
     object CFor {
       def mapMultiply(x: Array[Double]): Array[Double] = x.map(x => 2.0*x+3.0)
@@ -33,15 +33,10 @@ Now lets benchmark this. We can build a benchmark class using the `scala.testing
       var x: Array[Double] = null
 
       override def setUp() = {
-        val isNull = (x == null)
-        if (isNull) {
+        if (x == null) {
           x = new Array(8*1024*1024)
           cfor(0)(_ < x.size, _ + 1)(i => {
             x(i) = java.lang.Math.random()
-          })
-        } else { //Stupid hack to avoid running Math.random() over and over again
-          cfor(0)(_ < x.size, _ + 1)(i => {
-            x(i) = x(i) / 2.0
           })
         }
       }
