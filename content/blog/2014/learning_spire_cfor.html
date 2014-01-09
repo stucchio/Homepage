@@ -102,6 +102,38 @@ And the benchmarks:
 
 Dot product implemented as `x*y` takes 2.75ms.
 
+## Using a while loop
+
+[edit: it was suggested I try a while loop after I wrote this] This is equivalent to the performance you would get simply by using a while loop (21.75ms):
+
+    def whileMultiply(x: Array[Double]): Array[Double] = {
+      val result = new Array[Double](x.size)
+      var i:Int = 0
+      while (i < x.size) {
+        result(i) = 2.0*x(i) + 3.0
+        i += 1
+      }
+      result
+    }
+
+This is because `cfor` is a macro which expands down to the while loop. The implementation can be found [here](https://github.com/non/spire/blob/master/macros/src/main/scala/spire/macros/Syntax.scala#L70), but the gist of it is:
+
+    def oversimplified_cforMacro[A](c: Context)(init: c.Expr[A])
+       (test: c.Expr[A => Boolean], next: c.Expr[A => A])
+       (body: c.Expr[A => Unit]): c.Expr[Unit] = {
+
+       val tree = q"""
+       var $index = $init
+       while ($test($index)) {
+         $body($index)
+         $index = $next($index)
+       }
+       """
+       new InlineUtil[c.type](c).inlineAndReset[Unit](tree)
+    }
+
+So using `cfor` is equivalent to using the corresponding `while` loop.
+
 ## Lessons learned
 
-Python is still the clear winner for scientific code. Even with dirty performance hacks, Scala is 5x slower than idiomatic Python. Hopefully those of us who like both Scala and scientific computing can improve this situation.a
+Python is still the clear winner for scientific code. Even with dirty performance hacks, Scala is 5x slower than idiomatic Python. Hopefully those of us who like both Scala and scientific computing can improve this situation.
