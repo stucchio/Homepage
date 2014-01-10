@@ -73,7 +73,7 @@ The identical benchmark runs over 10x faster:
 
 Now lets consider an example with two arrays:
 
-    def cforDotProd(x: Array[Double], y: Array[Double]): Array[Double] = {
+    def cforMultiply(x: Array[Double], y: Array[Double]): Array[Double] = {
       val result = new Array[Double](x.size)
       cfor(0)(_ < x.size, _ + 1)(i => {
         result(i) = x(i)*y(i)
@@ -81,9 +81,9 @@ Now lets consider an example with two arrays:
       result
     }
 
-    def zipDotProd(x: Array[Double], y: Array[Double]): Array[Double] = x.zip(y).map( x => x._1 * x._2 )
+    def zipMultiply(x: Array[Double], y: Array[Double]): Array[Double] = x.zip(y).map( x => x._1 * x._2 )
 
-The `cforDotProd` takes 26.1ms to run. The `zipDotProd` takes 7.468 *seconds* to run! Holy shit, idiomatic scala is slow.
+The `cforMultiply` takes 26.1ms to run. The `zipMultiply` takes 7.468 *seconds* to run! Holy shit, idiomatic scala is slow.
 
 ## Scala - only 5x slower than python
 
@@ -137,3 +137,7 @@ So using `cfor` is equivalent to using the corresponding `while` loop.
 ## Lessons learned
 
 Python is still the clear winner for scientific code. Even with dirty performance hacks, Scala is 5x slower than idiomatic Python. Hopefully those of us who like both Scala and scientific computing can improve this situation.
+
+## Code available
+
+Code for this series of blog posts is available [on github](https://github.com/stucchio/Spire-examples).
