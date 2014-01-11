@@ -85,7 +85,9 @@ Now lets consider an example with two arrays:
 
 The `cforMultiply` takes 26.1ms to run. The `zipMultiply` takes 7.468 *seconds* to run! Holy shit, idiomatic scala is slow.
 
-## Scala - only 5x slower than python
+## Scala - Comparison to Python/Numpy
+
+*Note: A previous version of this post* **incorrectly** *said scala was slower than numpy. I misinterpreted the result of timeit. It is not returning a number in milliseconds, it's returning the time to run all benchmarks as measured in seconds. Thanks to Ichoran and michael_121 for spotting this mistake.*
 
 For comparison, here is multiply in idiomatic python:
 
@@ -100,7 +102,9 @@ And the benchmarks:
     <timeit-src>:2: SyntaxWarning: import * only allowed at module level
     Out[3]: 4.537637948989868
 
-Dot product implemented as `x*y` takes 2.75ms.
+This works out to be 45.37ms/run. This is about twice as slow as Scala's `cfor` - I'm guessing because the Scala version iterates once over the array, while the numpy version does so twice.
+
+Dot product implemented as `x*y` takes 27.5ms.
 
 ## Using a while loop
 
@@ -137,6 +141,10 @@ So using `cfor` is equivalent to using the corresponding `while` loop.
 ## Lessons learned
 
 Python is still the clear winner for scientific code. Even with dirty performance hacks, Scala is 5x slower than idiomatic Python. Hopefully those of us who like both Scala and scientific computing can improve this situation.
+
+*Also, double check the docs before posting benchmarks. Egg on my face here.*
+
+Another interesting fact I discovered while investigating this is that JVM has built in [bounds check elimination](https://wikis.oracle.com/display/HotSpotInternals/RangeCheckElimination). If the JIT compiler can prove that your loop will not exit the bounds of an array, it will eliminate the range check.
 
 ## Code available
 
