@@ -54,8 +54,12 @@
    _paq.push(['setDomains', '*.chrisstucchio.com']);
    _paq.push(['trackPageView']);
    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-   g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'/bayesianwitch.js';
+   g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'/bayesianwitch.min.js';
    s.parentNode.insertBefore(g,s);
+
+   window.BayesianWitch = window.BayesianWitch || {};
+   window.BayesianWitch.customEvents = window.BayesianWitch.customEvents || [];
+   window.logCustom = function(data) { window.BayesianWitch.customEvents.push(data); };
 })();
 </script>
 
@@ -99,16 +103,7 @@
   <!-- Javascript at the bottom for fast page loading -->
   {% block jquery %}
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
-});
-</script>
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.5.1.min.js">\x3C/script>')</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
   {% endblock jquery %}
 
   {% block scripts %}
@@ -125,6 +120,14 @@ MathJax.Hub.Config({
   {% endblock analytics %}
 
   {% endblock js %}
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
+});
+</script>
 </body>
 
 </html>
