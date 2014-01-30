@@ -140,11 +140,15 @@ So using `cfor` is equivalent to using the corresponding `while` loop.
 
 ## Lessons learned
 
-Python is still the clear winner for scientific code. Even with dirty performance hacks, Scala is 5x slower than idiomatic Python. Hopefully those of us who like both Scala and scientific computing can improve this situation.
+**Double check the docs before posting benchmarks. Egg on my face here.** (The previous lesson learned was that numpy was faster than scala+cfor, which is incorrect.)
 
-*Also, double check the docs before posting benchmarks. Egg on my face here.*
+Another interesting fact I discovered while investigating this is that JVM has built in [bounds check elimination](https://wikis.oracle.com/display/HotSpotInternals/RangeCheckElimination). If the JIT compiler can prove that your loop will not exit the bounds of an array, it will eliminate the range check. If I understand right, it does it whenever your indexing function is linear:
 
-Another interesting fact I discovered while investigating this is that JVM has built in [bounds check elimination](https://wikis.oracle.com/display/HotSpotInternals/RangeCheckElimination). If the JIT compiler can prove that your loop will not exit the bounds of an array, it will eliminate the range check.
+    cfor(0)(i => i < maxSize, i => i + 1)( i => {
+      result[a*i+b] = ...
+    })
+
+Here the compiler must be able to prove that `a` and `b` are constants.
 
 ## Code available
 
