@@ -28,7 +28,9 @@ In theory, I should have no reason to hold Dollars, Pounds, Rupees or Bitcoins.
 
 So lets put this theory to the test. What's in my wallet?
 
-I guess that theory is now debunked. So why am I carrying all this paper? One very simple reason.
+![Picture of Ghandi](demand_for_bitcoins/ghandiji.jpg)
+
+I've also got a few hundred GBP and a few hundred USD floating around. I guess that theory is now debunked. So why am I carrying all this paper? One very simple reason.
 
 **Auto drivers don't accept credit cards.**
 
@@ -36,128 +38,80 @@ I need to carry currency to perform my everyday transactions - getting laundry d
 
 So we arrive at the first fundamental principle of currencies. If people need to perform transactions with a currency then that currency will have a positive value.
 
-# Applying Supply and Demand
+## Mathematically Modelling the Demand for Money
 
-As economically-minded folks, we'll be using Supply&Demand to figure out the price of money.
+In order to do everyday transactions, people want to hold an inventory of currency. The important question to answer is "how much?" I have a few thousand Rupees in my pocket, but that's far less than my life savings. I have a lot more wealth invested in SPY, USD, and various interest-bearing USD-denominated securities. So how can we determine how much money I put into Rupees?
 
-## Demand
+The [Baumol-Tobin model](http://en.wikipedia.org/wiki/Baumol-Tobin_model) provides a good way to think about things. It's not a perfect model, but it provides a useful way to think about things. The basic idea is that people hold an inventory of currency to minimize transaction costs. If I want to convert from USD to INR, I need to take an auto to an ATM and then pay my bank a foreign transaction fee. Even if I were in the US, there would still be labor involved in holding enough cash.
 
-Now that we've established that people want to hold a currency, the important question to answer is "how much?" I have a few thousand Rupees in my pocket, but that's far less than my life savings. I have a lot more wealth invested in SPY, USD, and various interest-bearing USD-denominated securities. So how can we determine how much money I put into Rupees?
+On the other hand, I don't want to hold too much cash. Every year, the value of those pictures of Ghandi in my pocket go down by 10% or so. Furthermore, I lose the opportunity cost of putting rupees into an interest bearing account - I believe a savings account over here will yield a nominal 6%.
 
-The [Baumol-Tobin model](http://en.wikipedia.org/wiki/Baumol-Tobin_model) provides a good way to think about things. It's not a perfect model, as I'll explain below - it misses some important facts. But it provides a useful way to think about things.
-
-The first important fact to consider is transaction costs. If I want to convert from USD to INR, I need to take an auto to an ATM and then pay my bank a foreign transaction fee. Even if I were in the US, there would still be labor involved in holding enough cash.
-
-The other cost in carrying cash is opportunity cost - cash in my pocket is not earning interest.
-
-If you work out the details from this model and do the math, you discover the following equation for monetary demand:
+So the amount of cash I want to have on hand, assuming I'm making optimal decisions, can be arrived at by minimizing the sum of transaction costs and opportunity costs. The Baumol-Tobin model does this for one patricular model of transaction costs, and arrives at the following equation for monetary demand:
 
     M(P) = P sqrt(C Y / 2 R)
 
 In this equation, `P` is the price level, `C` is the transaction costs, `Y` is real consumption, and `R` is interest rates.
 
-Another common model comes from the [quantity theory of money](http://en.wikipedia.org/wiki/Quantity_Theory_of_Money), and this treats monetary demand as:
+So the key qualitative facts are the following:
 
-    M(P) = P Y / V
+**First:** higher transaction costs mean people want to hold more money.
 
-where `V` is the [velocity of money](http://en.wikipedia.org/wiki/Velocity_of_money).
+**Second:** higher price levels and higher consumption mean people want to hold more money.
 
-## Supply
+**Third:** higher interest rates mean people want to hold less money.
+
+# Computing the Price Level
+
+Although this is macroeconomics, we can still use a supply&demand curve. But instead of using *price* as one of the axes, we use *price level*.
 
 For BTC, the supply (in the long run) is pretty easy to figure out - 21 million. There is of course a small probability that the Bitcoin system will collectively agree to allow inflation or a different number, but I'll ignore this for the moment.
 
-For USD, it's much more difficult. To figure out money supply, you need to guess the actions of the Federal Reserve over the long term. Since this post is about speculating on BTC, I won't bother to get into thta.
+For USD, it's much more difficult. To figure out money supply, you need to guess the actions of the Federal Reserve over the long term. Since this post is about speculating on BTC, I won't bother to get into that.
 
-## Computing a price level
+So the game to be played is matching the supply and demand curves. In pictures, it means finding the point where the two curves intersect:
 
-Now that we know the money supply, to find the price we simply need to figure out where supply meets demand. For the Baumol-Tobin model, we have:
+![Picture of Ghandi](demand_for_bitcoins/supply_and_demand.png)
+
+In equations, it means solving the equation:
 
     21e6 = P sqrt(C Y / 2 R)
 
-Or:
+The solution is:
 
     P = 21e6 sqrt(2R/CY)
 
-If you use the Quantity Theory of Money, you come up with:
+It's important to note that all the quantities I'm listing here apply *to the bitcoin economy only*.
 
-    P = 21e6 V / Y
+Also, just so that we keep track of what this means in real world terms, a *higher* price level means that bitcoins are *less* valuable. So a more useful quantity to think about might be:
 
-There is a significant difference between these two equations, so it's important to figure out what theory of monetary demand you find most plausible.
+    1/P = (1/21e6) sqrt(CY/2R)
 
-It's important to note that all the quantities I'm listing here apply *to the bitcoin economy only*. The dollar economy is relevant only insofar as
+This is the *value* of bitcoins - it represents the real goods that a bitcoin can buy you in the future. So you want to go **long** if you expect `1/P` is large and **short** if you expect it to be small.
 
-# Price level vs Exchange Rate
+# Key properties
 
-At this point I want to emphasize that the *price level* is not the same thing as the *exchange rate*. The [price level](http://en.wikipedia.org/wiki/Price_level) of a currency is a (mostly hypothetical) measure of the overall prices of goods and services in an economy.
+The first thing to note is that the larger the bitcoin economy is in real terms (goods and services, represented by `Y`), the more valuable bitcoins become. This is rather unsurprising. If no one uses bitcoins for anything, they are worthless, while if everyone uses them they are more valuable.
 
-To compute an *exchange rate*, we need to go a bit further. Remember that `P y` has units of *nominal consumption* for a fixed quantity of real consumption `y`. Note that I'm using a lowercase `y` to distinguish between *aggregate consumption* (used in the previous section, called `Y`) and consumption of a fixed basket of goods (called `y`).
+The second and somewhat surprising fact is that the higher transaction costs are, the more valuable bitcoins are. But I'll try to give an intuitive explanation. In the US I carry very little cash. I can pay for nearly anything with a credit card, and then pay off my revolving debt (i.e. turn interest bearing bank deposits into cash) at the end of the month. In India, I carry a lot - credit cards are nearly useless here, due to the higher transaction costs (I need to pay foreign transaction fees).
 
-In the absence of arbitrage opportunities (efficient markets), `BTC price = P y = Dollar price = P_dollar y`. This implies that `BTC price / Dollar price = P y / P_dollar y = P/P_dollar`. So computing exchange rates is merely a matter of computing the ratios of price levels between BTC and dollars.
+Of course, this second fact is true only holding everything else in isolation. If transaction costs drop precipitously, it is likely that people will shift spending from dollars to bitcoins. This would result in a corresponding increase in Y. So although `C` might fall, `CY` (and hence `1/P`) could actually increase as a result.
+
+The last key property is that higher interest rates make bitcoins less valuable.
 
 # It's difficult to make predictions, especially about the future
 
-To engage in financial speculation, you need to be able to predict the future. To determine the price level of BTC, we ultimately need to predict interest rates, transaction costs and real BTC-denominated consumption. (I'm implicitly sticking to the Baumol-Tobin model - use another if you like.)
+To engage in financial speculation, you need to be able to predict the future. To determine the price level of BTC, we ultimately need to predict interest rates, transaction costs and real BTC-denominated consumption. This is hardly a trivial matter, but ultimately speculation is about predicting the future and then making bets on it.
 
-## Interest rates
-
-This is the least important quantity to measure, at least if you trading dollars vs bitcoins. The reason is that interest rates affect price levels for both dollars and bitcoins identically - they both have a `sqrt(R)` at the bottom.
-
-    exchange rate = P / P_dollar
-                  = 21e6 sqrt(2R/CY) / (# of dollars)sqrt(2R/C_dollar Y_dollar)
-                  = (21e6 / (# of dollars)) sqrt(C_dollar Y_dollar / C Y)
-
-So if you take the USD as a benchmark rate, and trade BTC against it, then you don't care about interest rates at all.
-
-## Real Consumption
-
-This is an important quantity, and will differ drastically from the dollar economy. The reason for this is that Bitcoins and other currencies are not close substitutes for one another. Most auto drivers will not accept BTC, and most drug dealers on Silk Road will not accept USD or INR.
-
-Another big use I expect to see in the future is cross-border transactions - paying one's web designer or other outsourced human in BTC rather than USD (which is then converted by some third party into Baht or Rupees or whatever). The cross-border trade segment of the economy will not necessarily move the same way as the rest of the economy. This is particularly true for nations with capital controls.
-
-If you want to predict real consumption, you need to somehow figure out which transactions will be done with BTC and how large these transactions will be.
-
-## Transaction Costs
-
-This is another biggie. The lower the transaction costs of BTC are, the fewer BTC I need to hold. I can just convert USD or INR to BTC immediately whenever I need to, which means that the inventory I need is lower.
-
-On the other hand, one of the promises of BTC is lower transaction costs than other money transfer mechanisms. The lower the transaction costs are, the more likely I am to actually use BTC. So a lowering of transaction costs here will not necessarily result in a commensurate decrease in the price level of BTC - lower transaction costs might result in higher real consumption. I.e., while `C` might go down, `CY` might go up (or remain flat).
-
-## Putting it all together
-
-Once you have a predictive model of `C`, `Y` and `R`, you run it and plug the result into the formula `P = 21e6 sqrt(2R/CY)`. This will tell you the bitcoin price level. You can then compute an exchange rate between BTC and Dollars/Rupees/etc, compare market prices to your own speculative price, and trade appropriately.
-
-# Example
-
-For this example, I'll make the following assumptions.
-
-**First**, international trade is modelled as being proportional to (say 5%) of the dollar economy.
-
-**Second**, the size of the BTC economy is modelled as being proportional to some fraction of international trade - illegal uses become negligible, and for domestic uses, dollars are preferable.
-
-**Third**, the constant of proportionality is inversely proportional to transaction costs. I.e., higher transaction costs mean fewer transactions use BTC.
-
-As an equation, this means that:
-
-    Y = Y_dollar (A / C)
-
-where `A` is the product of the constant of proportionalities from the first two equations. Roughly speaking, bigger `A` means more international trade and more
-
-If we plug this into the equation for the exchange rate, we get:
-
-    exchange rate = (21e6 / (# of dollars)) sqrt(C_dollar Y_dollar / [C Y_dollar (A / C)])
-                  = (21e6 / (# of dollars)) sqrt(C_dollar / A )
-
-So now we come to a very simple model. More dollars in circulation reduces this exchange rate, which is exactly what we expect. Higher transaction costs with dollars increase it - this is also expected, since higher transaction costs increase the demand for dollars. And it is inversely proportional to the square root of the size of the bitcoin economy. Of course, estimating `A` is a tricky question, but that's why speculators earn good money.
+Once you have a predictive model of `C`, `Y` and `R`, you run it and plug the result into the formula for `1/P`. This will tell you the real value of bitcoins in the future. You can then compute an exchange rate between BTC and Dollars/Rupees/etc, compare market prices to your own speculative price, and trade appropriately.
 
 # See also
 
 In a previous post, I discussed the macroeconomics of [Bitcoin's deflationary nature](http://www.bayesianwitch.com/blog/2014/bitcoin_critics_not_even_wrong.html).
 
 <div id="ebd18011-2be6-4ef5-b8e9-945c1e7e6d06"></div>
-
 <script type="text/javascript" id="bandit-javascript">
         (function(){window.BayesianWitch=window.BayesianWitch||{};window.BayesianWitch.variations=window.BayesianWitch.variations||{};window.BayesianWitch.variationNotifySuccess=window.BayesianWitch.variationNotifySuccess||{};window.BayesianWitch.variationGetSuccessData=window.BayesianWitch.variationGetSuccessData||{};var logCustom=function(data){if(window.BayesianWitch.customEventsFired)window.BayesianWitch.logCustom(data);else{window.BayesianWitch.customEvents=window.BayesianWitch.customEvents||[];window.BayesianWitch.customEvents.push(data)}};
-var bandit={"bandit":{"uuid":"ebd18011-2be6-4ef5-b8e9-945c1e7e6d06","tag":"macrolinkout2","site":{"client":{"id":4,"uuid":"3f68e356-e7a8-4714-807f-d6ce31b659ff","name":"f3810710421dd621f6c9a28c7fe6ba"},"domain":"chrisstucchio.com","uuid":"cdfdf2e8-8937-4fa8-9a5b-7595f8b3487f"},"createdAt":1392550618710,"kind":"content_snippet"},"variations":[{"tag":"Successful_old_version","isActive":true,"contentAndType":{"content":"<p>I recommend reading&nbsp;<a href=\"http://www.amazon.com/gp/product/0716752379/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0716752379&amp;linkCode=as2&amp;tag=macrolink1-20\">Macroeconomics</a>&nbsp;in order to learn more about Keynesian economics and it&#39;s alternatives. You can buy an older edition slightly used&nbsp;<a href=\"http://www.amazon.com/gp/product/0716752379/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0716752379&amp;linkCode=as2&amp;tag=macrolink1-20\">for only $9.50</a>.</p>\r\n","content_type":"text/html"},"uuid":"74dbef91-5e0f-4c13-abbc-781c0d7d4bca"},{"tag":"trial_version","isActive":true,"contentAndType":{"content":"<p>To learn more about macroeconomics, the used edition of Greg Mankiw&#39;s excellent <a href=\"http://www.amazon.com/gp/product/0716752379/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0716752379&amp;linkCode=as2&amp;tag=macrolink2-20\">Macroeconomics</a>&nbsp;textbook is only $9.50. To learn more about mathematical finance in general, you can also find <a href=\"http://www.amazon.com/gp/product/0471498629/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0471498629&amp;linkCode=as2&amp;tag=macrolink2-20\">the classic Wilmott book</a>&nbsp;for only $16.50.</p>\r\n","content_type":"text/html"},"uuid":"a9e24c3e-7a4c-4025-8e73-23dad4cc277c"}],"kind":"content_snippet"};var fallbackDelay=500;var maxAge=2592000;var divToInsert=document.getElementById(bandit.bandit.uuid);var banditDisplayed=false;var alreadySeenVersion=null;var cookieName="bwsn_"+bandit.bandit.uuid;var cookiePosition=document.cookie.indexOf(cookieName+"\x3d");if(cookiePosition>=0)alreadySeenVersion=document.cookie.substring(cookiePosition+cookieName.length+1,cookiePosition+cookieName.length+1+36);var displayBandit=function(displayVariation){if(banditDisplayed)return false;
+var bandit={"bandit":{"uuid":"ebd18011-2be6-4ef5-b8e9-945c1e7e6d06","tag":"macrolinkout2","site":{"client":{"id":4,"uuid":"3f68e356-e7a8-4714-807f-d6ce31b659ff","name":"f3810710421dd621f6c9a28c7fe6ba"},"domain":"chrisstucchio.com","uuid":"cdfdf2e8-8937-4fa8-9a5b-7595f8b3487f"},"createdAt":1392550618710,"kind":"content_snippet","baseURL":"http:"},"variations":[{"tag":"Successful_old_version","isActive":true,"contentAndType":{"content":"<p>I recommend reading&nbsp;<a href=\"http://www.amazon.com/gp/product/0716752379/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0716752379&amp;linkCode=as2&amp;tag=macrolink1-20\">Macroeconomics</a>&nbsp;in order to learn more about monetary theory and macroeconomics. You can buy an older edition slightly used&nbsp;<a href=\"http://www.amazon.com/gp/product/0716752379/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0716752379&amp;linkCode=as2&amp;tag=macrolink1-20\">for only $9.50</a>.</p>\r\n","content_type":"text/html"},"uuid":"74dbef91-5e0f-4c13-abbc-781c0d7d4bca"},{"tag":"trial_version","isActive":true,"contentAndType":{"content":"<p>To learn more about macroeconomics, the used edition of Greg Mankiw&#39;s excellent <a href=\"http://www.amazon.com/gp/product/0716752379/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0716752379&amp;linkCode=as2&amp;tag=macrolink2-20\">Macroeconomics</a>&nbsp;textbook is only $9.50. An alternative viewpoint is provided by <a href=\"http://www.amazon.com/gp/product/1467934925/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1467934925&amp;linkCode=as2&amp;tag=macrolink2-20\">John Maynard Keynes</a>, who&#39;s book is also only $8. And t<span style=\"line-height: 1.6em;\">o learn more about mathematical finance in general, you can also find </span><a href=\"http://www.amazon.com/gp/product/0471498629/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0471498629&amp;linkCode=as2&amp;tag=macrolink2-20\" style=\"line-height: 1.6em;\">the classic Wilmott book</a><span style=\"line-height: 1.6em;\">&nbsp;for only $16.50.</span></p>\r\n","content_type":"text/html"},"uuid":"a9e24c3e-7a4c-4025-8e73-23dad4cc277c"}],"kind":"content_snippet"};var fallbackDelay=500;var maxAge=2592000;var divToInsert=document.getElementById(bandit.bandit.uuid);var banditDisplayed=false;var alreadySeenVersion=null;var cookieName="bwsn_"+bandit.bandit.uuid;var cookiePosition=document.cookie.indexOf(cookieName+"\x3d");if(cookiePosition>=0)alreadySeenVersion=document.cookie.substring(cookiePosition+cookieName.length+1,cookiePosition+cookieName.length+1+36);var displayBandit=function(displayVariation){if(banditDisplayed)return false;
 divToInsert.innerHTML=displayVariation.contentAndType.content;divToInsert.setAttribute("bayesianwitch_bd_var",displayVariation.uuid);divToInsert.setAttribute("bayesianwitch_bd_suc","true");logCustom({"bd_var":displayVariation.uuid});window.BayesianWitch.variationNotifySuccess[bandit.bandit.uuid]=function(){logCustom({"bd_var":displayVariation.uuid,"bd_suc":true})};window.BayesianWitch.variationGetSuccessData[bandit.bandit.uuid]=function(){return{"bd_var":displayVariation.uuid,"bd_suc":true}};banditDisplayed=
 true;document.cookie=cookieName+"\x3d"+displayVariation.uuid+"; Max-Age\x3d"+maxAge+";";return true};var callbackName="bandit_display_"+bandit.bandit.uuid.replace(new RegExp("-","g"),"_");var fullCallbackName="window.BayesianWitch."+callbackName;window.BayesianWitch[callbackName]=displayBandit;var fallbackDisplayBandit=function(){if(banditDisplayed)return false;var displayVariation=null;if(alreadySeenVersion)for(var i=0;i<bandit.variations;i++){if(bandit.variations[i].uuid==alreadySeenVersion)displayVariation=
 bandit.variations[i]}else displayVariation=bandit.variations[bandit.variations.length*Math.random()<<0];displayBandit(displayVariation);logCustom({"bd_var":bandit.bandit.uuid,"timeout":fallbackDelay})};window.BayesianWitch.variations[bandit.bandit.uuid]=displayBandit;window.setTimeout(fallbackDisplayBandit,fallbackDelay);var callback=document.createElement("script");callback.setAttribute("type","application/javascript");if(alreadySeenVersion)callback.setAttribute("src","http://recommend.bayesianwitch.com/bandit_rec/"+
