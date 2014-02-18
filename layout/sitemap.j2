@@ -1,0 +1,16 @@
+{% from "macros.j2" import render_excerpt, render_post with context %}
+<?xml version="1.0" encoding="utf-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {% for res in resource.node.walk_resources_sorted_by_time() %}
+      {% if res.meta.remoteurl %}
+      {% else %}
+        <url>
+          <loc>http://www.chrisstucchio.com{{ content_url(res.url) }}</loc>
+          <lastmod>{{ res.meta.created|xmldatetime }}</lastmod>
+          <changefreq>weekly</changefreq>
+          <priority>0.8</priority>
+        </url>
+      {% endif %}
+    {% endfor %}
+</urlset>
