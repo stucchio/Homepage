@@ -64,7 +64,7 @@
 
     <div class="row" id="pagination">
       <div class="col col_16">
-      <a class="backlink" href="{{ content_url(resource.node.url) }}"> Back to list</a>
+      <a class="backlink" href="/blog/index.html"> Back to list</a>
       <a class="next{{' disabled' if not resource.prev_by_time }}" title="{{ resource.prev_by_time.meta.title }}" {% if resource.prev_by_time %}href="{{ content_url(resource.prev_by_time.url) }}"{% endif %}> Next </a>
       <a class="prev{{' disabled' if not resource.next_by_time }}" title="{{ resource.next_by_time.meta.title }}" {% if resource.next_by_time %} href="{{ content_url(resource.next_by_time.url) }}"{% endif %}> Prev </a>
       </div>
