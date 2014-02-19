@@ -16,7 +16,7 @@ The cause of this error is that Java is spending a lot of time inside the garbag
 
 {%- endmark %}
 
-One mitigation strategy I've used is [deduplication](deduplication.html). Another I've used is mutability. Rather than doing this:
+One mitigation strategy I've used is [deduplication](/blog/2012/deduplication.html). Another I've used is mutability. Rather than doing this:
 
     case class Foo(var x: Int, var y: Boolean) extends Writable {
       def +(other: Foo): Foo = Foo(x+other.x, y && other.y)
