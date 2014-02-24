@@ -2,6 +2,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc>http://www.chrisstucchio.com/index.html</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+
+    <url>
+      <loc>http://www.chrisstucchio.com/work.html</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+
+    <url>
+      <loc>http://www.chrisstucchio.com/blog/index.html</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+
     {% for res in resource.node.walk_resources_sorted_by_time() %}
       {% if res.meta.remoteurl %}
       {% else %}
