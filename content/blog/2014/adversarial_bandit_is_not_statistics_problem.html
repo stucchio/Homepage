@@ -74,8 +74,8 @@ Tangentially, it's completely unclear to me why god is able to predict the bandi
 
 Fundamentally the adversarial bandit is a thought experiment. Many other bandit algorithms, for example UCB1 and the [Bayesian Bandit](/blog/2013/bayesian_bandit.html), come with strong assumptions - a typical assumption is that the conversion rate of each variant does not change with time. That's a very unrealistic assumption.
 
-So in order to build a better model, some math lovers decided to come up with the weakest assumption they could think of that would still get results. The adversarial bandit is the result of that process. But the adversarial bandit models an adversarial world - this is very different from an *indifferent* world where the outcome of each slot machine varies with time.
+So in order to build a better model, some math lovers decided to come up with the weakest assumption they could think of that would still get results. The adversarial bandit is the result of that process. But the adversarial bandit models an adversarial world - this is very different from an *indifferent* world where the outcome of each slot machine varies with time. In an adversarial world, people will stop clicking on ads about beanie babies just to spite me - in an indifferent world, they will stop clicking on them simply because they have fallen out of favor.
 
-The reason is that in the adversarial world, using a deterministic algorithm will actually *change the world*. In an indifferent world, it will not. A bandit algorithm in an indifferent world is a statistics problem - your goal is to describe the world with a probability distribution and make decisions based on the result.
+In an adversarial world, using a deterministic algorithm will actually *change the world*. In an indifferent world, it will not. A bandit algorithm in an indifferent world is a statistics problem - your goal is to describe the world with a probability distribution and make decisions based on the result. In an adversarial world it's a game theory problem.
 
-Bandits in an indifferent world are a statistics problem. Adversarial bandits are not.
+The fact that Bayesian Statistics don't apply to deterministic game theory does not make game theory a problem of frequentist statistics - it just means there are areas of math that are not statistics at all.
