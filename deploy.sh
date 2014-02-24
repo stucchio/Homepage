@@ -13,14 +13,11 @@ find deploy/ -name '*.gz' | sed s/\\.gz// | xargs -I filename mv "filename.gz" "
 find deploy/ -name '*.jpg' | xargs -I filename jpegoptim --strip-all filename
 
 #Upload
+s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync deploy/* s3://www.chrisstucchio.com
 s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync deploy/* s3://www.chrisstucchio.com
-#Upload media with cache headers
-find deploy/ -name '*.css' -or -name "*.js" -or -name "*.html" | sed s/^deploy\\/// |xargs -I filename s3cmd -c s3cfg --add-header='Content-Encoding:gzip' put deploy/filename s3://www.chrisstucchio.com/filename
 
-#Repeat for non-www
+s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync deploy/* s3://chrisstucchio.com
 s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync deploy/* s3://chrisstucchio.com
-#Upload media with cache headers
-find deploy/ -name '*.css' -or -name "*.js" -or -name "*.html" | sed s/^deploy\\/// |xargs -I filename s3cmd -c s3cfg --add-header='Content-Encoding:gzip' put deploy/filename s3://chrisstucchio.com/filename
 
 
 rm -r deploy
