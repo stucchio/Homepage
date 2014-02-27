@@ -133,10 +133,10 @@ Finally, the algorithm `UCB1` is as follows:
         best_possible_true_mean = { m -> avg[m] + sqrt( 2 ln(N) / num_plays[m] ) }
             // This is pseudocode for a "dict comprehension"
             // I.e. best_possible_true_mean[m] = avg[m] + ...
-	to_play = argmax(best_possible_true_mean)
-	reward <- play_machine(to_play)
+            to_play = argmax(best_possible_true_mean)
+            reward <- play_machine(to_play)
 
-	update avg[to_play], num_plays[m], N
+            update avg[to_play], num_plays[m], N
 
 This algorithm starts off in a pure exploration phase, since `avg[m]` will be small compared to the confidence bound. For example, with `N=10` and `num_plays[m]=5`, we find that the confidence bound is 0.9597. For comparison, `avg[m]` is some number bounded by 1.
 
