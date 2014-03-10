@@ -33,7 +33,7 @@ The implementation of Breeze's `DenseVector.update` was the following:
 
 In addition to supporting `offset` and `stride`, this does two interesting things. First, it allows negative array access - `denseVector.update(-1, 12)` sets the *last* element of the array to 12. Second, it creates a nicer error message if you go out of bounds.
 
-It's also fairly slow. The following benchmark code takes 9.3 microseconds on an 8kb `Array[Double]`:
+It's also fairly slow. The following benchmark code takes 9.3 microseconds on an 8k `Array[Double]`:
 
     var i=0;
     while (i < vec.size) {
