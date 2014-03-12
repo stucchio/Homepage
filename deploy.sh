@@ -6,7 +6,7 @@ hyde gen
 find deploy/media/ -name '*.css' -or -name '*.js' | xargs -I filename yui-compressor filename -o filename.min
 find deploy/media/ -name '*.min' | sed s/\\.min// | xargs -I filename mv filename.min filename
 # Compress
-find deploy/ -name '*.css' -or -name '*.js' -or -name '*.html' | xargs -I filename gzip -9 "filename"
+find deploy/ -name '*.css' -or -name '*.js' -or -name '*.html' | xargs -I filename gzip -n -9 "filename"
 find deploy/ -name '*.gz' | sed s/\\.gz// | xargs -I filename mv "filename.gz" "filename"
 
 # Optimize
