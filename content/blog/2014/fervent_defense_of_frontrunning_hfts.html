@@ -10,9 +10,9 @@ tags:
 
 {% mark excerpt %}
 
-In the good old days before the computer revolution, stocks were generally priced by traders using pencil and paper. Analysts would read news, study corporate financials, and then give ideas to traders. Trading happened in a physical trading pit. When a large player (Goldman Sachs, J.P. Morgan) wanted to buy a large block of trades, they had two options.
+In the good old days before the computer revolution, stocks were generally priced by traders using pencil and paper. Analysts would read news, study corporate financials, and then give ideas to traders. Trading happened in a physical trading pit. When a large player (Goldman Sachs, J.P. Morgan) wanted to buy a large block of shares, they would hire a pit trader to trade on their behalf..
 
-The first is that they'd hire a pit trader to trade on their behalf - he'd be told to buy a bunch of shares of GOOG at the best price he could. Before electronic trading, order flow was determined by price-height priority. If a trader is really tall, you are more likely to notice that he wants to fill your order. Similarly if he was loud, had a bright jacket, or was otherwise noticeable. Those days were far more civilized than our modern system of price-time priority and electronic markets, or at least that's what [Michael Lewis](http://www.amazon.com/gp/product/0393244660/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0393244660&linkCode=as2&tag=christuc-20) wants us to believe.
+The pit trader would be told to buy a bunch of shares of GOOG at the best price he could. Before electronic trading, order flow was determined by price-height priority. If a trader is really tall, you are more likely to notice that he wants to fill your order. Similarly if he was loud, had a bright jacket, or was otherwise noticeable. Those days were far more civilized than our modern system of price-time priority and electronic markets, or at least that's what [Michael Lewis](http://www.amazon.com/gp/product/0393244660/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0393244660&linkCode=as2&tag=christuc-20) wants us to believe.
 
 Nowadays, the electronic markets are a [crime scene](http://www.zerohedge.com/article/its-not-market-its-hft-crop-circle-crime-scene-further-evidence-quote-stuffing-manipulation-) full of evil HFTs who will front run little guys like J.P. Morgan.
 
@@ -55,9 +55,9 @@ For the purposes of this blog post, I'm following Michael Lewis' unconventional 
 
 # Moving Large Blocks
 
-Block trades are large, market moving trades performed by the little guy. As a concrete example, [Little Billie Ackman](http://en.wikipedia.org/wiki/Bill_Ackman) currently holds a [$400M short position](http://dealbook.nytimes.com/2013/11/22/ackman-vows-to-take-bet-against-herbalife-to-the-end-of-the-earth/) against Herbalife, which he believes is a pyramid scheme. If Bill Ackman wants to close out this short, he will need to perform a block trade. Similarly, in 2011, [Little Davey Einhorn](http://en.wikipedia.org/wiki/David_Einhorn_(hedge_fund_manager)) performed a large short against Green Mountain Coffee.
+Big players sometimes need to move a lot of stock at one time. As a concrete example, [Little Billie Ackman](http://en.wikipedia.org/wiki/Bill_Ackman) currently holds a [$400M short position](http://dealbook.nytimes.com/2013/11/22/ackman-vows-to-take-bet-against-herbalife-to-the-end-of-the-earth/) against Herbalife, which he believes is a pyramid scheme. If Bill Ackman wants to close out this short, he will need to move a lot of shares relatively quickly. Similarly, in 2011, [Little Davey Einhorn](http://en.wikipedia.org/wiki/David_Einhorn_(hedge_fund_manager)) performed a large short against Green Mountain Coffee.
 
-There is no concrete definition of a block trade, so I'll make a formal definition for the purposes of this post. When a market participant wishes to sell an amount of stock larger than the current set of open orders on a single public matching engine (e.g. NYSE/ARCA/BATS), he wants to make a *block trade*. Another somewhat more flexible definition of a block trade is when a market participant wants to sell an amount of stock larger than the *average* set of open orders on a single public matching engine. I.e., suppose the order book looks like this:
+For the purposes of this post, I'll be discussing cases when a market participant wants to move an amount of stock larger than the current set of open orders on a single public matching engine (e.g. NYSE/ARCA/BATS). For example, suppose the order book looks like this:
 
     SELL(100 @ $21)
     SELL(300 @ $20.5)
@@ -68,27 +68,27 @@ There is no concrete definition of a block trade, so I'll make a formal definiti
     BUY(300 @ $19.90)
     BUY(200 @ $19.85)
 
-A buy order for 10,000 shares is a *block trade* since only 1,600 shares are available for sale.
+The case we are interested in is when a trader wants to move 10,000 shares, but only 1,600 shares are available.
 
 ## Supply and Demand
 
-Like most things, the price of a stock is determined by supply and demand. When a trader decides he wants to make a block trade, *demand has changed* in a significant way. As a result, the price of the stock will change a well.
+Like most things, the price of a stock is determined by supply and demand. When a trader decides he wants to make a large trade, *demand has changed* in a significant way. As a result, the price of the stock will change a well.
 
 This is generally considered to be a good thing. In fact, it's the primary mechanism behind price discovery and using markets to transmit information. If a speculator believes AAPL is undervalued, he buys a bunch of shares of AAPL. This drives up the price until AAPL is no longer undervalued - then the speculator can sell his AAPL and reap the profits.
 
-A very important fact to note is that at the time the decision to trade is made, the person making the block trade has an information advantage. Everyone else in the market currently believes demand is `D`. The block trader knows that demand is actually `D+B`, where `B` is the size of the block they want to trade. The block trader knows when the trade will be made.
+A very important fact to note is that at the time the decision to trade is made, the person making the trade has an information advantage. Everyone else in the market currently believes demand is `D`. The trader knows that demand is actually `D+B`, where `B` is the amount of stock they want to buy. The trader knows when the trade will be made.
 
-The goal of the block trader is to use this information without leaking it to the outside world. As soon as everyone else figures out the demand is `D+B`, they will adjust their prices accordingly.
+The goal of the trader is to use this information without leaking it to the outside world. As soon as everyone else figures out the demand is `D+B`, they will adjust their prices accordingly.
 
 # A whale dumped 1000 lots - you'll never believe what happened next
 
-Lets consider first the ideal case for [Little Billie Ackman](http://en.wikipedia.org/wiki/Bill_Ackman). Suppose that there are currently 1000 lots (1 lot = 100 shares) available on the matching engine. By my above definition, this is technically not a block trade. But for the sake of argument, lets say this was an exceptional circumstances that the whale just decided to take advantage of - he can push a button and unload his shares all at once.
+Lets consider first the ideal case for [Little Billie Ackman](http://en.wikipedia.org/wiki/Bill_Ackman). Suppose that there are currently 1000 lots (1 lot = 100 shares) available on the matching engine.
 
 At this point, a whole bunch of "trade" messages hit the feed - someone bought 1000 lots at $21.00. Everyone else in the market has just figured out that they got the demand wrong - they thought it was `D`, but it's actually `D+B`. As a result, the price on offer will immediately shoot upwards, perhaps to $22.00.
 
 In the meantime, all the traders who had orders out in the market do not reap the benefits of this price increase. Their orders were filled at $21.00 and then the price went up to $22.00. Conversely, if the whale sold at $21.00, the people who just bought from him might discover that a few moments later, their shares are worth only $20.50.
 
-# Adverse Selection
+# Adverse Selection aka Delta Toxicity
 
 There is a further difficulty when passively providing liquidity. When you passively provide liquidity, there are two types of people who will take liquidity from you.
 
@@ -96,9 +96,9 @@ There is a further difficulty when passively providing liquidity. When you passi
 
 **Informed Traders**. This category of people includes folks like Little Billie Ackman. Ackman has information on Herbalife which the liquidity provider lacks - as a result, the expectation is that after Ackman buys, the price of shares will move against the liquidity provider and in favor of Ackman.
 
-Informed traders (which block traders nearly always are) reduce the profits of market makers. As a result, market makers try to focus on providing liquidity to people with consumption preference while avoiding (or charging higher prics to) the informed.
+Informed traders (which traders moving a lot of stock nearly always are) reduce the profits of market makers. As a result, market makers try to focus on providing liquidity to people with consumption preference while avoiding (or charging higher prics to) the informed.
 
-As a result, most block traders attempt to hide their intentions. Instead of hitting the market with a single trade that meets their demand, they buy in small chunks - 2 lots here, 3 lots there, until they've eventually filled the entire 1000 lot trade they wanted. Most big traders have internal departments devoted to trade execution - hiding their intentions in the most clever way possible. For anyone who doesn't want to run an internal department, you can rent an algorithm from assorted shops out there. For example, [Pipeline Financial](http://www.marketswiki.com/mwiki/Pipeline_Financial_Group_Inc) (oops, bad example).
+As a result, most traders attempt to hide their intentions. Instead of hitting the market with a single trade that meets their demand, they buy in small chunks - 2 lots here, 3 lots there, until they've eventually filled the entire 1000 lot trade they wanted. Most big traders have internal departments devoted to trade execution - hiding their intentions in the most clever way possible. For anyone who doesn't want to run an internal department, you can rent an algorithm from assorted shops out there. For example, [Pipeline Financial](http://www.marketswiki.com/mwiki/Pipeline_Financial_Group_Inc) (oops, bad example).
 
 Many alternative trading venues, for example [Dark Pools](http://en.wikipedia.org/wiki/Dark_liquidity) have sprung up as a way to help the little guy hide his intentions. A Dark Pool is basically a matching engine where all quotes are hidden - only trades are printed to the public tape. There are also electronic communication networks (ECN) and crossing networks which offer similar services to dark pools - they let you move large blocks quietly, without leaking information.
 
