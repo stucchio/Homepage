@@ -1,5 +1,5 @@
 ---
-title: Why Front-Running HFTs are a good thing
+title: A Fervent Defense of Front-running HFTs
 created: !!timestamp '2014-04-07 10:00:00'
 tags:
     - economics
@@ -16,9 +16,9 @@ The first is that they'd hire a pit trader to trade on their behalf - he'd be to
 
 Nowadays, the electronic markets are a [crime scene](http://www.zerohedge.com/article/its-not-market-its-hft-crop-circle-crime-scene-further-evidence-quote-stuffing-manipulation-) full of evil HFTs who will front run little guys like J.P. Morgan.
 
-In contrast, consider the olden days. This guy would never have front run you - you can trust this face:
+In contrast, consider the good old days of pit trading. A pit trader would never front-run you. A pit trader would never dare to move his price away from where David Einhorn wants it to be.
 
-![a pit trader](/blog/2014/why_front_running_hfts_are_a_good_thing/pit_trader.jpg)
+![a pit trader](/blog/2014/fervent_defense_of_frontrunning_hfts/pit_trader.jpg)
 
 {%- endmark %}
 
@@ -37,19 +37,19 @@ To begin I want to define some terms.
 
 In simple terms:
 
-![Mickey and Rocky](/blog/2014/why_front_running_hfts_are_a_good_thing/rocky-screenshot-4.jpg)
+![Mickey and Rocky](/blog/2014/fervent_defense_of_frontrunning_hfts/rocky-screenshot-4.jpg)
 
-Mickey (Rocky's coach) is an asshole if he punches Rocky.
+Mickey (Rocky's coach) is an asshole if he punches Rocky. Punching Rocky is bad because Mickey's job is to help rocky.
 
-![Apollo and Rocky](/blog/2014/why_front_running_hfts_are_a_good_thing/rocky-screenshot-7.jpg)
+![Apollo and Rocky](/blog/2014/fervent_defense_of_frontrunning_hfts/rocky-screenshot-7.jpg)
 
-Apollo is not an asshole if he punches rocky.
+Apollo is not an asshole if he punches rocky. His job is to kick Rocky's ass.
 
-The only reason front-running is bad is because of the agency relationship between the trader and the broker. From here on out, I'm going to stick to the term "predatory trading".
+From here on out, I'm going to stick to the term "predatory trading" to refer to HFTs who trade ahead of you but are not your broker.
 
 ### The little guy
 
-For the purposes of this blog post, I'm following Michael Lewis' unconventional definitions. I'm defining the "little guy" as JP Morgan or George Soros - someone who wants to move 100,000 shares at a time. I'm defining the "big guy" as either Joe Sixpack dumping 100 shares from his retirement account, or perhaps Anil's HFT shop, a $5-20M prop shop run by a few computer geeks.
+For the purposes of this blog post, I'm following Michael Lewis' unconventional definitions. I'm defining the "little guy" as JP Morgan or George Soros - someone who wants to move 100,000 shares at a time. I'm defining the "big guy" as either Joe Sixpack dumping 100 shares from his retirement account, or perhaps Anil's HFT shop, a $1-20M prop shop run by a few computer geeks.
 
 # Moving Large Blocks
 
@@ -74,11 +74,11 @@ Like most things, the price of a stock is determined by supply and demand. When 
 
 This is generally considered to be a good thing. In fact, it's the primary mechanism behind price discovery and using markets to transmit information. If a speculator believes AAPL is undervalued, he buys a bunch of shares of AAPL. This drives up the price until AAPL is no longer undervalued - then the speculator can sell his AAPL and reap the profits.
 
-A very important fact to note is that at the time the decision to trade is made, the person making the block trade has a *massive* information advantage. Everyone else in the market currently believes demand is `D`. The block trader knows that demand is actually `D+B`, where `B` is the size of the block they want to trade. The block trader knows when the trade will be made.
+A very important fact to note is that at the time the decision to trade is made, the person making the block trade has an information advantage. Everyone else in the market currently believes demand is `D`. The block trader knows that demand is actually `D+B`, where `B` is the size of the block they want to trade. The block trader knows when the trade will be made.
 
 The goal of the block trader is to use this information without leaking it to the outside world. As soon as everyone else figures out the demand is `D+B`, they will adjust their prices accordingly.
 
-# A whale just dumped 1000 lots - you'll never believe what happened next
+# A whale dumped 1000 lots - you'll never believe what happened next
 
 Lets consider first the ideal case for [Little Billie Ackman](http://en.wikipedia.org/wiki/Bill_Ackman). Suppose that there are currently 1000 lots (1 lot = 100 shares) available on the matching engine. By my above definition, this is technically not a block trade. But for the sake of argument, lets say this was an exceptional circumstances that the whale just decided to take advantage of - he can push a button and unload his shares all at once.
 
@@ -90,13 +90,13 @@ In the meantime, all the traders who had orders out in the market do not reap th
 
 There is a further difficulty when passively providing liquidity. When you passively provide liquidity, there are two types of people who will take liquidity from you.
 
-**Retail traders**. This category of people is folks like Joe Retiree - he's a fellow who put money into the market and now wants to take it out. Or perhaps he's a younger man who wants to put his money into the market. His goal is to save his wealth for later - as a result, he wants to buy stocks that broadly track the economy.
+**Retail traders**. This category of people is folks like Joe Retiree - he's a fellow who put money into the market and now wants to take it out. Or perhaps he's a younger man who wants to put his money into the market. His goal is to save his wealth for later - as a result, he wants to buy stocks that broadly track the economy. Very importantly, he's typically not trading on the basis of information that only he posesses.
 
 **Informed Traders**. This category of people includes folks like Little Billie Ackman. Ackman has information on Herbalife which the liquidity provider lacks - as a result, the expectation is that after Ackman buys, the price of shares will move against the liquidity provider and in favor of Ackman.
 
-Informed traders (which block traders nearly always are) reduce the profits of market makers. As a result, market makers try to focus on providing liquidity to people with consumption preference while avoiding the informed.
+Informed traders (which block traders nearly always are) reduce the profits of market makers. As a result, market makers try to focus on providing liquidity to people with consumption preference while avoiding (or charging higher prics to) the informed.
 
-Conversely, most block traders attempt to hide their intentions. Instead of hitting the market with a single trade that meets their demand, they buy in small chunks - 2 lots here, 3 lots there, until they've eventually filled the entire 1000 lot trade they wanted. Most big traders have internal departments devoted to trade execution - hiding their intentions in the most clever way possible. For anyone who doesn't want to run an internal department, you can rent an algorithm from assorted shops out there. For example, [Pipeline Financial](http://www.marketswiki.com/mwiki/Pipeline_Financial_Group_Inc) (oops, bad example).
+As a result, most block traders attempt to hide their intentions. Instead of hitting the market with a single trade that meets their demand, they buy in small chunks - 2 lots here, 3 lots there, until they've eventually filled the entire 1000 lot trade they wanted. Most big traders have internal departments devoted to trade execution - hiding their intentions in the most clever way possible. For anyone who doesn't want to run an internal department, you can rent an algorithm from assorted shops out there. For example, [Pipeline Financial](http://www.marketswiki.com/mwiki/Pipeline_Financial_Group_Inc) (oops, bad example).
 
 Many alternative trading venues, for example [Dark Pools](http://en.wikipedia.org/wiki/Dark_liquidity) have sprung up as a way to help the little guy hide his intentions. A Dark Pool is basically a matching engine where all quotes are hidden - only trades are printed to the public tape. There are also electronic communication networks (ECN) and crossing networks which offer similar services to dark pools - they let you move large blocks quietly, without leaking information.
 
@@ -114,7 +114,7 @@ Most shops which do high frequency trading exclusively are noise traders. They r
 
 # Price Discrimination
 
-Because of the dichotomy between people with consumption preference and informed traders, HFTs have come up with clever schemes to price discriminate between these two groups.
+Because of the dichotomy between retail and informed traders, HFTs have come up with clever schemes to price discriminate between these two groups.
 
 A typical HFT will run a market making strategy, passively offering liquidity. The people with consumption preference make small trades and are nearly always filled in a single trade. To begin, the market might look like this:
 
@@ -147,7 +147,7 @@ Afterwards the order book looks like this:
     BUY(300 @ $19.90)
     BUY(200 @ $19.85)
 
-Big Joe's order is now filled, and he is happy. Note that the market maker *at no point* had the ability to change any order in respond to Big Joe. If you do not understand this point, please go read the [tutorial](http://www.chrisstucchio.com/blog/2012/hft_apology.html).
+Big Joe's order is now filled, and he is happy. Note that the market maker *at no point* had the ability to change any order in response to Big Joe. If you do not understand this point, please go read the [tutorial](http://www.chrisstucchio.com/blog/2012/hft_apology.html).
 
 In contrast, suppose Little Billie Ackman hits the market with a 1,500 share order (a small fraction of the 10,000 shares he wants) at $20.50:
 
@@ -231,7 +231,7 @@ Finally the predator offers the shares he just bought at a higher price:
     BUY(300 @ $19.90)
     BUY(200 @ $19.85)
 
-This benefits the trader attempting to sell at $21.0 - he gets an immediate fill. In contrast, Little Billie may or may not have filled his orders - perhaps Little Billie would have eventually purchased at $21.0. On the other hand, perhaps Little Billie would have waited hours or days for someone else to show up at $20.25, and the seller would never have been filled at $21.00.
+This benefits the trader attempting to sell at $21.0 - he gets an immediate fill. If the predator never showed up, the trader with the $21.00 sell order may never have been fillled. Perhaps Little Billie would have eventually purchased at $21.0. On the other hand, perhaps Little Billie would have waited hours or days for someone else to show up at $20.25, and the seller would never have been filled at $21.00.
 
 This is good for the market as well - information about demand is now available, but has not been incorporated into the market price. The predator has turned this *information* into a *price movement*, thereby making the market more efficient.
 
