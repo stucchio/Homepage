@@ -23,9 +23,9 @@ Network topology of the markets:
 
 ![network diagram](/blog/2014/hfts_cant_jump_the_queue/network_diagram.png)
 
-The important point is that the HFT has a direct connection to the market and receives everything in a few milliseconds. The slow guy is seconds behind - he actually needs to wait for his web browser to reload ETrade.
+The important point is that the HFT has a direct connection to the market and receives everything in a few milliseconds. The slow guy is seconds behind - he actually needs to wait for his web browser to reload ETrade to receive a quote update.
 
-So now, suppose a little guy like myself wants to buy a lot (200 shares). Suppose the order book looks like this:
+So now, suppose a little guy like myself wants to buy 2 lots (200 shares). Suppose the order book looks like this:
 
     SELL(100@20.5)
     SELL(100@20.25)
@@ -34,7 +34,7 @@ So now, suppose a little guy like myself wants to buy a lot (200 shares). Suppos
     BUY(200@20.3)
     ...
 
-I place my buy order for 200 shares @ $20.25. Here is what happens (times are in milliseconds):
+I place my buy order for 200 shares @ $20.25. Here is a timeline of what happens (times are in milliseconds):
 
     T = 0   : My order hits ETrade
     T = 1000: ETrade communicates my order to the matching engine.
@@ -54,11 +54,11 @@ At `T = 1001`, the order book now looks like this:
     BUY(200@20.3)
     ...
 
-Then the matching engine notifies everyone via the multicast messages, and notifies me and whoever I traded with via the private messages.
+Then the matching engine notifies everyone via the multicast messages, and notifies me and whoever I traded with via the private messages. The notifications are received in roughly the following order:
 
     T = 1030: HFT hears that someone just bought 100 @ $20.2, 100 @ $20.25
-    T = ~1500: ETrade hears that someone just bought 100 @ $20.2, 100 @ $20.25
-    T = ~1500: ETrade hears that I just received 2 fills on my order
+    T = 1500: ETrade hears that someone just bought 100 @ $20.2, 100 @ $20.25
+    T = 1500: ETrade hears that I just received 2 fills on my order
     T = 2500: ETrade updates my web browser and informs me of all this.
 
 The HFT **never had the opportunity to "cut in front" of me**. My order was filled at `T=1001` and the HFT was informed at `T=1030`.
@@ -131,6 +131,8 @@ Lets suppose his "pattern matching" isn't perfect, and he picks up 30,000 shares
 
 Now the HFT is stuck with 30,000 shares that he needs to unload. And you better believe that the HFT is not going to be getting $20.22 for them, particularly as soon as the other HFTs figure out he needs to dump a big position.
 
+If you get it right you make money, if you screw up you lose money. That's how trading works.
+
 # Do HFT's trade low volume stocks?
 
 Cuban makes this claim.
@@ -183,15 +185,15 @@ If someone comes along and buys shares before the market moves, HFT #1 will make
 
 HFTs do NOT need high volume in an individual security to trade. In fact, they will typically make *more money per share* on thinly traded stocks since the spread is wider.
 
-Enough volume needs to exist so that they can close out their positions and avoid failure to deliver, but that's a *very* low bar. Any security which doesn't meet that bar is probably about to be delisted.
+Enough volume needs to exist so that they can close out their positions and avoid failure to deliver, but that's a *very* low bar. A few trades/day, most likely. Any security which doesn't meet that bar is probably about to be delisted.
 
 # So why are some of the big banks and funds not screaming bloody murder?
 
-This is the question Cuban asks. It's a disingenuous question.
+This is a question Cuban asks. It's silly, since it assumes they aren't.
 
 [Goldman is](http://online.wsj.com/news/articles/SB10001424052702303563304579447692855042948?mod=mktw). [Charles Schwab is](http://pressroom.aboutschwab.com/press-release/corporate-and-financial-news/schwab-statement-high-frequency-trading). Big traders like [Mark Cuban](http://www.huffingtonpost.com/mark-cuban/high-frequency-trading_b_5086685.html) and [David Einhorn](http://www.cbsnews.com/news/is-the-us-stock-market-rigged/) are.
 
-Their information advantage has been reduced, and they are steaming mad about it. Less money for them.
+Their information advantage has been reduced and they are steaming mad about it. Less money for them, more for the little guy.
 
 # Huffpo, seriously?
 
