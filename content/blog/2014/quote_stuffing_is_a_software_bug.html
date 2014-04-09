@@ -1,0 +1,79 @@
+---
+title: Ex-HFT Trader reveals the truth about quote stuffing
+created: !!timestamp '2014-04-11 10:00:00'
+tags:
+    - economics
+    - trading
+    - high frequency trading
+---
+
+{% mark excerpt %}
+
+One of the more enduring memes about algorithmic trading is "quote stuffing". Occasionally an HFT will submit and then cancel a quote thousands of times in a second.
+
+![quote stuffing graph](http://www.zerohedge.com/sites/default/files/images/user5/imageroot/trichet/1%206%20nanex.png)
+
+The folks at Nanex, ZeroHedge and other such locations spread a lot of heat about this. The gist of the theory is that (1) HFTs send and cancel a lot of quotes, (2) ??? (3) they steal money from the little guy. Part (2) is rarely fleshed out, but occasionally the theory is that it's a DDOS attack or something like that.
+
+As a former HFT, I'm going to give away a secret. NDA be damned. I'll tell you the secret of why quote stuffing happens.
+
+{%- endmark %}
+
+
+# It's a software bug
+
+An HFT system is basically a fancy signal processing engine. A signal is typically a real-valued function of time - perhaps normalized to be confined to the interval `[0,1]`.
+
+![signals](quote_stuffing_is_a_software_bug/signals.png)
+
+Typical signals might be quantities like bid/ask spread, volume at bid, volume at ask, volume at bid / volume at ask, etc. As you might expect, these signals are all very noisy.
+
+Taking these signals as an input, the HFT system needs to make a decision about whether to place an order or not. Unfortunately, when making these decisions, there is a large tradeoff to be made between speed and accuracy. In graphical terms:
+
+![signals](quote_stuffing_is_a_software_bug/signal_jump.png)
+
+Has the signal jumped? Has the market changed? Or is it just noise?
+
+![signals](quote_stuffing_is_a_software_bug/signal_jump2.png)
+
+If we wait longer we can determine the answer - that's a real movement. But if we wait too long we will not be able to reap the rewards of our insight. There are lots of tricks we can try to improve the situation, mostly variants of moving averages:
+
+![signals](quote_stuffing_is_a_software_bug/moving_averages.png)
+
+If the HFT responds too quickly, he'll fire off too many orders many of which are just noise. If the HFT doesn't respond quickly enough he'll never get filled. So it's important to get this right.
+
+## A concrete example
+
+Here is a simple signal. An HFT has decided that when the signal is above a threshold, he will trade. When it is below a threshold, he won't. So he looks at historical data:
+
+![signals](quote_stuffing_is_a_software_bug/signal_to_order1.png)
+
+Hey, looks like we placed orders when the signal behaved appropriately. Sounds good - then we check if the market moved in the right direction after orders were placed.
+
+![signals](quote_stuffing_is_a_software_bug/signal_to_order2.png)
+
+Here is another case - also looks good. Then you run it statistically against historical order data, and it kind of looks like it makes money. And most of the time it does.
+
+Finally, you put it into production. It works great. Except, once in a blue moon this happens:
+
+![signals](quote_stuffing_is_a_software_bug/signal_to_order3.png)
+
+Quick, someone call Nanex! It's a crime scene!
+
+# Quote stuffing is a great way to *lose money*
+
+It might be a crime scene, but it's hardly clear what the crime actually is. However, if you are an HFT, you want to make sure that you quote stuff as rarely as possible. There are two major reasons.
+
+## Rolling Windows and Fill Rates
+
+As a trader, you are allowed to submit N messages to the exchange every X minutes. I can't tell you what N and X are, but your broker sure can. Once you cross this threshold, you might be forced to stop trading. Your broker might penalize you. There are all sorts of *very bad things* that can happen when you exceed your rolling windows.
+
+The second is your fill rate - this is the ratio of orders you place to trades you make. If this drops too low, your broker gets angry, as does the exchange. This can again result in unpleasant consequences like, for example, your access being turned off.
+
+Spamming orders wildly can get you into trouble. It's best to avoid it if you can.
+
+## Quote stuffing exposes you to risk
+
+This is the biggie.
+
+**Note:** I've made the graphs using the xkcd plotting style to emphasize that these are schematic diagrams. Further rationale can be found [here](/blog/2014/why_xkcd_style_graphs_are_important.html).
