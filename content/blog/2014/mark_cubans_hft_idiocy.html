@@ -31,7 +31,7 @@ So now, suppose a little guy like myself wants to buy 2 lots (200 shares). Suppo
     SELL(100@20.25)
     SELL(100@20.2)
     --------------
-    BUY(200@20.3)
+    BUY(200@20.1)
     ...
 
 I place my buy order for 200 shares @ $20.25. Here is a timeline of what happens (times are in milliseconds):
@@ -44,14 +44,14 @@ I place my buy order for 200 shares @ $20.25. Here is a timeline of what happens
     SELL(100@20.25) <----- Trade match! 100 shares @ 20.25
     SELL(100@20.20) <----- Trade match! 100 shares @ 20.20
     --------------
-    BUY(200@20.3)
+    BUY(200@20.1)
     ...
 
 At `T = 1001`, the order book now looks like this:
 
     SELL(100@20.5)
     --------------
-    BUY(200@20.3)
+    BUY(200@20.1)
     ...
 
 Then the matching engine notifies everyone via the multicast messages, and notifies me and whoever I traded with via the private messages. The notifications are received in roughly the following order:
@@ -71,14 +71,14 @@ Now suppose it wasn't me buying shares. Suppose it was Mark Cuban. Where I norma
     SELL(100@20.25)
     SELL(100@20.2)
     --------------
-    BUY(200@20.3)
+    BUY(200@20.1)
     ...
 
 He can't find 20,000 shares on offer, and he doesn't want to pay $20.5 in any case. He knows if he places a big buy order for 19,800 @ $20.25 that everyone (including the ETrade guy) will figure out what he is up to and raise the price. So he decides to get clever. He'll send out `BUY 200 @ $20.25` now. After this the order book looks like:
 
     SELL(100@20.5)
     --------------
-    BUY(200@20.3)
+    BUY(200@20.1)
     ...
 
 Then he'll wait for some poor sucker to put in some more `SELL 100 @ $20.20` order. Immediately after he sees that he'll snipe it. Cuban, being a big trader, has a pretty fast connection to the markets - he can easily place a trade in 200-300 ms.
@@ -163,7 +163,7 @@ HFTs don't need to do a high frequency of *trades*. The "high frequency" part of
 
 This is the *high frequency* part of the game. Because he was faster, HFT #1 is now sitting at the top of the order book. He will trade first. Now, at `T=200,000` someone comes along and takes liquidity:
 
-    SELL(200@20.20) <- HFT #2 - doesn't trade
+    SELL(200@20.20) <- HFT #2 - doesn't trade. :(
     SELL(100@20.20) <- Trade!!! HFT #1 has just sold 100 @ $20.20 to anonymous counterparty.
     --------------
     BUY(200@19.97)
@@ -181,7 +181,7 @@ The order book then looks like this:
     BUY(100@19.98) <- HFT #1
     BUY(200@19.97)
 
-If someone comes along and buys shares before the market moves, HFT #1 will make some money. And if the market moves before that happens he will lose money.
+If someone comes along and sells shares before the market moves, HFT #1 will make some money. And if the market moves before that happens he will lose money.
 
 HFTs do NOT need high volume in an individual security to trade. In fact, they will typically make *more money per share* on thinly traded stocks since the spread is wider.
 
@@ -197,4 +197,4 @@ Their information advantage has been reduced and they are steaming mad about it.
 
 # Huffpo, seriously?
 
-Come on guys. Clearly no editor or fact checkeractually did their job. You could have just read a book (like [Trading and Exchanges](http://www.amazon.com/gp/product/0195144708/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0195144708&linkCode=as2&tag=christuc-20) from fucking 2002) and discovered that Cuban is full of it. Every single one of his factual claims is wrong. I'm sure you got pageviews, but this is ridiculous.
+Come on guys. Clearly no editor or fact checker actually did their job. You could have just read a book (like [Trading and Exchanges](http://www.amazon.com/gp/product/0195144708/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0195144708&linkCode=as2&tag=christuc-20) from fucking 2002) and discovered that Cuban is full of it. Every single one of his factual claims is wrong. I'm sure you got pageviews, but this is ridiculous.
