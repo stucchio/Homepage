@@ -28,7 +28,7 @@
 	</div>
 
 	<div class="col col_7">
-	  <a href="http://news.ycombinator.com/submit" class="hn-share-button" data-title="{{resource.meta.title}}" data-url="http://www.chrisstucchio.com{{resource.url}}?utm_source=hackernews&utm_campaign=hnbutton" >Vote on HN</a>
+	  <a href="http://news.ycombinator.com/submit" class="hn-share-button" data-title="{{resource.meta.title}}" data-url="http://www.chrisstucchio.com{{resource.url}}" >Vote on HN</a>
 
 	  <div id="twitter_share">
 	    <a href="https://twitter.com/stucchio" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @stucchio</a>
@@ -36,7 +36,7 @@
 	    <script type="text/javascript">
 	      window.twttr.ready(function () {
 	      window.twttr.widgets.createShareButton(
-	      document.location.href + "?utm_medium=twitter&utm_campaign=sharebutton",
+	      document.location.href,
 	      document.getElementById('twitter_share'),
 	      function (el) {},
 	      {
@@ -116,3 +116,6 @@
 </script>
 
   {%- endblock %}
+
+{% block tailjavascript %}
+{% endblock %}

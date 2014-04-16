@@ -1,0 +1,40 @@
+{% from "macros.j2" import render_excerpt, render_post with context %}
+<?xml version="1.0" encoding="utf-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc>http://www.chrisstucchio.com/index.html</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+
+    <url>
+      <loc>http://www.chrisstucchio.com/work.html</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+
+    <url>
+      <loc>http://www.chrisstucchio.com/publications.html</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+
+    <url>
+      <loc>http://www.chrisstucchio.com/blog/index.html</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+
+    {% for res in resource.node.walk_resources_sorted_by_time() %}
+      {% if res.meta.remoteurl %}
+      {% else %}
+        <url>
+          <loc>http://www.chrisstucchio.com{{ content_url(res.url) }}</loc>
+          <lastmod>{{ res.meta.created|xmldatetime }}</lastmod>
+          <changefreq>weekly</changefreq>
+          <priority>0.8</priority>
+        </url>
+      {% endif %}
+    {% endfor %}
+</urlset>

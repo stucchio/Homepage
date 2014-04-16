@@ -66,7 +66,7 @@ In terms of expressing your computations, Hadoop is strictly inferior to SQL. Th
 
  SQL is a straightforward query language with minimal leakage of abstractions, commonly used by business analysts as well as programmers. Queries in SQL are generally pretty simple. They are also usually very fast - if your database is properly indexed, multi-second queries will be uncommon.
 
-Hadoop does not have any conception of indexing. Hadoop has only full table scans. Hadoop is full of leaky abstractions - at my last job I spent more time fighting with [java memory errors](gc_overhead_limit.html), file fragmentation and cluster contention than I spent actually worrying about the mostly straightforward analysis I wanted to perform.
+Hadoop does not have any conception of indexing. Hadoop has only full table scans. Hadoop is full of leaky abstractions - at my last job I spent more time fighting with [java memory errors](/blog/2013/gc_overhead_limit.html), file fragmentation and cluster contention than I spent actually worrying about the mostly straightforward analysis I wanted to perform.
 
 If your data is not structured like a SQL table (e.g., plain text, json blobs, binary blobs), it's generally speaking straightforward to write a small python or ruby script to process each row of your data. Store it in files, process each file, and move on. Under circumstances where SQL is a poor fit, Hadoop will be less annoying from a programming perspective. But it still provides no advantage over simply writing a Python script to read your data, process it, and dump it to disk.
 

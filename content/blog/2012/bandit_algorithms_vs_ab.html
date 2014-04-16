@@ -15,6 +15,7 @@ However, there are bandit algorithms that account for statistical significance.
 
 {%- endmark %}
 
+
 # Simple algorithms
 
 To begin, let me discuss the simple algorithms, namely epsilon-greedy ("20 lines of code that will beat A/B testing every time") and epsilon-first (A/B testing).
@@ -132,10 +133,10 @@ Finally, the algorithm `UCB1` is as follows:
         best_possible_true_mean = { m -> avg[m] + sqrt( 2 ln(N) / num_plays[m] ) }
             // This is pseudocode for a "dict comprehension"
             // I.e. best_possible_true_mean[m] = avg[m] + ...
-	to_play = argmax(best_possible_true_mean)
-	reward <- play_machine(to_play)
+            to_play = argmax(best_possible_true_mean)
+            reward <- play_machine(to_play)
 
-	update avg[to_play], num_plays[m], N
+            update avg[to_play], num_plays[m], N
 
 This algorithm starts off in a pure exploration phase, since `avg[m]` will be small compared to the confidence bound. For example, with `N=10` and `num_plays[m]=5`, we find that the confidence bound is 0.9597. For comparison, `avg[m]` is some number bounded by 1.
 
@@ -180,6 +181,8 @@ This means that UCB1 will always beat both A/B testing and "20 lines of code..."
 # Conclusion
 
 If you don't do any of this stuff (A/B, epsilon-greedy, MAB), pick whichever one is easiest and do it. Any of these fine optimization methods are *vastly* better than nothing. If you really want to be optimal, try UCB1 or any of the more modern adaptive bandit methods. They are marginally better than A/B tests.
+
+I've also written quite a bit more on bandit algorithms since this post was published. I've described my favorite bandit algorithm, the [Bayesian Bandit](/blog/2013/bayesian_bandit.html), which achieves similar accuracy to UCB1. I wrote this blog post about [Bayesian A/B testing](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html). And I wrote a post about measuring a [changing conversion rate](/blog/2013/time_varying_conversion_rates.html), which (when combined with the [Bayesian Bandit](/blog/2013/bayesian_bandit.html)) can handle the case of time varying conversion rates.
 
 <div id="a15002b0-548b-49ab-9814-5ac093454b1b"></div>
 <script type="text/javascript">

@@ -37,6 +37,12 @@ context:
                 css_class: work
                 type: node
                 url: /work.html
+            -
+                name: Publications
+                description: Publications
+                css_class: publications
+                type: node
+                url: /publications.html
 meta:
     nodemeta: meta.yaml
     created: !!timestamp 2010-01-01 00:00:00

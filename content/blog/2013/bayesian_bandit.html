@@ -142,6 +142,8 @@ Bandit algorithms are a great way of optimizing many factors of your website. Th
 
 It's also important to note that the theoretical properties of the Bayesian Bandit (namely logarithmic regret) have been [proven](http://arxiv.org/pdf/1111.1797.pdf). So asymptotically, you lose nothing by using it. There are also attempts at constructing a [Bayesian UCB](http://jmlr.csail.mit.edu/proceedings/papers/v22/kaufmann12/kaufmann12.pdf) algorithm - I don't currently understand it well enough to comment.
 
+I've written other articles related to this post. I have one post [comparing bandit algorithms to a/b testing](/blog/2012/bandit_algorithms_vs_ab.html). I also I wrote about [measuring a changing conversion rate](/blog/2013/time_varying_conversion_rates.html), which provides an alternate algorithm for computing the posterior distribution if your conversion rate is not constant.
+
 [1] If a single Beta distribution doesn't fit, one can also use a convex combination of Beta distributions. The math works out just as nicely.
 
 P.S. After I published this blog post, [this related article](http://camdp.com/blogs/multi-armed-bandits) was also pointed out to me, as was this [online simulation](https://googledrive.com/host/0B2GQktu-wcTiWDB2R2t2a2tMUG8/) of the Bayesian bandit.
