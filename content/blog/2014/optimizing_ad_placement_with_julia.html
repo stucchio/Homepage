@@ -1,0 +1,187 @@
+---
+title: Optimizing Ad Placement with Julia and Maximum Likelihood
+created: !!timestamp '2014-05-13 9:00:00'
+tags:
+    - conversion rates
+    - statistics
+    - julia
+---
+
+{% mark excerpt -%}
+
+Consider the following problem. You have an advertisement which can be displayed in any one of multiple slots - the navigation bar at the top of the page, the right rail, or below article content. How can we estimate conversion rates in each location? If we have a lot of data this is a very simple problem - compute `clicks['topnav'] / displays['topnav']`, `clicks['rightrail'] / displays['rightrail']`, etc.
+
+If we do not have a lot of data, we would like to relate the conversion rate in one location with that in the others so that we can take advantage of all the data we have. In this blog post I'll describe the simplest possible statistical method for addressing this problem, and provide an implementation in the Julia language.
+
+{%- endmark %}
+
+
+# A simple model
+
+The simplest way of relating the conversion rates in each location with each other is via a linear model.
+
+To begin with, let the variable $@ i=1 \ldots n $@ represent the slot - perhaps $@ i=1 $@ is the top navbar, $@ i=2 $@ is the right rail, etc.
+
+In this model, we assume that for each advertisement there is a fized quantity $@ z \in [0,1] $@ which represents the *quality* of an ad. There is also a set of *slot parameters* $@ \alpha_i $@, satisfying $@ \alpha_1 = 1.0 $@ and $@ \alpha_i \geq \alpha_{i+1} $@. We then assume that conversion rates are governed by:
+
+$$ \textrm{ctr}_i = \alpha_i z $$
+
+We haven't made as many assumptions here as it looks like. The constraint that $@ \alpha_i \geq \alpha_{i+1} $@ merely demands that we order the slots from most performant to least. And the constraint that $@ z \in [0,1] $@ and $@ \alpha_1 = 1.0 $@ is derived from the fact that click through rates must be between 0 and 1, and they can be as large as 1.
+
+Now suppose we've displayed an ad in all the slots a number of times. The result of this will be two vectors, the *click* vector
+
+$$ \vec{c} = [c_1, c_2, \ldots, c_n ] $$
+
+where $@ c_i $@ represents the number of clicks received in slot $@ i $@ and the *show* vector
+
+$$ \vec{s} = [s_1, s_2, \ldots, s_n ] $$
+
+where $@ s_i $@ represents the number of times the ad was displayed in slot $@ i $@.
+
+At this time I'll simply take the values $@ \alpha_i $@ to be known quantities. I'll return to the actual computation of them later on.
+
+## Optimizing Ad Placement
+
+Now suppose that we have a sequence of advertisements, each of which we have measured to have quality scores of $@ z_1, \ldots, z_M $@ (where possibly $@ M \neq N $@). The optimal way to place the ads is to put the highest quality ad in the highest quality slot, the second highest quality ad in the second best slot, etc.
+
+So our goal is to compute $@ z_j $@ for each advertisement and then put the best ads in the best slots.
+
+# Likelihood
+
+The *likelihood* of an event $@ e $@, given a parameter $@ z $@, is the probability of that event occuring given the parameter value $@ z $@. We denote this by $@ L(e | z) $@.
+
+For example, consider a loaded coin with probability of heads equal to $@ 1/3 $@. Suppose the coin comes up heads. Then the *likelihood* of this event is:
+
+$$ L(\textrm{heads} | a) = 1/3 $$
+
+In contrast, if the coin came up tails, the likelihood of that event would be
+
+$$ L(\textrm{tails} | a) = 2/3 $$
+
+## Likelihood for our advertising model
+
+Suppose now that we display the ad in slot $@ i $@, and a click occurs. The likelihood of this event is:
+
+$$ L( \textrm{click in slot } i | z ) = \alpha_i z $$
+
+This is true simply because by definition $@ \alpha_i z $@ is the clickthrough rate of an advertisement in slot $@ i $@. Similarly:
+
+$$ L( \textrm{no click in slot } i | z ) = 1 - \alpha_i z $$
+
+If the ad were displayed in slot $@ i $@ $@ s_i $@ times and $@ c_i $@ clicks occurred, the likelihood would be:
+
+$$ L( c_i, s_i | z ) =  {s_i \choose c_i}(\alpha_i z)^{c_i}(1-\alpha_i z)^{s_i-c_i} $$
+
+Finally, aggregating data across all slots, the likelihood would be:
+
+$$ L( \vec{c}, \vec{s} | z ) = \prod_{i=1}^n {s_i \choose c_i} (\alpha_i z)^{c_i}(1-\alpha_i z)^{s_i-c_i} $$
+
+# Maximum likelihood
+
+We now have a set of data, together with a model that purports to predict the distribution of that data. What we really want is a way of computing the model parameters - in this case, $@ z $@.
+
+A popular frequentist technique for doing this is maximum likelihood. Maximum likelihood considers all possible values of $@ z $@ and chooses the the one that makes what *actually* happened the *most likely* thing to have happened.
+
+As a highly simplified example of maximum likelihood, suppose a given coin is known to be loaded and yields the same outcome 75% of the time - whether that outcome is heads or tails is unknown. So the relevant parameter is a boolean value $@ \textrm{side} $@ representing whether the coin is loaded in favor of heads or tails. Suppose the coin is flipped once, resulting in heads. The likelihood that the coin is loaded in favor of heads is 0.75, whereas the likelihood that it is loaded in favor of tails is 0.25. Thus, the *maximum likelihood* estimator is that the coin is loaded in favor of heads.
+
+## Maximum likelihood for the advertising example
+
+Let us now turn our attention to our real example of interest. The first thing to note, is that maximizing $@ L( \vec{c}, \vec{s} | z ) $@ is exactly the same thing as maximizing $@ \ln( L( \vec{c}, \vec{s} | z ) ) $@. This is because the function $@ \ln(y) $@ is monotonically increasing - whenever $@ y $@ goes up, $@ \ln(y) $@ will also go up.
+
+This is a useful observation because it often simplifies the computations. Many common numerical methods for maximizing a function involve computing derivatives of the function - for example, [gradient descent](http://en.wikipedia.org/wiki/Gradient_descent). If we wish to compute the derivative of $@ L(\vec{c}, \vec{s} | z) $@, we must repeatedly use the product rule. In contrast, consider the log-likelihood:
+
+$$ \ln[ L( \vec{c}, \vec{s} | z )] = \ln \left[ \prod_{i=1}^n {s_i \choose c_i} (\alpha_i z)^{c_i}(1-\alpha_i z)^{s_i-c_i} \right] $$
+$$ = \ln\left[\prod_{i=1}^n {s_i \choose c_i} \right] + \ln \left[\prod_{i=1}^n (\alpha_i z)^{c_i}(1-\alpha_i z)^{s_i-c_i} \right] $$
+$$ = \ln\left[\prod_{i=1}^n {s_i \choose c_i} \right] + \sum_i \left[ c_i \ln(\alpha_i z) + (s_i-c_i) \ln(1-\alpha_i z) \right] $$
+
+This is a helpful simplification because it makes computing derivatives easier:
+
+$$ \frac{ d\ln[ L( \vec{c}, \vec{s} | z )] }{dz} = 0 + \sum_i \left[ \frac{c_i}{z} - \frac{\alpha_i(s_i-c_i)}{1-\alpha_i z} \right] $$
+
+## Implementing it in Julia
+
+We can define the logLikelihood function in Julia as follows:
+
+    function logLikelihood(z::Float64, clicks::Array{Float64,1}, shows::Array{Float64,1}, alpha::Array{Float64,1})
+        @assert size(clicks) == size(shows)
+        @assert size(shows) == size(alpha)
+        return sum(clicks .* log(z*alpha) .+ (shows .- clicks) .* log(1-z*alpha))
+    end
+
+The `.*` operator represents element-wise multiplication, `.+` elementwise addition, etc. Note that this computation completely ignores the $@ {s_i \choose c_i} $@ term - that's because it's a constant. It does not change the *location* of the maximal log-likelihood - merely the value at that point.
+
+Similarly, `log(az)` behaves like a numpy or breeze UFunc - it computes the logarithm element-wise across the array. The `sum` function them adds up all the elements in the array.
+
+We can define the derivative similarly:
+
+    function derivLogLikelihood(z::Float64, clicks::Array{Float64,1}, shows::Array{Float64,1}, alpha::Array{Float64,1})
+        @assert size(clicks) == size(shows)
+        @assert size(shows) == size(alpha)
+        return sum((clicks / z) .- alpha .* (shows .- clicks) ./ (1 .- (alpha*z)))
+    end
+
+Julia has the [Optim](https://github.com/JuliaOpt/Optim.jl) package available which provides an `optimize` function, which can be implemented via gradient descent or other methods. Unfortunately, the `optimize` function does not allow the domain of the variable being optimized to be constrained. So although we know that $@ z \in [0,1] $@, the `optimize` function might return negative numbers, or attempt to use negative numbers at intermediate stages of the computation.
+
+To prevent this, we must define a new variable $@ y = \tan(\pi z - \pi/2) $@. The variable $@ y $@ can be any real number, and can be mapped back to $@ z $@ values in $@ [0,1] $@.
+
+Then instead of finding $@ z \in [0,1] $@ to maximize $@ \ln[ L( \vec{c}, \vec{s} | z )] $@, we find $@ y \in \mathbb{R} $@ to maximize $@ \ln[ L( \vec{c}, \vec{s} | z(y) )] $@. As a result, we need to compute:
+
+$$ \frac{ d\ln[ L( \vec{c}, \vec{s} | z(y) )] }{ dy } = \frac{ d\ln[ L( \vec{c}, \vec{s} | z )] }{ dz } \frac{dz}{dy} = \frac{ d\ln[ L( \vec{c}, \vec{s} | z )] }{ dz } \frac{\pi^{-1}}{1+y^2} $$
+
+Now we are ready to actually find `y`, and similarly find `z`. We first define conversion functions:
+
+    function yToZ(y::Float64)
+        return 0.5+atan(y)/pi
+    end
+
+    function dzdy(y::Float64)
+        return (1+y*y) / pi
+    end
+
+    function zToY(z::Float64)
+        return tan(pi*z-(pi/2.0))
+    end
+
+Then, given data on `click`, `show` and `alpha`, we build a function to compute $@ - \ln[ L( \vec{c}, \vec{s} | z )] $@. We compute the negative of this because the `optimize` function in Julia *minimizes* rather than maximizes it's argument. So we define the objective function as follows:
+
+    function f(y::Array{Float64,1})
+        return -1*logLikelihood(yToZ(y[1]), clicks, shows, alpha)
+    end
+
+The value `y` is passed in as an array because that is what the `optimize` function expects.
+
+The function to compute the derivative of `f` mutates an in-place array rather than returning a new one. So we define the derivative of the objective function as follows:
+
+    function df!(y::Array{Float64,1}, storage::Array{Float64,1})
+        storage[1] = -1*derivLogLikelihood(yToZ(y[1]), clicks, shows, alpha) * dzdy(y[1])
+    end
+
+This strange structure is designed to avoid memory allocation in the event of higher dimensional gradients.
+
+Finally, we are ready to optimize:
+
+    result = optimize(f, df!, [0.0], method = :gradient_descent)
+
+The `result` object contains quite a bit of information on the optimization result. The actual parameter `z` is computed via:
+
+    z = yToZ(result.minimum[1])
+
+Code which implements this can be found [here](https://gist.github.com/stucchio/66bd9af4314499f0c436).
+
+# How to compute $@ \alpha_i $@
+
+Consider now the likelihood function over a sequence of experiments with different $@ z_j $@. The log-likelihood (ignoring additive constants) is:
+
+$$ \sum_j \sum_i \left[ c_{i,j} \ln(\alpha_i z_j) + (s_{i,j}-c_{i,j}) \ln(1-\alpha_i z_j) \right] $$
+
+Computing derivatives of this yields:
+
+$$ \frac{\partial}{\partial \alpha_i} \sum_j \sum_i \left[ c_{i,j} \ln(\alpha_i z_j) + (s_{i,j}-c_{i,j}) \ln(1-\alpha_i z_j) \right] = $$
+
+$$ \sum_j \frac{c_{i,j}}{\alpha_i} - \frac{ (s_{i,j} - c_{i,j}) z_j }{1-\alpha_i z_j} $$
+
+Similarly:
+
+$$ \frac{\partial}{\partial z_j} \sum_j \sum_i \left[ c_{i,j} \ln(\alpha_i z_j) + (s_{i,j}-c_{i,j}) \ln(1-\alpha_i z_j) \right] = $$
+
+$$ \sum_i \left[ \frac{c_{i,j}}{z_j} - \frac{(s_{i,j}-c_{i,j})\alpha_i}{1-\alpha_i z_j} \right] = $$
