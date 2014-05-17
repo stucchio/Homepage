@@ -22,9 +22,11 @@ The simplest way of relating the conversion rates in each location with each oth
 
 To begin with, let the variable $@ i=1 \ldots n $@ represent the slot - perhaps $@ i=1 $@ is the top navbar, $@ i=2 $@ is the right rail, etc.
 
-In this model, we assume that for each advertisement there is a fized quantity $@ z \in [0,1] $@ which represents the *quality* of an ad. There is also a set of *slot parameters* $@ \alpha_i $@, satisfying $@ \alpha_1 = 1.0 $@ and $@ \alpha_i \geq \alpha_{i+1} $@. We then assume that conversion rates are governed by:
+In this model, we assume that for each advertisement there is a fixed quantity $@ z \in [0,1] $@ which represents the *quality* of an ad. There is also a set of *slot parameters* $@ \alpha_i $@, satisfying $@ \alpha_1 = 1.0 $@ and $@ \alpha_i \geq \alpha_{i+1} $@. We then assume that conversion rates are governed by:
 
 $$ \textrm{ctr}_i = \alpha_i z $$
+
+What this means is that the click through rate of an ad is proportional to both the quality of the ad and the visibility of the slot in which it is placed.
 
 We haven't made as many assumptions here as it looks like. The constraint that $@ \alpha_i \geq \alpha_{i+1} $@ merely demands that we order the slots from most performant to least. And the constraint that $@ z \in [0,1] $@ and $@ \alpha_1 = 1.0 $@ is derived from the fact that click through rates must be between 0 and 1, and they can be as large as 1.
 
@@ -170,18 +172,93 @@ Code which implements this can be found [here](https://gist.github.com/stucchio/
 
 # How to compute $@ \alpha_i $@
 
-Consider now the likelihood function over a sequence of experiments with different $@ z_j $@. The log-likelihood (ignoring additive constants) is:
+In order to find $@ \alpha_i $@, we need to run some experiments. In these experiments we will run multiple advertisements in multiple slots, and gather data on how each one performs. This should be done on a fairly large and representative set of ads.
+
+Once we gather this data, we can use maximum likelihood to *simultaneously* compute both $@ \alpha_i$@ and $@ \z_j $@ for the experiment. If the experiment is large enough this will likely be a good estimator of $@ \alpha_i $@. Once the $@ \alpha_i $@ is computed, we can then use it in the future for optimization as per the above analysis.
+
+## Maximum likelihood for multiple experiments
+
+To begin with, we first need to compute the log-likelihood function over a sequence of experiments with different $@ z_j $@. The log-likelihood (ignoring additive constants) is:
 
 $$ \sum_j \sum_i \left[ c_{i,j} \ln(\alpha_i z_j) + (s_{i,j}-c_{i,j}) \ln(1-\alpha_i z_j) \right] $$
 
-Computing derivatives of this yields:
+Because of the constraints we've imposed on $@ \alpha $@, simply running a stock optimization method on it will not work well. There is nothing preventing $@ \alpha_1 $@ from being unequal to 1.0, or preventing $@ \alpha_3 $@ from being larger than $@ \alpha_2 $@. So if we use the standard Julia optimization methods, we could very easily wind up with $@ \vec{\alpha} $@ not satisfying our constraints.
 
-$$ \frac{\partial}{\partial \alpha_i} \sum_j \sum_i \left[ c_{i,j} \ln(\alpha_i z_j) + (s_{i,j}-c_{i,j}) \ln(1-\alpha_i z_j) \right] = $$
+In order to prevent this in a fairly natural way, we must re-parameterize the problem so that the constraints are automatically preserved. To do this, we define:
 
-$$ \sum_j \frac{c_{i,j}}{\alpha_i} - \frac{ (s_{i,j} - c_{i,j}) z_j }{1-\alpha_i z_j} $$
+$$ \alpha_1 = 1.0 $$
+$$ \alpha_i = \prod_{j=2}^i \beta_j $$
+
+We'll then attempt to find $@ (\vec{z}, \vec{\beta}) $@ for which likelihood is maximized.
+
+Computing derivatives with respect to these variables yields:
+
+$$ \frac{\partial}{\partial \beta_k} \sum_j \sum_i \left[ c_{i,j} \ln(\alpha_i z_j) + (s_{i,j}-c_{i,j}) \ln(1-\alpha_i z_j) \right] = $$
+
+$$ \sum_{i \geq k} \sum_j \frac{c_{i,j}}{\beta_k} - \frac{ (s_{i,j} - c_{i,j}) z_j (\alpha_i / \beta_k ) }{1-\alpha_i z_j} $$
 
 Similarly:
 
 $$ \frac{\partial}{\partial z_j} \sum_j \sum_i \left[ c_{i,j} \ln(\alpha_i z_j) + (s_{i,j}-c_{i,j}) \ln(1-\alpha_i z_j) \right] = $$
 
-$$ \sum_i \left[ \frac{c_{i,j}}{z_j} - \frac{(s_{i,j}-c_{i,j})\alpha_i}{1-\alpha_i z_j} \right] = $$
+$$ \sum_i \left[ \frac{c_{i,j}}{z_j} - \frac{(s_{i,j}-c_{i,j})\alpha_i}{1-\alpha_i z_j} \right] $$
+
+We can now build it in Julia.
+
+## Julia implementation
+
+The implementation of maximal likelihood in Julia is straightforward - you can [view it here](https://gist.github.com/stucchio/66bd9af4314499f0c436#file-mle_find_alpha-jl). It achieves results that appear correct at first glance:
+
+    clicks = [ 25 13 10; 20 9 4; 10 4 1; 12 4 0]
+    shows = [ 100 105 97; 99 103 96; 102 100 101; 103 101 107]
+
+This represents a situation with 3 slots and 4 advertisements. Ad #1 achieved a 25/100 clicks in slot 1, 13/105 in slot 2 and 10/97 in slot 3, similarly for ads 2-4.
+
+    (alpha, z) = computeAlphaZ(clicks, shows)
+
+After this, the result is:
+
+    alpha == [1.0,0.45101141823350566,0.22593041690511678]
+    z = [0.2784097973476466,0.1978200091513846,0.08869000396718513,0.09368066187975937]
+
+This intuitively makes sense. The click through rate in slot 2 appears to be half of that in slot 1, and in slot 3 is about half of that in slot 2. Similarly, the click through rate of the first two advertisements appears to be about twice that of the second, and the maximal likelihood estimate roughly agrees.
+
+### Non-robust implementation
+
+An unfortunate fact about the implementation is that it doesn't seem very robust. Occasionally repeating it yields errors:
+
+    ERROR: assertion failed: :((dphia<0))
+     in secant2! at /home/stucchio/.julia/v0.2/Optim/src/linesearch/hz_linesearch.jl:438
+     in hz_linesearch! at /home/stucchio/.julia/v0.2/Optim/src/linesearch/hz_linesearch.jl:355
+     in hz_linesearch! at /home/stucchio/.julia/v0.2/Optim/src/linesearch/hz_linesearch.jl:201
+     in gradient_descent at /home/stucchio/.julia/v0.2/Optim/src/gradient_descent.jl:93
+     in optimize at /home/stucchio/.julia/v0.2/Optim/src/optimize.jl:312
+     in computeAlphaZ at /home/stucchio/src/webpage/content/blog/2014/optimizing_ad_placement_with_julia/mle_find_alpha.jl:89
+     in include at boot.jl:238
+     in include_from_node1 at loading.jl:114
+     in process_options at client.jl:303
+     in _start at client.jl:389
+    at /home/stucchio/src/webpage/content/blog/2014/optimizing_ad_placement_with_julia/mle_find_alpha.jl:99
+
+Sometimes:
+
+    ERROR: assertion failed: :((lsr.slope[ia]<0))
+     in update! at /home/stucchio/.julia/v0.2/Optim/src/linesearch/hz_linesearch.jl:522
+     in hz_linesearch! at /home/stucchio/.julia/v0.2/Optim/src/linesearch/hz_linesearch.jl:383
+     in hz_linesearch! at /home/stucchio/.julia/v0.2/Optim/src/linesearch/hz_linesearch.jl:201
+     in gradient_descent at /home/stucchio/.julia/v0.2/Optim/src/gradient_descent.jl:93
+     in optimize at /home/stucchio/.julia/v0.2/Optim/src/optimize.jl:312
+     in computeAlphaZ at /home/stucchio/src/webpage/content/blog/2014/optimizing_ad_placement_with_julia/mle_find_alpha.jl:89
+     in include at boot.jl:238
+     in include_from_node1 at loading.jl:114
+     in process_options at client.jl:303
+     in _start at client.jl:389
+    at /home/stucchio/src/webpage/content/blog/2014/optimizing_ad_placement_with_julia/mle_find_alpha.jl:99
+
+I don't know if this is caused by the fact that the data is underdetermined, or because of some flaw in my implementation. A more robust set of codes would be nice. I probably won't build it myself since I tend to use Bayesian methods, but it's worth emphasizing this drawback of my implementation.
+
+# Conclusion
+
+I've just gotten started playing with it, but [Julia](http://julialang.org/) is pretty nice for a scientific language. Unlike [many](http://www.r-project.org/) [other](http://www.mathworks.in/products/matlab/) [products](http://www.maplesoft.com/products/maple/), Julia is actually a decent general purpose programming language.
+
+They make odd choices like 1-indexing for arrays, but overall it's a fairly nice little scripting language. They have [lispy macros](http://docs.julialang.org/en/release-0.2/manual/metaprogramming/), a fairly simple [type system](http://docs.julialang.org/en/release-0.2/manual/types/) and a good [ffi](http://docs.julialang.org/en/release-0.2/manual/calling-c-and-fortran-code/). I don't have strong opinions on Julia yet, but I'm thinking that it might make a nice replacement for Python.
