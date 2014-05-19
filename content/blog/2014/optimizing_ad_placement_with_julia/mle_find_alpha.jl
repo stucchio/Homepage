@@ -60,7 +60,7 @@ function computeAlphaZ(clicks::Array{Int64,2}, shows::Array{Int64,2})
     end
 
     function dzdy(y::Float64)
-        return (1+y*y) / pi
+        return (1.0/pi)/(1.0+y*y)
     end
 
     function zToY(z::Float64)

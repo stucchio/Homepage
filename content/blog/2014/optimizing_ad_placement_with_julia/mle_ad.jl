@@ -25,7 +25,7 @@ function adQuality(clicks::Array{Float64,1}, shows::Array{Float64,1}, alpha::Arr
     end
 
     function dzdy(y::Float64)
-        return (1+y*y) / pi
+        return (1.0/pi)/(1+y*y)
     end
 
     function zToY(z::Float64)

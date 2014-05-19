@@ -9,7 +9,9 @@ tags:
 
 {% mark excerpt -%}
 
-Consider the following problem. You have an advertisement which can be displayed in any one of multiple slots - the navigation bar at the top of the page, the right rail, or below article content. How can we estimate conversion rates in each location? If we have a lot of data this is a very simple problem - compute `clicks['topnav'] / displays['topnav']`, `clicks['rightrail'] / displays['rightrail']`, etc.
+Estimating the conversion rate of an advertisement placed in a fixed slot on a webpage is a well studied problem, and one I've [discussed](/blog/2013/bayesian_analysis_conversion_rates.html) [at length](/blog/2013/bayesian_bandit.html). For those who haven't seen, here are some [slides](http://localhost:8080/pubs/slides/helpshift_2014/slides.html) which might help.
+
+In the real world, however, it's not always the case that an advertisement will always appear in the same slot. Frequently there are multiple slots on page where an ad might appear - the navigation bar on top, the right rail (the vertical bar to the right side of the page), after the post content, and perhaps others. How can we handle this situation? If we have a lot of data this is a very simple problem - compute `ctr['topnav'] = clicks['topnav'] / displays['topnav']`, `ctr['rightrail'] = clicks['rightrail'] / displays['rightrail']`, etc.
 
 If we do not have a lot of data, we would like to relate the conversion rate in one location with that in the others so that we can take advantage of all the data we have. In this blog post I'll describe the simplest possible statistical method for addressing this problem, and provide an implementation in the Julia language.
 
@@ -18,9 +20,11 @@ If we do not have a lot of data, we would like to relate the conversion rate in 
 
 # A simple model
 
-The simplest way of relating the conversion rates in each location with each other is via a linear model.
+The first thing to recognize is that we must assume there is some sort of relationship between `ctr['rightrail']` and `ctr['topnav']` for a fixed ad. If there is no such relationship, then we have no hope of making any inference about `ctr['rightrail']` given knowledge of `ctr['topnav']` - the two quantities are simply unelated. The simplest way of relating the conversion rates in each location with each other is via a linear model.
 
-To begin with, let the variable $@ i=1 \ldots n $@ represent the slot - perhaps $@ i=1 $@ is the top navbar, $@ i=2 $@ is the right rail, etc.
+Specifically, we'll assume that the click through rate of an ad in a given location is the product of two factors - the visibility of the location, and the quality of the ad.
+
+To begin with, let the variable $@ i=1 \ldots N $@ represent the slot - perhaps $@ i=1 $@ is the top navbar, $@ i=2 $@ is the right rail, etc.
 
 In this model, we assume that for each advertisement there is a fixed quantity $@ z \in [0,1] $@ which represents the *quality* of an ad. There is also a set of *slot parameters* $@ \alpha_i $@, satisfying $@ \alpha_1 = 1.0 $@ and $@ \alpha_i \geq \alpha_{i+1} $@. We then assume that conversion rates are governed by:
 
@@ -50,19 +54,9 @@ So our goal is to compute $@ z_j $@ for each advertisement and then put the best
 
 # Likelihood
 
-The *likelihood* of an event $@ e $@, given a parameter $@ z $@, is the probability of that event occuring given the parameter value $@ z $@. We denote this by $@ L(e | z) $@.
+The *likelihood* of an event $@ e $@, given a parameter $@ z $@, is the probability of that event occuring given the parameter value $@ z $@ - i.e., $@ P( \textrm{event} | z ) $@. We denote this by $@ L(e | z) $@.
 
-For example, consider a loaded coin with probability of heads equal to $@ 1/3 $@. Suppose the coin comes up heads. Then the *likelihood* of this event is:
-
-$$ L(\textrm{heads} | a) = 1/3 $$
-
-In contrast, if the coin came up tails, the likelihood of that event would be
-
-$$ L(\textrm{tails} | a) = 2/3 $$
-
-## Likelihood for our advertising model
-
-Suppose now that we display the ad in slot $@ i $@, and a click occurs. The likelihood of this event is:
+Suppose we display an ad in slot $@ i $@, and a click occurs. The likelihood of this event is:
 
 $$ L( \textrm{click in slot } i | z ) = \alpha_i z $$
 
@@ -70,7 +64,7 @@ This is true simply because by definition $@ \alpha_i z $@ is the clickthrough r
 
 $$ L( \textrm{no click in slot } i | z ) = 1 - \alpha_i z $$
 
-If the ad were displayed in slot $@ i $@ $@ s_i $@ times and $@ c_i $@ clicks occurred, the likelihood would be:
+More generally, if we display an at $@ s_i $@ times and it is clicked on $@ c_i $@ times, then the likelihood is given by the [binomial distribution](http://en.wikipedia.org/wiki/Binomial_distribution):
 
 $$ L( c_i, s_i | z ) =  {s_i \choose c_i}(\alpha_i z)^{c_i}(1-\alpha_i z)^{s_i-c_i} $$
 
@@ -82,15 +76,19 @@ $$ L( \vec{c}, \vec{s} | z ) = \prod_{i=1}^n {s_i \choose c_i} (\alpha_i z)^{c_i
 
 We now have a set of data, together with a model that purports to predict the distribution of that data. What we really want is a way of computing the model parameters - in this case, $@ z $@.
 
-A popular frequentist technique for doing this is maximum likelihood. Maximum likelihood considers all possible values of $@ z $@ and chooses the the one that makes what *actually* happened the *most likely* thing to have happened.
+A popular frequentist technique for doing this is maximum likelihood. Maximum likelihood considers all possible values of $@ z $@ and chooses the the one that makes what *actually* happened the *most likely* thing to have happened:
 
-As a highly simplified example of maximum likelihood, suppose a given coin is known to be loaded and yields the same outcome 75% of the time - whether that outcome is heads or tails is unknown. So the relevant parameter is a boolean value $@ \textrm{side} $@ representing whether the coin is loaded in favor of heads or tails. Suppose the coin is flipped once, resulting in heads. The likelihood that the coin is loaded in favor of heads is 0.75, whereas the likelihood that it is loaded in favor of tails is 0.25. Thus, the *maximum likelihood* estimator is that the coin is loaded in favor of heads.
+$$ \textrm{argmax}_{z} L( \vec{c}, \vec{s} | z ) $$
 
-## Maximum likelihood for the advertising example
+**Fact 1:** Computing the maximum likelihood is equivalent to computing the maximum *log-likelihood*:
 
-Let us now turn our attention to our real example of interest. The first thing to note, is that maximizing $@ L( \vec{c}, \vec{s} | z ) $@ is exactly the same thing as maximizing $@ \ln( L( \vec{c}, \vec{s} | z ) ) $@. This is because the function $@ \ln(y) $@ is monotonically increasing - whenever $@ y $@ goes up, $@ \ln(y) $@ will also go up.
+$$ \textrm{argmax}_{z} \ln\left[ L( \vec{c}, \vec{s} | z ) \right] $$
 
-This is a useful observation because it often simplifies the computations. Many common numerical methods for maximizing a function involve computing derivatives of the function - for example, [gradient descent](http://en.wikipedia.org/wiki/Gradient_descent). If we wish to compute the derivative of $@ L(\vec{c}, \vec{s} | z) $@, we must repeatedly use the product rule. In contrast, consider the log-likelihood:
+This is because the function $@ \ln(x) $@ is monotonically increasing in $@ x $@ - making the likelihood bigger always makes the log bigger.
+
+This is an important fact to note because it drastically simplifies the computations. To actually maximize the likelihood, we'll be using [gradient descent](http://en.wikipedia.org/wiki/Gradient_descent), which requires computing derivatives of the objective function. If we wish to compute the derivative of $@ L(\vec{c}, \vec{s} | z) $@, we must repeatedly use the product rule.
+
+In contrast, consider the log-likelihood:
 
 $$ \ln[ L( \vec{c}, \vec{s} | z )] = \ln \left[ \prod_{i=1}^n {s_i \choose c_i} (\alpha_i z)^{c_i}(1-\alpha_i z)^{s_i-c_i} \right] $$
 $$ = \ln\left[\prod_{i=1}^n {s_i \choose c_i} \right] + \ln \left[\prod_{i=1}^n (\alpha_i z)^{c_i}(1-\alpha_i z)^{s_i-c_i} \right] $$
@@ -124,25 +122,31 @@ We can define the derivative similarly:
 
 Julia has the [Optim](https://github.com/JuliaOpt/Optim.jl) package available which provides an `optimize` function, which can be implemented via gradient descent or other methods. Unfortunately, the `optimize` function does not allow the domain of the variable being optimized to be constrained. So although we know that $@ z \in [0,1] $@, the `optimize` function might return negative numbers, or attempt to use negative numbers at intermediate stages of the computation.
 
-To prevent this, we must define a new variable $@ y = \tan(\pi z - \pi/2) $@. The variable $@ y $@ can be any real number, and can be mapped back to $@ z $@ values in $@ [0,1] $@.
+This is bad. The problem here is that the Julia library we use doesn't directly recognize the mathematics of the underlying problem.
 
-Then instead of finding $@ z \in [0,1] $@ to maximize $@ \ln[ L( \vec{c}, \vec{s} | z )] $@, we find $@ y \in \mathbb{R} $@ to maximize $@ \ln[ L( \vec{c}, \vec{s} | z(y) )] $@. As a result, we need to compute:
-
-$$ \frac{ d\ln[ L( \vec{c}, \vec{s} | z(y) )] }{ dy } = \frac{ d\ln[ L( \vec{c}, \vec{s} | z )] }{ dz } \frac{dz}{dy} = \frac{ d\ln[ L( \vec{c}, \vec{s} | z )] }{ dz } \frac{\pi^{-1}}{1+y^2} $$
-
-Now we are ready to actually find `y`, and similarly find `z`. We first define conversion functions:
+To prevent this, we must *reparamaterize* the problem. We do this by defining a new variable $@ y = \tan(\pi z - \pi/2) $@. The variable $@ y $@ can be any real number - this means that if Julia's optimization library gives us an answer of 738.2, we can make sense of it. We can then take the y-value and map it back to a $@ z $@ values in $@ [0,1] $@. In Julia we do this as follows:
 
     function yToZ(y::Float64)
         return 0.5+atan(y)/pi
     end
 
-    function dzdy(y::Float64)
-        return (1+y*y) / pi
-    end
-
     function zToY(z::Float64)
         return tan(pi*z-(pi/2.0))
     end
+
+**Fact 2:** Finding the variable $@ y $@ maximizing $@ \ln[L(\vec{c}, \vec{s} | 0.5+\pi^{-1} \arctan(z) )] $@ is equivalent to finding $@ z $@ maximizing $@ \ln[\L(\vec{c}, \vec{s} | z)] $@.
+
+However, this changes the optimization problem. We must now compute gradients with respect to $@ y $@ rather than with respect to $@ z $@. This is easily accomplished via the chain rule:
+
+$$ \frac{ d\ln[ L( \vec{c}, \vec{s} | z(y) )] }{ dy } = \frac{ d\ln[ L( \vec{c}, \vec{s} | z )] }{ dz } \frac{dz}{dy} = \frac{ d\ln[ L( \vec{c}, \vec{s} | z )] }{ dz } \frac{\pi^{-1}}{1+y^2} $$
+
+Because of this, we don't even need to rewrite our objective functions or derivatives. We merely need to write a new function:
+
+    function dzdy(y::Float64)
+        return (1.0/pi) / (1+y*y)
+    end
+
+Now we are ready to actually find `y`, and similarly find `z`.
 
 Then, given data on `click`, `show` and `alpha`, we build a function to compute $@ - \ln[ L( \vec{c}, \vec{s} | z )] $@. We compute the negative of this because the `optimize` function in Julia *minimizes* rather than maximizes it's argument. So we define the objective function as follows:
 
