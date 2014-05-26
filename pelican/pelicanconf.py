@@ -14,6 +14,8 @@ DEFAULT_LANG = u'en'
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
+FILENAME_METADATA = '(?P<slug>.*)'
+ARTICLE_PERMALINK_STRUCTURE = '/blog/%Y'
 
 # Blogroll
 LINKS =  (('Pelican', 'http://getpelican.com/'),
