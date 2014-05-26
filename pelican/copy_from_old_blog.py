@@ -8,6 +8,8 @@ def read_metadata(filename):
     metadata = yaml.load(metadata_str)
     return (metadata, content)
 
+def _uses_mathjax(content):
+    return (content.find('$$') > 0) or (content.find('$@') > 0)
 
 def write_file(filename, metadata, content):
     filename = filename.replace(".html", ".md")
@@ -18,9 +20,15 @@ category: blog
 author: Chris Stucchio
         """
         if len(metadata.get('tags', [])) > 0:
-            header = header + "tags: " + ", ".join(metadata.get('tags', []))
+            header = header + "tags: " + ", ".join(metadata.get('tags', [])) + "\n"
+        if _uses_mathjax(content):
+            header = header + "mathjax: true\n"
+
         header = header + "\n\n"
         f.write(header)
+
+        content = content.replace("{% mark excerpt -%}", "")
+        content = content.replace("{%- endmark %}", "")
         f.write(content)
 
 def exclude_filepath(filename):
