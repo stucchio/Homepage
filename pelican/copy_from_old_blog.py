@@ -9,6 +9,20 @@ def read_metadata(filename):
     return (metadata, content)
 
 
+def write_file(filename, metadata, content):
+    filename = filename.replace(".html", ".md")
+    with open(filename, 'w') as f:
+        header = """title: """ + metadata['title'] + """
+date: """ + metadata['created'].strftime("%Y-%m-%d %H:%M") + """
+category: blog
+author: Chris Stucchio
+        """
+        if len(metadata.get('tags', [])) > 0:
+            header = header + "tags: " + ", ".join(metadata.get('tags', []))
+        header = header + "\n\n"
+        f.write(header)
+        f.write(content)
+
 def exclude_filepath(filename):
     if filename[-4:] != "html":
         return True
@@ -30,4 +44,5 @@ if __name__=="__main__":
             if exclude_filepath(fullpath):
                 continue
             if fullpath[-4:] == "html":
-                print read_metadata(fullpath)[0]
+                metadata, content = read_metadata(fullpath)
+                write_file(os.path.join("content", filename), metadata, content)
