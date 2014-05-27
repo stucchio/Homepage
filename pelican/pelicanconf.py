@@ -16,6 +16,7 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 FILENAME_METADATA = '(?P<slug>.*)'
 ARTICLE_PERMALINK_STRUCTURE = '/blog/%Y'
+THEME = './theme/'
 
 # Blogroll
 LINKS =  (('Pelican', 'http://getpelican.com/'),
