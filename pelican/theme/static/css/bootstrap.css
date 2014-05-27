@@ -327,7 +327,7 @@ a {
 
 a:hover,
 a:focus {
-  color: #428bca;
+  color: #bb0000;
   text-decoration: underline;
 }
 
@@ -4325,6 +4325,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
+  background: #fbfbfb;
 }
 
 .navbar:before,
@@ -4718,10 +4719,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-text {
-  color: #777777;
-}
-
-.navbar-default .navbar-nav > li > a {
   color: #777777;
 }
 

@@ -83,7 +83,7 @@
         </script>
       {% endif %}
     {% elif page %}
-      {% if article.mathjax %}
+      {% if page.mathjax %}
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -171,6 +171,7 @@
 {% include 'includes/github-js.html' %}
 {% include 'includes/disqus_script.html' %}
 {% include 'includes/ga.html' %}
+{% include 'includes/bw.html' %}
 {% include 'includes/piwik.html' %}
 </body>
 </html>

@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'n'
+SITEURL = 'http:/chrisstucchio.com'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
@@ -20,5 +20,7 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
-#DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+DISQUS_SITENAME = "chrisstucchiosblog"
+GOOGLE_ANALYTICS = "UA-30538320-1"
+BAYESIAN_WITCH_SITE_ID = 'cdfdf2e8-8937-4fa8-9a5b-7595f8b3487f'
+BAYESIAN_WITCH_SITE_DOMAIN = 'chrisstucchio.com'

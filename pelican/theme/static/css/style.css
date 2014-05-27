@@ -149,3 +149,8 @@ figure.floatcenter, .align-center {
 .navbar-brand.myname {
     color: #c46d3b;
 }
+
+time {
+    color: #bbb;
+    font-size: 14px;
+}

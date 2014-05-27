@@ -18,7 +18,7 @@ def write_file(filename, metadata, content):
 date: """ + metadata['created'].strftime("%Y-%m-%d %H:%M") + """
 category: blog
 author: Chris Stucchio
-        """
+"""
         if len(metadata.get('tags', [])) > 0:
             header = header + "tags: " + ", ".join(metadata.get('tags', [])) + "\n"
         if _uses_mathjax(content):
@@ -28,6 +28,7 @@ author: Chris Stucchio
         f.write(header)
 
         content = content.replace("{% mark excerpt -%}", "")
+        content = content.replace("{% mark excerpt %}", "")
         content = content.replace("{%- endmark %}", "")
         f.write(content)
 
