@@ -3,3 +3,5 @@ deploy/*
 .hyde_deps
 s3cfg
 pyenv/*
+*.pyc
+*.pid
