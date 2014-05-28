@@ -40,7 +40,7 @@ Or mostly equivalently, I can draw samples from the normal distribution and plot
     s = normal(size=(1024*32,))
     hist(s, bins=50)
 
-![Image illustrating monte carlo sampling](basic_income_vs_basic_job/monte_carlo_sampling.png)
+![Image illustrating monte carlo sampling](/blog/2013/basic_income_vs_basic_job/monte_carlo_sampling.png)
 
 As we will see shortly, this property is very handy because it is usually a lot easier (from a programming perspective) to draw samples from a probability distribution than it is to explicitly model it.
 
@@ -197,7 +197,7 @@ Both the functions `basic_income_cost_benefit()` and `basic_job_cost_benefit()` 
 
 The results are displayed below:
 
-![Image illustrating monte carlo results](basic_income_vs_basic_job/monte_carlo_results.png)
+![Image illustrating monte carlo results](/blog/2013/basic_income_vs_basic_job/monte_carlo_results.png)
 
 Full source code is available [on github](https://gist.github.com/stucchio/7447067).
 
@@ -221,7 +221,7 @@ For example, maybe I'm overestimating the work disincentive for Basic Income and
     - administrative_cost_per_worker = norm(5000, 1500)
     + administrative_cost_per_worker = norm(7500, 2000)
 
-![Image illustrating monte carlo results](basic_income_vs_basic_job/monte_carlo_sampling_alt_assumption.png)
+![Image illustrating monte carlo results](/blog/2013/basic_income_vs_basic_job/monte_carlo_sampling_alt_assumption.png)
 
 It turns out that even if you believe I made these mistakes, my conclusions are still likely to be correct. Basic Income is likely to be a bit cheaper, Basic Job a little more expensive, but overall the Basic Job is still far more likely to be the better option. On the other hand, maybe a clever reader can come up with some assumptions or analysis that make Basic Income a better possibility. I'd love to see what sort of assumptions lead to that conclusion.
 

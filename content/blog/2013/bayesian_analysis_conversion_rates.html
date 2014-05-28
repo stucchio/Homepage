@@ -30,7 +30,7 @@ $$ P( a < \theta < b) = \int_a^b f(\theta) d\theta $$
 
 In graphical terms, the probability that $@a < \theta < b$@ can be interpreted as the area under the curve of the graph of $@f(\theta)$@:
 
-![graph of posterior distribution](bayesian_analysis_conversion_rates/posterior_distribution.png)
+![graph of posterior distribution](/blog/2013/bayesian_analysis_conversion_rates/posterior_distribution.png)
 
 The function $@f(x)$@ represents our beliefs about $@\theta$@ - it is an inherently subjective matter. It depends on our beliefs about what typical values of $@\theta$@ might be as well as the evidence we have seen. What Bayesian analysis provides us with is an objective method of altering $@f(x)$@ based on the evidence we have about it.
 
@@ -68,11 +68,11 @@ When choosing a prior, there are two major considerations. The first is mathemat
 
 The most obvious prior we could choose for the problem of conversion rates is the uniform prior. This means that all values of $@\theta$@ are equally likely. This is a minimally informative prior - it gives us as little information as possible, so we need to depend exclusively on the evidence.
 
-![graph of prior distribution](bayesian_analysis_conversion_rates/uninformative_prior.png)
+![graph of prior distribution](/blog/2013/bayesian_analysis_conversion_rates/uninformative_prior.png)
 
 The other prior we could choose is based on our intuition about website conversion rates - in general, they tend to be low. A conversion rate larger than 10% is extremely unlikely - it's more likely we made a mistake than we actually observe a 50% conversion rate. In this case, we would want to choose a prior that looks something like this:
 
-![graph of prior distribution](bayesian_analysis_conversion_rates/informative_prior.png)
+![graph of prior distribution](/blog/2013/bayesian_analysis_conversion_rates/informative_prior.png)
 
 This prior says that although the true value of $@\theta$@ is unknown to us, we are almost certain it is smaller than 0.1.
 
@@ -118,11 +118,11 @@ $$ P( \theta | \textrm{12 page views, 794 visitors} ) = f_{1.1+12, 30+794-12}(\t
 
 I.e., the posterior is just another beta distribution, albeit with different parameters. In the next picture I'll plot the prior (the blue line) together with the posterior (the green line) to illustrate how the evidence has shaped our beliefs:
 
-![graph of posterior distribution](bayesian_analysis_conversion_rates/posterior_zoomout.png)
+![graph of posterior distribution](/blog/2013/bayesian_analysis_conversion_rates/posterior_zoomout.png)
 
 The interesting part of the posterior graph is the range $@\theta \in [0,0.1]$@, so we can zoom in to that region (and graph only the posterior):
 
-![graph of posterior distribution](bayesian_analysis_conversion_rates/posterior.png)
+![graph of posterior distribution](/blog/2013/bayesian_analysis_conversion_rates/posterior.png)
 
 More generally, suppose that for any problem of this nature we choose the prior $@f_{\alpha,\beta}(\theta)$@. Then suppose we gather evidence by running N trials and observe K successes. The posterior is:
 
@@ -158,7 +158,7 @@ The answer is pretty straightforward - I should perform the *same* analysis, but
 
 The result is graphed here:
 
-![graph of posterior distribution](bayesian_analysis_conversion_rates/comparing_posteriors.png)
+![graph of posterior distribution](/blog/2013/bayesian_analysis_conversion_rates/comparing_posteriors.png)
 
 The two posteriors differ, but not very much. Cuba Thielion, being a perfectly rational Bayesian, is immediately convinced that you will achieve a 1% conversion rate.
 
@@ -166,7 +166,7 @@ The two posteriors differ, but not very much. Cuba Thielion, being a perfectly r
 
 In this post I haven't done anything particularly impressive. All we've done is shown how to measure conversion rates using Bayesian methods.
 
-If you want to optimize click through/conversion rates, you can read about the [Bayesian Bandit](http://www.chrisstucchio.com/blog/2013/bayesian_bandit.html) which allows you to increase your click through rate in realtime.
+If you want to optimize click through/conversion rates, you can read about the [Bayesian Bandit](/blog/2013/bayesian_bandit.html) which allows you to increase your click through rate in realtime.
 
 What if your conversion rates vary with time? [This blog post](/blog/2013/time_varying_conversion_rates.html) provides one method for measuring them based on the same ideas here.
 

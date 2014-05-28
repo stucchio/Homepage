@@ -30,7 +30,7 @@ The goal of the bandit algorithm is to do the following. To begin with, it shoul
 
 In the model described above, we have $@N$@ possible story titles, each of which has a click through rate $@\theta_i$@. Unfortunately we do not know what $@\theta_i$@ is. As the astute reader can guess from the title, we are following a Bayesian approach, so we will construct a *probability distribution* which represents our *belief* about what the actual value of $@\theta_i$@ is.
 
-![](bayesian_bandit/beliefs_about_theta.png)
+![](/blog/2013/bayesian_bandit/beliefs_about_theta.png)
 
 In the figure above, we believe that $@\theta_i$@ is somewhere between 0.1 and 0.7, with values of 0.3-0.4 being considerably more likely than values of 0.1-0.2 or 0.6-0.7. For those who forgot STATS 101, the area under this curve between the points a and b is the probability thta $@\theta_i$@ lies between a and b. I.e.:
 
@@ -60,7 +60,7 @@ The key idea here is that to update our probability distribution describing $@\t
 
 So what does this mean in practice? As we run more experiments, our probability distribution on where $@\theta_i$@ lives becomes sharper:
 
-![](bayesian_bandit/beta_distribution_evolution.png)
+![](/blog/2013/bayesian_bandit/beta_distribution_evolution.png)
 
 Before we run any experiments, $@\theta_i$@ could be anything (as represented by the blue line). Once we have run 700 experiments, yielding 175 click throughs, we are reasonably confident that $@\theta_i$@ lives roughly between 0.2 and 0.3.
 
@@ -74,13 +74,13 @@ But my new favorite method is a [Monte Carlo](https://en.wikipedia.org/wiki/Mont
 
 The ultimate goal of the bandit algorithm is to display to the user whichever title has the highest CTR. One method of estimating the CTRs of the articles is to *sample* the posterior distribution. I.e., suppose we have two possible titles, from which we have drawn $@n_0=200, s_0=64$@ and $@n_1=180, n_2=40$@. Then one possible set of samples we might observe is this:
 
-![](bayesian_bandit/beta_distribution_sampling1.png)
+![](/blog/2013/bayesian_bandit/beta_distribution_sampling1.png)
 
 For title 0, our sample of $@\theta_0$@ has worked out to be 0.35, while our sample of $@\theta_1$@ is only 0.28. Since $@\theta_0 = 0.35 > \theta_1 = 0.28$@, we will display title 0 to the user.
 
 However, there was no guarantee that things worked out this way. It was possible, although less likely, that $@\theta_1$@ could come out larger than $@\theta_0$@:
 
-![](bayesian_bandit/beta_distribution_sampling2.png)
+![](/blog/2013/bayesian_bandit/beta_distribution_sampling2.png)
 
 In this case, we would have displayed title 1 to the user rather than title 0.
 
@@ -88,7 +88,7 @@ The net result is that for overlapping probability distributions, we will displa
 
 As we gather more data our probability distributions will become narrower and a clear winner will become apparent. When this occurs, we will almost surely choose the winner:
 
-![](bayesian_bandit/beta_distribution_sampling3.png)
+![](/blog/2013/bayesian_bandit/beta_distribution_sampling3.png)
 
 In python, the algorithm looks like this:
 
@@ -96,7 +96,7 @@ In python, the algorithm looks like this:
 
 The results of this algorithm are exactly what any good bandit algorithm should do. I ran the following simulation, giving the beta bandit two titles - title 0 had a CTR of 0.25, title 1 had a CTR of 0.35. To start with, both titles were displayed to the user with roughly equal probability. Over time, evidence accumulated that title 1 was considerably better than title 0. At this point the algorithm switched to displaying primarily title 1, and the overall CTR of the experiment converged to 0.35 (the optimal CTR).
 
-![](bayesian_bandit/beta_bandit_results.png)
+![](/blog/2013/bayesian_bandit/beta_bandit_results.png)
 
 Source code to generate this graph is available [here](https://gist.github.com/stucchio/5383015#file-beta_bandit_test-py). This method is called [Thompson Sampling](https://en.wikipedia.org/wiki/Thompson_sampling) and is a a fairly popular method in Bayesian AI techniques. For the remainder of this post, I'll call this method the Bayesian Bandit.
 
@@ -106,7 +106,7 @@ Anyone with common sense is now scoffing at the geekiness embodied in this post.
 
 The wonderful thing about Bayesian methods is that we can modify them to take into account our prior knowledge. Suppose we believe editors intuition is a real thing - can we quantify it? Certainly. We can do this with a fairly simple experiment. We require editors to rate a collection of titles as "catchy" or "not catchy", run them on the site, and then measure the CTR of the "catchy" and "not catchy" samples. Suppose we did such an experiment, and observed the following aggregate results:
 
-![](bayesian_bandit/empirical_prior.png)
+![](/blog/2013/bayesian_bandit/empirical_prior.png)
 
 This isn't a solid win for the editor - some catchy titles have low CTRs, and some boring titles have good CTRs. But nevertheless, it's better for a story to have catchy title than not.
 
@@ -114,7 +114,7 @@ What we want to do is incorporate this information into our bandit algorithm. Th
 
 The first step is to fit a theoretical distribution to the empirical data. Due to the fact that I chose the "empirical" (i.e., made up) data to be very nice, a beta distribution fits well [1] - specifically beta distributions with $@(\alpha_0, \beta_0) = (9,20)$@ and $@(\alpha_1, \beta_1) = (4,20)$@.
 
-![](bayesian_bandit/theoretical_prior.png)
+![](/blog/2013/bayesian_bandit/theoretical_prior.png)
 
 Then the only modification needed to the algorithm is to plug these variables into the prior:
 

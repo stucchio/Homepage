@@ -16,11 +16,11 @@ However, whatever flaws VAM may have, Gary Rubinstein (henceforth GR) hasn't dem
 
 In his series of blog posts, he claims that intuition predicts certain correlations should be present between different sorts of VAM scores. He then uses visual inspection of scatterplots to assert that this correlation is not present. For example, in his [first post](http://garyrubinstein.teachforus.org/2012/02/26/analyzing-released-nyc-value-added-data-part-1/), he examines the relationship between a teachers VAM score in one year and their VAM score in the next year:
 
-![same teacher, different year](dont_use_scatterplots/rubinstein_multi_year.png)
+![same teacher, different year](/blog/2012/dont_use_scatterplots/rubinstein_multi_year.png)
 
 He also plotted the VAM score of students of the same teacher, but from two separate classes:
 
-![same grade, same teacher, different subjects](dont_use_scatterplots/rubinstein_elamathva.png)
+![same grade, same teacher, different subjects](/blog/2012/dont_use_scatterplots/rubinstein_elamathva.png)
 
 Looks pretty messy, hard to see much correlation there.
 
@@ -30,7 +30,7 @@ This creates the visual artifact called truncation. A scatterplot can only visua
 
 GR also measures the VAM scores of the same teacher, but teaching the same class to two different grade levels:
 
-![same teacher, same subject, different grades](dont_use_scatterplots/rubinstein_gradegrade.png)
+![same teacher, same subject, different grades](/blog/2012/dont_use_scatterplots/rubinstein_gradegrade.png)
 
 Still messy, no obvious relationship. Again we see the phenomenon of visual truncation, this time caused by the large tick size. At many points of the graph, multiple ticks overlap each other, which makes the visual density appear lower than it really is.
 
@@ -42,13 +42,13 @@ In two dimensions, there are multiple ways of doing it. The bin shapes can be ta
 
 I'll demonstrate a density plot using the hexagonal tiling, since [matplotlib](http://matplotlib.sourceforge.net) has the [hexbin](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.hexbin) function. I applied this hexbin function to GR's data comparing teachers across multiple school years:
 
-![hexbin plot of multiyear data](dont_use_scatterplots/same_teacher_different_year.png)
+![hexbin plot of multiyear data](/blog/2012/dont_use_scatterplots/same_teacher_different_year.png)
 
 Looks like a pretty clear relationship. It's noisy, but present. More importantly, it's far easier to see in a hexbin plot than it is in a scatterplot.
 
 (Side note: GR also plotted a strange data set. He compared the same teacher, but across different subjects and grade levels. Based on this, he got a correlation of 0.3. The relationship strengthens to 0.4 when you compare the same teacher teaching the same subject at the same grade level. But I'll ignore this - this is a blog post about why scatterplots suck.)
 
-![hexbin plots](dont_use_scatterplots/hexbin_plots.png)
+![hexbin plots](/blog/2012/dont_use_scatterplots/hexbin_plots.png)
 
 The left two columns are GR's data, but redone with a density plot instead of a scatterplot. The right two columns are the same plots, but for 2008-2009 instead of 2009-2010.
 

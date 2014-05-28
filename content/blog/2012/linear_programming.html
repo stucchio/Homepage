@@ -57,7 +57,7 @@ The first fact to observe is that it can't lie on the *interior* of the triangle
 
 I can make similar arguments about the edges. Suppose `p` is a point on the edge of triangle (but not the corner), and suppose `d` is a vector pointing along the edge. By the linearity of the objective function, `f(p+d)=f(p)+f(d)`. If `f(d) > 0`, then I can increase the objective function by moving in the direction of `d`, otherwise I can increase it by moving in the direction of `-d`. This means the maximum can't be on the edge either, except in the special case that `f(d)=0`.
 
-![diagram illustrating reasoning](polygon_diagram.png)
+![diagram illustrating reasoning](/blog/2012/polygon_diagram.png)
 
 So since the maximum of the objective function doesn't live inside the triangle or on the side, we find it must like at one of the corners of the triangle.
 

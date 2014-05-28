@@ -31,21 +31,21 @@ The claims by Nanex and others are entirely nonsense. Quote stuffing is virtuall
 
 An HFT system is basically a fancy signal processing engine. A signal is typically a real-valued function of time - perhaps normalized to be confined to the interval `[0,1]`.
 
-![signals](quote_stuffing_is_a_software_bug/signals.png)
+![signals](/blog/2014/quote_stuffing_is_a_software_bug/signals.png)
 
 Typical signals might be quantities like bid/ask spread, volume at bid, volume at ask, volume at bid / volume at ask, etc. As you might expect, these signals are all very noisy.
 
 Taking these signals as an input, the HFT system needs to make a decision about whether to place an order or not. Unfortunately, when making these decisions, there is a tradeoff to be made between speed and accuracy. In graphical terms:
 
-![signals](quote_stuffing_is_a_software_bug/signal_jump.png)
+![signals](/blog/2014/quote_stuffing_is_a_software_bug/signal_jump.png)
 
 Has the signal jumped? Has the market moved? Or is it just noise?
 
-![signals](quote_stuffing_is_a_software_bug/signal_jump2.png)
+![signals](/blog/2014/quote_stuffing_is_a_software_bug/signal_jump2.png)
 
 If we wait longer we can determine the answer - that's a real movement. But if we wait too long we will not be able to reap the rewards of our insight. There are lots of tricks we can try to improve the situation, mostly variants of moving averages:
 
-![signals](quote_stuffing_is_a_software_bug/moving_averages.png)
+![signals](/blog/2014/quote_stuffing_is_a_software_bug/moving_averages.png)
 
 If the HFT responds too quickly, he'll fire off too many orders many of which are just noise. If the HFT doesn't respond quickly enough he'll never get filled. So it's important to get this right.
 
@@ -53,11 +53,11 @@ If the HFT responds too quickly, he'll fire off too many orders many of which ar
 
 Here is a simple signal. An HFT has decided that when the signal is above a threshold, he will trade. When it is below a threshold, he won't. So he looks at historical data:
 
-![signals](quote_stuffing_is_a_software_bug/signal_to_order1.png)
+![signals](/blog/2014/quote_stuffing_is_a_software_bug/signal_to_order1.png)
 
 Hey, looks like we placed orders when the signal behaved appropriately. Sounds good - then we check if the market moved in the right direction after orders were placed.
 
-![signals](quote_stuffing_is_a_software_bug/signal_to_order2.png)
+![signals](/blog/2014/quote_stuffing_is_a_software_bug/signal_to_order2.png)
 
 Here is another case - we cancelled orders when expected, so everything looks good.
 
@@ -65,7 +65,7 @@ Now that it looks like it's doing the right thing directionally, we run a full b
 
 After running it for a day or two, it works great and appears to make money. Except, once in a blue moon this happens when the *mean* signal approaches the threshold and stays there for a while:
 
-![signals](quote_stuffing_is_a_software_bug/signal_to_order3.png)
+![signals](/blog/2014/quote_stuffing_is_a_software_bug/signal_to_order3.png)
 
 Quick, someone call Nanex! It's a crime scene!
 

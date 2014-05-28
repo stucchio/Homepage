@@ -58,7 +58,7 @@ So at each timestep the CTR approaches it's mean value (due to the term `- (thet
 
 To get a picture of what this model means, I've plotted three possible trajectories below. All of them start out at CTR=60%, but change over time according to the random walk model.
 
-![random walk](time_varying_conversion_rates/random_walk.png)
+![random walk](/blog/2013/time_varying_conversion_rates/random_walk.png)
 
 Before continuing I perform a simple variable transformation - I define $@ Z_t = 2 X_t-1$@. Jacobi diffusion for $@ Z_t $@ takes the form:
 
@@ -106,7 +106,7 @@ I actually use a different method of solution (spectral methods), this conceptua
 
 One important fact to understand is that $@ f(z,t) $@ is dissipative, which means that we lose information with time. If we start with a very sharp probability distribution, after some time that solution will spread out and our uncertainty will increase. One way to understand this is to plot $@ f(z,t) $@ at several different values of $@ t $@. At $@ t=0 $@, $@ f(z, 0) $@ is very localized - it's nearly zero except between x=0.2 and x=0.45. Over time, this distribution spreads out.
 
-![dissipative solution](time_varying_conversion_rates/probability_dist_various_times.png)
+![dissipative solution](/blog/2013/time_varying_conversion_rates/probability_dist_various_times.png)
 
 To translate the math to python again, you can think of this graph as being generated simply via the code:
 
@@ -122,7 +122,7 @@ To translate the math to python again, you can think of this graph as being gene
 
 Another way to visualize this is with a heatmap. At `time=0` (the left side of the heatmap), the solution is concentrated, while at `time=4` the solution is spread out. I've superimposed 3 examples of a random walk on the density plot, which are represented by the black lines. As time increases, the black lines roughly correspond to the locations of high probability.
 
-![dissipative solution](time_varying_conversion_rates/probability_density_random_walk.png)
+![dissipative solution](/blog/2013/time_varying_conversion_rates/probability_density_random_walk.png)
 
 Code to generate this [is available here](https://gist.github.com/stucchio/7578381).
 
@@ -166,13 +166,13 @@ Then we can run the simulation many times, and save the value `z` at the end of 
 
 I did this, and plotted the result below. The first plot is a histogram of the terminal positions of `z`, while the second is the best fit and theoretical distributions:
 
-![long_term_random_walk_result](time_varying_conversion_rates/long_term_random_walk_result.png)
+![long_term_random_walk_result](/blog/2013/time_varying_conversion_rates/long_term_random_walk_result.png)
 
 The result is imperfect due to sampling, but it appears more or less correct. To be precise, it's correct the second time I tried - the first version of my math did make a stupid calculation mistake (lost a factor of 2 somewhere), which this method revealed.
 
 ## Computing a posterior on $@x$@
 
-To compute the posterior distribution for the CTR, we do the following. Suppose at time $@ t=0 $@ we have some distribution on $@ z $@, call it $@ p_0(z) $@. For example, suppose at exactly $@ t=0 $@, we showed the call to action to 40 people resulting in 14 clicks. We then computed a posterior $@ p_0(z) $@ based on the techniques in [this blog post](bayesian_analysis_conversion_rates.html).
+To compute the posterior distribution for the CTR, we do the following. Suppose at time $@ t=0 $@ we have some distribution on $@ z $@, call it $@ p_0(z) $@. For example, suppose at exactly $@ t=0 $@, we showed the call to action to 40 people resulting in 14 clicks. We then computed a posterior $@ p_0(z) $@ based on the techniques in [this blog post](/blog/2013/bayesian_analysis_conversion_rates.html).
 
 Now suppose we've waited until $@ t = 0.2 $@. We want to know the posterior *now*, which is not the same as the posterior at $@ t=0 $@. So we do the following. We solve the Fokker-Planck equation for $@ f(z,0.2) $@ with $@ f(z,0) = p_0(z) $@, and this represents our new posterior.
 
@@ -212,7 +212,7 @@ I then performed a Bayesian update on $@ f(x, t) $@ and continued the simulation
 
 I repeated the process of drawing samples and updating the evidence at `t=2` and `t=3`. The result is plotted below:
 
-![Bayesian Estimate of CTR](time_varying_conversion_rates/bayesian_ctr_estimate.png)
+![Bayesian Estimate of CTR](/blog/2013/time_varying_conversion_rates/bayesian_ctr_estimate.png)
 
 There is a lot happening in this graph. The black line represents the *true* click through rate. The only reason we can actually graph this is because this is a simulation. In real life the black line would be unobservable.
 
@@ -228,7 +228,7 @@ The answer is of course yes. If by some improbable fluke, the true conversion ra
 
 But when you observe flukes caused by a *small sample size*, these will not affect your estimates as much as you might expect. Consider the following simulation, identical to the previous one, except that I've reduced the sample size, i.e. `nsamples = 10`. I ran a simulation where at `t=2` an improbable fluke occurs - the empirical conversion rate was 60% (6/10) even though the actual conversion rate was about 25%. Although unlikely, this will occur occasionally. The result is plotted below.
 
-![Bayesian Estimate of CTR](time_varying_conversion_rates/bayesian_estimation_sample_size_taken_into_account.png)
+![Bayesian Estimate of CTR](/blog/2013/time_varying_conversion_rates/bayesian_estimation_sample_size_taken_into_account.png)
 
 The Bayesian estimator is certainly an overestimate at `t=2.1`. But the estimated conversion rate has not increased 60% - according to the posterior, the probability that `CTR >= 60%` is still negligably low.
 

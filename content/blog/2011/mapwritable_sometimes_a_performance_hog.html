@@ -26,13 +26,9 @@ In this case, the result is a map, each key of which is a UUIDWritable and each 
     #!java
     public void write(DataOutput out) throws IOException {
         super.write(out);
-
         // Write out the number of entries in the map
-
         out.writeInt(instance.size());
-
         // Then write out each key/value pair
-
         for (Map.Entry e: instance.entrySet()) {
             out.writeByte(getId(e.getKey().getClass()));
 	    e.getKey().write(out);
