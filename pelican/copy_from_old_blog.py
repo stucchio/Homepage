@@ -1,6 +1,7 @@
 import os
 import yaml
 import shutil
+import re
 
 def read_metadata(filename):
     f = open(filename).read()
@@ -11,7 +12,18 @@ def read_metadata(filename):
 def _uses_mathjax(content):
     return (content.find('$$') > 0) or (content.find('$@') > 0)
 
-def write_file(filename, metadata, content):
+
+_to_strip = ['{% block tailjavascript %}', '{% endblock %}', '{% mark excerpt -%}', '{% mark excerpt %}', '{%- endmark %}', '{% raw %}', '{% endraw %}']
+def _process_content(content):
+    for s in _to_strip:
+        content = content.replace(s, '')
+    # Replace /blog/foo/test.png with /blog_media/foo/test.png
+    content = re.sub('\[([^\]]*)\]\(/blog/([^\)]+)([^(html)\)])\)', r"[\1](/blog_media/\2\3)", content)
+    for i in range(5):
+        content = re.sub('<img src="(/blog/([^\)]+)([^(html)\)]))"\s*>', r'<img src="/blog_media/\2\3\">', content)
+    return content
+
+def transfer_blogpost(filename, metadata, content):
     filename = filename.replace(".html", ".md")
     with open(filename, 'w') as f:
         header = """title: """ + metadata['title'] + """
@@ -27,18 +39,11 @@ author: Chris Stucchio
         header = header + "\n\n"
         f.write(header)
 
-        content = content.replace("{% mark excerpt -%}", "")
-        content = content.replace("{% mark excerpt %}", "")
-        content = content.replace("{%- endmark %}", "")
+        content = _process_content(content)
         f.write(content)
 
-def exclude_filepath(filename):
-    if filename[-4:] != "html":
-        return True
-    if filename.endswith("index.html"):
-        return True
-    return False
-
+def _split_path(dir):
+    return dir.replace("../content/blog/", '')
 
 if __name__=="__main__":
     #Remove tags
@@ -50,8 +55,13 @@ if __name__=="__main__":
     for (dir, arg, filenames) in os.walk("../content/blog/"):
         for filename in filenames:
             fullpath = os.path.join(dir, filename)
-            if exclude_filepath(fullpath):
-                continue
-            if fullpath[-4:] == "html":
+            if (fullpath[-4:] == "html") and (not filename.endswith("index.html")):
                 metadata, content = read_metadata(fullpath)
-                write_file(os.path.join("content", filename), metadata, content)
+                transfer_blogpost(os.path.join("content", filename), metadata, content)
+            else:
+                newdir = os.path.join("content/blog_media/", _split_path(dir))
+                try:
+                    os.makedirs(newdir)
+                except OSError:
+                    pass
+                shutil.copyfile(os.path.join(dir, filename), os.path.join(newdir, filename))
