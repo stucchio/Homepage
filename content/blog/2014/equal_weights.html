@@ -1,0 +1,88 @@
+---
+title: Why a pro/con list (or unit weighted regression) works so well
+created: !!timestamp '2014-05-28 09:00:00'
+tags:
+    - linear regression
+    - regression
+    - statistics
+    - unit-weighted regression
+---
+
+{% mark excerpt -%}
+
+I'm currently dating two lovely women - I'll describe them by the pseudonyms Svetlana and Elise. Unfortunately they are both growing attached to me, so the time has come for me to make a choice between them. In order to make such a choice, I wish to construct an approximation to my long term happiness - a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness with a given choice. I can then compute $@ f(\textrm{Svetlana}) $@ and $@ f(\textrm{Elise}) $@ and choose whichever one is larger - if my approximation is well chosen I will make the *utility* maximizing choice most of the time.
+
+In statistics we have many techniques for computing such a function, [linear regression](http://en.wikipedia.org/wiki/Linear_regression) being a simple example. Unfortunately, linear regression is relatively useless to me in this case - linear regression requires a considerable number of samples, and I have not dated sufficiently many women nor kept careful records of my happiness.
+
+Instead, I'm going to discuss a much simpler predictor, first described in [1772 by Benjamin Franklyn](http://www.procon.org/view.background-resource.php?resourceID=1474). The mathematical name for it is [unit weighted regression](http://en.wikipedia.org/wiki/Unit-weighted_regression), and the practical name for it is a list of pros and cons:
+
+<table>
+<tr><th>Characteristic</th><th>Elise</th><th>Svetlana</th></tr>
+<tr><td>Smart</td><td>0</td><td>+1</td></tr>
+<tr><td>Great Legs</td><td>+1</td><td>+1</td></tr>
+<tr><td>Black</td><td>+1</td><td>0</td></tr>
+<tr><td>Rational</td><td>0</td><td>0</td></tr>
+<tr><td>Exciting</td><td>+1</td><td>0</td></tr>
+<tr><td>Not Fat</td><td>+1</td><td>+1</td></tr>
+<tr><td>Lets me work</td><td>0</td><td>0</td></tr>
+</table>
+
+{%- endmark %}
+
+Technically that's only a list of pros. I'm treating the negation of a Con as a Pro.
+
+Unit-weighted regression consists of taking the values in each column and adding them up. Each value is either zero or one. The net result is that $@ f(\textrm{Elise}) = 4 $@ and $@ f(\textrm{Svetlana}) = 3 $@. Elise it is!
+
+# Benefits of unit-weighted regression
+
+One of the clearest benefits of unit-weighted regression is how easy it is for an expert to formulate a model. Consider the example above - I have not dated sufficiently many women to fit a 7-dimensional model. Nevertheless, I feel quite confident that if I did, it would show that I enjoy women from Africa more than women from Eastern Europe, that I enjoy intelligent women more than stupid, and that I enjoy being allowed to work without interruption.
+
+The second benefit is that unit weighted regression has far fewer degrees of freedom than most other multi-valued regression models. The only relevant choice when building a unit-weighted regression model is what values to include and what sign to include them with. The general rule of thumb is that if a variable's sign is questionable it should be excluded from the model.
+
+# There's no space at the corners
+
+Mathematically, a method of studying the usefuless of unit-weighted regression is to compare how accurately unit-weighted regression works relative to a more accurate predictor. Toward that end, let us consider a simple model. Let each possible choice be a a binary vector $@ \vec{x} \in \{ 0, 1 \} $@. As per our example above:
+
+$$ \vec{\textrm{Elise}} = [ 0, 1, 1, 0, 1, 1, 0] $$
+
+Let the true (but unknown) ranking function be $@ h(\vec{x}) = \vec{y} \cdot \vec{x} $@. For simplicity, suppose that $@ \vec{y} $@ is normalized:
+
+$$ \sum_{i} | \vec{y}_i | = 1.0 $$
+
+Further, suppose that we got the signs right:
+
+$$ \forall i,  \vec{y}_i \geq 0 $$
+
+In 3 dimensions, what this means is that the vector $@ \vec{y} $@ lives somewhere in the *2-simplex*:
+
+![2-simplex in r^3](/blog/2014/equal_weights/2D-simplex.png)
+
+In higher dimensions it is of course impossible to draw a picture, but there is a similar shape on which the vector $@ \vec{y} $@ can be contained.
+
+In contrast, unit-weighted regression simply takes the predictor function $@ f(\vec{x}) = \vec{u} \cdot \vec{x} $@ where $@ \vec{u} = [1/K, 1/K, \ldots, 1/K] $@ where $@ K $@ is the dimension. So the important question to answer is "when does $@ \vec{u} $@ differ significantly from $@ \vec{y} $@?"
+
+## The Corners are the problem
+
+The answer to that question is when $@ \vec{y} $@ lives near the corner of the simplex. Consider a simple example in 3 dimensions:
+
+$$ \vec{u} = [1/3, 1/3, 1/3] $$
+
+$$ \vec{y} = [1, 0, 0] $$
+
+Now consider an example vector $@ \vec{x} = [0,1,1] $@. In this case, $@ h(\vec{x}) = 0 $@ whereas $@ f(\vec{x}) = 2/3 $@.
+
+The vector $@ \vec{u} $@ is always a vector located dead-center in the middle of the simplex.
+
+## With lots of features, the corkers take up little space
+
+Now let us ask the question - what is a "typical" value of $@ \vec{y} $@? One way to answer this question is to take a uniform distribution on the simplex, which is equivalent to a [Dirichlet distribution](http://en.wikipedia.org/wiki/Dirichlet_distribution) with $@ \alpha_i = 1 $@. This means that all points on the simplex can occur with equal probability.
+
+The first question we'd like to answer is what is the *expected* difference between $@ \vec{u} $@ and $@ \vec{y} $@? This can be computed straightforwardly:
+
+$$ \int | \vec{y} - \vec{u} |^2 d\vec{y} = \sum_{i=1}^K \int | \vec{y}_i - 1/K |^2 d\vec{y} = \frac{K(K-1)}{K^2(K+1)} \sim \frac{1}{K} $$
+
+The latter fact comes simply by applying the definition of the variance of the [Dirichlet Distribution](http://en.wikipedia.org/wiki/Dirichlet_distribution) $@ K $@ times, and noting that $@ E[\vec{y}_i] = 1/K $@. We can then compute the probability of making a significant error via the [Chebyshev Inequality](http://en.wikipedia.org/wiki/Chebyshev%27s_inequality):
+
+$$ P( | \vec{y} - \vec{u} | > t ) \leq \frac{1}{t^2} \int | \vec{y} - \vec{u} |^2 d\vec{y} = \frac{(K-1)}{t^2 K(K+1)} \sim \frac{1}{K t^2}$$
+
+As $@ K $@ becomes larger, this probability becomes smaller.
