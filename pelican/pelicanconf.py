@@ -11,6 +11,7 @@ PAGE_SAVE_AS = '{slug}.html'
 
 TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = u'en'
+STATIC_PATHS=['blog_media']
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = '/blog/atom.xml'
