@@ -52,6 +52,12 @@ if __name__=="__main__":
     except OSError:
         pass
 
+    for d in ['work', 'pubs', 'media']:
+        destdir = os.path.join("content", d)
+        if os.path.exists(destdir):
+            shutil.rmtree(destdir)
+        shutil.copytree(os.path.join("../content/", d), destdir)
+
     for (dir, arg, filenames) in os.walk("../content/blog/"):
         for filename in filenames:
             fullpath = os.path.join(dir, filename)
