@@ -28,7 +28,6 @@ def transfer_blogpost(filename, metadata, content):
     with open(filename, 'w') as f:
         header = """title: """ + metadata['title'] + """
 date: """ + metadata['created'].strftime("%Y-%m-%d %H:%M") + """
-category: blog
 author: Chris Stucchio
 """
         if len(metadata.get('tags', [])) > 0:

@@ -36,6 +36,8 @@ DIRECT_TEMPLATES = ('index', 'tags', 'categories', 'archives', 'sitemap', 'atom'
 SITEMAP_SAVE_AS = 'sitemap.xml'
 ATOM_SAVE_AS = 'blog/atom.xml'
 
+DISPLAY_CATEGORIES_ON_MENU = False
+
 # Blogroll
 LINKS =  (('Pelican', 'http://getpelican.com/'),
           ('Python.org', 'http://python.org/'),

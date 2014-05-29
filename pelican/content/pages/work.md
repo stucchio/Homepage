@@ -1,6 +1,7 @@
 title: Work
 URL: work.html
 Save_as: work.html
+menubar: true
 
 I am a Data Scientist (formerly known as "Statistician") and I am currently seeking consulting work.
 

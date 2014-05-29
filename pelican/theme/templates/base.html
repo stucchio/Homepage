@@ -121,11 +121,14 @@
                 {% endfor %}
                 {% if DISPLAY_PAGES_ON_MENU %}
                     {% for p in PAGES %}
+                      {% if p.menubar %}
                          <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">
                              {{ p.title }}
                           </a></li>
-                      {% endfor %}
+                      {% endif %}
+                    {% endfor %}
                 {% endif %}
+                <li><a href="http://github.com/stucchio">Code</a></li>
                 {% if DISPLAY_CATEGORIES_ON_MENU %}
                     {% for cat, null in categories %}
                         <li {% if cat == category %}class="active"{% endif %}>

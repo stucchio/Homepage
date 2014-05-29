@@ -1,6 +1,7 @@
 title: Publications
 URL: publications.html
 Save_as: publications.html
+menubar: true
 
 I used to be an academic. Here are my papers.
 
