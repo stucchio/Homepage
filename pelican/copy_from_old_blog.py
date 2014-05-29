@@ -35,6 +35,8 @@ author: Chris Stucchio
             header = header + "tags: " + ", ".join(metadata.get('tags', [])) + "\n"
         if _uses_mathjax(content):
             header = header + "mathjax: true\n"
+        if metadata.has_key("remoteurl"):
+            header = header + "remoteurl: " + metadata['remoteurl'] + "\n"
 
         header = header + "\n\n"
         f.write(header)
