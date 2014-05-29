@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+<h1><a href="/blog/index.html">From the blog</a></h1>
     {% if articles %}
         {% for article in (articles_page.object_list if articles_page else articles) %}
+          {% if loop.index < 4 %}
             <article>
                 {% if article.remoteurl %}
                 <h2><a href="{{ article.remoteurl }}">{{ article.title }}</a></h2>
@@ -14,8 +16,18 @@
                 </div>
             </article>
             <hr/>
+          {% endif %}
         {% endfor %}
     {% endif %}
-
-    {% include 'includes/pagination.html' %}
+{% if FRONT_PAGE_CATEGORIES %}
+<a href="/blog/index.html">Read more</a>
+  <div class="row">
+    <h1>Top categories...</h1>
+    {% for c in FRONT_PAGE_CATEGORIES %}
+    <div class="col-lg-4">
+      <h2>{{c}}</h2>
+    </div>
+    {% endfor %}
+  </div>
+{% endif %}
 {% endblock content %}
