@@ -32,9 +32,12 @@ ARTICLE_EXCLUDES = ('pages',)
 THEME = './theme/'
 HIDE_SIDEBAR = True
 
-DIRECT_TEMPLATES = ('index', 'tags', 'categories', 'archives', 'sitemap', 'atom')
+DIRECT_TEMPLATES = ('index', 'blog_index', 'tags', 'categories', 'archives', 'sitemap', 'atom')
 SITEMAP_SAVE_AS = 'sitemap.xml'
 ATOM_SAVE_AS = 'blog/atom.xml'
+BLOG_INDEX_SAVE_AS = "blog/index.html"
+PAGINATED_DIRECT_TEMPLATES = ('index', 'blog_index')
+
 
 DISPLAY_CATEGORIES_ON_MENU = False
 

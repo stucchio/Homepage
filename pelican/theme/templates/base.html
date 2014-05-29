@@ -129,6 +129,7 @@
                     {% endfor %}
                 {% endif %}
                 <li><a href="http://github.com/stucchio">Code</a></li>
+                <li><a href="{{SITEURL}}/blog/index.html">Blog</a></li>
                 {% if DISPLAY_CATEGORIES_ON_MENU %}
                     {% for cat, null in categories %}
                         <li {% if cat == category %}class="active"{% endif %}>
