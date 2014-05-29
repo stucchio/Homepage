@@ -23,6 +23,13 @@ def _process_content(content):
         content = re.sub('<img src="(/blog/([^\)]+)([^(html)\)]))"\s*>', r'<img src="/blog_media/\2\3\">', content)
     return content
 
+def _category(filename, content):
+    if filename.find("hft") > 0:
+        return "high frequency trading"
+    if filename.find("conversion") > 0:
+        return "conversion rate optimization"
+    return None
+
 def transfer_blogpost(filename, metadata, content):
     filename = filename.replace(".html", ".md")
     with open(filename, 'w') as f:
@@ -38,6 +45,8 @@ author: Chris Stucchio
             header = header + "remoteurl: " + metadata['remoteurl'] + "\n"
         if metadata.has_key("nolinkback"):
             header = header + "nolinkback: true\n"
+        if _category(filename, content):
+            header = header + "category: " + _category(filename, content) + "\n"
 
         header = header + "\n\n"
         f.write(header)
