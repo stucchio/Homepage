@@ -22,12 +22,23 @@
 {% if FRONT_PAGE_CATEGORIES %}
 <a href="/blog/index.html">Read more</a>
   <div class="row">
-    <h1>Top categories...</h1>
-    {% for c in FRONT_PAGE_CATEGORIES %}
-    <div class="col-lg-4">
-      <h2>{{c}}</h2>
-    </div>
-    {% endfor %}
+    <h1>Popular Topics</h1>
+    {% for category, article_list in categories %}
+      {% if category in FRONT_PAGE_CATEGORIES %}
+      <div class="col-lg-3">
+        <h2>{{category}}</h2>
+        <ul>
+          {% for article in article_list %}
+            {% if article.remoteurl %}
+              <li><a href="{{ article.remoteurl }}">{{ article.title }}</a></li>
+            {% else %}
+              <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+     {% endfor %}
   </div>
 {% endif %}
 {% endblock content %}
