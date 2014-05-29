@@ -26,8 +26,12 @@
             <id>{{ article.url }}</id>
 
             <content type="html">
+              {% if article.nolinkback %}
+                {{ article.content }}
+                {% else %}
               {{article.summary}}
               <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">more ...</a>
+              {% endif %}
             </content>
         </entry>
     {% endfor %}

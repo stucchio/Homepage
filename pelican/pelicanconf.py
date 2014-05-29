@@ -15,8 +15,8 @@ DEFAULT_LANG = u'en'
 STATIC_PATHS=['blog_media', 'work', 'pubs', 'media']
 
 # Feed generation is usually not desired when developing
-#FEED_ATOM = '/blog/atom.xml'
-#FEED_ALL_ATOM = '/blog/atom.xml'
+#FEED_ATOM = None
+FEED_ALL_ATOM = None
 #FEED_ALL_ATOM = None
 #FEEDS = [("All posts", "/blog/atom.xml")]
 CATEGORY_FEED_ATOM = None

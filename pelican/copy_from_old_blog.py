@@ -37,6 +37,8 @@ author: Chris Stucchio
             header = header + "mathjax: true\n"
         if metadata.has_key("remoteurl"):
             header = header + "remoteurl: " + metadata['remoteurl'] + "\n"
+        if metadata.has_key("nolinkback"):
+            header = header + "nolinkback: true\n"
 
         header = header + "\n\n"
         f.write(header)
@@ -67,7 +69,7 @@ if __name__=="__main__":
                 metadata, content = read_metadata(fullpath)
                 transfer_blogpost(os.path.join("content", filename), metadata, content)
             else:
-                if filename.endswith(".xml"):
+                if filename.endswith(".xml") or filename.endswith(".html"):
                     continue
                 newdir = os.path.join("content/blog_media/", _split_path(dir))
                 try:
