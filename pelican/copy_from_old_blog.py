@@ -67,6 +67,8 @@ if __name__=="__main__":
                 metadata, content = read_metadata(fullpath)
                 transfer_blogpost(os.path.join("content", filename), metadata, content)
             else:
+                if filename.endswith(".xml"):
+                    continue
                 newdir = os.path.join("content/blog_media/", _split_path(dir))
                 try:
                     os.makedirs(newdir)
