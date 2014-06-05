@@ -1,0 +1,26 @@
+---
+title: "Decision Rules in Bayesian A/B testing"
+created: !!timestamp '2014-06-5 9:30:00'
+tags:
+    - ab testing
+    - bayesian statistics
+    - ab testing
+---
+
+{% mark excerpt -%}
+
+Earlier this year I published a blog post about a [Baysian decision rule](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) for choosing between two variations, each with a potentially different conversion rate.
+
+{%- endmark %}
+
+## Evan Miller's Closed Form Solution
+
+In a fantastic [blog post](http://www.evanmiller.org/bayesian-ab-testing.html), Evan Miller cooked up a nice *closed form* formula for evaluating $@ P( X > Y) $@ when $@ X $@ is drawn from a [Beta distribution](http://en.wikipedia.org/wiki/Beta_distribution) with integer parameters $@ (a,b) $@ and $@ Y $@ is drawn from a Beta distribution with integer parameters $@ (c,d)$@. For simplicity of notation, let us define $@ g(a,b,c,d) \equiv P(X > Y) $@.
+
+Expressed as an integral, we have that:
+
+$$ g(a,b,c,d) \equiv P(X > y) = \int_{0}^{1} \int_{y}^{1} \frac{x^{a}(1-x)^{b}}{B(a,b)} \frac{y^{c}(1-y)^{d}}{B(c,d)} dx dy $$
+
+Evan Miller computed the integral and came up with a closed form solution for it:
+
+$$ P(X > Y) = \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } $$
