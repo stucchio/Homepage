@@ -19,7 +19,7 @@
 	    {% if article.remoteurl %}
             <link href="{{article.remoteurl}}?utm_medium=rss&amp;utm_source=chris_blog&amp;utm_campaign=merged_rss"/>
             {% else %}
-            <link href="{{SITEURL}}{{ article.url }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss"/>
+            <link href="{{SITEURL}}/{{ article.url }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss"/>
             {% endif %}
             <updated>{{ article.date }}</updated>
             <published>{{ article.date }}</published>
