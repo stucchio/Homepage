@@ -23,11 +23,18 @@ def _process_content(content):
         content = re.sub('<img src="(/blog/([^\)]+)([^(html)\)]))"\s*>', r'<img src="/blog_media/\2\3\">', content)
     return content
 
+def _contains(filename, substring):
+    return filename.find(substring) > 0
+
 def _category(filename, content):
-    if filename.find("hft") > 0:
+    if _contains(filename, "hft") > 0:
         return "high frequency trading"
-    if filename.find("conversion") > 0:
+    if _contains(filename, "bandit"):
+        return "bandit algorithms"
+    if _contains(filename, "conversion") > 0:
         return "conversion rate optimization"
+    if _contains(filename, "scala"):
+        return "scala"
     return None
 
 def transfer_blogpost(filename, metadata, content):
