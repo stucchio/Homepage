@@ -1,7 +1,7 @@
 #!/bin/sh
 
 rm -r output
-pelican -s publishconf.py
+pelican content -s publishconf.py
 # Minify stuff
 find output/ -name '*.css' -or -name '*.js' | xargs -I filename yui-compressor filename -o filename.min
 find output/ -name '*.min' | sed s/\\.min// | xargs -I filename mv filename.min filename

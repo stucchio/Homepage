@@ -13,6 +13,7 @@ PAGE_SAVE_AS = '{slug}.html'
 TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = u'en'
 STATIC_PATHS=['blog_media', 'work', 'pubs', 'media']
+EXTRA_PATH_METADATA = { 'media/favicon.ico' : {'path' : 'favicon.ico' } }
 
 # Feed generation is usually not desired when developing
 #FEED_ATOM = None
@@ -23,8 +24,20 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 FILENAME_METADATA = '(?P<slug>.*)'
-ARTICLE_PERMALINK_STRUCTURE = '/blog/%Y'
-ARTICLE_URL = '{slug}.html'
+#ARTICLE_PERMALINK_STRUCTURE = '/blog/%Y'
+ARTICLE_URL = 'blog/{date:%Y}/{slug}.html'
+ARTICLE_LANG_URL = 'blog/{date:%Y}/{slug}-{lang}.html'
+PAGE_URL = 'blog/{date:%Y}/{slug}.html'
+PAGE_LANG_URL = 'blog/{date:%Y}/pages/{slug}-{lang}.html'
+DRAFT_URL = 'blog/{date:%Y}/drafts/{slug}.html'
+DRAFT_LANG_URL = 'blog/{date:%Y}/drafts/{slug}-{lang}.html'
+ARTICLE_SAVE_AS = 'blog/{date:%Y}/{slug}.html'
+ARTICLE_LANG_SAVE_AS = 'blog/{date:%Y}/{slug}-{lang}.html'
+DRAFT_SAVE_AS = 'blog/{date:%Y}/drafts/{slug}.html'
+DRAFT_LANG_SAVE_AS = 'blog/{date:%Y}/drafts/{slug}-{lang}.html'
+PAGE_SAVE_AS = '{slug}.html'
+PAGE_LANG_SAVE_AS = 'pages/{slug}-{lang}.html'
+
 
 DEFAULT_CATEGORY = ('Articles')
 ARTICLE_EXCLUDES = ('pages',)
