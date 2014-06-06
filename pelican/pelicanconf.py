@@ -36,7 +36,7 @@ DIRECT_TEMPLATES = ('index', 'blog_index', 'tags', 'categories', 'archives', 'si
 SITEMAP_SAVE_AS = 'sitemap.xml'
 ATOM_SAVE_AS = 'blog/atom.xml'
 BLOG_INDEX_SAVE_AS = "blog/index.html"
-PAGINATED_DIRECT_TEMPLATES = ('blog_index')
+PAGINATED_DIRECT_TEMPLATES = ['blog_index']
 
 FRONT_PAGE_CATEGORIES = [ 'high frequency trading', 'conversion rate optimization', 'scala', "bandit algorithms"]
 
