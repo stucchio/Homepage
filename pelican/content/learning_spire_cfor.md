@@ -2,7 +2,7 @@ title: Learning spire - Scala is Slow, cfor helps
 date: 2014-01-09 08:30
 author: Chris Stucchio
 tags: scala, spire, math, array programming
-
+category: scala
 
 
 

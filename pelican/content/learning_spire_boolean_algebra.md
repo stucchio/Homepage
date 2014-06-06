@@ -2,7 +2,7 @@ title: Learning Spire - Boolean Algebras are pretty cool
 date: 2013-12-05 08:00
 author: Chris Stucchio
 tags: scala, spire, math, boolean algebra
-
+category: scala
 
 
 

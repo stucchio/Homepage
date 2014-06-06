@@ -2,7 +2,7 @@ title: Scala Patterns - HasXIsX
 date: 2013-11-29 08:45
 author: Chris Stucchio
 tags: scala, design patterns
-
+category: scala
 
 
 

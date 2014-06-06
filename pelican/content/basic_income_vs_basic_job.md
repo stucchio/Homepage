@@ -2,8 +2,7 @@ title: Modelling a Basic Income with Python and Monte Carlo Simulation
 date: 2013-11-13 08:00
 author: Chris Stucchio
 tags: statistics, public policy, economics, monte carlo
-
-
+category: monte carlo
 
 
 

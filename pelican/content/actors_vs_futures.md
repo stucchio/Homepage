@@ -2,12 +2,11 @@ title: Don't use Actors for concurrency
 date: 2013-12-02 08:00
 author: Chris Stucchio
 tags: scala, concurrency, actors, futures
+category: scala
 
 
 
-
-
-Instead, use actors for state and use futures for concurrency.
+Don't use actors for concurrency. Instead, use actors for state and use futures for concurrency.
 
 A common practice I've seen in scala code is to use actors for concurrency. This is encouraged by Akka and a lot of writing about Scala, the documentation of which is highly actor-centric. I assert that this is a bad practice and should be considered an antipattern most of the time it is used. Actors should not be used as a tool for flow control or concurrency - they are an effective tool for two purposes, maintaining state and providing a messaging endpoint. In all other circumstances, it is probaby better to use Futures.
 

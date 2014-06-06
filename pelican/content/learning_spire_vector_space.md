@@ -2,7 +2,7 @@ title: Learning Spire - Vector Spaces!
 date: 2013-12-07 08:00
 author: Chris Stucchio
 tags: scala, spire, math, vector space
-
+category: scala
 
 
 
