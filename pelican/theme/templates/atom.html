@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+    <title>
+        {{SITENAME}}
+    </title>
+
+    <link href="{{ SITEURL }}{{ATOM_SAVE_AS}}" rel="self" />
+    <link href="{{ SITEURL }}"/>
+
+    <updated>{{ TODAY }}</updated>
+
+    <id>{{ SITEURL }}/</id>
+
+    {% for article in articles %}
+        <entry>
+            <title type="html">{{ article.title }}</title>
+            <author><name>{{ article.author }}</name></author>
+	    {% if article.remoteurl %}
+            <link href="{{article.remoteurl}}?utm_medium=rss&amp;utm_source=chris_blog&amp;utm_campaign=merged_rss"/>
+            {% else %}
+            <link href="{{SITEURL}}/{{ article.url }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss"/>
+            {% endif %}
+            <updated>{{ article.date }}</updated>
+            <published>{{ article.date }}</published>
+            <id>{{ article.url }}</id>
+
+            <content type="html">
+              {% if article.nolinkback %}
+                {{ article.content }}
+                {% else %}
+              {{article.summary}}
+              <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">more ...</a>
+              {% endif %}
+            </content>
+        </entry>
+    {% endfor %}
+
+</feed>
