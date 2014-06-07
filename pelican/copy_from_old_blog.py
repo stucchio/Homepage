@@ -76,6 +76,10 @@ if __name__=="__main__":
         if os.path.exists(destdir):
             shutil.rmtree(destdir)
         shutil.copytree(os.path.join("../content/", d), destdir)
+        try:
+            os.unlink('content/media/meta.yaml')
+        except OSError:
+            pass
 
     for (dir, arg, filenames) in os.walk("../content/blog/"):
         for filename in filenames:
@@ -85,6 +89,8 @@ if __name__=="__main__":
                 transfer_blogpost(os.path.join("content", filename), metadata, content)
             else:
                 if filename.endswith(".xml") or filename.endswith(".html"):
+                    continue
+                if filename.endswith("meta.yaml"):
                     continue
                 newdir = os.path.join("content/blog_media/", _split_path(dir))
                 try:
