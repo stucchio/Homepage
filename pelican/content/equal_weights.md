@@ -1,14 +1,12 @@
----
 title: Why a pro/con list (or unit weighted regression) works so well
-created: !!timestamp '2014-05-28 09:00:00'
-tags:
-    - linear regression
-    - regression
-    - statistics
-    - unit-weighted regression
----
+date: 2014-05-28 09:00
+author: Chris Stucchio
+tags: linear regression, regression, statistics, unit-weighted regression
+mathjax: true
 
-{% mark excerpt -%}
+
+
+
 
 I'm currently dating two lovely women - I'll describe them by the pseudonyms Svetlana and Elise. Unfortunately they are both growing attached to me, so the time has come for me to make a choice between them. In order to make such a choice, I wish to construct an approximation to my long term happiness - a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness with a given choice. I can then compute $@ f(\textrm{Svetlana}) $@ and $@ f(\textrm{Elise}) $@ and choose whichever one is larger - if my approximation is well chosen I will make the *utility* maximizing choice most of the time.
 
@@ -27,7 +25,7 @@ Instead, I'm going to discuss a much simpler predictor, first described in [1772
 <tr><td>Lets me work</td><td>0</td><td>0</td></tr>
 </table>
 
-{%- endmark %}
+
 
 Technically that's only a list of pros. I'm treating the negation of a Con as a Pro.
 
@@ -55,7 +53,7 @@ $$ \forall i,  \vec{y}_i \geq 0 $$
 
 In 3 dimensions, what this means is that the vector $@ \vec{y} $@ lives somewhere in the *2-simplex*:
 
-![2-simplex in r^3](/blog/2014/equal_weights/2D-simplex.png)
+![2-simplex in r^3](/blog_media/2014/equal_weights/2D-simplex.png)
 
 In higher dimensions it is of course impossible to draw a picture, but there is a similar shape on which the vector $@ \vec{y} $@ can be contained.
 
