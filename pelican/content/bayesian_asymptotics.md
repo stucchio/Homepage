@@ -1,9 +1,8 @@
 title: Asymptotics of Evan Miller's Bayesian A/B formula
-date: 2014-06-11 09:30
+date: 2014-06-09 08:30
 author: Chris Stucchio
 tags: ab testing, bayesian statistics, ab testing, asymptotics
 mathjax: true
-status: draft
 
 
 Earlier this year I published a blog post about a [Baysian decision rule](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) for choosing between two variations, each with a potentially different conversion rate. Later Evan Miller wrote a [blog post](http://www.evanmiller.org/bayesian-ab-testing.html) computing an exact formula for evaluating it, rather than approximating the integral numerically. In this post I'm going to derive an [asymptotic expansion](http://en.wikipedia.org/wiki/Asymptotic_expansion) of that formula which is valid in the limit of large sample sizes - this is the case when Evan's formula will become computationally difficult to evaluate and prone to numerical error.
