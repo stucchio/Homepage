@@ -22,11 +22,13 @@
     <section id="content">
         <article>
             <header class="page-header">
+              {% if article.status == 'draft' %} <h1>DRAFT. PLEASE DO NOT SHARE THIS LINK.</h1> {% endif %}
+
                 <h1>
                     <a href="{{ SITEURL }}/{{ article.url }}"
                        rel="bookmark"
                        title="Permalink to {{ article.title|striptags }}">
-                        {{ article.title }}
+                       {{ article.title }}
                     </a>
                 </h1>
             </header>
