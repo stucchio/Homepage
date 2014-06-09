@@ -1,12 +1,12 @@
 title: Asymptotics of Evan Miller's Bayesian A/B formula
 date: 2014-06-11 09:30
 author: Chris Stucchio
-tags: ab testing, bayesian statistics, ab testing
+tags: ab testing, bayesian statistics, ab testing, asymptotics
 mathjax: true
 status: draft
 
 
-Earlier this year I published a blog post about a [Baysian decision rule](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) for choosing between two variations, each with a potentially different conversion rate. Later Evan Miller wrote a [blog post](http://www.evanmiller.org/bayesian-ab-testing.html) computing an exact formula for evaluating it. In this post I'm going to derive an [asymptotic expansion](http://en.wikipedia.org/wiki/Asymptotic_expansion) of that formula which is valid in the limit of large sample sizes - this is the case when Evan's formula will become computationally difficult to evaluate and prone to numerical error.
+Earlier this year I published a blog post about a [Baysian decision rule](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) for choosing between two variations, each with a potentially different conversion rate. Later Evan Miller wrote a [blog post](http://www.evanmiller.org/bayesian-ab-testing.html) computing an exact formula for evaluating it, rather than approximating the integral numerically. In this post I'm going to derive an [asymptotic expansion](http://en.wikipedia.org/wiki/Asymptotic_expansion) of that formula which is valid in the limit of large sample sizes - this is the case when Evan's formula will become computationally difficult to evaluate and prone to numerical error.
 
 # The Asymptotic Expansion
 
@@ -20,9 +20,9 @@ $$ g(a,b,c,d) = P( \textrm{Conversion Rate of A > Conversion Rate of B}) $$
 
 Evan Miller discovered a [formula](http://www.evanmiller.org/bayesian-ab-testing.html) for this, which is somewhat computationally intensive:
 
-$$ g(a,b,c,d) = \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } $$
+$$ g(a,b,c,d) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } $$
 
-This is computationally intensive because a term in the sum must be computed for every data point. However, if we make a scaling assumption, we can derive a much simpler formula. Specifically, let us assume that $@ a-1=N\phi, b-1=N(1-\phi), c-1=N\psi, d-1=N(1-\psi) $@, with $@ N \rightarrow \infty $@. Provided $@ N $@ is sufficiently large and $@ \phi < \psi $@, we have the approximate formula:
+This is computationally intensive because a term in the sum must be computed for every data point. However, if we make a scaling assumption, we can derive a much simpler formula. Specifically, let us assume that $@ a-1=N\phi, b-1=N(1-\phi), c-1=N\psi, d-1=N(1-\psi) $@, with $@ N \rightarrow \infty $@. Provided $@ N $@ is sufficiently large and $@ 0 \leq \phi < \psi \leq 1$@, we have the approximate formula:
 
 $$ g(N\phi+1, N(1-\phi)+1, N\psi+1, N(1-\psi)+1) = \frac{ 2 B( N(\phi+\psi) + 2, N(2-\phi-\psi)+2) } { B(N\phi-1, N(1-\phi)-1) B(N\psi-1, N(1-\psi)-1) N(\psi-\phi) } \left(1 + O(N^{-1}) \right)$$
 
@@ -36,11 +36,29 @@ by
 
 $$ \frac{ 2 B( N(\phi+\psi) + 2, N(2-\phi-\psi)+2) } { B(N\phi-1, N(1-\phi)-1) B(N\psi-1, N(1-\psi)-1) N(\psi-\phi) }. $$
 
-Then the error (expressed as a percentage of the true value) will decay at the rate $@ O(1/N) $@. This can be quantified more precisely, but I'll leave that to a later blog post.
+Then the error (expressed as a percentage of the true value) will decay at the rate $@ O(1/N) $@. This can be quantified more precisely, but I don't feel like computing error bounds right now.
 
-Anyone who isn't interested in the mathematical details should stop reading now.
+If we graph the relative error (namely $@ (\textrm{asymptotic} / \textrm{exact} - 1) $@), we observe the expected behavior:
+
+![graph of asymptotic error](/blog_media/2014/bayesian_asymptotics/asymptotic_errors.png)
+
+The graph was generated with the following [Julia script](https://gist.github.com/stucchio/1a0abf880eb332175c02).
+
+## Problems with this method
+
+One flaw with the method described here is that it insists both variants of the A/B test be displayed to the *exact* same number of users. It is my belief that this assumption can be relaxed. We would instead take the scaling law:
+
+$$ a-1=N\phi, b-1=N(1-\phi) $$
+
+$$ c-1=\alpha N\psi, d-1=\alpha N(1-\psi) $$
+
+Here $@ \alpha \approx 1 $@, meaning that the two variations no longer need to have the *exact* same number of users.
+
+**Conjecture:** The method described here can be made to work with this scaling, and the only result will be minor changes in the formula, of the form $@ \psi \mapsto \alpha \psi $@ and $@ (2-\phi-\psi) \mapsto 1+\alpha-\phi-\alpha\psi $@.
 
 # Here comes the math
+
+For any reader unfamiliar with Laplace's method and asymptotic analysis, you can read this [free pdf](http://www.pas.rochester.edu/~rajeev/phy493/AsymptoticMethods.pdf) on the topic. The classic (but expensive) textbook is [Asymptotics and Special Functions](http://www.amazon.com/gp/product/1568810695/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1568810695&linkCode=as2&tag=christuc-20&linkId=2PHYJMUHXP65N6M7) by Olver.
 
 Define $@ C = C(a,b,c,d) \equiv [ B(a,b) B(c,d) ]^{-1} $@ to simplify the notation.
 
@@ -96,6 +114,11 @@ We can now plug this formula into the definition of $@ g( N\phi, N(1-\phi), N\ps
 
 $$ 2 C \int_0^{1} \int_0^{\min(v,1-v)}  \exp \left[N \left(\phi \ln(u+v) + (1-\phi)\ln(1-u-v) + \psi \ln(v-u) + (1-\psi) \ln (1-v+u) \right) \right] du dv $$
 $$ = 2 C \int_0^{1} \frac{ v^{N(\phi+\psi) + 1} (1-v)^{N(2-\phi-\psi)+1} }{N(\psi-\phi)} \left(1 + O(N^{-1}) \right) dv $$
+
+The reader will observe that this integral is the definition of the Beta function.
+
 $$ = \frac{ 2 B( N(\phi+\psi) + 2, N(2-\phi-\psi)+2) } { B(N\phi-1, N(1-\phi)-1) B(N\psi-1, N(1-\psi)-1) N(\psi-\phi) } \left(1 + O(N^{-1}) \right) $$
 
 This is what we wanted to show.
+
+In principle higher order terms can also be computed, but that seems unnecessary at this point.
