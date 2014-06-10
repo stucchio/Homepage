@@ -35,13 +35,13 @@ The values which represent the model are called *parameters*. In the interests o
 type Param = (Float64, Float64)
 ```
 
-# Step 2: A *prior* belief about the world
+# Step 2: A *prior* opinion
 
 Before a test begins, we must have some *opinion* about what the world looks like. This opinion is represented by a probability distribution on possible states of the world. In mathematical terms this is a function $@ f_{prior}(\theta) $@ with the property that:
 
 $$ \int f_{prior}(\theta) d\theta = 1. $$
 
-For the example of conversion rates above, one possible choice is $@ f_{prior}(\theta) = 1 $@.
+For the example of conversion rates above, one possible choice is $@ f_{prior}(\theta) = 1 $@. This represents the opinion that all conversion rates are equally likely.
 
 In programming terms, you can also think of a probability distribution as being a function together with a discrete set of possible values.:
 
@@ -68,15 +68,10 @@ The function `f` might then be:
 
 ```julia
 function f(x)
-  if (x == 0.0)
-     return 0.5
-  if (x == 0.23)
-     return 0.5
-  end
-  return 0.0
+  return 1.0 / 100.0
 end
 ```
 
-This represents the belief that there is a 50% chance of a click through rate being 0% and a 50% chance the click through rate is 23%.
+This again represents the opinion that all conversion rates are equally likely. The reason we divide by `100` is that our grid `parameterChoices` has `100` elements.
 
-# Step 3: Data
+# Step 3: Evidence and how to change your opinion
