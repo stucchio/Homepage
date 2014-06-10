@@ -80,6 +80,7 @@ if __name__=="__main__":
             os.unlink('content/media/meta.yaml')
         except OSError:
             pass
+    shutil.copyfile("../content/favicon.ico", "content/media/favicon.ico")
 
     for (dir, arg, filenames) in os.walk("../content/blog/"):
         for filename in filenames:
