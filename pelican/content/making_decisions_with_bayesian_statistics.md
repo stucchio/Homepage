@@ -74,4 +74,42 @@ end
 
 This again represents the opinion that all conversion rates are equally likely. The reason we divide by `100` is that our grid `parameterChoices` has `100` elements.
 
+The programming formulation is not identical to the mathematical formulation, but it's similar enough that you won't make too many mistakes.
+
 # Step 3: Evidence and how to change your opinion
+
+Now suppose we've run an experiment. An experiment consists of making observations about the world. A key point in an experiment is that the probability of these observations being made is different for different parameter choices.
+
+Consider the conversion rate example above. Suppose we display call to action A to two users, and both of them click. The probability of this occurring is $@ p_a^2 $@ - this value changes depending on $@ p_a $@. You can then compute a *posterior* probability using Bayes rule:
+
+$$ P(\theta|\textrm{evidence}) = \frac { P(\textrm{evidence} | \theta) P(\theta) } { P(\textrm{evidence}) } $$
+
+The value $@ P(\textrm{evidence} | \textrm{Param}) $@ is determined simply by the model you specified in step 1. The value $@ P(\textrm{Param}) $@ is your prior. The value $@ P(\textrm{evidence}) $@ can be computed via the integral:
+
+$$ P(\textrm{evidence}) = \int P(\textrm{evidence} | \theta) P(\theta) d \theta $$
+
+In programming terms, we do the following:
+
+```julia
+function posterior(evidence, prior)
+    normalization = 0.0
+
+    for i = 1:prior.parameterChoices.length
+      normalization += prior.f(prior.parameterChoices[i]) * probability_of_evidence_given_param(evidence, prior.parameterChoices[i])
+    end
+
+    function g(x)
+      return f(x) * probability_of_evidence_given_param(evidence, x) / normalization
+    end
+
+    return ProbabilityDistribution(prior.parameterChoices, g)
+end
+```
+
+The function `probability_of_evidence_given_param(evidence, x)` comes from your model. For example, in the case of conversion rates:
+
+$$ P(\textrm{evidence} | \theta) = \theta^{c}(1-\theta)^{n-c} $$
+
+    function probability_of_evidence_given_param(num_conversions, num_shows, x)
+      return (x^num_conversions) * ((1-x)^(num_shows-num_conversions))
+    end
