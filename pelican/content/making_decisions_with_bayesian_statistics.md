@@ -110,6 +110,25 @@ The function `probability_of_evidence_given_param(evidence, x)` comes from your 
 
 $$ P(\textrm{evidence} | \theta) = \theta^{c}(1-\theta)^{n-c} $$
 
-    function probability_of_evidence_given_param(num_conversions, num_shows, x)
-      return (x^num_conversions) * ((1-x)^(num_shows-num_conversions))
-    end
+```julia
+function probability_of_evidence_given_param(num_conversions, num_shows, x)
+  return (x^num_conversions) * ((1-x)^(num_shows-num_conversions))
+end
+```
+
+# Step 4: Cut your losses
+
+At this point we need to introduce a *loss function*. A loss function is a function $@ L(\theta, D) $@ which represents how much you will lose by making decision $@ D $@ if the true value of the parameter were $@ \theta $@.
+
+Lets make this very clear by going back to our example of choosing conversion rates. In this example, $@ \theta = (p_a, p_b) $@. If we make the wrong decision, say choosing B when the better version was A, our loss will be $@ p_a - p_b $@.
+
+$$ L( (p_a, p_b), \textrm{choose A}) = \max \left( p_b - p_a, 0 \right) $$
+$$ L( (p_a, p_b), \textrm{choose B}) = \max \left( p_a - p_b, 0 \right) $$
+
+What this means is that if we choose A, and $@ p_b > p_a$@, then we've made a mistake. As a result of our mistake, we lose an amount proportional to the conversions we failed to gain.  However, if $@ p_a > p_b$@, we lose nothing. The same applies if we choose B, but in reverse.
+
+Now the loss function gives the loss for a fixed value of $@ \theta $@, but what we really want is the *expected loss*. This is computed with the help of the posterior:
+
+$$ L(D) = \int L( \theta, D) P(\theta | \textrm{evidence}) d\theta $$
+
+**Your mission:** Come up with a strategy, based on the evidence, which computes a decision to minimize the expected loss.
