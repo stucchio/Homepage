@@ -3,6 +3,7 @@ date: 2014-06-25 12:00
 author: Chris Stucchio
 nolinkback: true
 
+Great blog post [showing the difference between confidence and credible intervals](http://jakevdp.github.io/blog/2014/06/12/frequentism-and-bayesianism-3-confidence-credibility/).
 
 [Get the Science out of your Yogurt](http://pipeline.corante.com/archives/2014/06/05/get_the_science_out_of_your_yogurt.php?utm_source=stucchio)
 
@@ -19,6 +20,8 @@ Jayman on the [Hajnal line](https://hbdchick.wordpress.com/2014/03/10/big-summar
 Welfare economics [part 1](http://www.interfluidity.com/v2/5149.html)[part 2](http://www.interfluidity.com/v2/5212.html) [part 3](http://www.interfluidity.com/v2/5302.html).
 
 A great infographic on [what technique you should use](http://i.imgur.com/twr2j8Y.png).
+
+[The Hunsader Follies](http://zacharydavid.com/bad-research/the-hunsader-follies/)
 
 Reasons why I'm glad I'm not in the US:
 
