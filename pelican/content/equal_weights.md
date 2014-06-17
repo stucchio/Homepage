@@ -101,9 +101,14 @@ Intuitively, what is happening here is that the vector $@ \vec{x} $@ is pointing
 
 ## Normally distributed feature vectors
 
-Suppose for simplicity that the vectors $@ \vec{x} $@ satisfy $@ \vec{x}_i \sim N(0,2^{-1/2}) $@. Define $@ \vec{d} = \vec{x} - \vec{y} $@, and note that $@ \vec{d}_i \sim N(0,1) $@. This is an unrealistic assumption, but one which is mathematically tractable. We want to show that:
+Suppose for simplicity that the feature vectors $@ \vec{x}, \vec{y} $@ satisfy $@ \vec{x}_i \sim N(0,2^{-1/2}) $@. Define $@ \vec{d} = \vec{x} - \vec{y} $@, and note that $@ \vec{d}_i \sim N(0,1) $@. This is an unrealistic assumption, but one which is mathematically tractable. We want to compute the probability:
 
-$$ P( \vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0 ) \rightarrow 1/4 $$
+$$ P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) \textrm{ or } (\vec{h} \cdot \vec{d} < 0 \textrm{ and } \vec{u} \cdot \vec{d} > 0) ) $$
+$$ = 2 P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) ). $$
+
+For simplicity, we will attempt to compute the latter quantity.
+
+### How accurately does $@ \vec{u} $@ approximate $@ \vec{h} $@?
 
 Define $@ \vec{h} = \vec{u} + \vec{p} $@ where $@ \vec{p} \cdot \vec{u} = 0 $@. Then:
 
@@ -121,8 +126,28 @@ where $@ N $@ is the dimension of the problem. Similarly:
 
 $$ \vec{p} \cdot \vec{d} \sim N\left(0, \sum \vec{p}_i^2 \right) $$
 
-Due to the orthogonality of $@ \vec{u} $@ and $@ \vec{p} $@, the quantities $@ \vec{u} \cdot \vec{d} $@ and $@ \vec{p} \cdot \vec{d} $@ are independent. (This is why we assumed the feature vectors were normal.)
+Due to the orthogonality of $@ \vec{u} $@ and $@ \vec{p} $@, the quantities $@ \vec{u} \cdot \vec{d} $@ and $@ \vec{p} \cdot \vec{d} $@ are independent.
 
-The size of $@ \sum \vec{p}_i^2 $@ can be bounded by noting that the $@ \vec{p} $@ is the difference of $@ \vec{u} $@ and another vector in the unit simplex. The extremal points in the unit simplex are the unit vectors. Thus:
+**Note:** This is why we assumed the feature vectors were normal - showing statistical independence in the case of binary vectors is harder. A possibly easier test case than binary vectors would be random vectors chosen uniformly from the unit ball in $@ l^\infty $@, aka vectors for which  $@ \max_i |\vec{x}_i| < 1$@.
 
-$$ | \vec{p} |^2 \leq | \vec{e}_1 - \vec{u} |^2 = \frac{N-1}{N} $$
+We've now reduced the problem to simple calculus. Define $@ \sigma_u^2 = N^{-1} $@ and $@ \sigma_p^2 = \sum \vec{p}_i^2 $@. Let $@ v = \vec{u} \cdot \vec{d} $@ and $@ w = \vec{p} \cdot \vec{d} $@. Then:
+
+$$ P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) ) = \int_{-\infty}^0 \int_{-v}^{\infty} C \exp\left(\frac{-v^2}{2\sigma_u^2} + \frac{-w^2}{2\sigma_p^2} \right) dw dv $$
+
+Changing variables to $@ v = r \sigma_u \cos(\theta) $@, $@ w = r \sigma_p \sin(\theta) $@. Then:
+
+$$ \int_{-\infty}^0 \int_{-v}^{\infty} C \exp\left(\frac{-v^2}{2\sigma_u^2} + \frac{-w^2}{2\sigma_p^2} \right) dw dv = \int_{\theta_0}^{\pi/2} \int_0^\infty C' e^{-r^2} r dr d\theta = \frac{\theta_0-\pi/2}{2\pi}$$
+
+Here $@ \theta_0 = \textrm{arccot}(\sigma_u/\sigma_p) $@, so:
+
+$$ P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) ) = \frac{ \pi/2 - \textrm{arccot}(\sigma_p/\sigma_u)}{2\pi} = \frac{ \arctan(\sigma_p/\sigma_u)}{2\pi} = \frac{ \arctan(\sqrt{N} \sigma_p)}{2\pi} $$
+
+### Worse case analysis
+
+The worst case to consider is when $@ \vec{h}$@ is one of the corners of the unit simplex - e.g. $@ \vec{h} = [1,0,\ldots,0] $@. In this case:
+
+$$ | \vec{p} |^2 = |\vec{h}-\vec{u}|^2 - = \frac{N-1}{N} = \sigma_p^2 $$
+
+So $@ \sigma_p = \sqrt{(N-1)/N} $@ while $@ \sigma_u = 1/\sqrt{N} $@, and $@ \textrm{arccot}( -1/\sqrt{N-1} ) \rightarrow \pi $@ as $@ N \rightarrow \infty $@. This implies:
+
+$$ P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) ) = \frac{ \arctan(\sqrt{N-1})}{2\pi} \rightarrow \frac{1}{4} $$

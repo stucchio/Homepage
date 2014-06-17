@@ -1,29 +1,29 @@
 from pylab import *
-from numpy.random import dirichlet, rand
+from numpy.random import dirichlet, rand, binomial, uniform
 
 def _unit_weight(dim):
     return ones(dim) / float(dim)
 
-ONE_FRAC = 0.1
-def _feature_vec(dim, storage = None):
-    result = rand(dim)
-    result[where(result > ONE_FRAC)] = 1.0
-    result[where(result <= ONE_FRAC)] = 0.0
-    return result
+ONE_FRAC = 0.5
+def _feature_vec(dim):
+    return binomial(1, ONE_FRAC, size=dim)
+    #return uniform(0,1,dim)
 
 def test_ranking(dim, nsamples=10000, h = None):
     u = _unit_weight(dim)
     if h is None:
-        h = dirichlet(ones(dim))
+        #h = dirichlet(ones(dim))
+        h = zeros(dim)
+        h[0] = 1.0
 
     diff_count = 0
     zero_count = 0
-    for i in range(nsamples):
-        v = _feature_vec(dim)
-        w = _feature_vec(dim)
 
-        u_delta = dot(u, v-w)
-        h_delta = dot(h, v-w)
+    for i in range(nsamples):
+        v_minus_w =  _feature_vec(dim) - _feature_vec(dim)
+
+        u_delta = dot(u, v_minus_w)
+        h_delta = dot(h, v_minus_w)
         if (sign(u_delta * h_delta) < 0):
             diff_count += 1
         if u_delta == 0:
@@ -48,7 +48,7 @@ if __name__=="__main__":
         m[n], s[n], um[n], us[n] = ranking(n)
         print "Up to " + str(n) + " dimensions"
     plot(d, m)
-    plot(d, um)
+#    plot(d, um)
 
     xlabel("number of dimensions")
     ylabel("Error fraction")
