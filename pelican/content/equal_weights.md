@@ -168,7 +168,7 @@ $$ \int P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) 
 $$ \leq \frac{ \arctan( \sqrt{N} \sqrt{ \int | \vec{h} - \vec{u}|^2 d\vec{h} } ) }{2\pi} = \frac{ \arctan( \sqrt{N} \sqrt{ (N-1)/(N(N+1)) } ) }{2\pi} $$
 $$ = \frac{ \arctan( \sqrt{ (N-1)/(N+1) } ) }{2\pi} $$
 
-The inequality follows from [Jensen's Inequality](http://en.wikipedia.org/wiki/Jensen's_inequality), noting that $@ \cdot \mapsto \arctan(\sqrt{N} \sqrt{\cdot}) $@ is a concave function.
+The inequality follows from [Jensen's Inequality](http://en.wikipedia.org/wiki/Jensen's_inequality) since $@ z \mapsto \arctan(\sqrt{N} \sqrt{z}) $@ is a concave function.
 
 For large $@ N $@ this quantity approaches $@ \arctan(1) / 2 \pi = (\pi/4) / (2\pi) = 1/8 $@.
 
