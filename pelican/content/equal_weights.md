@@ -128,7 +128,7 @@ $$ \vec{p} \cdot \vec{d} \sim N\left(0, \sum \vec{p}_i^2 \right) $$
 
 Due to the orthogonality of $@ \vec{u} $@ and $@ \vec{p} $@, the quantities $@ \vec{u} \cdot \vec{d} $@ and $@ \vec{p} \cdot \vec{d} $@ are independent.
 
-**Note:** This is why we assumed the feature vectors were normal - showing statistical independence in the case of binary vectors is harder. A possibly easier test case than binary vectors would be random vectors chosen uniformly from the unit ball in $@ l^\infty $@, aka vectors for which  $@ \max_i |\vec{x}_i| < 1$@.
+**Note:** Obtaining this statistical independence is why we needed to assume the feature vectors were normal - showing statistical independence in the case of binary vectors is harder. A potentially easier test case than binary vectors might be random vectors chosen uniformly from the unit ball in $@ l^\infty $@, aka vectors for which  $@ \max_i |\vec{x}_i| < 1$@.
 
 We've now reduced the problem to simple calculus. Define $@ \sigma_u^2 = N^{-1} $@ and $@ \sigma_p^2 = \sum \vec{p}_i^2 $@. Let $@ v = \vec{u} \cdot \vec{d} $@ and $@ w = \vec{p} \cdot \vec{d} $@. Then:
 
@@ -172,8 +172,10 @@ The inequality follows from [Jensen's Inequality](http://en.wikipedia.org/wiki/J
 
 For large $@ N $@ this quantity approaches $@ \arctan(1) / 2 \pi = (\pi/4) / (2\pi) = 1/8 $@.
 
-Thus, we have shown that the average error-rate of unit-weighted regression is bounded above by $@ 1/4 $@. A monte carlo simulation confirms that the theoretical bound appears correct:
+Thus, we have shown that the average error-rate of unit-weighted regression is bounded above by $@ 1/4 $@. A monte carlo simulation confirms that the theoretical bound appears correct. It also shows that treating feature vectors as Gaussian rather than Boolean vectors appears to be a reasonable approximation to the problem - if anything it introduces extra error.
 
 ![average case, theory vs practice](/blog_media/2014/equal_weights/theory_vs_practice.png)
 
 Code to produce the graph [is available on github](https://gist.github.com/stucchio/142620be989dcf2767bc).
+
+**Note:** The reason the Bernoulli feature vectors appear to have lower error than the Gaussian feature vectors for small N appears to be caused by the fact that for small N, there is a significant possibility that a feature vector might be 0 in the important components. The net result of this is that $@ \vec{h} \cdot (\vec{x} - \vec{y}) = 0 $@ fairly often, meaning that many vectors have equal rank. This effect becomes improbable as more features are introduced.
