@@ -151,3 +151,29 @@ $$ | \vec{p} |^2 = |\vec{h}-\vec{u}|^2 - = \frac{N-1}{N} = \sigma_p^2 $$
 So $@ \sigma_p = \sqrt{(N-1)/N} $@ while $@ \sigma_u = 1/\sqrt{N} $@, and $@ \textrm{arccot}( -1/\sqrt{N-1} ) \rightarrow \pi $@ as $@ N \rightarrow \infty $@. This implies:
 
 $$ P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) ) = \frac{ \arctan(\sqrt{N-1})}{2\pi} \rightarrow \frac{1}{4} $$
+
+This means that in the worst case, unit-weighted regression is no better than chance.
+
+### Average case analysis
+
+Let us now consider the *average* case over all vectors $@ \vec{h} $@. To handle this case, we must impose a probability distribution on such vectors. The natural distribution to consider is the uniform distribution on the unit-simplex, which is equivalent to a [Dirichlet](http://en.wikipedia.org/wiki/Dirichlet_distribution) distribution with $@ \alpha_1 = \alpha_2 = \ldots = \alpha_N = 1 $@.
+
+So what we want to compute is:
+
+$$ E[P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) )] = \int P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) ) d\vec{h} $$
+
+This can be bounded above as follows, noting that $@ \sigma_p = \sqrt{| \vec{h} - \vec{u}|^2} $@:
+
+$$ \int P( (\vec{h} \cdot \vec{d} > 0 \textrm{ and } \vec{u} \cdot \vec{d} < 0) ) d\vec{h} = \int \frac{ \arctan(\sqrt{N} \sqrt{| \vec{h} - \vec{u}|^2})}{2\pi} d\vec{h} $$
+$$ \leq \frac{ \arctan( \sqrt{N} \sqrt{ \int | \vec{h} - \vec{u}|^2 d\vec{h} } ) }{2\pi} = \frac{ \arctan( \sqrt{N} \sqrt{ (N-1)/(N(N+1)) } ) }{2\pi} $$
+$$ = \frac{ \arctan( \sqrt{ (N-1)/(N+1) } ) }{2\pi} $$
+
+The inequality follows from [Jensen's Inequality](http://en.wikipedia.org/wiki/Jensen's_inequality), noting that $@ \cdot \mapsto \arctan(\sqrt{N} \sqrt{\cdot}) $@ is a concave function.
+
+For large $@ N $@ this quantity approaches $@ \arctan(1) / 2 \pi = (\pi/4) / (2\pi) = 1/8 $@.
+
+Thus, we have shown that the average error-rate of unit-weighted regression is bounded above by $@ 1/4 $@. A monte carlo simulation confirms that the theoretical bound appears correct:
+
+![average case, theory vs practice](/blog_media/2014/equal_weights/theory_vs_practice.png)
+
+Code to produce the graph [is available on github](https://gist.github.com/stucchio/142620be989dcf2767bc).
