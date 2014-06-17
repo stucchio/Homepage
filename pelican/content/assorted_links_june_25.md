@@ -21,6 +21,10 @@ Welfare economics [part 1](http://www.interfluidity.com/v2/5149.html)[part 2](ht
 
 A great infographic on [what technique you should use](http://i.imgur.com/twr2j8Y.png).
 
+![what technique to use](http://i.imgur.com/twr2j8Y.png)
+
+A critique of [Critical Theory](http://argumentativerags.blogspot.in/2014/06/philosophy-to-rescue-credo-or-something.html).
+
 [The Hunsader Follies](http://zacharydavid.com/bad-research/the-hunsader-follies/)
 
 Reasons why I'm glad I'm not in the US:
