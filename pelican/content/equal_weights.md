@@ -27,11 +27,7 @@ If a woman posesses the characteristic under discussion, a +1 is assigned to the
 <tr><td>Lets me work</td><td>0</td><td>0</td></tr>
 </table>
 
-
-
 Unit-weighted regression consists of taking the values in each column and adding them up. Each value is either zero or one. The net result is that $@ f(\textrm{Elise}) = 4 $@ and $@ f(\textrm{Svetlana}) = 3 $@. Elise it is!
-
-(The names and characteristics of the women in question are of course obfuscated.)
 
 # Pro/Con lists are easy
 
