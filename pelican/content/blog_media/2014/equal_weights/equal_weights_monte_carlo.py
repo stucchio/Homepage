@@ -51,11 +51,11 @@ if __name__=="__main__":
         gaussian[n] = ranking(n, feature_method="gaussian")[0]
         print "Up to " + str(n) + " dimensions"
     plot(d, bernoulli, label="Bernoulli")
-    plot(d, gaussian, label="Gaussian")
-    plot(d, 2*arctan(sqrt((d-1)/(d+1)))/(2*pi), label="theoretical gaussian bound")
+#    plot(d, gaussian, label="Gaussian")
+#    plot(d, 2*arctan(sqrt((d-1)/(d+1)))/(2*pi), label="theoretical gaussian bound")
 #    plot(d, um)
 
     xlabel("number of dimensions")
     ylabel("Error fraction")
-    legend()
+#    legend()
     show()

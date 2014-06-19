@@ -4,11 +4,17 @@ author: Chris Stucchio
 tags: linear regression, regression, statistics, unit-weighted regression
 mathjax: true
 
-I'm currently dating two lovely women - I'll describe them by the pseudonyms Svetlana and Elise. Unfortunately they are both growing attached to me, so the time has come for me to make a choice between them. In order to make such a choice, I wish to construct an approximation to my long term happiness - a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness with a given choice. I can then compute $@ f(\textrm{Svetlana}) $@ and $@ f(\textrm{Elise}) $@ and choose whichever one is larger - if my approximation is well chosen I will make the *utility* maximizing choice most of the time.
+I'm currently dating two lovely women, Svetlana and Elise. Unfortunately continuing to date both of them is unsustainable so I must choose one. In order to make such a choice, I wish to construct an approximation to my long term happiness - a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness with a given choice. I can then compute $@ f(\textrm{Svetlana}) $@ and $@ f(\textrm{Elise}) $@ and choose whichever one is larger - if my approximation is well chosen I will make the *utility* maximizing choice most of the time.
 
 In statistics we have many techniques for computing such a function, [linear regression](http://en.wikipedia.org/wiki/Linear_regression) being a simple example. Unfortunately, linear regression is relatively useless to me in this case - linear regression requires a considerable number of samples, and I have not dated sufficiently many women nor kept careful records of my happiness.
 
-Instead, I'm going to discuss a much simpler predictor, first described in [1772 by Benjamin Franklin](http://www.procon.org/view.background-resource.php?resourceID=1474). The mathematical name for it is [unit weighted regression](http://en.wikipedia.org/wiki/Unit-weighted_regression), and the practical name for it is a list of pros and cons:
+Instead, I'm going to discuss a much simpler method of making decisions, described in [1772 by Benjamin Franklin](http://www.procon.org/view.background-resource.php?resourceID=1474):
+
+> ...my Way is, to divide half a Sheet of Paper by a Line into two Columns, writing over the one Pro, and over the other Con. Then...I put down under the different Heads short Hints of the different Motives...I find at length where the Ballance lies...I come to a Determination accordingly.
+
+The mathematical name for it is [unit weighted regression](http://en.wikipedia.org/wiki/Unit-weighted_regression). I present the method in a slightly different format - in each column a different choice is listed. Each row represents a characteristic, all of which are pros. A con is transformed into a pro by negation - rather than treating "disturbs my work" as a con, I treat "Lets me work" as a pro.
+
+If a woman posesses the characteristic under discussion, a +1 is assigned to the relevant row/column, otherwise 0 is assigned:
 
 <table>
 <tr><th>Characteristic</th><th>Elise</th><th>Svetlana</th></tr>
@@ -23,17 +29,57 @@ Instead, I'm going to discuss a much simpler predictor, first described in [1772
 
 
 
-Technically that's only a list of pros - I'm treating the negation of a Con as a Pro.
-
 Unit-weighted regression consists of taking the values in each column and adding them up. Each value is either zero or one. The net result is that $@ f(\textrm{Elise}) = 4 $@ and $@ f(\textrm{Svetlana}) = 3 $@. Elise it is!
 
-# Unit-weighted regression is easy
+(The names and characteristics of the women in question are of course obfuscated.)
 
-One of the clearest benefits of unit-weighted regression is how easy it is for an expert to formulate a model. As an expert in my own personal choices, I am confident that I enjoy women from Africa more than women from Eastern Europe, intelligent women more than stupid ones, and that I enjoy being allowed to work without interruption. I am not confident I can apply proper weights to these facts, but I am confident they are all positive and significant.
+# Pro/Con lists are easy
 
-Another important benefit is that unit weighted regression has far fewer degrees of freedom than most other regression models. The only relevant choice when building a unit-weighted regression model is what values to include and what sign to include them with. The general rule of thumb is that if a variable's sign is questionable it should be excluded from the model.
+A pro/con list is one of the simplest ranking algorithms you can construct. The mathematical sophistication required is grade school arithmetic and it's so easy to program that even a RoR hipster could do it. As a result, you should not hesitate to implement a pro/con list for decision processes.
 
-An obvious question is why I would use *unit* weighted regression rather than *linear* regression - perhaps fitting a least squares model to available data. The reason for that is simply sample size. Consider the example above - I have not dated sufficiently many women to robustly fit a 7-dimensional linear model to the available data. Additionally, I have not kept sufficiently accurate records even with this smaller sample size.
+The key factor in the success of unit-weighted regression is feature selection. The rule of thumb here is very simple - choose features which you have good reason to believe are strongly predictive of the quantity you wish to rank. Such features can usually be determined without a lot of data - typically a combination of expert opinion and easy correlations are sufficient. For example, I do not need a large amount of data to determine that I consider "not fat" to be a positive predictor of my happiness with a woman.
+
+Conversely, if the predictiveness of a feature is not clear, it should not be used.
+
+## Linear regression is hard
+
+An obvious question the reader might ask is why I would ever use unit-weighted regression, as opposed to the more general *linear* regression predictor. Linear regression is a lot like a pro/con list, except that the weight of each feature is allowed to vary. In mathematical terms, we represent each possible choice as a binary vector - for example:
+
+$$ \vec{\textrm{Elise}} = [ 0, 1, 1, 0, 1, 1, 0] $$
+
+Then the predictor function uses a set of weights which can take on values other than $@ +1 $@:
+
+$$ f(\vec{x}) = \sum_i h_i x_i $$
+
+The individual weights $@ f_i $@ represent how important each variable is. For example, "Smart" might receive a weight of +3.3, "Not fat" a weight of +3.1 and "Black" a weight of +0.9.
+
+The weights can be determined with a reasonable degree of accuracy by taking past data and choosing the weights which minimize the difference between the "true" value and the approximate value - this is what [least squares](http://en.wikipedia.org/wiki/Least_squares) does.
+
+Fitting a linear model only works when you have sufficient data. To robustly fit a linear model, you'll need tens to hundreds of data points *per feature*. If you have too few data points, you run into a real danger of overfitting - building a model which accurately memorizes the past, but fails to predict the future. You can even run into this problem if you have lots of data points, but those data points don't represent all the features in question.
+
+It also requires more mathematical and programming sophistication to build.
+
+In principle fitting a linear model to the data is the right way to go. After all, in real life, some factors are 3x or 10x more important than others. But in practice, it can be difficult to do it right.
+
+# How well does it work?
+
+This is where things get interesting. It turns out that Pro/Con list is at least 75% as good as a linear regression model.
+
+Suppose we've done linear regression and found linear regression coefficients $@ \vec{h} $@. Suppose instead of using the vector $@ \vec{h} $@, we instead used the vector of unit weights, $@ \vec{u} = [ 1/N, 1/N, \ldots, 1/N] $@. Here $@ N $@ is the number of features in the model.
+
+An error is made whenever the pro/con list and linear regression rank two vectors differently - i.e., linear regression says "choose Elise" while the pro/con list says "choose Svetlana". The *error rate* of the pro/con list is the probability of making an error given two random *feature vectors* $@ \vec{x} $@ and $@ \vec{y} $@, i.e.:
+
+$$ \textrm{error rate} = P( \textrm{sign}( [\vec{h} \cdot (\vec{x} - \vec{y})] [\vec{u} \cdot (\vec{x} - \vec{y})] ) < 0 ) $$
+
+It turns out that if you average it out over all vectors $@ \vec{h} $@, the error rate is bounded by 1/4. There are of course vectors $@ \vec{h} $@ for which the error rate is higher, and others for which it is lower. But on average, the error rate is bounded by 1/4.
+
+In this sense, the pro/con list is 75% as good as linear regression.
+
+We can confirm this fact by computer simulation - generating a random ensemble of vectors $@ \vec{h} $@, and then measuring how accurately unit-weighted regression agrees with it. The result:
+
+![distribution of errors](/blog_media/2014/equal_weights/equal_weight_ranking_errors.png)
+
+[Code is available](https://gist.github.com/stucchio/f5d0455fa58a4c733eba).
 
 # A simple model of regression
 
