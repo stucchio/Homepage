@@ -19,20 +19,20 @@ Jayman on the [Hajnal line](https://hbdchick.wordpress.com/2014/03/10/big-summar
 
 Welfare economics [part 1](http://www.interfluidity.com/v2/5149.html)[part 2](http://www.interfluidity.com/v2/5212.html) [part 3](http://www.interfluidity.com/v2/5302.html).
 
-A great infographic on [what technique you should use](http://i.imgur.com/twr2j8Y.png).
+A great infographic on [what technique you should use](http://i.imgur.com/twr2j8Y.png):
 
 ![what technique to use](http://i.imgur.com/twr2j8Y.png)
+
+Data on [all NYC taxi rides](http://chriswhong.com/open-data/foil_nyc_taxi/).
 
 A critique of [Critical Theory](http://argumentativerags.blogspot.in/2014/06/philosophy-to-rescue-credo-or-something.html).
 
 [The Hunsader Follies](http://zacharydavid.com/bad-research/the-hunsader-follies/)
 
-Reasons why I'm glad I'm not in the US:
-
-![not a hipster](http://i.imgur.com/Cp0cqf7.jpg)
-
 Architecture: [Con/Struct](http://www.justinplunkett.com/construct?utm_source=stucchio&utm_medium=bloglink) via [Colossal](http://www.thisiscolossal.com/2014/06/construct-the-fictional-urban-architecture-of-justin-plunkett/?utm_source=stucchio). [Stanley Kubrick's Interiors](http://www.archdaily.com/514027/interiors-stanley-kubrick/?utm_source=chrisstucchio&utm_medium=bloglink) and the [Domino Sugar Factory](http://www.archdaily.com/514373/in-images-the-domino-sugar-factory-s-beautiful-decline/?utm_source=chrisstucchio&utm_medium=bloglink) on archdaily.
 
 [Good Badlands](http://www.thisiscolossal.com/2014/06/good-badlands-guy-tal/?utm_source=chrisstucchio&utm_medium=bloglink)
 
-Some clever programmer makes [subtle](http://www.modelviewculture.com/pieces/the-newest-frontier) [parody](http://www.modelviewculture.com/pieces/how-perks-can-divide-us). The [twitter feed](https://twitter.com/shanley) gives away the joke.
+[The internet is not a safe space](http://reason.com/blog/2014/06/18/the-internet-is-not-a-safe-space). Two related questions. First, was it "violence" when journalists quoted Pax Dickinson's tweets without permission? Second, has the US gone completely insane since I left?
+
+Some clever brogrammer makes [subtle](http://www.modelviewculture.com/pieces/the-newest-frontier) [parody](http://www.modelviewculture.com/pieces/how-perks-can-divide-us). The [twitter feed](https://twitter.com/shanley) gives away the joke.
