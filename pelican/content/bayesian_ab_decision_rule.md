@@ -28,7 +28,9 @@ $$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} d
 
 In the [original blog post](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html), the integral is calculated numerically. However, it turns out we can compute it exactly using the following formula. Define first the function:
 
-$$ g(a,b,c,d) = \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } $$
+$$ h(a,b,c,d) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } $$
+
+Note that $@ h(a,b,c,d) = P(X > Y) $@ where $@ X \sim \beta(a,b) $@ and $@ Y \sim \beta(c,d) $@.
 
 Then:
 
@@ -48,7 +50,7 @@ $$ P(X > y) = \int_{0}^{1} \int_{y}^{1} \frac{x^{a}(1-x)^{b}}{B(a,b)} \frac{y^{c
 
 Evan Miller computed the integral and came up with a closed form solution for it:
 
-$$ P(X > Y) = \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } \equiv g(a,b,c,d) $$
+$$ P(X > Y) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } \equiv h(a,b,c,d) $$
 
 ## Computing the loss function
 
@@ -61,6 +63,6 @@ We then multiply by $@ B(c+1,d)/B(c+1,d)$@ and $@ B(a+1,b)/B(a+1,b)$@ and do sim
 
 $$ \frac{B(c+1,d)}{B(c+1,d)} \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c,d)} dx dy - \frac{B(a+1,b)}{B(a+1,b)} \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy = $$
 $$ \frac{B(c+1,d)}{B(c,d)} \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c+1,d)} dx dy - \frac{B(a+1,b)}{B(a,b)} \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a+1,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy = $$
-$$ \frac{B(c+1,d)}{B(c,d)} g(a,b,c+1,d) - \frac{B(a+1,b)}{B(a,b)} g(a+1,b,c,d) $$
+$$ \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) - \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) $$
 
 This is what we wanted to show.
