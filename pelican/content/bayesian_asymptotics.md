@@ -120,4 +120,4 @@ $$ = \frac{ 2 B( N(\phi+\psi) + 2, N(2-\phi-\psi)+2) } { B(N\phi-1, N(1-\phi)-1)
 
 This is what we wanted to show.
 
-In principle higher order terms can also be computed, but that seems unnecessary at this point.
+In principle higher order terms can also be computed, but that seems unnecessary at this point. I believe the approach in section 3 of [Asymptotic Inversion of the Incopmlete Beta Function](http://oai.cwi.nl/oai/asset/2294/2294A.pdf) may also be useful.
