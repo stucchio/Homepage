@@ -5,6 +5,8 @@ nolinkback: true
 
 Great blog post [showing the difference between confidence and credible intervals](http://jakevdp.github.io/blog/2014/06/12/frequentism-and-bayesianism-3-confidence-credibility/).
 
+[The Safyness of Static Typing](http://blog.metaobject.com/2014/06/the-safyness-of-static-typing.html).
+
 [Get the Science out of your Yogurt](http://pipeline.corante.com/archives/2014/06/05/get_the_science_out_of_your_yogurt.php?utm_source=stucchio)
 
 Gelman, Hill and Yajima on [Bayesian multiple comparisons](http://www.stat.columbia.edu/~gelman/research/unpublished/multiple2.pdf) via multilevel models.
