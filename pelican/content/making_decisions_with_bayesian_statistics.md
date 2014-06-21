@@ -1,7 +1,7 @@
 title: Making decisions with Bayesian Statistics - A Tutorial
 date: 2014-06-15 09:30
 author: Chris Stucchio
-tags: ab testing, bayesian statistics, ab testing
+tags: ab testing, bayesian statistics, decision rules
 mathjax: true
 summary: Bayesian Statistics allows you to take data and a prior belief, and compute a probability distribution (the posterior) describing your beliefs about the world. But how do you make decisions based on that data? This post explains how.
 
@@ -123,6 +123,7 @@ At this point we need to introduce a *loss function*. A loss function is a funct
 Lets make this very clear by going back to our example of choosing conversion rates. In this example, $@ \theta = (p_a, p_b) $@. If we make the wrong decision, say choosing B when the better version was A, our loss will be $@ p_a - p_b $@.
 
 $$ L( (p_a, p_b), \textrm{choose A}) = \max \left( p_b - p_a, 0 \right) $$
+
 $$ L( (p_a, p_b), \textrm{choose B}) = \max \left( p_a - p_b, 0 \right) $$
 
 What this means is that if we choose A, and $@ p_b > p_a$@, then we've made a mistake. As a result of our mistake, we lose an amount proportional to the conversions we failed to gain.  However, if $@ p_a > p_b$@, we lose nothing. The same applies if we choose B, but in reverse.
@@ -131,4 +132,14 @@ Now the loss function gives the loss for a fixed value of $@ \theta $@, but what
 
 $$ L(D) = \int L( \theta, D) P(\theta | \textrm{evidence}) d\theta $$
 
-**Your mission:** Come up with a strategy, based on the evidence, which computes a decision to minimize the expected loss.
+**Your mission:** Come up with a strategy, based on the evidence, which computes a decision to minimize the expected loss. In the Bayesian context, this will typically be a function that takes as input the posterior, and returns as output a decision.
+
+A strategy I often use for A/B testing is the following. I choose a "threshold of caring" - a value $@ \epsilon $@ below which I don't care about differences between A and B. Then at each step, I check if:
+
+$$ L(A) = \int L( \theta, A) P(\theta | \textrm{evidence}) d\theta \leq \epsilon $$
+
+If so, I choose B - this is because the error I expect from choosing A is so low that I don't care. Conversely, if:
+
+$$ L(B) = \int L( \theta, B) P(\theta | \textrm{evidence}) d\theta \leq \epsilon $$
+
+then I would choose A.
