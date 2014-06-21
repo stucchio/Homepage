@@ -1,20 +1,21 @@
 title: Why a pro/con list might beat your fancy machine learning algorithm
-date: 2014-06-12 09:00
+date: 2014-06-24 09:00
 author: Chris Stucchio
 tags: linear regression, regression, statistics, unit-weighted regression
 mathjax: true
+status: draft
 
-I'm currently dating two lovely women, Svetlana and Elise. Unfortunately continuing to date both of them is unsustainable so I must choose one. In order to make such a choice, I wish to construct an approximation to my long term happiness - a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness with a given choice. I can then compute $@ f(\textrm{Svetlana}) $@ and $@ f(\textrm{Elise}) $@ and choose whichever one is larger - if my approximation is well chosen I will make the *utility* maximizing choice most of the time.
+I'm currently dating two lovely women, Svetlana and Elise. Unfortunately continuing to date both of them is unsustainable so I must choose one. In order to make such a choice, I wish to construct a *ranking function* - a function which takes as input the characteristics of a woman and returns as output a single number. This ranking function is meant to approximate my [utility function](http://en.wikipedia.org/wiki/Utility) - a higher number means that by making this choice I will be happier. If the ranking closely approximates utility, then I can use the ranking function as an effective decisionmaking tool.
 
-In statistics we have many techniques for computing such a function, [linear regression](http://en.wikipedia.org/wiki/Linear_regression) being a simple example. Unfortunately, linear regression is relatively useless to me in this case - linear regression requires a considerable number of samples, and I have not dated sufficiently many women nor kept careful records of my happiness.
+In concrete terms, I want to build a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness. If $@ f(\textrm{Svetlana}) > f(\textrm{Elise}) $@, I will choose Svetlana (and vice versa).
 
-Instead, I'm going to discuss a much simpler method of making decisions, described in [1772 by Benjamin Franklin](http://www.procon.org/view.background-resource.php?resourceID=1474):
+One of the simplest procedures for building a ranking function dates back to 1772, and was [described by Benjamin Franklin](http://www.procon.org/view.background-resource.php?resourceID=1474):
 
 > ...my Way is, to divide half a Sheet of Paper by a Line into two Columns, writing over the one Pro, and over the other Con. Then...I put down under the different Heads short Hints of the different Motives...I find at length where the Ballance lies...I come to a Determination accordingly.
 
-The mathematical name for it is [unit weighted regression](http://en.wikipedia.org/wiki/Unit-weighted_regression). I present the method in a slightly different format - in each column a different choice is listed. Each row represents a characteristic, all of which are pros. A con is transformed into a pro by negation - rather than treating "disturbs my work" as a con, I treat "Lets me work" as a pro.
+The mathematical name for this technique is [unit weighted regression](http://en.wikipedia.org/wiki/Unit-weighted_regression), and the more commonplace name for it is a Pro/Con list.
 
-If a woman posesses the characteristic under discussion, a +1 is assigned to the relevant row/column, otherwise 0 is assigned:
+I present the method in a slightly different format - in each column a different choice is listed. Each row represents a characteristic, all of which are pros. A con is transformed into a pro by negation - rather than treating "Fat" as a con, I treat "Not Fat" as a pro. If one of the choices possesses the characteristic under discussion, a +1 is assigned to the relevant row/column, otherwise 0 is assigned:
 
 <table>
 <tr><th>Characteristic</th><th>Elise</th><th>Svetlana</th></tr>
@@ -37,9 +38,11 @@ The key factor in the success of unit-weighted regression is feature selection. 
 
 Conversely, if the predictiveness of a feature is not clear, it should not be used.
 
-## Linear regression is hard
+## Why not use machine learning (TM)?
 
-An obvious question the reader might ask is why I would ever use unit-weighted regression, as opposed to the more general *linear* regression predictor. Linear regression is a lot like a pro/con list, except that the weight of each feature is allowed to vary. In mathematical terms, we represent each possible choice as a binary vector - for example:
+Anyone who read one of [the many](http://www.amazon.com/gp/product/0596529325/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0596529325&linkCode=as2&tag=christuc-20&linkId=SBLFGHS3FMO4V34J) [good](http://www.amazon.com/gp/product/0387310738/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0387310738&linkCode=as2&tag=christuc-20&linkId=XP3TXBAHMPIFWUPK) [books](http://www.amazon.com/gp/product/0387848576/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0387848576&linkCode=as2&tag=christuc-20&linkId=ME7GPF4I6NS27XDL) on machine learning can probably name several fancy machine learning techniques - neural networks, decision trees, etc. And they are probably asking why I would ever use unit-weighted regression, as opposed to one of these techniques? Why not use *linear* regression, rather than forcing all the coefficients to be +1?
+
+I'll be concrete, and consider the case of linear regression in particular. Linear regression is a lot like a pro/con list, except that the weight of each feature is allowed to vary. In mathematical terms, we represent each possible choice as a binary vector - for example:
 
 $$ \vec{\textrm{Elise}} = [ 0, 1, 1, 0, 1, 1, 0] $$
 
@@ -51,13 +54,13 @@ The individual weights $@ f_i $@ represent how important each variable is. For e
 
 The weights can be determined with a reasonable degree of accuracy by taking past data and choosing the weights which minimize the difference between the "true" value and the approximate value - this is what [least squares](http://en.wikipedia.org/wiki/Least_squares) does.
 
-Fitting a linear model only works when you have sufficient data. To robustly fit a linear model, you'll need tens to hundreds of data points *per feature*. If you have too few data points, you run into a real danger of overfitting - building a model which accurately memorizes the past, but fails to predict the future. You can even run into this problem if you have lots of data points, but those data points don't represent all the features in question.
+The difficulty with using a fancier learning tool is that it only works when you have sufficient data. To robustly fit a linear model, you'll need tens to hundreds of data points *per feature*. If you have too few data points, you run into a real danger of overfitting - building a model which accurately memorizes the past, but fails to predict the future. You can even run into this problem if you have lots of data points, but those data points don't represent all the features in question.
 
-It also requires more mathematical and programming sophistication to build.
+It also requires more programming sophistication to build, and more mathematical sophistication to recognize when you are running into trouble.
 
-In principle fitting a linear model to the data is the right way to go. After all, in real life, some factors are 3x or 10x more important than others. But in practice, it can be difficult to do it right.
+For the rest of this post I'll be comparing a Pro/Con list to [Linear Regression](http://en.wikipedia.org/wiki/Linear_regression), since this will make the theoretical comparison tractable and keep the explanation simple. Let me emphasize that I'm not pushing a pro/con list as a solution to all the ranking problems - I'm just pushing it as a nice simple starting point.
 
-# How well does it work?
+# A Pro/Con list is 75% as good as linear regression
 
 This is where things get interesting. It turns out that Pro/Con list is at least 75% as good as a linear regression model.
 
@@ -65,7 +68,7 @@ Suppose we've done linear regression and found linear regression coefficients $@
 
 An error is made whenever the pro/con list and linear regression rank two vectors differently - i.e., linear regression says "choose Elise" while the pro/con list says "choose Svetlana". The *error rate* of the pro/con list is the probability of making an error given two random *feature vectors* $@ \vec{x} $@ and $@ \vec{y} $@, i.e.:
 
-$$ \textrm{error rate} = P( \textrm{sign}( [\vec{h} \cdot (\vec{x} - \vec{y})] [\vec{u} \cdot (\vec{x} - \vec{y})] ) < 0 ) $$
+$$ \textrm{error rate}(\vec{h}) = P( \textrm{sign}( [\vec{h} \cdot (\vec{x} - \vec{y})] [\vec{u} \cdot (\vec{x} - \vec{y})] ) < 0 ) $$
 
 It turns out that if you average it out over all vectors $@ \vec{h} $@, the error rate is bounded by 1/4. There are of course vectors $@ \vec{h} $@ for which the error rate is higher, and others for which it is lower. But on average, the error rate is bounded by 1/4.
 
@@ -77,59 +80,41 @@ We can confirm this fact by computer simulation - generating a random ensemble o
 
 [Code is available](https://gist.github.com/stucchio/f5d0455fa58a4c733eba).
 
-# A simple model of regression
-
-Mathematically, a method of studying the usefuless of unit-weighted regression is to compare how accurately unit-weighted regression works relative to a more accurate predictor. Toward that end, let us consider another predictor, simple linear regression.
-
-Let each possible choice be a a binary vector $@ \vec{x} \in \{ 0, 1 \} $@. As per our example above:
-
-$$ \vec{\textrm{Elise}} = [ 0, 1, 1, 0, 1, 1, 0] $$
-
-Let the true (but unknown) ranking function be $@ h(\vec{x}) = \vec{h} \cdot \vec{x} $@. For simplicity, suppose that $@ \vec{h} $@ is normalized:
+More concretely, I computed this graph via the following procedure. For every dimension N, I created a large number of vectors $@ \vec{h} $@ by drawing them from the uniform [Dirichlet Distribution](http://en.wikipedia.org/wiki/Dirichlet_distribution). This means that the vectors $@ \vec{h} $@ were chosen so that:
 
 $$ \sum_{i} | \vec{h}_i | = 1.0 $$
 
-Further, suppose that we got the signs right:
+and
 
 $$ \forall i,  \vec{h}_i \geq 0 $$
 
-In 3 dimensions, what this means is that the vector $@ \vec{h} $@ lives somewhere in the *2-simplex*:
+In 3 dimensions, this means that $@ \vec{h} $@ lives on the green surface in this figure:
 
 ![2-simplex in r^3](/blog_media/2014/equal_weights/2D-simplex.png)
 
-In higher dimensions it is of course impossible to draw a picture, but there is a similar shape on which the vector $@ \vec{h} $@ can be contained.
+Then I generated a set of vectors $@ \vec{x}, \vec{y} $@ by choosing each component to be 0 or 1 with a probability of 50% each.
 
-The question we want to answer is the following. Consider two typical feature vectors, $@ \vec{x} $@ and $@ \vec{y} $@. How frequently does it happen that
+## Mathematical results
 
-$$ \vec{u} \cdot \vec{x} > \vec{u} \cdot \vec{y} $$
+I don't know how to prove how closely a Pro/Con list approximates linear regression for binary feature vectors. However, if we assume that the feature vectors $@ \vec{x} $@ and $@ \vec{y} $@ are [normally distributed](http://en.wikipedia.org/wiki/Normal_distribution) instead, I can prove the following theorem:
 
-but
+**Theorem:** Suppose $@ \vec{h} $@ is drawn from a uniform Dirichlet distribution and $@ \vec{x}, \vec{y} $@ have components which are independent identical normally distributed variables. Then:
 
-$$ \vec{h} \cdot \vec{x} < \vec{h} \cdot \vec{y} \textrm{?} $$
+$$ E[\textrm{error rate}(\vec{h})] \leq \frac{ \arctan( \sqrt{ (N-1)/(N+1) } ) }{\pi} < \frac{1}{4}$$
 
-I.e., how often does the true ranking (determined by $@ \vec{h} $@) differ from the *approximate* ranking (determined by $@ \vec{u} $@)?
+This means that *averaged* over all vectors $@ \vec{h} $@, the error rate is bounded by 1/4. There are of course individual vectors $@ \vec{h} $@ with a higher or lower error rate, but the typical error rate is 1/4.
 
-Equivalently, we can write this condition as:
+Unfortunately I don't know how to prove this is true for Bernoulli (binary) vectors $@ \vec{x}, \vec{y}$@. Any suggestions would be appreciated.
 
-$$ \vec{u} \cdot (\vec{x}-\vec{y}) > 0 $$
+If we run a Monte Carlo simulation, we can see that this theorem appears roughly correct:
 
-but
+![average case, theory vs practice](/blog_media/2014/equal_weights/theory_vs_practice.png)
 
-$$ \vec{h} \cdot (\vec{x}-\vec{y}) < 0 $$
+Code to produce the graph [is available on github](https://gist.github.com/stucchio/142620be989dcf2767bc).
 
-# Monte Carlo simulation
+In fact, the graph suggests the bound above is close to being exact. The theorem is proved in the appendix.
 
-The most obvious way to answer this question is via a computer simulation. To model the problem, I assumed the true vector $@ \vec{h} $@ was drawn from a [Dirichlet Distribution](http://en.wikipedia.org/wiki/Dirichlet_distribution) with parameters $@ [1, 1, ..., 1] $@ - i.e., essentially a uniform distribution on the unit simplex.
-
-For each true vector, I then randomly generated vectors $@ \vec{x} $@ and $@ \vec{y} $@ by the rule $@ \vec{x}_i = 1 $@ with probability $@ 1/2 $@, otherwise $@ \vec{x}_i=0 $@ (and similarly for $@ \vec{y} $@). The result is plotted below.
-
-![distribution of errors](/blog_media/2014/equal_weights/equal_weight_ranking_errors.png)
-
-[Code is available](https://gist.github.com/stucchio/f5d0455fa58a4c733eba).
-
-The graph suggests a theorem - under the assumptions above, the probability of unit-weighted regression and true linear regression yielding the same result is at least 3/4.
-
-# Mathematical analysis
+# Appendix: Proof of the error bound
 
 Let us consider a very simple, 3-dimensional example to build some intuition. In this example, $@ \vec{h} = [ 0.9, 0.05, 0.05] $@ - a bit of an extreme case, but reasonable. In this example, what sorts of vectors $@ \vec{x}, \vec{y} $@ will result in unit-weighted regression disagreeing with the true ranking? Here is one example:
 
@@ -214,10 +199,6 @@ The inequality follows from [Jensen's Inequality](http://en.wikipedia.org/wiki/J
 
 For large $@ N $@ this quantity approaches $@ \arctan(1) / 2 \pi = (\pi/4) / (2\pi) = 1/8 $@.
 
-Thus, we have shown that the average error-rate of unit-weighted regression is bounded above by $@ 1/4 $@. A monte carlo simulation confirms that the theoretical bound appears correct. It also shows that treating feature vectors as Gaussian rather than Boolean vectors appears to be a reasonable approximation to the problem - if anything it introduces extra error.
+Thus, we have shown that the average error-rate of unit-weighted regression is bounded above by $@ 1/4 $@. It also shows that treating feature vectors as Gaussian rather than Boolean vectors appears to be a reasonable approximation to the problem - if anything it introduces extra error.
 
-![average case, theory vs practice](/blog_media/2014/equal_weights/theory_vs_practice.png)
-
-Code to produce the graph [is available on github](https://gist.github.com/stucchio/142620be989dcf2767bc).
-
-**Note:** The reason the Bernoulli feature vectors appear to have lower error than the Gaussian feature vectors for small N appears to be caused by the fact that for small N, there is a significant possibility that a feature vector might be 0 in the important components. The net result of this is that $@ \vec{h} \cdot (\vec{x} - \vec{y}) = 0 $@ fairly often, meaning that many vectors have equal rank. This effect becomes improbable as more features are introduced.
+**Note:** I believe that the reason the Bernoulli feature vectors appear to have lower error than the Gaussian feature vectors for small N appears to be caused by the fact that for small N, there is a significant possibility that a feature vector might be 0 in the relevant components. The net result of this is that $@ \vec{h} \cdot (\vec{x} - \vec{y}) = 0 $@ fairly often, meaning that many vectors have equal rank. This effect becomes improbable as more features are introduced.
