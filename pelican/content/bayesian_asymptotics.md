@@ -1,7 +1,7 @@
 title: Asymptotics of Evan Miller's Bayesian A/B formula
 date: 2014-06-09 08:30
 author: Chris Stucchio
-tags: ab testing, bayesian statistics, ab testing, asymptotics
+tags: ab testing, bayesian statistics, asymptotics, decision rules
 mathjax: true
 
 

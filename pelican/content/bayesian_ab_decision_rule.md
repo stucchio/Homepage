@@ -1,7 +1,7 @@
 title: Easy Evaluation of Decision Rules in Bayesian A/B testing
 date: 2014-06-05 09:30
 author: Chris Stucchio
-tags: ab testing, bayesian statistics, ab testing
+tags: ab testing, bayesian statistics, decision rules
 mathjax: true
 
 
