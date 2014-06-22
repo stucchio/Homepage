@@ -3,6 +3,8 @@ date: 2014-06-25 12:00
 author: Chris Stucchio
 nolinkback: true
 
+[Tyler Cowen explains how to eat well](http://www.theatlantic.com/magazine/archive/2012/05/six-rules-for-dining-out/308929/?single_page=true). Read this one.
+
 Great blog post [showing the difference between confidence and credible intervals](http://jakevdp.github.io/blog/2014/06/12/frequentism-and-bayesianism-3-confidence-credibility/).
 
 [The Safyness of Static Typing](http://blog.metaobject.com/2014/06/the-safyness-of-static-typing.html).
