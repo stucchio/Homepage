@@ -213,7 +213,7 @@ All the pre-readers I shared this with had two major but tangential questions wh
 
 First, [Olga Kurylenko](https://www.google.com/search?q=olga+kurylenko&oq=olga+kurylenko) and [Oluchi Onweagba](https://www.google.com/search?q=oluchi+onweagba).
 
-Second, I didn't waste time with gimp. Command line all the way:
+Second, I didn't waste time with gimp. Imagemagick was more than sufficient:
 
 ```bash
 # -resize x594 will shrink height to 594, preserve aspect ratio
