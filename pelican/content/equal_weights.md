@@ -3,11 +3,15 @@ date: 2014-06-24 09:00
 author: Chris Stucchio
 tags: linear regression, regression, statistics, unit-weighted regression
 mathjax: true
-status: draft
 
-I'm currently dating two lovely women, Svetlana and Elise. Unfortunately continuing to date both of them is unsustainable so I must choose one. In order to make such a choice, I wish to construct a *ranking function* - a function which takes as input the characteristics of a woman and returns as output a single number. This ranking function is meant to approximate my [utility function](http://en.wikipedia.org/wiki/Utility) - a higher number means that by making this choice I will be happier. If the ranking closely approximates utility, then I can use the ranking function as an effective decisionmaking tool.
 
-In concrete terms, I want to build a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness. If $@ f(\textrm{Svetlana}) > f(\textrm{Elise}) $@, I will choose Svetlana (and vice versa).
+I'm currently dating two lovely women, Svetlana and Elise. Unfortunately continuing to date both of them is unsustainable so I must choose one.
+
+![A good choice to make](/blog_media/2014/equal_weights/choices.jpg)
+
+In order to make such a choice, I wish to construct a *ranking function* - a function which takes as input the characteristics of a woman and returns as output a single number. This ranking function is meant to approximate my [utility function](http://en.wikipedia.org/wiki/Utility) - a higher number means that by making this choice I will be happier. If the ranking closely approximates utility, then I can use the ranking function as an effective decisionmaking tool.
+
+In concrete terms, I want to build a function $@ f : \textrm{Women} \rightarrow \mathbb{R} $@ which approximately predicts my happiness. If $@ f(\textrm{Svetlana}) > f(\textrm{Elise}) $@ I will choose Svetlana, and vice versa if the reverse inequality holds.
 
 One of the simplest procedures for building a ranking function dates back to 1772, and was [described by Benjamin Franklin](http://www.procon.org/view.background-resource.php?resourceID=1474):
 
@@ -202,3 +206,18 @@ For large $@ N $@ this quantity approaches $@ \arctan(1) / 2 \pi = (\pi/4) / (2\
 Thus, we have shown that the average error-rate of unit-weighted regression is bounded above by $@ 1/4 $@. It also shows that treating feature vectors as Gaussian rather than Boolean vectors appears to be a reasonable approximation to the problem - if anything it introduces extra error.
 
 **Note:** I believe that the reason the Bernoulli feature vectors appear to have lower error than the Gaussian feature vectors for small N appears to be caused by the fact that for small N, there is a significant possibility that a feature vector might be 0 in the relevant components. The net result of this is that $@ \vec{h} \cdot (\vec{x} - \vec{y}) = 0 $@ fairly often, meaning that many vectors have equal rank. This effect becomes improbable as more features are introduced.
+
+# Frequently Asked Questions
+
+All the pre-readers I shared this with had two major but tangential questions which are worth answering once and for all.
+
+First, [Olga Kurylenko](https://www.google.com/search?q=olga+kurylenko&oq=olga+kurylenko) and [Oluchi Onweagba](https://www.google.com/search?q=oluchi+onweagba).
+
+Second, I didn't waste time with gimp. Command line all the way:
+
+```bash
+# -resize x594 will shrink height to 594, preserve aspect ratio
+$ convert olga-kurylenko-too-big.jpg -resize 'x594' olga-kurylenko.jpg;
+# -tile x1 means tile the images with 1 row, however many columns are needed
+$ montage -mode concatenate -tile x1 olga-kurylenko.jpg oluchi-onweagba.jpg composite.jpg
+```
