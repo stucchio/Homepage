@@ -23,8 +23,6 @@ Jayman on the [Hajnal line](https://hbdchick.wordpress.com/2014/03/10/big-summar
 
 Welfare economics [part 1](http://www.interfluidity.com/v2/5149.html)[part 2](http://www.interfluidity.com/v2/5212.html) [part 3](http://www.interfluidity.com/v2/5302.html).
 
-A great infographic on [what technique you should use](http://i.imgur.com/twr2j8Y.png):
-
 ![what technique to use](http://i.imgur.com/twr2j8Y.png)
 
 Data on [all NYC taxi rides](http://chriswhong.com/open-data/foil_nyc_taxi/).
