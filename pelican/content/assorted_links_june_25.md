@@ -21,7 +21,7 @@ Jayman on the [Hajnal line](https://hbdchick.wordpress.com/2014/03/10/big-summar
 
 [How a Russian mathematician constructed a decision tree - by hand - to solve a medical problem](http://fastml.com/how-a-russian-mathematician-constructed-a-decision-tree-by-hand-to-solve-a-medical-problem/)
 
-Welfare economics [part 1](http://www.interfluidity.com/v2/5149.html)[part 2](http://www.interfluidity.com/v2/5212.html) [part 3](http://www.interfluidity.com/v2/5302.html).
+Welfare economics [part 1](http://www.interfluidity.com/v2/5149.html)[part 2](http://www.interfluidity.com/v2/5212.html) [part 3](http://www.interfluidity.com/v2/5302.html) [part 4](http://www.interfluidity.com/v2/5374.html).
 
 ![what technique to use](http://i.imgur.com/twr2j8Y.png)
 
