@@ -1,5 +1,5 @@
 title: Why a pro/con list might beat your fancy machine learning algorithm
-date: 2014-06-24 09:00
+date: 2014-06-25 09:15
 author: Chris Stucchio
 tags: linear regression, regression, statistics, unit-weighted regression
 mathjax: true
