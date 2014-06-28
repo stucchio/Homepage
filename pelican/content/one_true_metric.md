@@ -1,8 +1,9 @@
 title: Topology of decisionmaking - are you secretly managing by metric?
 date: 2014-06-30 09:00
 author: Chris Stucchio
-tags: metrics, data analysis, topology
+tags: metrics, data analysis, topology, decisionmaking
 mathjax: true
+status: draft
 summary: Suppose you have a method of making decisions that doesn't suck - i.e., one that is objective, consistent, and never leaves you guessing about what to do. The mathematical field of topology provides a wonderful theorem - if you have a good decision process, it is equivalent to managing by metric.
 
 Humans generally take two different approaches to rational decisionmaking. One method, which I *holistic*, involves humans accounting for all features of the choices and emitting a decision on the basis of careful consideration. Another method is *management by metric* which involves reducing all your choices to a set of numbers and choosing whichever one is largest. The question arises - are these two methods really different?

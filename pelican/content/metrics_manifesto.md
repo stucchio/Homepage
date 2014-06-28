@@ -1,7 +1,7 @@
 title: The Metrics Manifesto - Why you need an objective function
 date: 2013-02-05 07:00
 author: Chris Stucchio
-tags: metrics, data analysis
+tags: metrics, data analysis, decisionmaking
 
 
 

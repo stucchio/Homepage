@@ -1,7 +1,7 @@
 title: Why a pro/con list is 75% as good as your fancy machine learning algorithm
 date: 2014-06-25 09:15
 author: Chris Stucchio
-tags: linear regression, regression, statistics, unit-weighted regression
+tags: linear regression, regression, statistics, unit-weighted regression, decisionmaking
 mathjax: true
 
 
