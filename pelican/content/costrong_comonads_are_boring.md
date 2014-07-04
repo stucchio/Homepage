@@ -2,6 +2,7 @@ title: Costrong Comonads are Boring
 date: 2014-07-04 09:00
 author: Chris Stucchio
 tags: scala, type systems, scalaz, comonads, category theory
+category: category theory
 summary: Strength is a category theoretical property which is known to be *boring* - every `Monad` in `Hask` (and similarly `Scal`) satisfies it. The question arises - what about it's dual, Costrength? What would a Costrong Comonad look like? Is it interesting? It turns out the answer is no - every `Comonad` in `Hask`/`Scal` is `Costrong`. In this post I'll provide a brief tutorial on `Comonads` and show why every `Comonad` is also Costrong. You do NOT need to know much category theory to follow this post, but some familiarity with the everyday programming of Monads will be helpful.
 
 After studying monads, a natural topic to turn to next is the [comonad](http://en.wikipedia.org/wiki/Monad_(category_theory)#Comonads_and_their_importance). A `Comonad` is a typeclass with the following methods:
