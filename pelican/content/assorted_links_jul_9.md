@@ -22,3 +22,7 @@ A great paper on [short selling risks](http://papers.ssrn.com/sol3/papers.cfm?ab
 Tyler Cowen notes that if Piketty is right, and if trickle down economics has a non-zero effect, [redistribution harms the poor in the long term](http://marginalrevolution.com/marginalrevolution/2007/04/leftwingers_sho.html).
 
 [The Trouble with Shadowstats](http://azizonomics.com/2013/06/01/the-trouble-with-shadowstats/) - apparently shadowstats is an obvious fake.
+
+[10 tallest buildings ever demolished](http://www.archdaily.com/522991/the-10-tallest-buildings-ever-demolished/?utm_source=stucchio&utm_medium=blog&utm_campaign=assortedlinks)
+
+[A proposal to airlift elephants to the US](http://www.nationalreview.com/article/381696/save-elephants-josh-gelernter)
