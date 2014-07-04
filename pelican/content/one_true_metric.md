@@ -1,18 +1,21 @@
 title: Topology of decisionmaking - are you secretly managing by metric?
-date: 2014-06-30 09:00
+date: 2014-07-10 09:00
 author: Chris Stucchio
 tags: metrics, data analysis, topology, decisionmaking
 mathjax: true
-status: draft
 summary: Suppose you have a method of making decisions that doesn't suck - i.e., one that is objective, consistent, and never leaves you guessing about what to do. The mathematical field of topology provides a wonderful theorem - if you have a good decision process, it is equivalent to managing by metric.
 
-Humans generally take two different approaches to rational decisionmaking. One method, which I *holistic*, involves humans accounting for all features of the choices and emitting a decision on the basis of careful consideration. Another method is *management by metric* which involves reducing all your choices to a set of numbers and choosing whichever one is largest. The question arises - are these two methods really different?
+Humans generally take two different approaches to rational decisionmaking. The first approach is *management by metric* which involves reducing each choice to a single number and then choosing whichever choice has the larger number. In education, this involves assigning a student a score based on performance on a set of exams - this score can then be compared to a fixed performance standard to determine whether a student passed or failed. In trading, management by metric involves evaluating a trader based on [Sharpe ratios](http://en.wikipedia.org/wiki/Sharpe_ratio), [alpha](http://en.wikipedia.org/wiki/Alpha_(investment)) generated above a benchmark, and similar measures.
 
-In this blog post I'll use topology to show that the answer is no, provided your decision process doesn't suck.
+The competing method, which I *holistic*, involves humans accounting for all features of the choices and emitting a decision on the basis of careful consideration. In trading, it would involve senior managers forming opinions about traders and evaluating them on that basis. In education, it might involve a teacher giving an oral exam to a student, letting the conversation flow, and then evaluating whether they seem to discuss issues at a 5'th grade level. I use holistic as a catch-all term to describe anything besides management by metric.
+
+Are these two decisionmaking techniques significantly different? In this blog post I'll use topology to show that the answer is no - if your decision process doesn't suck, then it's equivalent to managing by metric for some specific metric.
+
+I'll begin by describing the properties that any good decision process should satisfy.
 
 # Properties of a good decision process
 
-The first important property of a decision process is that it should always work. To begin with let us define some notation. Consider two elements of our set of choices, $@ x $@ and $@ y $@. We will write
+To begin with let us define some notation. Consider two elements of our set of choices, $@ x $@ and $@ y $@. We will write
 
 $$ x \leq y $$
 
@@ -20,7 +23,7 @@ if our decision process says the choice $@ y $@ is not inferior to $@ x $@. We w
 
 $$ x \sim y $$
 
-whenever both $@ x \leq y $@ and $@ y \leq x $@. Whenever this is true, the decision process says we can choose $@ x $@ or $@ y $@ at random - it will make no difference. We also write:
+whenever both $@ x \leq y $@ and $@ y \leq x $@. The property $@ x \sim y $@ means we can choose $@ x $@ or $@ y $@ at random - we are indifferent. We also write:
 
 $$ x < y $$
 
@@ -32,9 +35,9 @@ The first property a decision process should have is that it actually makes a de
 
 $$ x \leq y \textrm{ or } y \leq x .$$
 
-This does not mean the decision process can always determine the best choice. It merely means that it can make *some* choice.
-
 It's important to note what happens if we do not have decisiveness. In this case, *we fail to make a decision*. This is not the same thing as declaring $@ x \sim y $@ - in that case, we choose one arbitrarily and move on. A lack of decisiveness means that in a very strict sense, your decision process fails to make a choice. In computational terms (assuming the decision is made by computer) this means your computer hangs forever, segfaults, emits $@ \bot $@ or otherwise engages in undefined behavior.
+
+**Note:** This does not mean the decision process can always determine the best choice. It merely means that it can make *some* choice.
 
 ## Property 2: Consistency (aka transitivity)
 
@@ -76,15 +79,21 @@ In practice, objectivity means that the internal details of the decision process
 
 In contrast, if the teaching assistent were more generous than me with partial credit, the process would fail the objectivity property.
 
+### A failure of objectivity
+
+Consider the following holistic decisionmaking process. Two adversaries enter a room and argue in favor of choice $@ x $@ and $@ y $@, respectively. Each one has an incentive to introduce all possible evidence to prove his position. An uninterested and impartial Judge will then make decisions based on this evidence. Yes, this describes the Israeli court system, and court systems in most other nations.
+
+In at least one experiment, this process has been shown to fail the property of objectivity. It turns out that strong variations are introduced into the decisionmaking process [based on how hungry the Judge is](http://blogs.discovermagazine.com/notrocketscience/2011/04/11/justice-is-served-but-more-so-after-lunch-how-food-breaks-sway-the-decisions-of-judges/#.U7bNFnV53UY).
+
 # Consistency in the face of new information
 
 Let us now consider a real world example to understand what these terms mean. We want to hire a single candidate to work as a fetcher - their job will be to run into a warehouse and retrieve items when requested.
 
-At 12:00, the candidates all walk into the room. We see Monika, a 5'2" skinny female, Pooja, a 5'4" chubby female, and Pandit, a 6'1" skinny male. Based on physical appearance alone we mentally construct a ranking:
+At 12:00, the candidates all walk into the room. We see Monika, a 5'2" skinny female, Pandit, a 6'1" skinny male, and Pooja, a 5'4" chubby female. Based on physical appearance alone we mentally construct a ranking:
 
 $$ \textrm{Pandit} > \textrm{Monika} > \textrm{Pooja} $$
 
-This ranking is based on the theory that the tall person can retrieve items from the top shelf quickly (not needing a ladder) and the skinny person is less likely to be lazy than the fat person.
+This ranking is based on the theory that the tall person can retrieve items from the top shelf quickly (not needing a ladder) and the fat person is more likely than the thin person to be slow and lazy.
 
 Now suppose we subject the candidates to a work sample test - we ask them to retrieve items and time them. Based on this test, we observe that Monika is very good at climbing, and is able to quickly retrieve items from high shelves. The net result:
 
@@ -104,7 +113,7 @@ So our *decision process* has remained constant in light of new information - it
 
 None of the properties described above preclude changing one's mind based on new information - they simply preclude changing one's mind for no reason at all.
 
-# Management by metric - in mathematical terms
+# Management by metric - Theorems for free!
 
 We define management by metric to be the following decision process. Consider the set of choices $@ X $@. Then there is a metric, i.e. a function $@ d : X \rightarrow \mathbb{R} $@ which reduces each choice to a single number. Whenever
 
@@ -116,13 +125,11 @@ It's not hard to see why management by metric satisfies the 3 properties listed 
 
 It satisfies transitivity because if $@ d(x) \leq d(y) $@ and $@ d(y) \leq d(z) $@, then $@ d(x) \leq d(z) $@ - again, this follows from the transitivity of < on the real numbers.
 
-## Theorems for free!
-
-A large part of the appeal of management by metric is all the theorems that come for free. If you actively design your decision process to first compute a metric, then use the metric to make choices, you don't have to worry about accidentally being inconsistent. Deliberate metric-based decisionmaking gives you good properties for free.
+A large part of the appeal of management by metric is all the theorems that come for free. If you actively design your decision process to first compute a metric, then use the metric to make choices, you don't have to worry about accidentally being inconsistent or subjective. Deliberate metric-based decisionmaking gives you all the good properties of a decision process for free.
 
 # Topology
 
-One of the earliest topics studied in topology is the study of orderings. An ordering is a relation, like our $@ \leq $@ relation above. There are a variety of types of relations, each satisfying more stringent assumptions.
+One of the earliest topics studied in topology is the study of orderings. An ordering is a relation like our $@ \leq $@ relation above. There are a variety of types of relations, each satisfying more stringent assumptions.
 
 A preorder is simply a relation which satisfies reflexivity (namely $@ x \leq x $@) and consistency (aka transitivity). A partial order adds the requirement of antisymmetry - if $@ x \leq y $@ and $@ y \leq x $@ then $@ x = y $@. A [total order](http://en.wikipedia.org/wiki/Total_order) is a partial order together with the decisiveness property.
 
