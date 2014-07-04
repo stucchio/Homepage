@@ -74,7 +74,7 @@ After playing around a bit, I came up with the following possible implementation
 This certainly satisfies the type signature. But it's quite **boring** - I can put `cobindBoring` onto `Functor` if I want to. Given the fancy name, a `Comonad` should be more interesting - turns out it is. This boring version of `cobind` fails the identity law:
 
 ```scala
-> cobind(NonEmptyList(1,2,3))(copoint)
+> cobindBoring(NonEmptyList(1,2,3))(copoint)
 NonEmptyList(1,1,1)
 ```
 
