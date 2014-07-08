@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-07-09 12:00
+date: 2014-07-08 08:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -12,6 +12,18 @@ nolinkback: true
 [How to use Treelog](http://typelevel.org/blog/2013/10/18/treelog.html), and the underlying [github page](https://github.com/lancewalton/treelog).
 
 Frequentist inference only [seems easy](http://www.win-vector.com/blog/2014/07/frequenstist-inference-only-seems-easy/?utm_source=stucchio&utm_medium=referral&utm_campaign=bloglink).
+
+[A stochastic diﬀusion process for the Dirichlet distribution](http://arxiv.org/pdf/1303.0217.pdf). Some time back I used a Jacobi Diffusion model to study [time varying conversion rates](http://www.chrisstucchio.com/blog/2013/time_varying_conversion_rates.html) - you could similarly use a Dirichlet diffusion process to model a 3 or 4 choice model.
+
+[Monte Carlo Theory, methods and examples](http://statweb.stanford.edu/~owen/mc/) - a free book, work in progress.
+
+[Greedy Algorithms are Good Enough](http://jeremykun.com/2014/07/07/when-greedy-algorithms-are-good-enough-submodularity-and-the-1-1e-approximation/).
+
+[The Markov Chain Monte Carlo Revolution](http://statweb.stanford.edu/~cgates/PERSI/papers/MCMCRev.pdf), by Persi Diaconis.
+
+Sorry for the Quora link, but this is too good not to link to: [using a bloom filter to avoid a server round trip when checking if something is in the cache](http://www.quora.com/Bloom-Filters/What-are-the-best-applications-of-Bloom-filters/answer/Siddharth-Anand).
+
+[Ziggurat Algorithm](http://en.wikipedia.org/wiki/Ziggurat_algorithm) for generating random numbers.
 
 Scott Sumner points out that [correlations between ethnicity and wealth](http://econlog.econlib.org/archives/2014/06/piketty_on_meri.html) undermine Piketty's belief that merit is uncorrelated with wealth. Naughty.
 
