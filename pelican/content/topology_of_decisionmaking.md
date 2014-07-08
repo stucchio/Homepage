@@ -1,5 +1,5 @@
 title: Topology of decisionmaking - are you secretly managing by metric?
-date: 2014-07-10 09:00
+date: 2014-07-08 09:00
 author: Chris Stucchio
 tags: metrics, data analysis, topology, decisionmaking
 mathjax: true
