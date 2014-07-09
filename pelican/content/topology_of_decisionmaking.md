@@ -199,7 +199,7 @@ Finally we note that $@ \textrm{Sneha} \sim \textrm{Priyanka} $@, so we assign:
 
 $$ d(\textrm{Sneha}) \equiv d(\textrm{Priyanka}) = 0 $$
 
-Checking that the metric agrees with the underlying decision process is left as an exercise for the reader. And I really mean that - if you had trouble understanding the proof above, please work through this example. The example will illustrate fairly clearly why managing by metric is equivalent to managing by
+Checking that the metric agrees with the underlying decision process is left as an exercise for the reader. And I really mean that - if you had trouble understanding the proof above, please work through this example. The example will illustrate fairly clearly why managing by metric is equivalent to managing by any other method.
 
 # Conclusion
 
