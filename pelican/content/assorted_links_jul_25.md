@@ -17,6 +17,8 @@ John Cochrane discusses [math in economics](http://johnhcochrane.blogspot.in/201
 
 Scott Alexander discusses the [structure of the Catholic Church](http://slatestarcodex.com/2014/07/14/ecclesiology-for-atheists/).
 
+Jim Manzi checks [Piketty's math on supermanagers](http://m.nationalreview.com/corner/382084/pikettys-can-opener-jim-manzi). Shockingly, Piketty seems to have screwed it up.
+
 A new paper shows that [sex differences in mental rotation are positively correlated with gender equality](http://www.lscp.net/persons/ramus/fr/GDP1/papers/lippa10.pdf). It's not the [first study](http://www.ams.org/notices/201201/rtx120100010p.pdf) to observe this.
 
 "It's time, Bro. You're a rich white man...you're explaining to your board why it's fine that you're dating a direct report...you should stop doing that while looking like a fucking putz...I've assembled a crack team of homos that understand how shirts are supposed to look, and where pants are supposed to stop..." [shirtrate](http://www.shirterate.com/)
