@@ -13,6 +13,10 @@ A classic from the MIT AI lab - [Hakmem](http://w3.pppl.gov/~hammett/work/2009/A
 
 [Cache coherency primer](http://fgiesen.wordpress.com/2014/07/07/cache-coherency/), about cpu caching.
 
+Favor [Disjuction over Validation](http://oletraveler.com/2014/07/20/favor-disjunction-over-validation/) when handling errors in Scala.
+
+[A Lispers first impression of Julia](http://p-cos.blogspot.in/2014/07/a-lispers-first-impression-of-julia.html). I'm not a Lisper, but I feel similarly.
+
 John Cochrane discusses [math in economics](http://johnhcochrane.blogspot.in/2014/07/summer-institute.html). Quote: "The use of ancient quotations came up several times. I complained a bit about Eggertsson and Mehrotra's long efforts to tie their work to quotes from verbal speculations of Keynes, Alvin Hansen, Paul Krugman and Larry Summers."
 
 Scott Alexander discusses the [structure of the Catholic Church](http://slatestarcodex.com/2014/07/14/ecclesiology-for-atheists/).
