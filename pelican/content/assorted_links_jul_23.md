@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-07-25 08:00
+date: 2014-07-23 08:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -19,7 +19,13 @@ Favor [Disjuction over Validation](http://oletraveler.com/2014/07/20/favor-disju
 
 John Cochrane discusses [math in economics](http://johnhcochrane.blogspot.in/2014/07/summer-institute.html). Quote: "The use of ancient quotations came up several times. I complained a bit about Eggertsson and Mehrotra's long efforts to tie their work to quotes from verbal speculations of Keynes, Alvin Hansen, Paul Krugman and Larry Summers."
 
+William Briggs on the [Kaya Equation](http://wmbriggs.com/blog/?p=13103). My favorite example, loosely borrowed from Piketty: `inequality = puppies * (ganja / puppies) * (inequality / ganja)`
+
+Scott Locklin on [neglected machine learning ideas](http://scottlocklin.wordpress.com/2014/07/22/neglected-machine-learning-ideas/).
+
 Scott Alexander discusses the [structure of the Catholic Church](http://slatestarcodex.com/2014/07/14/ecclesiology-for-atheists/).
+
+Terminator 2 and the [biggest spoiler ever](http://thedissolve.com/features/movie-of-the-week/670-terminator-2-and-the-worlds-biggest-spoiler/).
 
 Jim Manzi checks [Piketty's math on supermanagers](http://m.nationalreview.com/corner/382084/pikettys-can-opener-jim-manzi). Shockingly, Piketty seems to have screwed it up.
 
