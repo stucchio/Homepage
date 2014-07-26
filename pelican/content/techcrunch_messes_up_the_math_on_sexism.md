@@ -1,7 +1,8 @@
 title: TechCrunch messes up the math on sexism
 date: 2011-11-19 00:00
 author: Chris Stucchio
-
+tags: culture, probability
+category: culture
 
 
 
