@@ -1,7 +1,7 @@
-title: Sam Altman's Sexism Straw Man
+title: Sam Altman defeats the Sexist Straw Man
 date: 2014-07-28 00:00
 author: Chris Stucchio
-tags: culture, probability
+tags: culture
 category: culture
 
 Sam Altman recently wrote an article about [sexism in technology](http://blog.ycombinator.com/diversity-and-startups). And while I don't dispute many of his factual claims, it's important to recognize the claims he didn't make, and to recognize that most of the article is merely attacking a straw man. Unfortunately, logical fallacy, emotional reasoning and argument by juxtoposition are far too common in discussions of this topic.
@@ -14,7 +14,7 @@ It continues:
 
 > Debating how to fix it is important, but debating whether or not sexism actually exists...Saying “There isn’t any sexism in tech” in the face of a mountain of data hurts things in subtle and not-so-subtle ways.
 
-Sam Altman then juxtaposes a discussion of the representation of women in YC:
+Sam Altman then juxtaposes a discussion of the representation of women in YC and technology in general:
 
 > We can get more precise number when we disregard background and just look at the gender of applicants (based on looking at the application videos)—19.5% of the startups we have funded this year have women on the founding team compared to approximately 24.3% of startups that applied...
 
@@ -38,9 +38,21 @@ Sam Altman attempts to argue against this by juxtuposition. He first discusses t
 
 > I’m willing to believe it’s worse in other industries [1], but it’s still very bad in our own industry...[1] My mom is a doctor...My mom pointed out to me there was a men’s bathroom but no women’s bathroom.
 
-So here is the *logical argument* in favor of Hypothesis 2. Other industries such as medicine were *more sexist than tech currently is*. Women entered those industries and achieved equal representation. This suggests that there isn't even a strong correlation between sexism in an industry and women's representation there.
+So here is the *logical argument* in favor of Hypothesis 2. Other industries such as medicine were *more sexist than tech currently is*. Women entered those industries and achieved equal representation. This suggests that there isn't even a strong correlation between sexism in an industry and women's representation there. Altman simply ignores this point.
 
 Or consider an organization which *strictly forbids* women from taking the primary leadership role. The guiding document of that organization considers women subservient to men, claims wives must obey their husbands, and is generally medieval in it's outlook. (This organization is also generally opposed to homosexuality.) The Catholic Church has a diversity problem - it has [too few men](http://www.jsonline.com/news/religion/with-leadership-dominated-by-women-churches-reaching-out-to-men-b99135844z1-233951051.html). (Hat tip: [Scott Alexander](http://slatestarcodex.com/2014/01/12/a-response-to-apophemi-on-triggers/) )
+
+# Sexism countermeasures might be bad for technology
+
+Altman claims that it's in the best interest of the technology industry to "fix" this disparity.
+
+> We—the tech industry as a whole—need to fix this...And speaking for YC, it’s also in our best interest.  People who are not white males will start many of the best companies of the future, and we’d like to fund them.
+
+This is not necessarily true. It might be the case (see Hypothesis 2) that "fixes" to sexism will not generate new talent for the technology industry.
+
+They may simply impose costs for little/no benefit. For example, the HR infrastructure Altman suggests both costs money and can impose silly bureaucratic costs on an organization (e.g. HR drones filtering candidates based on irrelevant features). Some smart people will choose not to enter technology at all - if tech becomes as stuffy and boring as banking, I'll choose the sector where I get paid 50% more money.
+
+Most actions have real tradeoffs and it's silly to kid ourselves that this is not the case here.
 
 # Sexism is real and Altman's numbers suggest YC suffers from it
 
@@ -60,4 +72,4 @@ If Altman reveals the number of companies worth more than $100M with women on th
 
 The topic of too many white/asian males in computing is a popular topic, and generally one worth ignoring. The quality of the discussion is low, most people get emotional about it, [rhetorical superweapons](http://slatestarcodex.com/2014/05/12/weak-men-are-superweapons/) are built and used, and one learns nothing by reading these discussions.
 
-Also, full disclosure. I am a White/Asian Male (TM) attempting to maintain my superiority. I hate non-Asian minorities and women so much that I moved to location which is almost exclusively full of [white/asians](http://en.wikipedia.org/wiki/Demographics_of_India) and which also has 1.06 males for every female. Additionally, I'm a neckbeard who can't get laid, I wear a fedora, and I'm generally a low status individual. (Just want to head off all the obvious responses.)
+Also, full disclosure. I am a White/Asian Male (TM) attempting to maintain my superiority. I hate non-Asian minorities and women so much that I moved to location which is almost exclusively full of [white/asians](http://en.wikipedia.org/wiki/Demographics_of_India) and which also has 1.06 males for every female. Additionally, I'm a proud fedora-wearing neckbeard who can't get laid, and I'm generally a person of low status. (Just to head off all the obvious non-responses.)
