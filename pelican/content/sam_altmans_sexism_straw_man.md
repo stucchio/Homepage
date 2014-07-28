@@ -42,18 +42,6 @@ So here is the *logical argument* in favor of Hypothesis 2. Other industries suc
 
 Or consider an organization which *strictly forbids* women from taking the primary leadership role. The guiding document of that organization considers women subservient to men, claims wives must obey their husbands, and is generally medieval in it's outlook. (This organization is also generally opposed to homosexuality.) The Catholic Church has a diversity problem - it has [too few men](http://www.jsonline.com/news/religion/with-leadership-dominated-by-women-churches-reaching-out-to-men-b99135844z1-233951051.html). (Hat tip: [Scott Alexander](http://slatestarcodex.com/2014/01/12/a-response-to-apophemi-on-triggers/) )
 
-# Sexism countermeasures might be bad for technology
-
-Altman claims that it's in the best interest of the technology industry to "fix" this disparity.
-
-> We—the tech industry as a whole—need to fix this...And speaking for YC, it’s also in our best interest.  People who are not white males will start many of the best companies of the future, and we’d like to fund them.
-
-This is not necessarily true. It might be the case (see Hypothesis 2) that "fixes" to sexism will not generate new talent for the technology industry.
-
-They may simply impose costs for little/no benefit. For example, the HR infrastructure Altman suggests both costs money and can impose silly bureaucratic costs on an organization (e.g. HR drones filtering candidates based on irrelevant features). Some smart people will choose not to enter technology at all - if tech becomes as stuffy and boring as banking, I'll choose the sector where I get paid 50% more money.
-
-Most actions have real tradeoffs and it's silly to kid ourselves that this is not the case here.
-
 # Sexism is real and Altman's numbers suggest YC suffers from it
 
 A mathematical exercise. Suppose you have a selection process. You want to measure a quality score Q. But your actual measurement M does not measure Q only - it also has a bias built in. Suppose for a baseline group, M = Q, but for a subgroup, M = Q + B (where B can be positive or negative). What do we predict the outcome will be?
