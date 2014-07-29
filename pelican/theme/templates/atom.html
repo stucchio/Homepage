@@ -30,7 +30,7 @@
                 {{ article.content }}
                 {% else %}
               {{article.summary}}
-              <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">more ...</a>
+              <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss">more ...</a>
               {% endif %}
             </content>
         </entry>
