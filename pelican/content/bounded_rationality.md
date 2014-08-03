@@ -1,5 +1,5 @@
 title: Bounded Rationality and the Ellsberg Paradox
-date: 2014-07-24 21:00
+date: 2014-08-04 21:00
 author: Chris Stucchio
 tags: probability, bayesian reasoning, utility functions, rationality
 mathjax: true
@@ -72,3 +72,29 @@ def solveB = {
 The key part of the theory is at the end of the lexical scope (i.e., the last `}`), the intermediate variables vanish. So *during* the execution of `solveA`, the value of `nb_guess` is available. Once the solution is computed, and the `return ...` statement is reached, the intermediate variables (namely `nb_guess`, `payoff_a1` and `payoff_a2`) exit the local scope and are lost.
 
 Because of this, there can be no relation between `nb_guess` and `ny_guess`. This allows `nb_guess` to pessimistically estimate the payoff probability in problem A, while `ny_guess` pessimistically estimates the payoff probability in problem B.
+
+# Loss of scope can amplify other biases
+
+If this "scoping" theory of reasoning is true, this would suggest a significant enhancement of other cognitive biases. Specifically, consider a [motivated reasoning](http://en.wikipedia.org/wiki/Motivated_reasoning) process leading to a desirable conclusion `C`, using an intermediate step `B`. However, the intermediate step `B` implies an undesirable conclusion `D`. The scoping model of bounded rationality predicts that a person will be less likely to conclude `B => D`, therefore `not B`.
+
+A concrete example, based on an actual argument I've heard many times.
+
+> Two consenting adults should be able to do whatever they like in the privacy of their own bedroom. Therefore, anti-sodomy laws should be repealed.
+
+The logical argument being made here is the following.
+
+1. Sodomy is a private act between adults.
+2. Private acts between consenting adults should not be regulated.
+
+Yet strangely, the opponent of anti-sodomy laws is rarely persuaded by his own argument when the private act is one adult paying another adult $7.24/hour ($0.01 below the US minimum wage, for those outside the US) to clean his bedroom, or one adult providing another adult with drugs not approved by the FDA. I propose that having the intermediate principle vanish from the lexical scope is one possible explanation for this inability to reason.
+
+Another example of motivated reasoning, where the illogical results are a bit more mathematical, comes from Austrian economics. The argument (and I'm paraphrasing an in-person conversation) goes something like this:
+
+> Private-sector actors are reasonably efficient at allocating capital to it's most productive uses - specifically uses with the highest rates of return.
+> Loose money policies by the Federal Reserve caused a flood of money, thereby inducing capitalists to malinvest in housing - the result was investments in housing which had a negative rate of return.
+
+This argument takes a similar form. The logical conclusion of the first clause is that a flood of money should not cause malinvestment - after all, why would those private-sector actors to suddenly lose their ability to funnel money to sectors with high rates of return, or at least keep the money in cash form rather than putting it into sectors with negative rates of return?
+
+# A bleg
+
+Does anyone know more about this? Are there similar theories that have appeared in the literature, and been either accepted or rejected? I'm curious to hear about this.
