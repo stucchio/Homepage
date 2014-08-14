@@ -34,7 +34,7 @@ Note that $@ h(a,b,c,d) = P(X > Y) $@ where $@ X \sim \beta(a,b) $@ and $@ Y \si
 
 Then:
 
-$$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy = \frac{B(c+1,d)}{B(c,d)} g(a,b,c+1,d) - \frac{B(a+1,b)}{B(a,b)} g(a+1,b,c,d) $$
+$$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy = \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) - \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) $$
 
 The numerical computation in [the original blog post](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) can then be replaced by the above formula.
 
