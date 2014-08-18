@@ -69,7 +69,7 @@ By analogy to my example of "why is my latency so high on the east coast" exampl
 
 ## Sexism in technology
 
-A couple of weeks ago I pointed out [Sam Altman making bogus arguments about sexism](http://localhost:8000/blog/2014/sam_altmans_sexism_straw_man.html) - arguing by juxtuposition that the existence of sexism reduces the number of women in technology. This is far from an isolated occurrence - a few days ago a Hacker News comments suggested that [requests for dates](https://news.ycombinator.com/item?id=8168532) cause women to be underrepresented in technology.
+A couple of weeks ago I pointed out [Sam Altman making bogus arguments about sexism](/blog/2014/sam_altmans_sexism_straw_man.html) - arguing by juxtuposition that the existence of sexism reduces the number of women in technology. This is far from an isolated occurrence - a few days ago a Hacker News comments suggested that [requests for dates](https://news.ycombinator.com/item?id=8168532) cause women to be underrepresented in technology.
 
 Many arguments of this sort, including both of those I linked to, make the same error I'm describing in this post. "`A` exists, `B` exists, therefore `A ~ B`" (or perhaps `A => B`). Since these arguments don't actually show either sexist behavior or requests for dates are less common in other fields, they are unable to show even correlation (let alone causation). For all we know, requests for dates are less common in technology than in other fields.
 
