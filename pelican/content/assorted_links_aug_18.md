@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-08-15 8:30:00
+date: 2014-08-18 10:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -32,6 +32,8 @@ When I saw the movie "Blood Diamond", the premise of "African guy follows Dicapr
 [Give Johns (prostitute customers) a break](http://time.com/3087616/defense-johns-legalize-prostitution/).
 
 [Abandoned Lego Houses](http://imgur.com/a/xf6ah)
+
+[Grade deflation, grade illusion, and academic depressions](http://econlog.econlib.org/archives/2014/08/price_inflation.html)
 
 Paul Krugman, of all people, points out [why a basic income won't reduce overhead much](http://krugman.blogs.nytimes.com/2014/08/09/libertarian-fantasies/?_php=true&_type=blogs&_r=0). tl;dr; Most government spending is actual wealth transfers - reducing bureaucracy won't matter much. This suggests updating the calculations in my [post on the topic](http://www.chrisstucchio.com/blog/2013/basic_income_vs_basic_job.html) - most likely this will cause a Basic Job proposal to win by an even larger margin. See also [rortybomb](http://www.nextnewdeal.net/rortybomb/pragmatic-libertarian-case-basic-income-doesnt-add) with numbers rather than snark. On the same topic, apparently there have been [experiments](http://www.cato-unbound.org/2014/08/08/jim-manzi/when-basic-income-guarantee-meets-political-process), all of which conclude that work requirements are the only way to get people off welfare in the long run.
 
