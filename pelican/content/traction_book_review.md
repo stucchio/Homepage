@@ -31,4 +31,4 @@ That last step is important because traction channel A might be a reliable way o
 
 # Recommendation: go read it
 
-At some point I recommended the Traction Book to a friend of mine, Jared Ranere at [Brief](http://www.abriefapp.com/). I went to illegally share my pre-release copy of the book with him (sorry) since I felt he wasn't focused at least 50% on traction (he's a product guy). I noticed that there was a single book in my "books/startup" folder - the Traction Book. I've read quite a few books about startups over the years, and apparently this was the only one worth keeping.
+At some point I recommended the Traction Book to a friend of mine, Jared Ranere at [Brief](http://www.abriefapp.com/). Go sign up for Brief if you deal with a lot of work documents. I went to illegally share my pre-release copy of the book with him (sorry) since I felt he was focusing primarily on building a good product. I noticed that there was a single book in my "books/startup" folder - the Traction Book. I've read quite a few books about startups over the years, and apparently this was the only one worth keeping.
