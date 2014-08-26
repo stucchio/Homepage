@@ -128,7 +128,7 @@ The answer is pretty simple - Team Email needs to switch to a microservice. Here
 1. Team Email builds the microservice.
 2. Team Email builds a new version of `EmailProvider` which calls the microservice and then publishes a new jar.
 
-Because of the Service Object approach, everyone else's code is already structured to handle microservices. This makes actually replacing the service object with a
+Because of the Service Object approach, everyone else's code is already structured to handle microservices. This makes actually swapping the service object for a microservice a straightforward matter.
 
 # Service Objects make testing fun
 
