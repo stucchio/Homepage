@@ -23,6 +23,8 @@ $ curl -d "{ 'to' : 'foo@bar.com', 'from' : 'test@test.com', ... }"  "http://ema
 
 (This example is NOT restful.)
 
+The developers working on Team Email are now solely responsible for making sure this http server properly responds to json-over-http requests. They can address this task in relative isolation, and as long as the task is handled, their job is done.
+
 Alternatively, one might simply expose an SMTP server, but that isn't considered cool anymore.
 
 Consumers of the microservice then access the HTTP endpoint as they see fit:
@@ -70,7 +72,17 @@ The key fact about this trait/interface is that programmers working on a team ot
 
 ## Rigid interface? Check.
 
-Now that we have this service object defined, we get *most* of the benefits of a bonafide microservice. As far as our code is concerned, we get the *exact same* level of isolation as with the genuine microservice.
+Now that we have this service object defined, we get *most* of the benefits of a bonafide microservice. As far as our code is concerned, we get the *same* level of isolation as with the genuine microservice. Team Email exposes no detail about their internal implementations to the world - all they provide is a fixed interface.
+
+When a user wishes to send email, all they get is an object that satisfies this interface. They get no additional information about it. This is typically done with the `Factory` pattern:
+
+```scala
+object EmailProviderFactory {
+  def getEmailProvider: EmailProvider = ...
+}
+```
+
+Users may call this method, receive an email provider object, and may only call the known methods on `EmailProvider`. Everything else is opaque to them.
 
 Concretely, what this means is the following. Team Email gets to sit in their office, write nearly any code they like (so long as it doesn't do silly things like `System.exit(-1)`), and simply exposes a rigid interface. Similarly, Team Welcome New Users gets to sit in their office and send emails with the `sendEmail` method. Periodically Team Email will publish an updated jar file which is then consumed by Team Welcome New Users, and email will continue to be sent. Team Welcome New Users has no right to muck around in Team Email's code, and Team Email is free to do as they like within their fiefdom.
 
