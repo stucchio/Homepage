@@ -11,6 +11,10 @@ nolinkback: true
 
 Interestingly, Ozy's one major screwup in this post is her snarkiest: the bit about leg hair. I don't dispute that nearly all white and Indian women have leg hair. A quote from a non-white non-Indian woman: "White people shave their legs too? I thought that was just an Indian thing." (I've been told that it's possible that extremely fine and nearly undetectible hairs may still be present on such women - for the purposes of Heartiste, they may as well be absent.)
 
+[Against Empathy](http://www.bostonreview.net/forum/paul-bloom-against-empathy)
+
+[A relational model of data for large shared data banks](http://www.cs.berkeley.edu/~rxin/db-papers/Relational-Model-Codd.pdf). This is how it all got started.
+
 [About those struggling middle class Americans](http://www.themoneyillusion.com/?p=27400&utm_source=stucchio&utm_medium=blog&utm_campaign=assortedlinks). Key point is this image displaying the result of a high savings rate:
 
 ![Rio vs Xangai metros](http://www.themoneyillusion.com/wp-content/uploads/2014/08/Screen-Shot-2014-08-26-at-7.05.33-PM1.png)
