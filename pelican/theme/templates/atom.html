@@ -8,7 +8,7 @@
     <link href="{{ SITEURL }}/{{ATOM_SAVE_AS}}" rel="self" />
     <link href="{{ SITEURL }}"/>
 
-    <updated>{{ TODAY }}</updated>
+    <updated>{{ TODAY.isoformat('T')+'Z' }}</updated>
 
     <id>{{ SITEURL }}/</id>
 
@@ -21,9 +21,9 @@
             {% else %}
             <link href="{{SITEURL}}/{{ article.url }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss"/>
             {% endif %}
-            <updated>{{ article.date }}</updated>
-            <published>{{ article.date }}</published>
-            <id>{{ article.url }}</id>
+            <updated>{{ article.date.isoformat('T')+'Z' }}</updated>
+            <published>{{ article.date.isoformat('T')+'Z' }}</published>
+            <id>{{ SITEURL }}/{{ article.url }}</id>
 
             <content type="html">
               <![CDATA[
