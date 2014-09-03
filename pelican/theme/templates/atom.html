@@ -13,6 +13,7 @@
     <id>{{ SITEURL }}/</id>
 
     {% for article in articles %}
+      {% if loop.index < 20 %}
         <entry>
             <title type="html">{{ article.title }}</title>
             <author><name>{{ article.author }}</name></author>
@@ -32,10 +33,11 @@
                 {% else %}
                 {{article.summary}}
               <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss">more ...</a>
-              ]]>
               {% endif %}
+              ]]>
             </content>
         </entry>
+      {% endif %}
     {% endfor %}
 
 </feed>
