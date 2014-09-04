@@ -19,4 +19,6 @@ Interestingly, Ozy's one major screwup in this post is her snarkiest: the bit ab
 
 ![Rio vs Xangai metros](http://www.themoneyillusion.com/wp-content/uploads/2014/08/Screen-Shot-2014-08-26-at-7.05.33-PM1.png)
 
+I'm *shocked* to discover that there is a price delta between [abstract aluminum and deliverable aluminum ingots](http://www.bloombergview.com/articles/2014-09-03/the-goldman-sachs-aluminum-conspiracy-lawsuit-is-over).
+
 I [like these paintings a lot](http://www.thisiscolossal.com/2014/08/paintings-by-michael-kerbow-warn-of-dire-consequences-for-current-actions/?utm_source=stucchio&utm_medium=blog&utm_campaign=assortedlinks) though I imagine I'm missing the point.
