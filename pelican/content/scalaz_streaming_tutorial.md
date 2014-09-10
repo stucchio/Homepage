@@ -41,7 +41,7 @@ res11: List[IndexedSeq[Int]] = List(Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9))
 
 If one wanted to do more complex effects, one would replace `List[_]` with `IO[_]` or `DatabaseTransaction[_]`, or whatever.
 
-## Starting a Process
+# Starting a Process
 
 In Scalaz Streaming, there are a variety of ways of creating a `Process`. Scalaz streaming provides a few analogues of standard scala methods:
 
@@ -70,4 +70,75 @@ while (true) {
 val stringsFromTheNetwork: Process[Task,String] = q.dequeue
 ```
 
-This is how you write procedural code to interface with java/scala libraries (e.g. servlets, akka), and put it into Scalaz Stream. The `stringsFromTheNetwork` variable is the resulting stream.
+This is how you write procedural code to interface with java/scala libraries (e.g. servlets, akka), and put it into Scalaz Stream. The `stringsFromTheNetwork` variable is the resulting stream. Other methods include:
+
+```scala
+val f: Task[A] = Task.async { ... } //Do something to create an object
+val repeatedF: Process[Task,A] = Process.repeatEval(f) //Do it again and again
+```
+
+Another tool for creating `Process[Task,A]` objects is signals:
+
+```scala
+import scalaz.stream.async
+
+val signal = async.signal[Boolean]
+val signalChanges: Process[Task,Boolean] = signal.discrete
+
+//Thread 1
+signal.set(true).run // Time = 1
+signal.set(true).run // Time = 2
+signal.set(false).run //Time = 3
+...
+//Thread 2
+signalChanges.map(x => {
+  println("" + x + " -> " + System.currentTimeMillis)
+  }).run.run
+// Will print:
+// true -> 1
+// false -> 3
+```
+
+### What's with `process.run.run`?
+
+The astute reader might be wondering why I did `process.run.run`. Was it a typo? Did I intend to do `process.run` (no)? The reason is this - we are invoking `run` first on the `Process[Task,_]` object, and second on the `Task[_]` object itself.
+
+```
+scala> process
+res0: Process[Task,Boolean]
+
+scala> process.run
+res1: Task[Unit]
+
+scala> process.run.run
+res2: Unit
+```
+
+So the first invocation of `run` is `Process.run`, and results in a `Task[Unit]`. The second `run` is `Task.run`. Another way to see it:
+
+```
+scala> process
+res0: Process[Task,Boolean]
+
+scala> process.runLast
+res1: Task[Option[Int]]
+
+scala> process.runLast.run
+res2: Option[Int]
+```
+
+# Manipulating the process
+
+So great. We've got a stream of values. What do we do with it?
+
+As you might expect, all the standard Scala functional programming methods are supported:
+
+```scala
+val p: Process[Task,Int] = Process.range(0,10)
+
+val mapResult = p.map(x => "the value is " + x).runLog.run
+// Vector("the value is 0", "the value is 1", ...)
+
+val filterResult = p.filter(x => x % 2 == 0).runLog.run
+Vector(0, 2, 4, 6, 8)
+```
