@@ -1,4 +1,4 @@
-title: Scalaz Streaming - a Functional Reactive Programming Tutorial
+title: Scalaz Stream - a Functional Reactive Programming Tutorial
 date: 2014-09-11 09:00
 author: Chris Stucchio
 tags: scala, scalaz, scalaz-streaming, concurrency
@@ -203,3 +203,94 @@ val w = wye.dynamic((x:Int) => if (x % 3 == 0) { wye.Request.R } else { wye.Requ
 l.wye(r)(w).runLog.run
 /// Result is Vector(ReceiveL(1), ReceiveL(2), ReceiveL(3), ReceiveR(a), ReceiveL(4), ReceiveL(5))
 ```
+
+# Putting the pieces together: an example
+
+Lets now consider the following situation. We receive an incoming stream of true/false events. We want to keep a rolling total of both the number of events, and the number which were true. Separately, we have a stream of incoming requests, and for each request we want to return the current value of `(allEvents, trueEvents)`.
+
+So consider the first stream as input data, and the second stream as a monitoring process.
+
+To begin we have our source:
+
+```scala
+val input: Process[Task,Boolean] = Process.awakeEvery(300 milliseconds)(Strategy.DefaultStrategy, Strategy.DefaultTimeoutScheduler).map(_ => (math.random < 0.3))
+```
+
+We will use the `scan` method to keep track of the current counts:
+```scala
+val counter = input.scan( (0L,0L) )( (count, event) => ( count._1+1, count._2 + (if (event) { 1L } else { 0L }) ) )
+```
+
+We will then want to generate a `Signal` which is always set to the current value of the counts:
+
+```scala
+import scalaz.stream.async
+
+val sig = async.signal[(Long,Long)]
+val snk = sig.sink
+val counterToSignal = counter
+        .map( x => async.mutable.Signal.Set( x ) : async.mutable.Signal.Msg[(Long,Long)] )
+        .to(snk)
+
+Task.fork( generator.run ).runAsync( _ => () ) //Run this in a separate thread
+```
+
+The `async.mutable.Signal.Set(x)` is a message which, when received by a `signal.sink`, will set the signal to `x`. Ok, we are now tracking statistics.
+
+The other side of the process, which takes requests and returns responses, is a bit trickier. First consider the stream of requests:
+
+```scala
+val requestSignal = Process.awakeEvery(1000 milliseconds)(Strategy.DefaultStrategy, Strategy.DefaultTimeoutScheduler)
+```
+
+To combine the request stream and the statistics signal, we use a `Wye`:
+
+```scala
+val w = wye.dynamic( (_:Any) => wye.Request.R, (_:Any) => wye.Request.L)
+
+val responseStream = requestSignal.wye(stateSignal)(w).filter( _.isR ).map(_ match {
+      case ReceiveY.ReceiveR(x) => x
+      case _ => ???
+    }).map(x => println("Response " + x))
+```
+
+The `responseStream` will now a output a response whenever a request is received. Typical output:
+
+```
+scala> responseStream.run.run
+Response (3,2)
+Response (6,3)
+Response (9,4)
+Response (13,5)
+Response (16,6)
+Response (19,7)
+Response (23,8)
+Response (26,8)
+Response (29,11)
+Response (33,13)
+```
+
+# Performance
+
+This is where the story becomes less than pretty. Here is a fairly straightforward benchmark, comparing Scalaz Stream to it's closest competitor - Akka. I build a wrapper class `case class Wrapper(x: Long, y: Long)` with a `+` method that behaves in the obvious way and compute a rolling sum of `1024*1024` wrappers. In stream, it's done as follows (full code):
+
+```scala
+q.dequeue.scan(Wrapper(0,0))( (state, w) => (state + w) ).scan(0L)( (count, w) => {
+  if (count == finishCount) {
+    finishTime = System.currentTimeMillis
+  }
+    count + 1
+})
+```
+
+In Akka the code is [considerably longer](https://gist.github.com/stucchio/fbc29e84f68817b0a798), but more or less similar - just using Actors to handle the state. In Akka the whole process takes about 10 seconds. In Scalaz Stream, the process takes 42 seconds. I'm not sure if this is due to Scalaz Stream or perhaps just my current inability to write performant code in it.
+
+Browsing the source code, it appears that Scalaz Stream certainly does a lot of object creation (some of it appears unnecessary), probably more than Akka. On the other hand it hits thread pools less. In principle (perhaps by polluting the innards of Scalaz Stream with some imperative code) it should be possible to improve performance.
+
+# See also
+
+You must read [Task: The Missing Documentation](http://timperrett.com/2014/07/20/scalaz-task-the-missing-documentation/).
+
+Paul Chiusano (author of Scalaz-Stream) has a useful [slideshow on it](http://pchiusano.github.io/talks/scalaz-stream-nescala-2014/scalaz-stream-nescala-2014.html#/an-introduction-to-scalaz-stream), albeit one or two versions out of date.
+
+I also wrote about [Agents - a purely functional alternative to actors](|filename|agents.md), which is a thin library on top of Scalaz Stream.
