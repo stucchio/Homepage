@@ -283,7 +283,7 @@ q.dequeue.scan(Wrapper(0,0))( (state, w) => (state + w) ).scan(0L)( (count, w) =
 })
 ```
 
-In Akka the code is [considerably longer](https://gist.github.com/stucchio/fbc29e84f68817b0a798), but more or less similar - just using Actors to handle the state. In Akka the whole process takes about 10 seconds. In Scalaz Stream, the process takes 42 seconds. I'm not sure if this is due to Scalaz Stream or perhaps just my current inability to write performant code in it.
+In Akka the code is [considerably longer](https://gist.github.com/stucchio/fbc29e84f68817b0a798), but more or less similar - just using Actors to handle the state. In Akka the whole process takes about 10 seconds. In Scalaz Stream, the process takes 42 seconds. I'm not sure if this is due to Scalaz Stream or perhaps just my current inability to write performant code in it. However, stream can definitely be sped up - a little playing around gave me [this pull request](https://github.com/scalaz/scalaz-stream/pull/237#issuecomment-55305291) which makes `Process.map` about 10x faster than before.
 
 Browsing the source code, it appears that Scalaz Stream certainly does a lot of object creation (some of it appears unnecessary), probably more than Akka. On the other hand it hits thread pools less. In principle (perhaps by polluting the innards of Scalaz Stream with some imperative code) it should be possible to improve performance.
 
