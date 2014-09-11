@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-09-10 10:30:00
+date: 2014-09-15 10:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -10,6 +10,8 @@ nolinkback: true
 Most machine learning is [approximating the identity](http://nuit-blanche.blogspot.fr/2013/06/sunday-morning-sunday-quick-panorama-of.html).
 
 [Principled Typeclasses](http://degoes.net/articles/principled-typeclasses/).
+
+Presentation on [Scalaz Futures and Tasks](http://t.co/8O2rV4nMCr). Well worth reading, nice to see a counterpoint to the Akka side of life.
 
 [Ozys Anti-Heartiste FAQ](http://slatestarcodex.com/2014/08/20/ozys-anti-heartiste-faq/). Well worth reading for two distinct groups. If you are open to rational arguments and are generally familiar with the PUA crowd, this is a very good counterargument against parts of it. If you are a typical coastal white knight sort, the sort persuaded by John Stewart, Valleywag or Jezebel, it's also worth reading - it illustrates *rational disagreement* as opposed to *argument by snark*.
 
