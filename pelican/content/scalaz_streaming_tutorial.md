@@ -1,5 +1,5 @@
-title: Scalaz Streaming tutorial
-date: 2014-09-10 09:00
+title: Scalaz Streaming - a Functional Reactive Programming Tutorial
+date: 2014-09-11 09:00
 author: Chris Stucchio
 tags: scala, scalaz, scalaz-streaming, concurrency
 category: scala
@@ -43,11 +43,17 @@ If one wanted to do more complex effects, one would replace `List[_]` with `IO[_
 
 # Starting a Process
 
-In Scalaz Streaming, there are a variety of ways of creating a `Process`. Scalaz streaming provides a few analogues of standard scala methods:
+In Scalaz Streaming, there are a variety of ways of creating a `Process`. The simplest, albeit most boring:
 
 ```scala
-import scalaz.stream.io
+scala> import scalaz.stream.io
+scala> val p = Process(1,2,3,4,5)
+p: scalaz.stream.Process[Nothing,Int] = Emit(WrappedArray(1, 2, 3, 4, 5))
+```
 
+Scalaz streaming provides a few analogues of standard scala methods:
+
+```scala
 val lns: Process[Task,String] = io.linesR("inputfile.txt")
 ```
 
@@ -99,6 +105,14 @@ signalChanges.map(x => {
 // false -> 3
 ```
 
+Another useful method in realtime operations is `Process.awakeEvery`:
+```scala
+import scala.concurrent.duration._
+val clock = Process.awakeEvery(1 seconds)
+```
+
+Every second, a new value will enter the `clock` process, namely `1 seconds`, `2 seconds`, `3 seconds`, etc (the actual values may vary a little bit).
+
 ### What's with `process.run.run`?
 
 The astute reader might be wondering why I did `process.run.run`. Was it a typo? Did I intend to do `process.run` (no)? The reason is this - we are invoking `run` first on the `Process[Task,_]` object, and second on the `Task[_]` object itself.
@@ -141,4 +155,51 @@ val mapResult = p.map(x => "the value is " + x).runLog.run
 
 val filterResult = p.filter(x => x % 2 == 0).runLog.run
 Vector(0, 2, 4, 6, 8)
+```
+
+The `flatmap` method is a bit trickier, since it operates at the `Process` level:
+
+```scala
+p.flatMap(x => Process(x, x-1)).runLog
+// Result: Vector(0, -1, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9, 8)
+```
+
+These are all interesting, but none actually allow us to run a real streaming computation. To do many interesting operations we need to be able to build a general [causal function](http://en.wikipedia.org/wiki/Causal_system). A causal function is a function that depends on the past and present (i.e., earlier values in the stream) but not the future. This can be accomplished with the `scan` method:
+
+```scala
+val runningTotal = p.scan(0)( (state, newValue) => state + newValue)
+// Vector(0, 0, 1, 3, 6, 10, 15, 21, 28, 36, 45)
+// Vector(initialState, initialState + firstElement, initial state + firstElement + secondElement, etc)
+```
+
+So in principle, `process.scan(initialState)( (state, input) => state)` is the Streaming equivalent of building a stateful actor (e.g. Akka style) and having that actor process a stream of values.
+
+Processes can be zipped together:
+
+```scala
+val lettersAndNumbers = (Process.emitAll(List(1,2,3)) zip (Process.emitAll(List("a", "b", "c"))
+// Process contains (1,a), (2,b), (3,c)
+```
+
+# Combining streams
+
+Streams can be combined in a variety of ways. One tool is the Wye (named after the Wye rail). A wye is a tool for merging streams. For example, one method it has is `dynamic`. This method takes two functions, one function of the left stream, the other of the irght stream, and it uses these functions to determine which stream to receive from next. A simple example which alternates between streams:
+
+```scala
+val l = Process.emitAll(List(1,2,3,4,5))
+val r = Process.emitAll(List("a", "b", "c", "d", "e"))
+
+val w = wye.dynamic((x:Int) => wye.Request.R, (y:String) => wye.Request.L)
+
+l.wye(r)(w).runLog.run
+// Result is Vector(ReceiveL(1), ReceiveR(a), ReceiveL(2), ReceiveR(b), ReceiveL(3), ReceiveR(c), ReceiveL(4), ReceiveR(d), ReceiveL(5), ReceiveR(e))
+```
+
+Another version - this one only requests from the right stream whenever the left element is divisible by three:
+
+```scala
+val w = wye.dynamic((x:Int) => if (x % 3 == 0) { wye.Request.R } else { wye.Request.L }, (y:String) => wye.Request.L)
+
+l.wye(r)(w).runLog.run
+/// Result is Vector(ReceiveL(1), ReceiveL(2), ReceiveL(3), ReceiveR(a), ReceiveL(4), ReceiveL(5))
 ```
