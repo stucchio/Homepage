@@ -11,6 +11,8 @@ Most machine learning is [approximating the identity](http://nuit-blanche.blogsp
 
 [Principled Typeclasses](http://degoes.net/articles/principled-typeclasses/).
 
+[Reactive in Reverse](https://dl.dropboxusercontent.com/u/1679797/NYT/Reactive%20in%20Reverse.pdf) - about Scalaz streams.
+
 Presentation on [Scalaz Futures and Tasks](http://t.co/8O2rV4nMCr). Well worth reading, nice to see a counterpoint to the Akka side of life.
 
 [Ozys Anti-Heartiste FAQ](http://slatestarcodex.com/2014/08/20/ozys-anti-heartiste-faq/). Well worth reading for two distinct groups. If you are open to rational arguments and are generally familiar with the PUA crowd, this is a very good counterargument against parts of it. If you are a typical coastal white knight sort, the sort persuaded by John Stewart, Valleywag or Jezebel, it's also worth reading - it illustrates *rational disagreement* as opposed to *argument by snark*.
@@ -30,3 +32,5 @@ Interestingly, Ozy's one major screwup in this post is her snarkiest: the bit ab
 I'm *shocked* to discover that there is a price delta between [abstract aluminum and deliverable aluminum ingots](http://www.bloombergview.com/articles/2014-09-03/the-goldman-sachs-aluminum-conspiracy-lawsuit-is-over).
 
 I [like these paintings a lot](http://www.thisiscolossal.com/2014/08/paintings-by-michael-kerbow-warn-of-dire-consequences-for-current-actions/?utm_source=stucchio&utm_medium=blog&utm_campaign=assortedlinks) though I imagine I'm missing the point.
+
+Steven Pinker's [The Trouble with Harvard](http://www.newrepublic.com/article/119321/harvard-ivy-league-should-judge-students-standardized-tests) and [Steven Pinkers inflammatory proposal](http://www.scottaaronson.com/blog/?p=2003).
