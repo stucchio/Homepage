@@ -293,6 +293,6 @@ You must read [Task: The Missing Documentation](http://timperrett.com/2014/07/20
 
 Paul Chiusano (author of Scalaz-Stream) has a useful [slideshow on it](http://pchiusano.github.io/talks/scalaz-stream-nescala-2014/scalaz-stream-nescala-2014.html#/an-introduction-to-scalaz-stream), albeit one or two versions out of date.
 
-[Scalaz Stream - Reactive in Reverse](https://dl.dropboxusercontent.com/u/1679797/NYT/Reactive%20in%20Reverse.pdf) is also worth reading.
+[Scalaz Stream - Reactive in Reverse](https://dl.dropboxusercontent.com/u/1679797/NYT/Reactive%20in%20Reverse.pdf) is also worth reading. This slideshow emphasizes how Scalaz Stream is pull rather than push.
 
 I also wrote about [Agents - a purely functional alternative to actors](|filename|agents.md), which is a thin library on top of Scalaz Stream.
