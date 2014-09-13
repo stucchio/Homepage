@@ -1,5 +1,5 @@
 title: Scalaz Stream - a Functional Reactive Programming Tutorial
-date: 2014-09-11 09:00
+date: 2014-09-15 08:30
 author: Chris Stucchio
 tags: scala, scalaz, scalaz-streaming, concurrency
 category: scala
