@@ -19,6 +19,8 @@ Presentation on [Scalaz Futures and Tasks](http://t.co/8O2rV4nMCr). Well worth r
 
 [A relational model of data for large shared data banks](http://www.cs.berkeley.edu/~rxin/db-papers/Relational-Model-Codd.pdf). This is how it all got started.
 
+[Inferring Causal Impact using Bayesian Structural Time-Series Models](http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/41854.pdf) - an interesting way to estimate whether an intervention actually worked. It's also peripherally related to this [blog post of mine](http://www.chrisstucchio.com/blog/2013/time_varying_conversion_rates.html). I also strongly believe that folks interested in stuff like this should learn a bit more PDEs, particularly Ito's Lemma.
+
 [Ozys Anti-Heartiste FAQ](http://slatestarcodex.com/2014/08/20/ozys-anti-heartiste-faq/). Well worth reading for two distinct groups. If you are open to rational arguments and are generally familiar with the PUA crowd, this is a very good counterargument against parts of it. If you are a typical coastal white knight sort, the sort persuaded by John Stewart, Valleywag or Jezebel, it's also worth reading - it illustrates *rational disagreement* as opposed to *argument by snark*.
 
 Interestingly, Ozy's one major screwup in this post is her snarkiest: the bit about leg hair. I don't dispute that nearly all white and Indian women have leg hair. A quote from a non-white non-Indian woman: "White people shave their legs too? I thought that was just an Indian thing." (I've been told that it's possible that extremely fine and nearly undetectible hairs may still be present on such women - for the purposes of Heartiste, they may as well be absent.)
