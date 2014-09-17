@@ -1,5 +1,5 @@
 title: Attribution Theory is Misguided
-date: 2014-09-22 08:30
+date: 2014-09-17 08:30
 author: Chris Stucchio
 tags: statistics, marginal thinking, advertising, attribution
 mathjax: true
@@ -43,7 +43,29 @@ That's not really clear from attribution models. The attribution models suggest 
 
 Instead of thinking in terms of giving credit for sales we've already achieved, we need to think on the relevant margin. The relevant margin is the *next sale*. The right question to answer is "how do I maximize sales right now?"
 
+We define the *Marginal Return on Advertising* or MRA as the allocation which will maximize *future* sales. So given that we've already spend $10 on TV and $0.5 on radio, the question is how to allocate that last $1 in order to increase sales the most?
+
 There are a couple of ways to answer this quesiton.
+
+### Brute Force
+
+Given that we have an explicit form for our return on advertising, we can simply brute force it, just make a table of possible allocations:
+
+- TV gets an extra $1, radio gets an extra $0: $@ S(11, 0.5) = 100 \cdot \ln(1+11)\ln(1+0.5) = 100.7 $@
+- TV gets an extra $0.5, radio gets an extra $0.5: $@ S(10.5, 1.0)  = 100 \cdot \ln(1+10.5)\ln(1+1.0)  = 169 $@
+- TV gets an extra $0.0, radio gets an extra $1.0: $@ S(10, 1.5)  = 100 \cdot \ln(1+10)\ln(1+1.5) = 219 $@
+
+### A picture
+
+So now I'll draw a picture. A point on the graph represents an allocation of capital into different advertising channels - for example, the point $@(2,3)$@ represents 2 dollars in television and 3 dollars in radio. The *color* represents how many sales we'd receieve with that allocation. More red means more sales.
+
+![marginal thinking](|filename|blog_media/2014/attribution_theory_is_misguided/attribution_vs_marginal_return.png)
+
+The red arrow represents our original spend - $10 on TV and $0.5 on radio. Now we've got an additional $1 - what to spend it on? The yellow arrow represents throwing money in the direction of attribution theory. This will increase sales, but not by a lot.
+
+In contrast, the black arrow represents the direction maximizing the *Marginal Return on Advertising* - throwing that additional $1 into radio. And that shifts us from the dark blue to the light blue region of the picture.
+
+In short, attribution theory measures how you got to where you are, where as Marginal Return on Advertising measures where you should go next.
 
 ### Calculus
 
@@ -60,26 +82,6 @@ $$ \textrm{MRA}_{TV} = \frac{dS}{dx} $$
 and for radio is
 
 $$ \textrm{MRA}_{Radio} = \frac{dS}{dy}.$$
-
-### Brute Force
-
-We can also simply brute force it, just make a table of possible allocations:
-
-- TV gets an extra $1, radio gets an extra $0: $@ S(11, 0.5) = 1.007 $@
-- TV gets an extra $0.5, radio gets an extra $0.5: $@ S(10.5, 1.0) = 1.69 $@
-- TV gets an extra $0.0, radio gets an extra $1.0: $@ S(10, 1.5) = 2.19 $@
-
-### A picture
-
-So now I'll draw a picture. A point on the graph represents an allocation of capital into different advertising channels - for example, the point $@(2,3)$@ represents 2 dollars in television and 3 dollars in radio. The *color* represents how many sales we'd receieve with that allocation. More red means more sales.
-
-![marginal thinking](|filename|blog_media/2014/attribution_theory_is_misguided/attribution_vs_marginal_return.png)
-
-The red arrow represents our original spend - $10 on TV and $0.5 on radio. Now we've got an additional $1 - what to spend it on? The yellow arrow represents throwing money in the direction of attribution theory. This will increase sales, but not by a lot.
-
-In contrast, the black arrow represents the direction maximizing the *Marginal Return on Advertising* - throwing that additional $1 into radio. And that shifts us from the dark blue to the light blue region of the picture.
-
-In short, attribution theory measures how you got to where you are, where as Marginal Return on Advertising measures where you should go next.
 
 # The Big Idea
 
