@@ -27,7 +27,7 @@ $$ S(x,y) = 100 \cdot \ln(1+x) \ln(1+y) $$
 
 In real life we'll never know this, of course. But it's illustrative to have a fully explicit mathematical model to explore the concept.
 
-Now suppose that we've currently devoted $10 to TV advertising and $5 to radio advertising. What can we deduce? First of all, sales will be 97.
+Now suppose that we've currently devoted $10 to TV advertising and $0.5 to radio advertising. What can we deduce? First of all, sales will be 97.
 
 For simplicity we'll assume all sales are due to advertising. We'll assume 92 people saw TV ads only, 2 people saw a TV ad then a radio ad, and 3 people saw radio ads only. With last touch modelling, we might discover that 5 sales were due to radio ads (2 of those customers also saw a TV ad) and 92 are due to TV. With linear attribution, we'd attribute 93 sales to TV and 4 to radio.
 
@@ -68,6 +68,18 @@ We can also simply brute force it, just make a table of possible allocations:
 - TV gets an extra $1, radio gets an extra $0: $@ S(11, 0.5) = 1.007 $@
 - TV gets an extra $0.5, radio gets an extra $0.5: $@ S(10.5, 1.0) = 1.69 $@
 - TV gets an extra $0.0, radio gets an extra $1.0: $@ S(10, 1.5) = 2.19 $@
+
+### A picture
+
+So now I'll draw a picture. A point on the graph represents an allocation of capital into different advertising channels - for example, the point $@(2,3)$@ represents 2 dollars in television and 3 dollars in radio. The *color* represents how many sales we'd receieve with that allocation. More red means more sales.
+
+![marginal thinking](|filename|blog_media/2014/attribution_theory_is_misguided/attribution_vs_marginal_return.png)
+
+The red arrow represents our original spend - $10 on TV and $0.5 on radio. Now we've got an additional $1 - what to spend it on? The yellow arrow represents throwing money in the direction of attribution theory. This will increase sales, but not by a lot.
+
+In contrast, the black arrow represents the direction maximizing the *Marginal Return on Advertising* - throwing that additional $1 into radio. And that shifts us from the dark blue to the light blue region of the picture.
+
+In short, attribution theory measures how you got to where you are, where as Marginal Return on Advertising measures where you should go next.
 
 # The Big Idea
 
