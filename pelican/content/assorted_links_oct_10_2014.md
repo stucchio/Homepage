@@ -12,3 +12,5 @@ nolinkback: true
 [Why Scrum Should basically Just Die](http://gilesbowkett.blogspot.com.au/2014/09/why-scrum-should-basically-just-die-in.html)
 
 Apparently the Nazi's planned to deport the Jews to [Madagascar](http://en.wikipedia.org/wiki/Madagascar_Plan).
+
+[In praise of the privileged](http://www.psychologytoday.com/blog/how-do-life/201409/in-praise-the-so-called-privileged)
