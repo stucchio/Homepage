@@ -9,7 +9,7 @@ nolinkback: true
 
 [The Log: What every software engineer should know about real-time data's unifying abstraction](http://gilesbowkett.blogspot.com.au/2014/09/why-scrum-should-basically-just-die-in.html)
 
-[Microservice Prerequisites](http://martinfowler.com/bliki/MicroservicePrerequisites.html) - a good guide. Also a great reason to stick to monolithic architecture for as long as possible.
+[Microservice Prerequisites](http://martinfowler.com/bliki/MicroservicePrerequisites.html) - a good guide. Also a great reason to stick to monolithic architecture for as long as possible. Relatedly, [distributed balls of mud](http://www.codingthearchitecture.com/2014/07/06/distributed_big_balls_of_mud.html).
 
 [Why Scrum Should basically Just Die](http://gilesbowkett.blogspot.com.au/2014/09/why-scrum-should-basically-just-die-in.html)
 
