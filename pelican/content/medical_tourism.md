@@ -21,3 +21,5 @@ My first official bit of medical tourism was several months back. My problem: I 
 Through the magic of lasers, this problem is now permanently fixable. I did some research and knew the procedure I wanted - [wavefront guided femtolasik](http://en.wikipedia.org/wiki/IntraLASIK). I started looking up prices, and a typical price in the US was $2000 or 1.2 lakh rupees **per eye**. I started googling for prices in India but that was rather more difficult - the general price range I got was anywhere from 15-30k rupees per eye. Quite a price difference. So I asked around and got a recommendation - Aditya Kelkar at the [National Institute of Opthamology](http://www.nioeyes.com/).
 
 It was a little difficult to find the place, but when I got there the facility was clean and modern - more or less what you'd expect in the US, apart from minor differences like the lack of paper cups for the water cooler.
+
+[Link to $117k surgery](http://www.nytimes.com/2014/09/21/us/drive-by-doctoring-surprise-medical-bills.html)
