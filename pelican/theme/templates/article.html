@@ -51,7 +51,32 @@
     <div class="col-sm-2">
       <img id="mailer" src="" style="width: 160px; height=160px;"></img>
     </div>
+    <div class="col-sm-10">
+      <div id="mc_embed_signup">
+        <form action="//chrisstucchio.us9.list-manage.com/subscribe/post?u=3a98a60ae3f68c59a307a874c&amp;id=3adc54ba5c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" role="form" novalidate >
+          <h2>Subscribe to the mailing list</h2>
+          <div class="mc-field-group form-group">
+            <label for="mce-EMAIL">Email Address</label>
+            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"></input>
+          </div>
+          <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+          </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div style="position: absolute; left: -5000px;"><input type="text" name="b_3a98a60ae3f68c59a307a874c_3adc54ba5c" tabindex="-1" value=""></input></div>
+          <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></input></div>
+        </form>
+      </div>
+      <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+      <!--End mc_embed_signup-->
+    </div>
+  </div>
+
+  {% endblock %}
+
+{% block footerjs %}
     <script type="text/javascript">
+      (function() {
       var setCookie = function(name,value,days) {
         if (days) {
           var date = new Date();
@@ -90,26 +115,14 @@
         'eventAction' : choice
       });
       document.getElementById("mailer").setAttribute("src", choice);
+      document.getElementById("mc-embedded-subscribe").addEventListener("click", function () {
+        ga('send', {
+            'hitType' : 'event',
+            'nonInteraction' : true,
+            'eventCategory' : 'ab:glasses:submit',
+            'eventAction' : choice
+          });
+        });
+      })();
     </script>
-    <div class="col-sm-10">
-      <div id="mc_embed_signup">
-        <form action="//chrisstucchio.us9.list-manage.com/subscribe/post?u=3a98a60ae3f68c59a307a874c&amp;id=3adc54ba5c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" role="form" novalidate >
-          <h2>Subscribe to the mailing list</h2>
-          <div class="mc-field-group form-group">
-            <label for="mce-EMAIL">Email Address</label>
-            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"></input>
-          </div>
-          <div id="mce-responses" class="clear">
-            <div class="response" id="mce-error-response" style="display:none"></div>
-            <div class="response" id="mce-success-response" style="display:none"></div>
-          </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-          <div style="position: absolute; left: -5000px;"><input type="text" name="b_3a98a60ae3f68c59a307a874c_3adc54ba5c" tabindex="-1" value=""></input></div>
-          <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></input></div>
-        </form>
-      </div>
-      <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-      <!--End mc_embed_signup-->
-    </div>
-  </div>
-
-  {% endblock %}
+{% endblock %}
