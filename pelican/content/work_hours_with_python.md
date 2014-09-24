@@ -162,7 +162,7 @@ Now what happens when we optimize?
  message: 'Optimization terminated successfully.'
 ```
 
-With this change, all of a sudden we find the optimal work week is 13.7 hours. With $100/week in per-employee costs (e.g., health insurance, time spent managing employees), the optimal work week rises to 27 hours.
+With this change, all of a sudden we find the optimal work week is 13.7 hours. Below that and we waste too much money on payroll processing. Above that and we waste money on  With $100/week in per-employee costs (e.g., health insurance, time spent managing employees), the optimal work week rises to 27 hours.
 
 # A more complicated model? Python's got you covered.
 
@@ -187,14 +187,14 @@ def cost(hours_worked_pt, num_employees_pt, hours_worked_ft, num_employees_ft):
     part_time_labor_cost = hours_worked_pt * hourly_pay * num_employees_pt
     part_time_fixed_cost = 20*num_employees_pt
     full_time_labor_cost = hours_worked_ft * num_employees_ft * hourly_pay
-    full_time_fixed_cost = 150*num_employees_ft
+    full_time_fixed_cost = 100*num_employees_ft
     return  (part_time_labor_cost
              + part_time_fixed_cost
              + full_time_labor_cost
              + full_time_fixed_cost)
 ```
 
-The $150 full time fixed cost corresponds to about $600/month per full time employee - a quick google search suggests this is a very plausible cost for health insurance alone (to say nothing of other benefits/real estate/etc).
+The $100 full time fixed cost corresponds to about $400/month per full time employee - a quick google search suggests this is a very plausible cost for health insurance alone (to say nothing of other benefits/desk space/etc).
 
 We also need to impose extra constraints. By definition, a full time worker works at least 30 hours, and a part time worker works 29 or less. So the constraints become:
 
@@ -210,7 +210,7 @@ cons = ({'type': 'ineq', 'fun': lambda x:  production(x[0], x[1]) + production(x
 
 According to this simulation, the optimal number of work hours is exactly 29 for part time workers (and 0 full time workers should be hired).
 
-Of course, this effect is driven entirely by fixed costs - even if we set productivity to a constant, we get the same result.
+Of course, this effect is driven entirely by fixed costs - even if we throw away the assumption that fewer hours increases productivity, we get the same result.
 
 # Conclusion
 
