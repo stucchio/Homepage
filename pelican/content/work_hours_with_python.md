@@ -102,7 +102,7 @@ That's even better! We got the cost down to $3431, and we have 2988 employees wo
 
 ## Time for a 5.6 minute work week?!?
 
-The math can't be wrong. It shows that the best thing for bakery owners would be to have a 5.7 minute work week and a parade of 3000 workers passing through each day.
+The math can't be wrong. It shows that the best thing for bakery owners would be to have a 5.7 minute work week and a parade of 3000 workers passing through each week, each worker performing a single task before leaving.
 
 So why won't the greedy capitalist bakers implement this solution, apart from the fact that it's patently ridiculous?
 
