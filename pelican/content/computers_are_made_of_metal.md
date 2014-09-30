@@ -1,5 +1,5 @@
 title: Computers are made of metal (not category theory)
-date: 2014-09-29 08:00
+date: 2014-10-01 08:00
 author: Chris Stucchio
 tags: scala, performance, functional programming
 category: programming
@@ -8,7 +8,25 @@ Computers are made of metal. It's an important fact to remember. It's wonderful 
 
 That's why if you truly want to build a performant system, you need to understand how all that works. And you can't be afraid of putting a little bit of mutable state under the hood - mutable state tends to be vastly faster than copying objects around. It's worth breaking the purity of one's implementation to achieve that.
 
-In what follows, please note that I'm criticising libraries I [start new projects in](https://github.com/stucchio/timeserieszen/), not libraries I [refuse to use](http://www.mongodb.org/).
+# The basics
+
+The following is at table reproduced from Peter Norvig's [Teach Yourself Programming in 10 years](http://norvig.com/21-days.html).
+
+<table>
+<tr><th>Operation</th><th>Time</th></tr>
+<tr><td>execute typical instruction</td><td>1/1,000,000,000 sec = 1 nanosec</td></tr>
+<tr><td>fetch from L1 cache memory</td><td>0.5 nanosec</td></tr>
+<tr><td>branch misprediction</td><td>5 nanosec</td></tr>
+<tr><td>fetch from L2 cache memory</td><td>7 nanosec</td></tr>
+<tr><td>Mutex lock/unlock</td><td>25 nanosec</td></tr>
+<tr><td>fetch from main memory</td><td>100 nanosec</td></tr>
+<tr><td>send 2K bytes over 1Gbps network</td><td>20,000 nanosec</td></tr>
+<tr><td>read 1MB sequentially from memory</td><td>250,000 nanosec</td></tr>
+<tr><td>fetch from new disk location (seek)</td><td>8,000,000 nanosec</td></tr>
+<tr><td>read 1MB sequentially from disk</td><td>20,000,000 nanosec</td></tr>
+<tr><td>send packet US to Europe and back</td><td>150 milliseconds = 150,000,000 nanosec</td></tr>
+</table>
+
 
 # Function calls are slow
 
@@ -26,6 +44,7 @@ val x: Array[Double] = ... //size 8M
 x.map(x => 2.0*x+3.0)
 ```
 The code path is:
+
 1. Create an int pointer `i` into the array, and a result array.
 2. Call the anonymous `<function1>` on the value in that array at position `i`.
 3. Do the float multiplication/addition.
@@ -65,7 +84,7 @@ x.map(x => 2.0*x+3.0)
 One nice fact about this code is that consecutive elements in the `Array[Double]` are consecutive in RAM. So if the CPU loads a page of `1024` bytes into the CPU cache, then the CPU can perform 128 operations before needing to load a new page into the cache. I.e., the instructions can look like:
 
 1. Load a page of 128 elements into cache.
-2. Run the fnuction for those 128 elements.
+2. Run the function for those 128 elements.
 3. Write the cache line back to RAM.
 
 This involves paging RAM into cache once every 128 elements of the array.
@@ -177,4 +196,10 @@ There are precisely 3 objects created - 2 `Boolean`s and an `Int`. No functions 
 
 I'm too lazy to run a benchmark on this, but I hope you believe me that it's faster.
 
-# Disks are spinny pieces of metal
+# These problems are solveable
+
+In principle, a Sufficiently Smart Compiler (TM) can solve these problems. Such a compiler could properly determine that intermediate steps are unused, merge them (e.g. translate `x.map(f).map(g)` to `x.map(x => g(f(x)))`). Functional purity can make this process a lot safer than in many other languages.
+
+As proof that such things are possible, take a look at [Julia's Benchmarks](http://julialang.org/benchmarks/). Julia is a Lisp-like language designed for numerical code, and it achieves "as fast as C" performance via optional static typing and aggressive compiler optimizations. At some point it is my hope that the more pure functional languages (Haskell, Scala) will adopt similar optimizations and perform similarly.
+
+Until then, we shouldn't forget that computers are made of metal. A few dirty while loops over arrays hidden inside functions, aggressive use of `StringBuilder`, and similar optimizations can drastically speed up performance. Until a Sufficiently Smart Compiler exists, lets not be afraid to dirty up our implementations for the benefit of the users.
