@@ -1,4 +1,4 @@
-title: Computers are made of metal (not category theory)
+title: Computers are made of metal, not category theory
 date: 2014-10-01 08:00
 author: Chris Stucchio
 tags: scala, performance, functional programming
