@@ -7,6 +7,8 @@ nolinkback: true
 
 The [MCMC Handbook](http://www.mcmchandbook.net/HandbookTableofContents.html).
 
+Andrew Gelman has an [excellent list of statistical techniques you may not know, but should](http://andrewgelman.com/2009/05/24/handy_statistic/).
+
 A [short tutorial](http://www.marketingdistillery.com/2014/09/26/estimating-the-impact-of-tv-advertisement-with-bayesian-state-space-models/) on using Google's [Causal Impact](http://google-opensource.blogspot.com/2014/09/causalimpact-new-open-source-package.html) to estimate the result of a TV ad.
 
 A hacker news [comment](https://news.ycombinator.com/item?id=8377198) which explains when MongoDB is the right tool for the job.
@@ -17,6 +19,14 @@ Eduard Kmett on [the advantages and disadvantages of class inheritance vs typecl
 
 A large portion of the infant mortality gap between the US and Europe (or at least the US and {Finland, Austria}) is [caused by differential reporting of births and demographics](http://faculty.chicagobooth.edu/emily.oster/papers/imr.pdf).
 
+First steps [towards NGDP futures](http://www.themoneyillusion.com/?p=27695&utm_source=referral&utm_medium=blog&utm_campaign=stucchio). Relatedly, [Americans will be prohibited from using it](http://econlog.econlib.org/archives/2014/10/still_no_free_l.html?utm_source=referral&utm_medium=blog&utm_campaign=stucchio).
+
 [Are Americans Maoists, or merely innumerate?](http://www.themoneyillusion.com/?p=27648&utm_source=referral&utm_medium=blog&utm_campaign=stucchio)
+
+[Shamer Shaming](http://andrewgelman.com/2014/09/18/shamer-shaming/)
+
+[Match Made at Birth? What Traits of a Million Swedes Tell Us About CEOs](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2436765). Apparently CEOs are generally super awesome people.
+
+[John Cochrane demolishes Paul Krugman](http://johnhcochrane.blogspot.com/2014/10/envy-and-excess.html). Several followups - [Noah Smith](http://www.bloombergview.com/articles/2014-10-01/what-s-wrong-with-ignoring-inequality) says we should punish the wealthy because voters dislike inequality. I wonder if he'd support punishing gay/interracial sex on the same grounds, or if he is making an argument he doesn't really believe?
 
 [The Case for Fair Value Accounting](http://www.nationalaffairs.com/publications/detail/the-case-for-fair-value-accounting)
