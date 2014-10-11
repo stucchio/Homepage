@@ -25,6 +25,8 @@ Scott Alexander on [Red Plenty](http://slatestarcodex.com/2014/09/24/book-review
 
 Also [An Important Message from Scott Siskind](http://raikoth.net/).
 
+[Introduction to automatic differentiation](http://alexey.radul.name/ideas/2013/introduction-to-automatic-differentiation/). This should be more famous than it is.
+
 I'm currently enjoying the paper [The limit distribution of the maximum increment of a random walk with regularly varying jump size distribution](http://www.math.ku.dk/~mikosch/Preprint/Increment/BEJ255.pdf). Boy that's a mouthful. The gist of the paper is
 
 [How The FiveThirtyEight Senate Forecast Model Works](http://fivethirtyeight.com/features/how-the-fivethirtyeight-senate-forecast-model-works/). Relatedly, [this](http://allendowney.blogspot.com/2014/09/bayesian-election-forecasting.html).
