@@ -17,16 +17,26 @@ Eduard Kmett on [the advantages and disadvantages of class inheritance vs typecl
 
 [Making Hybrid Images](http://jeremykun.com/2014/09/29/hybrid-images/)
 
+[Why Program with Continuous Time](http://conal.net/blog/posts/why-program-with-continuous-time)
+
+[Seven Deadly Sins of Talking About Types](http://www.cl.cam.ac.uk/~srk31/blog/2014/10/07/)
+
+[Tutorial on optimizing Haskell](https://github.com/bitemyapp/learnhaskell/blob/master/write_haskell_as_fast_as_c.md)
+
 A large portion of the infant mortality gap between the US and Europe (or at least the US and {Finland, Austria}) is [caused by differential reporting of births and demographics](http://faculty.chicagobooth.edu/emily.oster/papers/imr.pdf).
 
 First steps [towards NGDP futures](http://www.themoneyillusion.com/?p=27695&utm_source=referral&utm_medium=blog&utm_campaign=stucchio). Relatedly, [Americans will be prohibited from using it](http://econlog.econlib.org/archives/2014/10/still_no_free_l.html?utm_source=referral&utm_medium=blog&utm_campaign=stucchio).
 
+The FTC takes an interest in [feature engineering](http://www.ftc.gov/news-events/blogs/techftc/2014/09/online-ads-roll-dice).
+
 [Are Americans Maoists, or merely innumerate?](http://www.themoneyillusion.com/?p=27648&utm_source=referral&utm_medium=blog&utm_campaign=stucchio)
+
+[62% of academic achievement is due to genes](http://news.sciencemag.org/biology/2014/10/genes-dont-just-influence-your-iq-they-determine-how-well-you-do-school)
 
 [Shamer Shaming](http://andrewgelman.com/2014/09/18/shamer-shaming/)
 
 [Match Made at Birth? What Traits of a Million Swedes Tell Us About CEOs](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2436765). Apparently CEOs are generally super awesome people.
 
-[John Cochrane demolishes Paul Krugman](http://johnhcochrane.blogspot.com/2014/10/envy-and-excess.html). Several followups - [Noah Smith](http://www.bloombergview.com/articles/2014-10-01/what-s-wrong-with-ignoring-inequality) says we should punish the wealthy because voters dislike inequality. I wonder if he'd support punishing gay/interracial sex on the same grounds, or if he is making an argument he doesn't really believe?
+[John Cochrane demolishes Paul Krugman](http://johnhcochrane.blogspot.com/2014/10/envy-and-excess.html). Several followups - [Noah Smith](http://www.bloombergview.com/articles/2014-10-01/what-s-wrong-with-ignoring-inequality) says we should punish the wealthy because voters dislike inequality. I wonder if he'd support punishing gay/interracial sex on the same grounds, or if he is making an argument he doesn't really believe? John Cochrane has a [followup to some responses](http://johnhcochrane.blogspot.in/2014/10/chicken-and-egg-inequality.html).
 
 [The Case for Fair Value Accounting](http://www.nationalaffairs.com/publications/detail/the-case-for-fair-value-accounting)
