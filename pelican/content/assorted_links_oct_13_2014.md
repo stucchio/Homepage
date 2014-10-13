@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-9-27 9:30:00
+date: 2014-10-13 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -21,6 +21,8 @@ Eduard Kmett on [the advantages and disadvantages of class inheritance vs typecl
 
 [Seven Deadly Sins of Talking About Types](http://www.cl.cam.ac.uk/~srk31/blog/2014/10/07/)
 
+[Alternatives to Executors when scheduling Tasks/Actors](http://java-is-the-new-c.blogspot.in/2014/10/alternatives-to-executors-when.html)
+
 [Tutorial on optimizing Haskell](https://github.com/bitemyapp/learnhaskell/blob/master/write_haskell_as_fast_as_c.md)
 
 A large portion of the infant mortality gap between the US and Europe (or at least the US and {Finland, Austria}) is [caused by differential reporting of births and demographics](http://faculty.chicagobooth.edu/emily.oster/papers/imr.pdf).
@@ -39,4 +41,16 @@ The FTC takes an interest in [feature engineering](http://www.ftc.gov/news-event
 
 [John Cochrane demolishes Paul Krugman](http://johnhcochrane.blogspot.com/2014/10/envy-and-excess.html). Several followups - [Noah Smith](http://www.bloombergview.com/articles/2014-10-01/what-s-wrong-with-ignoring-inequality) says we should punish the wealthy because voters dislike inequality. I wonder if he'd support punishing gay/interracial sex on the same grounds, or if he is making an argument he doesn't really believe? John Cochrane has a [followup to some responses](http://johnhcochrane.blogspot.in/2014/10/chicken-and-egg-inequality.html).
 
+[The Id of Basic Income](http://www.moreright.net/the-id-of-the-basic-income/). Interesting article arguing that the true purpose of BI is for the (wannabe) intellectual elite to maintain status without working.
+
+[Interfluidity explains some basic math on taxation and progressivity](http://www.interfluidity.com/v2/5675.html)
+
+[Charlie Munger interview - part 1](http://www.forbes.com/sites/phildemuth/2014/09/19/charlie-munger-and-the-2014-daily-journal-annual-meeting-a-fans-notes/) [part 2](http://www.forbes.com/sites/phildemuth/2014/09/25/charlie-munger-and-the-2014-daily-journal-annual-meeting-part-two/) and [part 3](http://www.forbes.com/sites/phildemuth/2014/10/01/charlie-munger-and-the-2014-daily-journal-annual-meeting-part-three/). Good quotes:
+
+> ...once the press goes off on something that’s complicated they go berserk. [On matters of tax policy.]
+>The Jews were right to put those things [don't covet] in the Old Testament: don’t envy thy neighbor’s donkey, his wife…they kept laying it on because they knew it was important even for a bunch of herdsmen. They were right.
+> Mr. Picketty [Capital] is a little daft...if a place as big as China gets really good at manufacturing it’s going to reduce some union jobs in the rest of the world...To sit in a very rich country with a 36-hour week and complain about the fact that all the other people are coming up just doesn’t strike me as a very mature or noble way to behave.
+
 [The Case for Fair Value Accounting](http://www.nationalaffairs.com/publications/detail/the-case-for-fair-value-accounting)
+
+[Robin Hanson on (female human) egg futures](http://www.overcomingbias.com/2014/10/why-not-egg-futures.html)
