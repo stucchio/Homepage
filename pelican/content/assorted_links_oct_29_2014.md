@@ -13,14 +13,30 @@ Illustrating Asymptotic Behavior, [part 1](http://davegiles.blogspot.ca/2014/10/
 
 [The overhead of abstraction in Python vs C++](http://blog.reverberate.org/2014/10/the-overhead-of-abstraction-in-cc-vs.html)
 
+[Colin Percival on Startup School](http://www.daemonology.net/blog/2014-10-18-thoughts-on-startup-school.html). He describes very well one of the things I strongly dislike about the modern startup scene.
+
+[Microservices - a Reality Check(point)](http://capgemini.github.io/architecture/microservices-reality-check/). Great article discussing some of the things you need to do to make microservices work.
+
+[Docker development patterns](http://www.hokstad.com/docker/patterns).
+
+[Great discussion on actual HFT market manipulation](http://www.bloombergview.com/articles/2014-10-16/high-speed-traders-put-a-bit-too-much-gravy-on-their-meat). Goes into trading mechanics, not simply "omfg, trading fast, robbery!"
+
 [Bricolage by smart people](http://lemire.me/blog/archives/2014/10/13/bricolage-by-smart/)
 
 [Articulating my confusion](http://updatedpriors.blogspot.in/2014/10/articulating-my-confusion.html?utm_source=referral&utm_medium=blog&utm_campaign=stucchio) on secular stagnation.
 
 [Infotainment Journalism](https://www.jacobinmag.com/2014/06/infotainment-journalism/) and the Pop-Quant.
 
+[International Evidence on the Human Capital/Signaling Split](http://econlog.econlib.org/archives/2013/10/international_e.html)
+
+[All an Ayn Rand Hero really wants is Love](http://thefederalist.com/2014/08/19/all-an-ayn-rand-hero-really-wants-is-love/). A very interesting perspective.
+
 [Archiwindow](http://www.archdaily.com/556587/archiwindow-a-glimpse-through-the-eyes-of-architecture/?utm_source=referral&utm_medium=blog&utm_campaign=stucchio). Just click the link, it's interesting. And yes, my favorite happens to be Le Corbusier and Toyo Ito.
 
-[Jezebel decides sex shaming is ok](http://fredrikdeboer.com/2014/10/08/jezebel-gets-in-on-some-sweet-sex-shaming/). Relatedly, [hard data is bro-stuff](https://twitter.com/zunguzungu/status/457644537679077376) and a [fetish for dude-bros](https://twitter.com/zunguzungu/status/457650311457296385). I truly don't understand why techies take these people seriously. That said,
+[Modesty of Dress and Indian Culture](http://feminisminindia.com/modesty-dress-indian-culture/). "The problem, sir/madam, is that revealing attire is being worn. Deep-neck and sleeveless tops, exposed legs–and these are just the middle-aged priests! Some priests are even (Shiva Shiva!) doing away with the upper garment. They are doing this in front of ladies and Gods, with no shame at all. "
+
+[Socialists advocating for $20/hour min wage want to hire web developer for $13/hour](http://reason.com/blog/2014/10/16/socialists-push-for-20-minimum-wage-but). Heh.
+
+[Jezebel decides sex shaming is ok](http://fredrikdeboer.com/2014/10/08/jezebel-gets-in-on-some-sweet-sex-shaming/). Relatedly, [hard data is bro-stuff](https://twitter.com/zunguzungu/status/457644537679077376) and a [fetish for dude-bros](https://twitter.com/zunguzungu/status/457650311457296385). I truly don't understand why techies take these people seriously. Related thoughts on [police aggression](http://fredrikdeboer.com/2014/10/19/police-aggression-will-fall-inevitably-on-the-poor-and-the-brown-pumpkin-edition/) by Freddie Deboer - apparently when the police go wild on homeboys it's an outrage, but when they go wild on bros it's hilarious. And one more by [Freddie](http://fredrikdeboer.com/2014/10/13/the-burden-of-expanding-the-police-states-power-to-prosecute-sex-crimes-will-fall-on-the-poor-and-the-black/).
 
 ![Inequality vs parental attitudes.](http://www.voxeu.org/sites/default/files/image/FromMay2014/doepke%20fig4%2010%20oct.png) Correlations between [inequality and parental attitudes](http://www.voxeu.org/article/economics-parenting).
