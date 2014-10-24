@@ -24,7 +24,7 @@ def dW(dt):
 def random_walk(y0, tmax, dt, times = None):
     dt = dt * tscale
     def rhs(y,t):
-        return -theta*(y-(a-b)/(a+b+2)) + sqrt(2*theta*(1-y*y)/(a+b+2))*dW(dt)
+        return -theta*(y-(a-b)/(a+b+2)) + sqrt(2*theta*(1-y*y)/(a+b+2))*dW(dt/tscale)
     if (times is None):
         times = arange(0,tmax,dt)
     y = zeros(shape=times.shape, dtype=float)
@@ -97,6 +97,7 @@ def propagate_jacobi(pc, t):
     n = arange(pc.shape[0], dtype=float)
     l = theta*n*(n+a+b+1.0)/(a+b+2.0)*tscale
     return exp(-l*t)*pc
+
 
 def pde_solve(prior, t):
     result = zeros(shape=(t.shape[0], prior.shape[0]), dtype=float)
