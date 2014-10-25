@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-10-13 9:30:00
+date: 2014-10-27 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
