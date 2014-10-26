@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-10-27 9:30:00
+date: 2014-10-26 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -10,6 +10,8 @@ nolinkback: true
 [Blind Denoising with Random Greedy Pursuits](http://arxiv.org/pdf/1312.5444v3.pdf). You can denoise some signals without knowledge of the noise level. I'm impressed.
 
 Illustrating Asymptotic Behavior, [part 1](http://davegiles.blogspot.ca/2014/10/illustrating-asymptotic-behaviour-part-i.html?utm_source=referral&utm_medium=blog&utm_campaign=stucchio) [part 2](http://davegiles.blogspot.ca/2014/10/illustrating-asymptotic-behaviour-part_12.html?utm_source=referral&utm_medium=blog&utm_campaign=stucchio) and [part 3](http://davegiles.blogspot.in/2014/10/illustrating-asymptotic-behaviour-part.html?utm_source=referral&utm_medium=blog&utm_campaign=stucchio). Great reading.
+
+[Elementary Data Analysis](http://www.stat.cmu.edu/~cshalizi/ADAfaEPoV/ADAfaEPoV.pdf) by Cosma Shalizi. Also useful.
 
 [The overhead of abstraction in Python vs C++](http://blog.reverberate.org/2014/10/the-overhead-of-abstraction-in-cc-vs.html)
 
