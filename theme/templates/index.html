@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h1><a href="/blog/index.html">From the blog</a></h1>
+    {% if articles %}
+        {% for article in (articles_page.object_list if articles_page else articles) %}
+          {% if loop.index < 4 %}
+            <article>
+                {% if article.remoteurl %}
+                <h2><a href="{{ article.remoteurl }}">{{ article.title }}</a></h2>
+                {% else %}
+                <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+                {% endif %}
+                <div class="summary">{{ article.summary }}
+                    {% include 'includes/comment_count.html' %}
+                    <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">more ...</a>
+                </div>
+            </article>
+            <hr/>
+          {% endif %}
+        {% endfor %}
+    {% endif %}
+{% if FRONT_PAGE_CATEGORIES %}
+<a href="/blog/index.html">Read more</a>
+  <div class="row">
+    <h1>Popular Topics</h1>
+    {% for category, article_list in categories %}
+      {% if category in FRONT_PAGE_CATEGORIES %}
+      <div class="col-lg-3">
+        <h2>{{category}}</h2>
+        <ul>
+          {% for article in article_list %}
+            {% if article.remoteurl %}
+              <li><a href="{{ article.remoteurl }}">{{ article.title }}</a></li>
+            {% else %}
+              <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+     {% endfor %}
+  </div>
+{% endif %}
+{% endblock content %}
