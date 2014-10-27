@@ -11,7 +11,7 @@ The last month or so of my life hasn't been awesome. That's me prepped for surge
 
 # **Go read right now:** Foundations of Data Science, by John Hopcroft and Ravindran Kannan
 
-Summary: [Go read this book now](http://research.microsoft.com/en-us/people/navingo/e0-229.aspx).
+Summary: [Go read this book now](http://www.cs.cornell.edu/jeh/NOSOLUTIONS90413.pdf).
 
 Data science tends to consist of two somewhat disparate parts. On the one hand, there are a variety of practical algorithms, together with various tricks for implementing them, which can be used more or less as black box learning tools. Most of the textbooks I've seen focus on describing these algorithms, while providing enough theory to get to the point where they can be explained. On the other hand, there is quite a bit of mathematical theory and intuition, which most books don't provide a great deal of explanation for.
 
@@ -25,7 +25,7 @@ So far, FODS is the ONLY book I've seen that falls into this category. As such, 
 
 The first two chapters alone (which cover high dimensional vector spaces and singular value decompositions) make FODS well worth reading. The book also covers random graphs, markov chains, and much later on in the book actually teaches some algorithms. I didn't actually get that far during my hospital stay, so I can't say every chapter is perfect. But overall, it's a fantastic book.
 
-Did I mention that [it's available for free](https://research.microsoft.com/en-US/people/kannan/book-no-solutions-aug-21-2014.pdf)? Go read it now.
+Did I mention that [it's available for free](http://research.microsoft.com/en-us/people/navingo/e0-229.aspx)? Go read it now.
 
 # **Skip:** Antifragile, by Nassim Taleb
 
