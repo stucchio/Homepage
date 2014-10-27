@@ -2,7 +2,7 @@ title: Go Read Gabriel Weinberg's "Traction Book" right now
 date: 2014-08-20 09:00
 author: Chris Stucchio
 tags: startups, marketing
-category: startups
+category: book review
 summary: My review of Gabriel Weinberg's Traction Book. In short: buy it and read it.
 
 In a few days, Gabriel Weinberg's new book [Traction: A Startup Guide to Getting Customers](http://www.amazon.com/gp/product/0976339609/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0976339609&linkCode=as2&tag=christuc-20&linkId=7VRVMNOJHRGUFU2A) will be released. I was lucky enough to receive a pre-release copy of it, and for the most part all I can say is that it was an excellent book. The core of the book is embodied in the blurb:
