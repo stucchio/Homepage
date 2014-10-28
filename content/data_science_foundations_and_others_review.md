@@ -11,7 +11,7 @@ The last month or so of my life hasn't been awesome. That's me prepped for surge
 
 # **Go read right now:** Foundations of Data Science, by John Hopcroft and Ravindran Kannan
 
-Summary: [Go read this book now](http://research.microsoft.com/en-us/people/navingo/e0-229.aspx).
+Summary: [Go read this book now](http://www.cs.cornell.edu/jeh/NOSOLUTIONS90413.pdf).
 
 Data science tends to consist of two somewhat disparate parts. On the one hand, there are a variety of practical algorithms, together with various tricks for implementing them, which can be used more or less as black box learning tools. Most of the textbooks I've seen focus on describing these algorithms, while providing enough theory to get to the point where they can be explained. On the other hand, there is quite a bit of mathematical theory and intuition, which most books don't provide a great deal of explanation for.
 
@@ -25,7 +25,7 @@ So far, FODS is the ONLY book I've seen that falls into this category. As such, 
 
 The first two chapters alone (which cover high dimensional vector spaces and singular value decompositions) make FODS well worth reading. The book also covers random graphs, markov chains, and much later on in the book actually teaches some algorithms. I didn't actually get that far during my hospital stay, so I can't say every chapter is perfect. But overall, it's a fantastic book.
 
-Did I mention that [it's available for free](https://research.microsoft.com/en-US/people/kannan/book-no-solutions-aug-21-2014.pdf)? Go read it now.
+Did I mention that [it's available for free](http://research.microsoft.com/en-us/people/navingo/e0-229.aspx)? Go read it now.
 
 # **Skip:** Antifragile, by Nassim Taleb
 
@@ -35,7 +35,9 @@ Before reading this book, my feelings about Nassim Taleb were mixed. On various 
 
 On the other hand, I've also read articles by Talbe writtenfor a popular audience, and I've found it to be content-free New Yorker style prattle. A perfect example is this [execrable article]() about why Standard Deviations are evil and should never be used. It makes you feel smart when you read it - Taleb exudes intelligence, contrarianism, and disdain for the nerds who actually handle the technicalities. When writing for a popular audience, Taleb lets you feel smart without actually having to exercise your brain.
 
-Antifragile falls solidly into the latter category. Taleb's main thesis is that some things in the world are "antifragile", which means that after subjecting them to certain types of "randomness"
+Antifragile falls solidly into the latter category. Taleb's main thesis is that some things in the world are "antifragile", which means that after subjecting them to certain types of "randomness", they "improve". What this means in general is pretty vague. But Taleb lifts weights, so bones are antifragile. Isn't he awesome? Regulators trying to ensure stability are fragile, but the free market system where companies go bankrupt regularly is antifragile. Unlike those nerdy regulators, Taleb has good intuition and a nose for bullshit. You too, dear reader, are smart - look at how easy it would be to apply hindsight to stop the financial crisis!
+
+I don't particularly disagree with most of Taleb's isolated claims. I also lift (or at least I did until my disks stopped being antifragile), I hate regulators, and generally oppose attempts to control and stabilize things. Yay, Taleb is just like me! But he doesn't really make any good arguments that antifragile is a real thing. The book is just smug verbosity and flattery towards the reader. Those are both perfectly fine things to have, but you need to put some substance behind it.
 
 If you want to feel smarter without actually becoming smarter, go buy [Antifragile](http://www.amazon.com/gp/product/0812979680/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0812979680&linkCode=as2&tag=christuc-20&linkId=PSPH6MWDWJRWLSSZ).
 

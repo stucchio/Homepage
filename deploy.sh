@@ -22,7 +22,6 @@ s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output
 s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync output/* s3://chrisstucchio.com
 s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output/* s3://chrisstucchio.com
 
-#s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync output/* s3://cs-blog-preview
-#s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output/* s3://cs-blog-preview
+curl --verbose https://www.cloudflare.com/api_json.html -d 'a=fpurge_ts' -d "tkn=`cat cloudflare-key`" -d 'email=stucchio@gmail.com' -d 'z=chrisstucchio.com'  -d 'v=1'
 
 rm -r output
