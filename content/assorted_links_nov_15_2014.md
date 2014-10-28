@@ -12,3 +12,5 @@ nolinkback: true
 [Scalazy streams](https://github.com/ochafik/Scalaxy/tree/master/Streams) - assorted tricks to make your Scala 2.11.x collections faster.
 
 [What is it like to move from India to the US](http://www.quora.com/What-is-it-like-to-move-from-India-to-the-US). Sorry for the Quora link.
+
+[everything personal can’t be political](http://fredrikdeboer.com/2014/10/27/everything-personal-cant-be-political/)
