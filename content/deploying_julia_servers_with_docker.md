@@ -46,8 +46,8 @@ FROM stucchio/juliabase:0.3.2
 MAINTAINER Chris Stucchio <stucchio@gmail.com>
 
 # C Libraries we need
-RUN apt-get install -y libhttp-parser-dev libicu-dev   # Utility libs
-RUN apt-get install -y libpq-dev # For postgresql
+RUN apt-get install -y libhttp-parser2.1 libicu52 # Utility libs for parsing unicode and http
+RUN apt-get install -y libpq # For postgresql
 RUN apt-get install -y unixodbc unixodbc-dev odbc-postgresql # Needed if we want to use ODBC
 
 # Julia libs we want
@@ -166,4 +166,4 @@ end
 end
 ```
 
-Now you can run Julia from within it's docker image, call `save_user("zombie feynman")` from the command line, and then verify that it's saved t othe database.
+Now you can run Julia from within it's docker image, call `save_user("zombie feynman")` from the command line and then verify that it's saved to the database.
