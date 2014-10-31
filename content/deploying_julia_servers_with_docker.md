@@ -3,11 +3,11 @@ date: 2014-11-01 09:00
 author: Chris Stucchio
 tags: julia, docker
 
-Julia is a very nice little language. It's got a fast compiler, great numerical libraries, and integrates very easily with C. I'm hoping that as the world moves forward, Julia can eventually replace Python.
+As a result of a new work project, I've now gotten the opportunity to use Julia in anger. The first part of the project was a standard Julia task - a purely scientific R&D project, culminating in a command line script. The problem involves deriving algebraic constraints on a business process and then using convex optimization in order to optimize that process. Overall, this is fairly standard operations research, merely applied to a new domain.
 
-One thing Julia is *not* yet good for is web applications or other servers. In principle there is nothing that should prevent it from being used for this purpose, but the infrastructure, knowledge and libraries aren't there.
+But the second part of the project is where things get interesting. Rather than simply delivering the command line script, it's necessary to package it and build a deployable version. Nothing fancy, just a little json-over-http endpoint that connects to a database. Time to put Julia to the test.
 
-Since I'm deploying a Julia server, and since I found very little information on the web as to how this is done, I've decided to write up my experiences. Consider this blog post a set of notes explaining how I made it work - nothing more.
+At the moment, Julia is *not* a particularly good language for building CRUD-type apps. In principle there is nothing that should prevent it from being used for this purpose, but the infrastructure, knowledge and libraries aren't there. Since I've found very little information on the web as to how this is done, I've decided to write up my experiences. Consider this blog post a set of notes explaining how I made it work, not a set of best practices.
 
 # Julia Packages
 
@@ -165,3 +165,5 @@ end
 
 end
 ```
+
+Now you can run Julia from within it's docker image, call `save_user("zombie feynman")` from the command line, and then verify that it's saved t othe database.
