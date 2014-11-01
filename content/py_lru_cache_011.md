@@ -22,3 +22,9 @@ You can also create a thread safe cache with the `concurrent` argument:
 ```python
 thread_safe_cache = lru.LRUCacheDict(concurrent=True)
 ```
+
+It can be installed with pip:
+
+```bash
+pip install py_lru_cache
+```
