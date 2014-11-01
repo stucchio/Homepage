@@ -13,6 +13,7 @@ find output/ -name '*.gz' | sed s/\\.gz// | xargs -I filename mv "filename.gz" "
 
 # Optimize
 find output/ -name '*.jpg' | xargs -I filename jpegoptim --strip-all filename
+rm -r output/feeds
 
 #Upload
 s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync output/index.html s3://www.chrisstucchio.com/index.html
