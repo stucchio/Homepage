@@ -16,12 +16,16 @@ find output/ -name '*.jpg' | xargs -I filename jpegoptim --strip-all filename
 rm -r output/feeds
 
 #Upload
-s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync output/index.html s3://www.chrisstucchio.com/index.html
-s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync output/* s3://www.chrisstucchio.com
-s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output/* s3://www.chrisstucchio.com
 
-s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding:gzip' sync output/* s3://chrisstucchio.com
-s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output/* s3://chrisstucchio.com
+s3cmd -c s3cfg --exclude '*' --include '*.html' --mime-type="text/html"  --add-header='Content-Encoding: gzip' --add-header='Cache-Control: max-age=259200' sync output/* s3://www.chrisstucchio.com/
+s3cmd -c s3cfg --exclude '*' --include '*.css'  --mime-type="text/css" --add-header='Content-Encoding: gzip' --add-header='Cache-Control: max-age=259200'  sync output/* s3://www.chrisstucchio.com/
+s3cmd -c s3cfg --exclude '*' --include '*.js'   --mime-type="text/javascript" --add-header='Content-Encoding: gzip' --add-header='Cache-Control: max-age=259200' sync output/* s3://www.chrisstucchio.com/
+
+s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output/ s3://www.chrisstucchio.com/
+#s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding: gzip' sync output/* s3://www.chrisstucchio.com
+
+#s3cmd -c s3cfg --exclude '*' --include '*.html' --include '*.css' --include '*.js' --add-header='Content-Encoding: gzip' sync output/* s3://chrisstucchio.com
+#s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output/* s3://chrisstucchio.com
 
 curl --verbose https://www.cloudflare.com/api_json.html -d 'a=fpurge_ts' -d "tkn=`cat cloudflare-key`" -d 'email=stucchio@gmail.com' -d 'z=chrisstucchio.com'  -d 'v=1'
 
