@@ -70,7 +70,7 @@
 
     {% if article %}
       {% if article.mathjax %}
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
@@ -79,7 +79,7 @@
       {% endif %}
     {% elif page %}
       {% if page.mathjax %}
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
@@ -89,7 +89,6 @@
     {% endif %}
 
 {% include 'includes/ga.html' %}
-{% include 'includes/bw.html' %}
 </head>
 <body>
 
@@ -121,7 +120,7 @@
                       {% endif %}
                     {% endfor %}
                 {% endif %}
-                <li><a href="http://github.com/stucchio">Code</a></li>
+                <li><a href="https://github.com/stucchio">Code</a></li>
                 <li><a href="{{SITEURL}}/blog/index.html">Blog</a></li>
                 {% if DISPLAY_CATEGORIES_ON_MENU %}
                     {% for cat, null in categories %}
