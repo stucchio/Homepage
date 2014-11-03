@@ -6,3 +6,4 @@ pyenv/*
 *.pyc
 *.pid
 cloudflare-key
+output/
