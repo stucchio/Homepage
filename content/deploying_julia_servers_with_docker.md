@@ -1,5 +1,5 @@
 title: Deploying Julia Servers with Docker
-date: 2014-11-01 09:00
+date: 2014-11-06 09:00
 author: Chris Stucchio
 tags: julia, docker
 
@@ -59,7 +59,7 @@ RUN julia -e 'Pkg.clone("https://github.com/JuliaDB/DBI.jl.git")' && julia -e 'P
 
 ```
 
-The file `REQUIRE` should be located in the same folder as this Dockerfile, and should list the required julia libraries. My require contains:
+The file `REQUIRE` should be located in the same folder as this Dockerfile, and should list the required julia libraries. Note the last line which is necessary to install *unpublished* packages in Julia. My require contains:
 
 ```
 NamedArrays
@@ -167,3 +167,45 @@ end
 ```
 
 Now you can run Julia from within it's docker image, call `save_user("zombie feynman")` from the command line and then verify that it's saved to the database.
+
+# The webapp
+
+Creating a very basic webapp is fairly straightforward given Julia's `Morsel.jl`:
+
+```julia
+using Storage
+using Morsel
+using PostgreSQL
+using JSON
+
+app = Morsel.app()
+
+route(app, POST, "/api/users/<user>") do req, res
+    username = convert(ASCIIString, req.state[:route_params]["user"])
+    save_user(username)
+    json(username)
+end
+
+route(app, GET, "/api/users/<user>") do req, res
+    username = convert(ASCIIString, req.state[:route_params]["user"])
+    user = get_user(username)
+    json({ "username" => user.name, "id" => user.id })
+end
+
+start(app, 8000)
+```
+
+Unfortunately, doing more complicated things than simply returning JSON requires quite a bit of reading `Morsel.jl` code. From the docs alone, it's far from clear to me how I would do things like return a 404 error, change a `content-type` header, or anything of that sort. At some point in the future I may write a more detailed tutorial explaining how to do these things.
+
+The webapp can then be run via:
+
+```shell
+docker run -i --env=POSTGRES_PGPASS=PASSWORD --env=POSTGRES_PGUSER=cybersyn --env=POSTGRES_DBNAME=adex \
+    --link adex-postgres:postgres \
+    --name julia_shell \
+    -v /home/stucchio/src/cybersyn/:/var/lib/cybersyn/ \
+    -p 8000:8000 \
+    -t stucchio/juliaweb:0.3.2 "cd /var/lib/cybersyn && julia Web.jl"
+
+```
+In production, of course, port 8000 should not be exposed. Rather, the Julia webserver should be hidden behind a [revere proxy](http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/) - there is plenty of documentation on building a docker image with an nginx reverse proxy, so I'll just [link to it](http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/). Here is [my configuration](https://gist.github.com/stucchio/54331ebdee08bcadd051).
