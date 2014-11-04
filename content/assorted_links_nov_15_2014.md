@@ -15,6 +15,10 @@ nolinkback: true
 
 [The flaw lurking in every deep neural net](http://www.i-programmer.info/news/105-artificial-intelligence/7352-the-flaw-lurking-in-every-deep-neural-net.html) is a pop science article, and the original paper is [Intriguing properties of neural networks](http://arxiv.org/pdf/1312.6199v4.pdf). The gist is this: neural networks are not "continuous" functions, in the sense that an adversary can take almost any image and produce a slightly perturbed variation that will be misclassified. Moreover, the adversarial result generalizes across a variety of different networks.
 
+[Low Rank Matrix Approximation in Linear Time](http://arxiv.org/pdf/1410.8802v1.pdf). Very clever result.
+
+[Convex.jl](https://github.com/cvxgrp/Convex.jl) - disciplined convex optimization in Julia. See also [John Boyd's free book](http://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf) on the subject.
+
 [Why I support statisticians and their resistance to hype](http://simplystatistics.org/?p=3501)
 
 [Suddenly, the opposite happened](http://superginbaby.wordpress.com/2014/10/28/suddenly-the-opposite-appeared/). This article is a great takedown of the anti-intellectualism that various folks are pushing on computing under "won't someone think of the women/minorities/children" banner.
@@ -27,6 +31,10 @@ First go read this article on [Japanese Zoning Regulations](http://urbankchoze.b
 
 [Fun with restitution law](http://www.washingtonpost.com/news/volokh-conspiracy/wp/2014/10/28/fun-with-restitution-law/).
 
-[everything personal can’t be political](http://fredrikdeboer.com/2014/10/27/everything-personal-cant-be-political/)
+[everything personal can’t be political](http://fredrikdeboer.com/2014/10/27/everything-personal-cant-be-political/) and [incentives for argument, continued](http://fredrikdeboer.com/2014/11/03/incentives-for-argument-continued/). Freddie Deboer is one of the few remaining intellectuals in the academic left, and is a strong opponent of the anti-intellectualism that is currently being pushed.
+
+[The Rise of the Gray Tribe](http://paxdickinson.wordpress.com/2014/10/27/the-rise-of-the-grey-tribe/), by Pax Dickinson. Good to see him speaking publicly again. Also related: [Gamergate, 3 stages to orbit](http://www.popehat.com/2014/10/21/gamer-gate-three-stages-to-obit/) by popehat.
+
+[Scott Alexander on the Motte & Bailey Doctrine](http://slatestarcodex.com/2014/11/03/all-in-all-another-brick-in-the-motte/), and related thoughts by the [Practical Ethics Blog](http://blog.practicalethics.ox.ac.uk/2014/09/motte-and-bailey-doctrines/).
 
 Apparently [women are not significantly discriminated against](http://www.psychologicalscience.org/pdf/Women-Academic-Science.pdf) in academic science. In fact, if you assume male and female candidates are equal on average, then it would appear that discrimination significantly favors women. The article covers their bases, and presents evidence that male candidates tend to be superior, suggesting even more discrimination in favor of women. Overall, this is a very thorough and detailed analysis - it should not fall down the memory hole simply because it's results are politically incorrect. Here is a [widely linked](http://www.emilywillinghamphd.com/2014/11/academic-science-is-sexist-we-do-have.html) counterpoint, which mostly seems to miss the point (but has the correct mood affiliation).
