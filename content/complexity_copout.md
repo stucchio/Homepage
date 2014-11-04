@@ -6,7 +6,7 @@ category: culture
 
 ![schrodinger's kitty](|filename|blog_media/2014/complexity_copout/kitty.jpg)
 
-Back in my days as a phycisist, my Ph.D. adviser came to me with a proposed theory. He wanted to study the many-body Schrodinger equation - to study the interaction of a single charged particle with a [conductive screen](http://en.wikipedia.org/wiki/Method_of_image_charges). I didn't like this theory very much - it offended my sensibilities, and I certainly didn't want to write code to simulate a theory I didn't like. So I made the following reply:
+Back in my days as a physicist, my Ph.D. adviser came to me with a proposed theory. He wanted to study the many-body Schrodinger equation - to study the interaction of a single charged particle with a [conductive screen](http://en.wikipedia.org/wiki/Method_of_image_charges). I didn't like this theory very much - it offended my sensibilities, and I certainly didn't want to write code to simulate a theory I didn't like. So I made the following reply:
 
 > In the end, the world is a lot more complex than making a few assumptions and simulating them. If it was that easy, we'd do nothing but that. The reality is that the complex web of interactions mean that quantum mechanics is difficult to simulate or reduce, and it is chaotic (in the mathematical sense). There have been many well intentioned theories that seemed to be founded in common sense employing models just like yours, that fell flat, for entirely unintuitive reasons once in contact with reality.
 
