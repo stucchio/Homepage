@@ -3,6 +3,10 @@ date: 2014-11-15 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
+![illustrated cross section](http://www.thisiscolossal.com/wp-content/uploads/2014/11/map-small.jpg)
+
+[An illustrated cross section of Kowloon Walled City](http://www.thisiscolossal.com/2014/11/an-illustrated-cross-section-of-hong-kongs-infamous-kowloon-walled-city/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+colossal+%28Colossal%29)
+
 [Probable points and credible intervals](http://www.sumsar.net/blog/2014/10/probable-points-and-credible-intervals-part-one/). A great article about things to do with a posterior once you compute it.
 
 [How misaligning data can increase performance 12X by reducing cache misses](http://danluu.com/3c-conflict/)
