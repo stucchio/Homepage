@@ -17,6 +17,12 @@ nolinkback: true
 
 [How to desugar Haskell code](http://www.haskellforall.com/2014/10/how-to-desugar-haskell-code.html)
 
+[The Binary Problem and The Continuous Problem in A/B testing](http://dataorigami.net/blogs/napkin-folding/17543303-the-binary-problem-and-the-continuous-problem-in-a-b-testing).
+
+[The Counter-intuitive Non-informative Prior for the Bernoulli Family](http://www.amstat.org/publications/jse/v12n2/zhu.pdf).
+
+[How do you write your model definitions](http://www.sumsar.net/blog/2013/10/how-do-you-write-your-model-definitions/). Very nice article about how defining models via a calculation procedure hides the salami.
+
 [The flaw lurking in every deep neural net](http://www.i-programmer.info/news/105-artificial-intelligence/7352-the-flaw-lurking-in-every-deep-neural-net.html) is a pop science article, and the original paper is [Intriguing properties of neural networks](http://arxiv.org/pdf/1312.6199v4.pdf). The gist is this: neural networks are not "continuous" functions, in the sense that an adversary can take almost any image and produce a slightly perturbed variation that will be misclassified. Moreover, the adversarial result generalizes across a variety of different networks.
 
 [Low Rank Matrix Approximation in Linear Time](http://arxiv.org/pdf/1410.8802v1.pdf). Very clever result.
@@ -28,6 +34,8 @@ nolinkback: true
 [Suddenly, the opposite happened](http://superginbaby.wordpress.com/2014/10/28/suddenly-the-opposite-appeared/). This article is a great takedown of the anti-intellectualism that various folks are pushing on computing under "won't someone think of the women/minorities/children" banner.
 
 First go read this article on [Japanese Zoning Regulations](http://urbankchoze.blogspot.in/2014/04/japanese-zoning.html). It's a very interesting look at how Japanese zoning regulations are far more rational than American ones. The basic idea is that Japanese zoning rules restrict the amount of *nuisance* allowed in a region - you are permitted to build a low nuisance home in a region zoned for medium nuisance (light commercial). In contrast, American zoning rules restrict areas to an exclusive use (i.e., shop or home, not both). After you read this article, read this article on [Social Technology and Anarcho Tyranny](http://www.moreright.net/social-technology-and-anarcho-tyranny/).
+
+[Hollaback and Why Everyone Needs Better Research Methods, And Why All Data Needs Theory](https://medium.com/message/that-catcalling-video-and-why-research-methods-is-such-an-exciting-topic-really-32223ac9c9e8). I didn't watch enough of the video to catch the racism, but yeah. WTF.
 
 [This Time Isn't Different](http://www.overcomingbias.com/2014/11/this-time-isnt-different.html) - Robin Hanson on the [AI Winter](http://en.wikipedia.org/wiki/AI_winter).
 
