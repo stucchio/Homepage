@@ -360,7 +360,7 @@ Doing some math:
 In code:
 
     def update_belief_from_no_click(pctr):
-        unnormalized = ctr * pctr
+        unnormalized = (1-ctr) * pctr
         return unnormalized / unnormalized.sum()
 
 ---
