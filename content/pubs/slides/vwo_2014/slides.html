@@ -4,8 +4,8 @@
     <title>How to change your opinion and make a decision</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
-      @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
-      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 
       body {
         font-family: 'Droid Serif';
@@ -609,6 +609,56 @@ def expected_loss(loss, posterior, choice):
 ```
 
 This represents the *average* losses you believe will happen if you make a given choice.
+---
+# Choice of loss function
+
+```
+def error_probability(world_state, choice):
+    conv_rate_a, conv_rate_b = world_state
+    if choice == A:
+        return conv_rate_a >= conv_rate_b
+    if choice == B:
+        return conv_rate_b >= conv_rate_a
+```
+- In this case, `expected_loss` is the same as `P(choice is correct)`.
+- Treats all mistakes as equal, i.e. choosing A when `world_state=(0.10, 0.101)` is just as bad as choosing A when `world_state=(0.10, 0.20)`.
+---
+# Choice of loss function
+
+```
+def loss_of_conversions(world_state, choice):
+    conv_rate_a, conv_rate_b = world_state
+    if choice == A:
+        return max(conv_rate_b - conv_rate_a, 0)
+    if choice == B:
+        return max(conv_rate_a - conv_rate_b, 0)
+```
+- The cost of a mistake is the difference in conversion rates. Choosing A when `world_state=(0.10, 0.101)` has cost `0.001`, while choosing A when `world_state=(0.10, 0.20)` has cost `0.10`.
+- May result in making a choice, even when `P(choice is wrong)` is high. **Analogy:** I don't really know which pani puri cart tastes better, but I'm only out 20 rupees if I screw up - *just pick one and move on with your life*.
+- **This is the loss function I recommended.**
+---
+# Choice of loss function
+
+```
+def risk_averse(x):
+    if x > 0:
+        return max(x, 0.01)
+    else:
+        return 0
+
+def loss_of_conversions(world_state, choice):
+    conv_rate_a, conv_rate_b = world_state
+    if choice == A:
+        return max(risk_averse(conv_rate_b - conv_rate_a), 0)
+    if choice == B:
+        return max(risk_averse(conv_rate_a - conv_rate_b), 0)
+```
+- If I make a mistake I look bad to my boss, even if the harm is small.
+- So round small errors up.
+
+---
+# Choice of loss function
+![advertise on patch](loss_functions.png)
 
 ---
 # Important parameters
@@ -623,7 +673,7 @@ Suppose version A converts at 20% and version B converts at 10%. You definitely 
 
 Suppose A converts at 10% and B converts at 10.01%. You probably don't care.
 
-    threshold_of_caring = Above this I care, below this I don't.
+    threshold_of_caring = if lift gained/lost is smaller, I don't care
 
 ---
 # A/B testing
@@ -657,32 +707,83 @@ Point in plane is `(ctrA, ctrB)`. Color is probability density.
 ---
 # Consequences of an error
 
-## Assume B > A, but we choose A
+```
+def expected_loss(loss, posterior, choice):
+    return sum( loss(world_states, choice) * posterior )
+```
+Sum is taken over all values of `(ctrA, ctrB)` for which `ctrA > ctrB` (above yellow line). The function `loss` is a specific choice of loss function.
 
-    Loss = sum( (ctrA - ctrB) * P(ctrA, ctrB | ctrA > ctrB) )
+## Assume we choose A
 
-Sum is taken over all values of `(ctrA, ctrB)` for which `ctrA > ctrB` (above yellow line):
+```
+Loss = expected_loss( loss, posterior, A)
+```
+
+## Assume we choose B
+
+```
+Loss = expected_loss( loss, posterior, B)
+```
 
 ---
 # Stopping condition
 
-    if loss < threshold_of_caring:
-        stop_test_choose(B)
-    else:
-        continue_test()
+```
+valid_choices = [ c for c in choices
+                    if expected_loss(loss, posterior, c) < threshold_of_caring ]
+
+if len(valid_choices) > 0:
+    stop_test_choose_from(valid_choices)
+else:
+    continue_test()
+```
 
 Stop test when the amount of lift we expect to lose **assuming** we make the wrong choice is so low that we don't care. Otherwise continue.
 
-## Benefits
+## The resulting choice may not be better
 
-- Lets us stop tests early.
-- Or run them for extra time if we need to.
-- Can incorporate a more detailed model than simply 1 conversion rate, if needed.
+If B is definitely not worse than A, but might be better, then it makes sense to choose B. It's a bet with no downside and possible upside. Give up scientific truth for faster decisions.
 
-## Drawbacks
+**Analogy:** Flip a coin. If it comes up heads I give you 100rs. If it comes up tails, you pay me 1 paise. A good bet?
+---
+# Don't look for truth
 
-- Standard frequentist test takes a couple of microseconds and 2 doubles.
-- Bayesian test requires up to 1 second and 1024x1024 array of doubles (16mb ram).
+![ab test posteriors](certain_choice_uncertain_result.png)
+
+B could be anywhere from 0% to 20% better (in terms of absolute lift, i.e. `ctr_b - ctr_a`), but we don't know which.
+
+**Choose B** - tiny risk, large possible reward. Waiting for truth *will not increase profit*.
+---
+# What if the choice doesn't matter?
+
+![ab test posteriors](loss_function_x_posterior.png)
+
+Because posterior is fat (very little data), loss function for choice A (and B) is high.
+
+**Fact:** For beta distribution `variance = O(1/N)`. Small number of samples => high variance.
+---
+# What if the choice doesn't matter?
+
+![ab test posteriors](loss_function_x_posterior2.png)
+
+Because posterior is thin, expected loss for choice A (and B) is low.
+
+**Fact:** For beta distribution `variance = O(1/N)`. Large number of samples => low variance.
+---
+# What if the choice doesn't matter?
+## Don't look for truth
+
+Eventually the loss from making a choice will be arbitrarily low due solely to the posterior becoming narrow.
+
+```
+valid_choices = [A,B]
+```
+
+**Choose A** - tiny risk, tiny reward. Waiting for truth *will not increase profit*.
+
+**Choose B** - tiny risk, tiny reward. Waiting for truth *will not increase profit*.
+
+![coin flip](http://zmainvestments.com/wp-content/uploads/2011/11/coin-flip.jpg)
 
 ---
 ## Why history chose frequentist methods
@@ -690,142 +791,48 @@ Stop test when the amount of lift we expect to lose **assuming** we make the wro
 ![old timey computer](old_timey.jpg)
 
 ---
-class: center, middle
-# Bandit Algorithms
+# What is probability of an error?
 
-[More details on my blog](http://www.chrisstucchio.com/blog/2013/bayesian_bandit.html)
+**NOT frequentist p-value!**
 
----
-# Limitations of A/B test
+Rather (assuming choice A is made):
 
-- While test is running users see bad version 50% of time
-- Requires human thought
-- Requires lots of samples
+```
+P(error) = sum( posterior[where(ctr[A] > ctr[B])] )
+```
 
-## Bandit Algorithms
+(Flip A and B if choice B was made.)
 
 ---
-# Find Balance
+# With 95% probability, what is the CTR?
 
-# Exploration
+**NOT frequentist confidence interval!**
 
-Time spent testing different versions to see which is best.
+Rather compute a Bayesian *credible interval*. Find `a,b` so that:
 
-# Exploitation
+```
+sum(posterior[where(a < ctr && ctr < b)]) >= 0.95
+```
 
-Showing users the best version
+![old timey computer](credible_interval.png)
 
----
-# Bayesian Bandit
-
-## Thomson Sampling
-
-    def display_choice(posteriors):
-        ranking = {}
-        for (variation, posterior) in posteriors:
-            ranking[variation] = posterior.sample()
-        return argmax(ranking)
-
-Or, since this is a functional programming crowd:
-
-    def display_choice(posteriors):
-        return argmax(
-          posteriors.map(
-              (variation, posterior) => (variation, posterior.sample) )
-          )
+```
+P(a < ctr < b) = 0.95
+```
 
 ---
-# Most of the time
+# Pros/cons for Bayesian methods
+## Benefits
 
-![common case](bandit_algorithm_common.png)
+- Lets us stop tests early.
+- Or run them for extra time if we need to.
+- Can incorporate a more detailed model than simply 1 conversion rate, if needed.
+- End results are highly intuitive.
 
----
-# Most of the time
+## Drawbacks
 
-![common case](bandit_algorithm_common.png)
-
----
-# Occasionally
-
-![common case](bandit_algorithm_uncommon.png)
-
----
-# Eventually
-
-![common case](bandit_algorithm_eventual.png)
-
-Probability of making wrong choice by chance (oversimplified):
-
-    P(wrong choice) = O( exp( -N * delta ) )
-
-Here `N` is the number of samples, and `delta` is the lift between the best and worst version.
-
----
-# Asymptotics
-
-A/B testing:
-
-    Loss = N * P(error) = O(N)
-
-Thompson Sampling:
-
-    Loss = O(log(N))
-
-(Logarithmic regret is the *best possible gain*.)
-
-[Math details are here](http://arxiv.org/pdf/1111.1797.pdf)
-
----
-# Use Cases
-
-Bandit algorithms great for *automatic optimization*.
-
-## Long Tail SEO marketing
-
-10,000 SEO-optimized pages, each with low traffic:
-
-- "Best dress to wear for Mexican wedding"
-- "Best dress to wear for first date"
-- "Best dress to wear for {{event}}"...
-
-## Rapidly changing content
-
-- "Valentines day Sale, only 3 days remaining."
-- "Spring sale, this weekend only!"
-
-Or
-
-- "Man Bites Dog!"
-- "Headless Body found in Topless Bar"
-
----
-# Use Cases
-
-## 10,000 pages
-
-Use bandit algorithm to choose which photo/description of the dress to display.
-
-## Short term sales
-
-Use bandit algorithm to determine best title of the sale
-
-## News publishing
-
-Use bandit algorithm to determine which story to promote.
-
----
-class: center, middle, inverse
-# "We #&@!ing lost $400,000 because you %@#$ing forgot the A/B test was still %@&#ing running?!?!?!"
-## Source: Anonymous
-
----
-# Quantitative results
-
-Ran bandit algorithm to optimize content on a large number of SEO-optimized microsites.
-
-![bandits for seo pages](bandits_for_seo_pages.png)
-
-Outperformed both A/B testing and random selection.
+- Standard frequentist test takes a couple of microseconds and 2 doubles.
+- Bayesian test requires up to 1 second and 1024x1024 array of doubles (16mb ram).
 
 ---
 # Conclusions
