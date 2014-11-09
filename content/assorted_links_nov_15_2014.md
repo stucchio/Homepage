@@ -15,6 +15,10 @@ nolinkback: true
 
 [Why protocols are a messy concept](http://java-is-the-new-c.blogspot.in/2014/10/why-protocols-are-messy-concept.html). tl;dr; binary protocols are super awesome and we should use them more. Fuck json-over-http.
 
+[Sketching as a tool for numerical linear algebra](http://researcher.watson.ibm.com/researcher/files/us-dpwoodru/journal.pdf). Very interesting tool - for solving many problems like `A x=b`, you can often solve a problem `SAx = Sb`, where `S` is a random matrix that reduces the dimensionality of the problem.
+
+[The introduction to reactive programming that you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754/)
+
 [How to desugar Haskell code](http://www.haskellforall.com/2014/10/how-to-desugar-haskell-code.html)
 
 [The Binary Problem and The Continuous Problem in A/B testing](http://dataorigami.net/blogs/napkin-folding/17543303-the-binary-problem-and-the-continuous-problem-in-a-b-testing).
@@ -37,13 +41,15 @@ First go read this article on [Japanese Zoning Regulations](http://urbankchoze.b
 
 [Hollaback and Why Everyone Needs Better Research Methods, And Why All Data Needs Theory](https://medium.com/message/that-catcalling-video-and-why-research-methods-is-such-an-exciting-topic-really-32223ac9c9e8). I didn't watch enough of the video to catch the racism, but yeah. WTF.
 
+[A radical solution to global inequality](http://www.newrepublic.com/article/120179/how-reduce-global-income-inequality-open-immigration-policies) - tl;dr; temporary economic migration combined with a caste system. Intuitively I want to oppose this, but their arguments seem sound.
+
 [This Time Isn't Different](http://www.overcomingbias.com/2014/11/this-time-isnt-different.html) - Robin Hanson on the [AI Winter](http://en.wikipedia.org/wiki/AI_winter).
 
-[What is it like to move from India to the US](http://www.quora.com/What-is-it-like-to-move-from-India-to-the-US). Sorry for the Quora link.
-
-[Fun with restitution law](http://www.washingtonpost.com/news/volokh-conspiracy/wp/2014/10/28/fun-with-restitution-law/).
-
 [everything personal can’t be political](http://fredrikdeboer.com/2014/10/27/everything-personal-cant-be-political/) and [incentives for argument, continued](http://fredrikdeboer.com/2014/11/03/incentives-for-argument-continued/). Freddie Deboer is one of the few remaining intellectuals in the academic left, and is a strong opponent of the anti-intellectualism that is currently being pushed.
+
+Apparently they've [found many of the genes influencing intelligence](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3652710/). It's more boring and incremental than many people would have thought - there isn't one intelligence gene, there are a lot of "slightly more intelligent" genes.
+
+[Sixth Circuit on the ‘rational basis’ for opposite-sex-only marriage laws](http://www.washingtonpost.com/news/volokh-conspiracy/wp/2014/11/06/sixth-circuit-on-the-rational-basis-for-opposite-sex-only-marriage-laws/). Interesting article on the intellectual bankruptcy of many recent court decisions about same sex marriage. Note: I favor marriage equality by ending state sanctioned marriage for all people.
 
 [The Rise of the Gray Tribe](http://paxdickinson.wordpress.com/2014/10/27/the-rise-of-the-grey-tribe/), by Pax Dickinson. Good to see him speaking publicly again. Also related: [Gamergate, 3 stages to orbit](http://www.popehat.com/2014/10/21/gamer-gate-three-stages-to-obit/) by popehat.
 
