@@ -13,6 +13,8 @@ Illustrating Asymptotic Behavior, [part 1](http://davegiles.blogspot.ca/2014/10/
 
 [Elementary Data Analysis](http://www.stat.cmu.edu/~cshalizi/ADAfaEPoV/ADAfaEPoV.pdf) by Cosma Shalizi. Also useful.
 
+[The Misfortunes of a Trio of Mathematicians Using Computer Algebra Systems. Can We Trust in Them?](http://www.ams.org/notices/201410/rnoti-p1249.pdf)
+
 [The overhead of abstraction in Python vs C++](http://blog.reverberate.org/2014/10/the-overhead-of-abstraction-in-cc-vs.html)
 
 [Microservices - a Reality Check(point)](http://capgemini.github.io/architecture/microservices-reality-check/). Great article discussing some of the things you need to do to make microservices work.
