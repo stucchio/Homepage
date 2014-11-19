@@ -13,6 +13,10 @@ nolinkback: true
 
 [Exactly once delivery may not be what you want](http://brooker.co.za/blog/2014/11/15/exactly-once.html). tl;dr; Idempotence for side effects is fucking awesome if you can make it happen.
 
+[Seaborn](http://web.stanford.edu/~mwaskom/software/seaborn/) - a great addition to matplotlib. Very useful plotting techniques.
+
 [Beyond power calculations: Assessing Type S (sign) and Type M (magnitude) errors](http://www.stat.columbia.edu/~gelman/research/published/retropower20.pdf)
 
 For the benefit of my non-American readers: [what's wrong with America](https://twitter.com/roseveleth/status/532538957490561024). I wish I knew where to get one of those shirts.
+
+Uber exec suggests [hiring reporters to report on reporters who report on Uber](http://www.buzzfeed.com/bensmith/uber-executive-suggests-digging-up-dirt-on-journalists). I understand why Buzzfeed is selfishly against this, but I don't understand why he apologized.
