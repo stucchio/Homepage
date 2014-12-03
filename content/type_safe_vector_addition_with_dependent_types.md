@@ -146,6 +146,38 @@ Near as I can tell I must provide the unused type parameters `A,B` in order for 
 
 In principle, it would be nice to encode the vector space of linear transformations as a `RealVectorSpace` - this would enable type safe addition of matrices. I imagine this could be done, I simply haven't put the effort in yet.
 
+# Do you need dependent types?
+
+Another way to solve this problem is with newtype wrappers - this is how Haskell's [Data.Monoid](http://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html#t:Sum) package handles things.
+
+```scala
+trait VectorWrapper {
+  def x: DenseVector[Double]
+}
+abstract class VectorWrapperVectorSpace[A <: VectorWrapper](aconstructor: DenseVector[Double] => A) extends VectorSpace[Double] {
+  def add(u: A, v: A) = aconstructor(u.x+v.x)
+  ...
+}
+class LinearTransformationOfWrappers[D <: VectorWrapper, R <: VectorWrapper](rconstructor: DenseVector[Double] => R, matrix: DenseMatrix[Double])  {
+  def apply(u: D): R = rconstructor(matrix * u.x)
+}
+```
+
+Then whenever you want to enforce type safety on your vectors:
+
+```scala
+case class SecurityReturns(x: DenseVector[Double]) extends VectorWrapper
+implicit val SecurityReturnsVectorSpace = new VectorWrapperVectorSpace[SecurityReturns](SecurityReturns) {}
+
+val securityReturns = SecurityReturns(DenseVector[Double](...))
+///etc
+val m = new LinearTransformationOfWrappers[SecurityReturns,Volatilities](Volatilities, DenseMatrix[Double].zeros(...))
+```
+
+Extensions to other cases, e.g. `NamedVectors` would be even more verbose.
+
+But verbose or not, this can certainly get the job done. Dependent types are merely functions from values to types - if you are willing to manually inline the body of those functoins, you can certainly do so.
+
 # See also
 
 [The Neophytes Guide to Scala Part 13: Path Dependent Types](http://danielwestheide.com/blog/2013/02/13/the-neophytes-guide-to-scala-part-13-path-dependent-types.html).
