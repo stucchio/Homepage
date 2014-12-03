@@ -15,7 +15,7 @@ val v4 = DenseVector.zeros[Double](4)
 v3 + v4 //RUNTIME ERROR - Vectors must have same dimension
 ```
 
-This isn't a big problem. The minute I run my code I'll discove rthe error - [Breeze](https://github.com/scalanlp/breeze) has a lot of [runtime checks](https://github.com/scalanlp/breeze/blob/master/math/src/main/scala/breeze/linalg/DenseVector.scala#L257) with informative error messages.
+This isn't a big problem. The minute I run my code I'll discover the error - [Breeze](https://github.com/scalanlp/breeze) has a lot of [runtime checks](https://github.com/scalanlp/breeze/blob/master/math/src/main/scala/breeze/linalg/DenseVector.scala#L257) with informative error messages.
 
 Here is a more subtle error:
 ```scala
