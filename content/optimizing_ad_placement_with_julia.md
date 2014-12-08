@@ -8,7 +8,7 @@ mathjax: true
 
 
 
-Estimating the conversion rate of an advertisement placed in a fixed slot on a webpage is a well studied problem, and one I've [discussed](/blog/2013/bayesian_analysis_conversion_rates.html) [at length](/blog/2013/bayesian_bandit.html). For those who haven't seen, here are some [slides](http://localhost:8080/pubs/slides/helpshift_2014/slides.html) which might help.
+Estimating the conversion rate of an advertisement placed in a fixed slot on a webpage is a well studied problem, and one I've [discussed](/blog/2013/bayesian_analysis_conversion_rates.html) [at length](/blog/2013/bayesian_bandit.html). For those who haven't seen, here are some [slides](/pubs/slides/helpshift_2014/slides.html) which might help.
 
 In the real world, however, it's not always the case that an advertisement will always appear in the same slot. Frequently there are multiple slots on page where an ad might appear - the navigation bar on top, the right rail (the vertical bar to the right side of the page), after the post content, and perhaps others. How can we handle this situation? If we have a lot of data this is a very simple problem - compute `ctr['topnav'] = clicks['topnav'] / displays['topnav']`, `ctr['rightrail'] = clicks['rightrail'] / displays['rightrail']`, etc.
 
