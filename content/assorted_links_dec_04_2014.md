@@ -27,10 +27,14 @@ nolinkback: true
 
 For the benefit of my non-American readers: [what's wrong with America](https://twitter.com/roseveleth/status/532538957490561024). I wish I knew where to get one of those shirts. More [anti-intellectualism](http://www.city-journal.org/2014/24_4_racial-microaggression.html).
 
+[Economists Are Almost Inhumanly Impartial](http://www.motherjones.com/kevin-drum/2014/12/economists-are-almost-inhumanly-impartial)
+
 Uber exec suggests [hiring reporters to report on reporters who report on Uber](http://www.buzzfeed.com/bensmith/uber-executive-suggests-digging-up-dirt-on-journalists). I understand why Buzzfeed is selfishly against this, but I don't understand why he apologized.
 
 Freddy Deboer discusses [Free Speech Rights and Ability](http://fredrikdeboer.com/2014/04/18/free-speech-rights-and-ability/).
 
 Scott Alexander on [Framing for light instead of heat](http://slatestarcodex.com/2014/12/03/framing-for-light-instead-of-heat/). I have a half-written post on causality, but now I need to mostly defer to him on this topic.
+
+The [Non-Libertarian Police Department](http://www.theatlantic.com/politics/archive/2014/04/nlpd-non-libertarian-police-department/360224/?single_page=true).
 
 Weekly anti-intellectualism: [The smart against the dumb](http://econlog.econlib.org/archives/2014/11/the_smart_again.html). See also [Noah Smith decides to kick a nerd to make women like him.](http://www.bloombergview.com/articles/2014-11-21/economics-is-a-dismal-science-for-women). [Republican writes about bullying in feminism](http://dailycaller.com/2014/11/13/the-waronnerds-how-far-left-feminists-and-the-media-created-gamergate/) - to prove him wrong, [feminists mock his appearance](http://wehuntedthemammoth.com/2014/11/14/gamergates-new-champion-is-a-wax-replica-of-patrick-bateman-who-thinks-gamers-are-a-bunch-of-dateless-nerds/). Finally, [Freddy Deboer on mood affiliation](http://fredrikdeboer.com/2014/11/28/one-thing-ive-learned/).
