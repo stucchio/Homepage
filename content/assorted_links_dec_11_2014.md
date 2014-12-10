@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2014-11-12 9:30:00
+date: 2014-12-11 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -9,7 +9,13 @@ nolinkback: true
 
 [Multiple comparisons don't have to feel like fishing](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf)
 
+[How Naive AB Testing Goes Wrong and How to Fix It](http://ewulczyn.github.io/How_Naive_AB_Testing_Goes_Wrong/). Nice to see that someone is using a proper [decision rule](https://www.chrisstucchio.com/blog/2014/bayesian_ab_decision_rule.html). Note: my conflict of interest is obvious to anyone who reads the articles.
+
 [Timeseries: Cointegration](ftp://ftp.econ.au.dk/creates/rp/14/rp14_38.pdf) - a useful overview.
+
+[Beyond power calculations: Assessing Type S (sign) and Type M (magnitude) errors](http://www.stat.columbia.edu/~gelman/research/published/retropower20.pdf)
+
+[Seaborn](http://web.stanford.edu/~mwaskom/software/seaborn/) - a great addition to matplotlib. Very useful plotting techniques.
 
 [Wavelets in J](https://scottlocklin.wordpress.com/2014/11/14/notation-as-a-tool-for-thought-wavelets-in-j/)
 
@@ -17,15 +23,7 @@ nolinkback: true
 
 [Exactly once delivery may not be what you want](http://brooker.co.za/blog/2014/11/15/exactly-once.html). tl;dr; Idempotence for side effects is fucking awesome if you can make it happen.
 
-[How Naive AB Testing Goes Wrong and How to Fix It](http://ewulczyn.github.io/How_Naive_AB_Testing_Goes_Wrong/). Nice to see that someone is using a proper [decision rule](https://www.chrisstucchio.com/blog/2014/bayesian_ab_decision_rule.html). Note: my conflict of interest is obvious to anyone who reads the articles.
-
-[Seaborn](http://web.stanford.edu/~mwaskom/software/seaborn/) - a great addition to matplotlib. Very useful plotting techniques.
-
-[Beyond power calculations: Assessing Type S (sign) and Type M (magnitude) errors](http://www.stat.columbia.edu/~gelman/research/published/retropower20.pdf)
-
 [New uses for shipping containers](http://www.archdaily.com/570300/designers-explore-an-entirely-new-use-for-shipping-containers-in-seoul-s-design-district/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+ArchDaily+%28ArchDaily%29)
-
-For the benefit of my non-American readers: [what's wrong with America](https://twitter.com/roseveleth/status/532538957490561024). I wish I knew where to get one of those shirts. More [anti-intellectualism](http://www.city-journal.org/2014/24_4_racial-microaggression.html).
 
 [Economists Are Almost Inhumanly Impartial](http://www.motherjones.com/kevin-drum/2014/12/economists-are-almost-inhumanly-impartial)
 
@@ -34,6 +32,8 @@ Uber exec suggests [hiring reporters to report on reporters who report on Uber](
 Freddy Deboer discusses [Free Speech Rights and Ability](http://fredrikdeboer.com/2014/04/18/free-speech-rights-and-ability/).
 
 Scott Alexander on [Framing for light instead of heat](http://slatestarcodex.com/2014/12/03/framing-for-light-instead-of-heat/). I have a half-written post on causality, but now I need to mostly defer to him on this topic.
+
+[Is Preventative Medicine it's own Health Risk?](http://aeon.co/magazine/health/is-preventive-medicine-its-own-health-risk/)
 
 The [Non-Libertarian Police Department](http://www.theatlantic.com/politics/archive/2014/04/nlpd-non-libertarian-police-department/360224/?single_page=true).
 
