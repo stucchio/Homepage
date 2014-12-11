@@ -19,7 +19,7 @@ nolinkback: true
 
 [Wavelets in J](https://scottlocklin.wordpress.com/2014/11/14/notation-as-a-tool-for-thought-wavelets-in-j/)
 
-[Tomatoes are a subtype of vegetables](http://blog.ezyang.com/2014/11/tomatoes-are-a-subtype-of-vegetables/)
+[Focusing Behavioral Economics on Development Professionals](http://conversableeconomist.blogspot.in/2014/12/focusing-behavioral-economics-on.html). This article makes a *very* important point. Behavioral economics is often used to justify assorted paternalistic policies devised by academic experts. But it turns out the experts are subject to very similar biases. Oops.
 
 [Exactly once delivery may not be what you want](http://brooker.co.za/blog/2014/11/15/exactly-once.html). tl;dr; Idempotence for side effects is fucking awesome if you can make it happen.
 
