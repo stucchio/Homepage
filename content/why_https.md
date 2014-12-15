@@ -12,7 +12,7 @@ Weirdly, the advertisement appeared only on my phone; it wasn't present on the d
 
 This is a problem. Among other things, my blog is partially used for advertising myself, and I do not want to be associated with the content of remnant ads.
 
-![stupid ad](/blog_media/2014/why_https/stupid_wtf.jpg)
+![stupid ad](|filename|/blog_media/2014/why_https/stupid_wtf.jpg)
 
 We all know the way forward: HTTPS. It was time to switch. And it's probably time for you to switch too, unless you want your visitors browsing habits being tracked and seeing stupid advertisements on **your page**.
 
@@ -35,5 +35,3 @@ s3cmd -c s3cfg --exclude '*.html' --exclude '*.css' --exclude '*.js' sync output
 The third thing was turning on https. To do this, go to cloudflare settings and turn on SSL. I also needed go into "Page Rules" and create a rule for `http://www.chrisstucchio.com/*` and set it to "always use HTTPS".
 
 That was all it took. Now I don't need to worry about Idea or any other data providers inserting ads into my site. If you run a blog of your own, I encourage you to do this as well. Pervasive [man in the middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) are here; to protect you and your readers from nasty surprises, encryption is necessary.
-
-![stupid ad](/blog_media/2014/why_https/stupid_ad3.jpg)
