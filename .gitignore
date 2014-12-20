@@ -5,3 +5,6 @@ s3cfg
 pyenv/*
 *.pyc
 *.pid
+cloudflare-key
+output/
+cache/
