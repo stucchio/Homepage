@@ -1,7 +1,7 @@
 title: Segmenting your traffic? You are probably doing it wrong.
 date: 2015-01-05 09:30
 author: Chris Stucchio
-tags: ab testing
+tags: ab testing, segmentation, multiple comparisons
 
 So you've jumped onboard the A/B testing bandwagon. You've just run an A/B test comparing the site redesign to the old version. Unfortunately the redesign did not differ in a statistically significant way from the old version. At this point, a variety of [conversion rate experts](http://online-behavior.com/targeting/segment-or-die-214) will tell you to [segment your data](http://conversionxl.com/how-to-build-a-strong-ab-testing-plan-that-gets-results/):
 
@@ -21,7 +21,11 @@ Suppose you run statistical tests with a p-value cutoff of 5%. What this means i
 
 So now lets think about how many segments you have. You've got mobile and desktop, 50 states, and perhaps 20 significant sources of referral traffic (google search, partner links, etc). All told, that's 2 x 50 x 20 = 2000 segments. Now lets assume that each segment is identical to every other segment; if you segment your data, you'll get 0.05 x 2000 = 100 *statistically significant* results purely by chance. With a little luck, Android users in Kentucky referred by Google, iPhone users in Nebraska referred by Direct and Desktop users in NJ all preferred the redesign. Wow!
 
-Here is an actual picture taken from an [article advocating segmentation](http://online-behavior.com/targeting/audience-segmentation):
+## It's worse than that
+
+The calculation I've done above assumes that you have enough traffic so that you can get statistically significant data in *each segment*. In reality that assumption is likely to be false. In real life, you almost certainly have a tiny amount of data for each segment.
+
+The folks advocating segmentation don't seem to understand this. I'm not arguing against straw men here - this is an actual picture taken from an [article advocating segmentation](http://online-behavior.com/targeting/audience-segmentation):
 
 ![segmentation](http://online-behavior.com/sites/default/files/imagecache/Content/articles/Segmentation-Analysis-report.jpg)
 
@@ -31,11 +35,19 @@ The largest of those segments has 100 visitors! You simply do not have enough da
 
 A lot of people, in addition to segmentation, like to track multiple goals on their site. For example, newsletter signups, add item to shopping card, or save item for later. Congratulations - by using multiple sufficiently many goals, you'll definitely find a statistically significant result in one of them.
 
-This effect is partially mitigated if your goals are correlated with each other. I.e., if people who sign up for the newsletter also tend to add an item to the shopping cart, then the issue of multiple goals is reduced. On the other hand, the more your goals are correlated with each other, the less useful information you actually get out of tracking multiple goals .
+This effect is partially mitigated if your goals are correlated with each other. I.e., if people who sign up for the newsletter also tend to add an item to the shopping cart, then the issue of multiple goals is reduced. On the other hand, the more your goals are correlated with each other, the less useful information you actually get out of tracking multiple goals.
 
-## How to fix the problem of multiple goals
+## An easy fix for multiple goals
 
-Ok, you are still determined to segment your traffic. Now it's time for [one weird trick](https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction) to use to avoid running into the problems I've described above. It's a simple formula you can use. Suppose you want to run a segmented test with a p-value cutoff of 0.05. You can use the following formula to compute a *new* cutoff that works with multiple segments:
+The best way to handle the problem of multiple goals is to define One Key Metric (OKM). For example, you might define your OKM as:
+
+    OKM = 10 x purchase + 1 x newsletter_signup + 1.5 x save_item_for_later
+
+Then when making decisions, you have a single number which incorporates all the factors you are interested in. You can freely run any statistical test you like on the OKM without having to worry about multiple goals.
+
+# How to fix the problem of multiple comparisons
+
+Ok, you are still determined to segment your traffic or use multiple goals. Now it's time for [one weird trick](https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction) to use to avoid running into the problems I've described above. It's a simple formula you can use. Suppose you want to run a segmented test with a p-value cutoff of 0.05. You can use the following formula to compute a *new* cutoff that works with multiple segments:
 
     new_p_cutoff = 1 - (1 - old_p_cutoff)^(1/number_of_segments)
 
@@ -43,7 +55,7 @@ According to this formula, if we have 20 segments, `new_p_cutoff=0.00256`. So su
 
 You can use the same formula with multiple goals as well. This formula is called the [Sidak Correction](https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction), by the way.
 
-It's possible your A/B testing tool has this built in, but you should not take that as a given.
+It's possible your A/B testing tool has this built in, but you should not assume they do the right thing. Most do not.
 
 # Experimenter degrees of freedom
 
@@ -65,7 +77,7 @@ Andrew Gelman discusses this in a lot more detail in his article, [The Garden of
 
 # But Google and Amazon make $hitton$ of money by segmenting and personalizing?!?
 
-Google and Amazon have more traffic than you.
+Google and Amazon have more traffic than you. They've also hired teams of statisticians to help them avoid making these mistakes.
 
 # Conclusion
 
