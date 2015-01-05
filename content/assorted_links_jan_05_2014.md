@@ -21,6 +21,8 @@ Yet again I found myself re-reading [Universal Portfolios](http://www-isl.stanfo
 
 [What effect size would you expect](http://blog.dansimons.com/2013/03/what-effect-size-would-you-expect.html). Discusses what specific measurement should count as a "replication".
 
+[Ten lessons learned from building real ML systems](http://technocalifornia.blogspot.in/2014/12/ten-lessons-learned-from-building-real.html).
+
 [Poor in the US = Rich](http://blog.givewell.org/2009/11/27/poor-in-the-us-rich/). A short article with many links, and given that this is from [givewell.org](http://givewell.org), it suggests why resources should be diverted from helping poor/rich Americans to helping actual poor people elsewhere. Also notable: [Hunger here vs hunger there](http://blog.givewell.org/2009/11/26/hunger-here-vs-hunger-there/).
 
 If I ever find myself in a situation where I have a gas oven, I'll be sure to [bake a french toast rosat](https://imgur.com/gallery/MPQDR).
