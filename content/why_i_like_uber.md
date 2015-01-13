@@ -20,6 +20,6 @@ That's why I love Uber. Uber completely solves one of the few racial problems I 
 
 This eliminates two major issues - one is the financial issue, which I barely care about (I'm part of the top 1%). The other is the constant mental burden of having to deal with drivers bad attitudes and the unpleasant feeling of being ripped off.
 
-It's really easy to criticize Uber when your needs are being well served. That's true for a lot of people. But for those of us who lack "white privilege", Uber is important.
+It's really easy to criticize Uber when your needs are being well served. That's true for a lot of people. But for those of us who lack "white privilege", Uber is important. The best way to prevent prejudice is to replace biased human decisionmaking with systematic unbiased and automated processes - replace humans with computers that don't get race as an input (ala Uber), and racial bias becomes impossible.
 
 **Note:** A lot of social justice terms are poorly defined, and I'm a big proponent of clear language and precise definitions. I'm defining "white privilege" as satisfying at least 3/4 of the applicable criteria (e.g. I have no children to educate about systemic racism) of [this list](http://amptoons.com/blog/files/mcintosh.html). My use of the term is merely a tangential point, an attempt to use language that social justice types (a group that seems to have a very large intersection with Uber critics) are familiar with. If you disagree with my use of the term, please ignore it and focus on the underlying reality being discussed.
