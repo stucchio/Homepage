@@ -66,3 +66,5 @@ $$ \frac{B(a+1,b)}{B(a,b)} \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a+1,b)} \fr
 $$ \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) - \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) $$
 
 This is what we wanted to show.
+
+**Note: The original version of this post had two sign errors. Thanks to Frank (unknown last name) for catching the mistake.**
