@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2015-01-06 9:30:00
+date: 2015-01-20 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -23,7 +23,13 @@ Yet again I found myself re-reading [Universal Portfolios](http://www-isl.stanfo
 
 [Ten lessons learned from building real ML systems](http://technocalifornia.blogspot.in/2014/12/ten-lessons-learned-from-building-real.html).
 
+[Spoofers Tricked High-Speed Traders by Hitting Keys Fast](http://www.bloombergview.com/articles/2015-01-13/spoofers-tricked-highspeed-traders-by-hitting-keys-fast)
+
 [Poor in the US = Rich](http://blog.givewell.org/2009/11/27/poor-in-the-us-rich/). A short article with many links, and given that this is from [givewell.org](http://givewell.org), it suggests why resources should be diverted from helping poor/rich Americans to helping actual poor people elsewhere. Also notable: [Hunger here vs hunger there](http://blog.givewell.org/2009/11/26/hunger-here-vs-hunger-there/).
+
+Apparently [Shanley Kane was a great big racist](http://www.breitbart.com/london/2015/01/17/i-taught-shanley-kane-how-to-troll-and-im-sincerely-sorry/). The horrible weev-kind. Her twitter feed pretty much admits it's true.
+
+[How regulators (ab)use bank regulation for non-democratic purposes](http://dailycaller.com/2015/01/14/audio-tapes-reveal-how-federal-regulators-shut-down-gun-store-owners-bank-accounts/).
 
 If I ever find myself in a situation where I have a gas oven, I'll be sure to [bake a french toast rosat](https://imgur.com/gallery/MPQDR).
 
