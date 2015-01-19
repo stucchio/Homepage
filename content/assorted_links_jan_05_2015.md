@@ -15,6 +15,8 @@ nolinkback: true
 
 Yet again I found myself re-reading [Universal Portfolios](http://www-isl.stanford.edu/~cover/papers/paper93.pdf) by Thomas Cover. This describes a portfolio allocation strategy roughly analogous to adversarial bandit algorithms - a prediction-free strategy which should (in the long run) achieve better returns than any constant portfolio. The proof is interesting. The strategy is first shown to have returns equal to the integral over all possible constant portfolios. Then the Laplace method of integration guarantees that the average converges to the best.
 
+[How to understand the drawbacks of K-means](https://stats.stackexchange.com/questions/133656/how-to-understand-the-drawbacks-of-k-means)
+
 [The Big Problem is Medium Data](http://highscalability.com/blog/2014/12/17/the-big-problem-is-medium-data.html)
 
 [A key part of statistical thinking is to use additive rather than Boolean models](http://andrewgelman.com/2014/12/18/key-part-statistical-thinking-use-additive-rather-boolean-models/)
