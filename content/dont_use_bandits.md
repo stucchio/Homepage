@@ -23,7 +23,9 @@ If all these assumptions are known to be true, then using standard stochastic ba
 
 There are other algorithms that make fewer assumptions, such as [Exp3](http://jeremykun.com/2013/11/08/adversarial-bandits-and-the-exp3-algorithm/). Due to their lack of assumptions, these algorithms tend to converge far more slowly, typically so slowly that they can *never be turned off*. Very few people tend to use them in practice, because they are optimized for the case when the [world is out to get you](http://jeremykun.com/2013/12/09/bandits-and-stocks/).
 
-I should also mention that there are (in principle) stochastic bandit algorithms which can solve every issue presented here. However, if you know about such methods, it's probably because you developed them yourself - I don't know of any published material on this. If you did cook up your own bandits which violate the assumptions above, stop reading this post now. In particular, Noel Welsh pointed out a paper [Online Learning under Delayed Feedback](http://jmlr.org/proceedings/papers/v28/joulani13.pdf) which deals with one of these problems.
+I should also mention that there are (in principle) stochastic bandit algorithms which can solve every issue presented here. However, if you know about such methods, it's probably because you developed them yourself - I don't know of any published material on this. If you did cook up your own bandits which violate the assumptions above, stop reading this post now.
+
+**Note:** After writing the above, Noel Welsh pointed out a paper [Online Learning under Delayed Feedback](http://jmlr.org/proceedings/papers/v28/joulani13.pdf) which deals with one of these problems. I also know how to do it for Bayesian bandits, and will eventually try to write that up.
 
 # Saturday is not Tuesday
 
