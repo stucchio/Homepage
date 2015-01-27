@@ -22,6 +22,8 @@ If all these assumptions are known to be true, then using standard stochastic ba
 
 There are other algorithms that make fewer assumptions, such as [Exp3](http://jeremykun.com/2013/11/08/adversarial-bandits-and-the-exp3-algorithm/). Due to their lack of assumptions, these algorithms tend to converge far more slowly, typically so slowly that they can *never be turned off*. Very few people tend to use them in practice, because they are optimized for the case when the [world is out to get you](http://jeremykun.com/2013/12/09/bandits-and-stocks/).
 
+I should also mention that there are (in principle) stochastic bandit algorithms which can solve every issue presented here. However, if you know about such methods, it's probably because you developed them yourself - I don't know of any published material on this. If you did cook up your own bandits which violate the assumptions above, stop reading this post now.
+
 # Saturday is not Tuesday
 
 The first problem using bandits in practice is the Saturday/Tuesday problem. Depending on what your website is selling, people will have a different propensity to purchase on Saturday than they have on Tuesday. Consider now an A/B test comparing following two headlines:
