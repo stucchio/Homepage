@@ -12,8 +12,7 @@ In a recent [post](http://visualwebsiteoptimizer.com/split-testing-blog/multi-ar
 
 However, there are bandit algorithms that account for statistical significance.
 
-
-
+**UPDATE:** Several years after writing this post, I've learned that it's a bit misunderstood. After reading this post, please go read [this followup post](/blog/2015/dont_use_bandits.html) to avoid any misconceptions.
 
 # Simple algorithms
 
