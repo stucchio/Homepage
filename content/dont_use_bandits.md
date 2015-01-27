@@ -2,6 +2,7 @@ title: Don't use Bandit Algorithms - they probably won't work for you
 date: 2015-01-27 09:00
 author: Chris Stucchio
 tags: statistics, bandit algorithms, ab testing
+nolinkback: true
 category: statistics
 
 Several years back, I wrote an article [advocating in favor of using bandit algorithms](/blog/2012/bandit_algorithms_vs_ab.html). In retrospect, the article I wrote was incorrect, and I should have phrased it differently. I made no mathematical mistakes in the article. Every fact I said is true. But the implications of this article and the way it has been interpreted by others is deeply wrong, and I'm going to take the opportunity now to correct what I said.
