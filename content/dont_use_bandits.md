@@ -93,3 +93,7 @@ None of these issues are, in principle, a problem for bandit algorithms. The iss
 But if you don't recognize these issues up front and deal with them, they will make your bandit algorithms completely ineffective. This is not hyperbole - I've had a number of clients who have read my advocacy of bandit algorithms, blindly used them in code, and found them to be ineffective. This is probably my fault, and in retrospect I should have been more careful in my advocacy.
 
 The simplest way to avoid these issues is to stick to basic A/B test methods. Run your tests for an integer number of weeks, track on a per-user rather than per-visit basis, and make sure all your users have enough time to respond. This is the most robust way to handle such things, and the only one I can recommend to any non-experts. My strong **recommendation** - if you can't follow the convergence proofs of bandit algorithms, you probably do not want to use them in your code. Bandit algorithms are great tools, but also very delicate and easy to get wrong.
+
+# See also
+
+Noel Welsh pointed out a paper [Online Learning under Delayed Feedback](http://jmlr.org/proceedings/papers/v28/joulani13.pdf). Deals with one of these problems, though not necessarily optimally.
