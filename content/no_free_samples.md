@@ -1,4 +1,4 @@
-title: No Free Samples - Counting Tricks don't get you to Statistical Significance
+title: No Free Samples - Counting Tricks won't get you to Statistical Significance
 date: 2015-01-29 09:00
 author: Chris Stucchio
 tags: statistics, bandit algorithms, ab testing
