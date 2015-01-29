@@ -74,7 +74,7 @@ Here's the problem.
 
 Most bandit algorithms use the [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem) to bound the variance of the samples. Once the variance of the sample is low, convergence has been achieved and the algorithm has converged. However, the variance of the Central Limit Theorem in the non-IID case is [vastly larger](https://en.wikipedia.org/wiki/Central_limit_theorem#CLT_under_weak_dependence) than in the IID case.
 
-Based on some simple examples, supposing a single user visits the site 3x before buying, then the variance of the data set based on measuring visits rather than users might be `(1+2x3)=7` times larger than a naive algorithm would expect!
+Based on some simple examples, supposing a single user visits the site 3x before buying, then the variance of the data set based on measuring visits rather than users might be `(1+2x3)=7` times larger than a naive algorithm would expect! (Note: to understand the details, see [this post](/blog/2015/no_free_samples.html).)
 
 Without knowing further details about dynamicyield's implementation, it's not possible to figure out how strongly this affects their implementation. Since they are closed source, proving them right or wrong is impossible. But based on their lack of recognition of this problem on their blog, I'd suggest avoiding using them.
 
