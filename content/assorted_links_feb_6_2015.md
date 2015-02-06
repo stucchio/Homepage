@@ -1,5 +1,5 @@
 title: Assorted links - nothing interesting happened lately edition
-date: 2015-02-15 9:30:00
+date: 2015-02-06 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -11,7 +11,11 @@ Using [Edgeworth series](https://en.wikipedia.org/wiki/Edgeworth_series) to [app
 
 [Good critique of append-only databases](http://www.xaprb.com/blog/2013/12/28/immutability-mvcc-and-garbage-collection/?)
 
+[Bigger Data; same laptop](http://www.frankmcsherry.org/graph/scalability/cost/2015/02/04/COST2.html). Quote: "I’d like to challenge the teams behind the existing graph processing platforms to evaluate and report their COST (Configuration that Outperforms a Single Thread) for this dataset."
+
 [Column Oriented Database - Introduction](https://medium.com/@hellomichibye/column-oriented-database-introduction-part-1-572e5780aebb), and [part 2](https://medium.com/@hellomichibye/column-oriented-database-draft-part-2-21199a2de18a).
+
+A [nice tutorial](http://bryangilbert.com/blog/2015/02/04/akka-reactive-streams/index.html) on using Akka Streaming. See also this [example application](https://github.com/pkinsky/akka-streams-example) and the [cookbook](http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-M2/scala/stream-cookbook.html). I'm getting excited by this project - I was bullish on Scalaz Stream, but the performance leaves something to be desired.
 
 [Augmenting Human Intelligence: A Conceptual Framework](http://www.dougengelbart.org/pubs/papers/scanned/Doug_Engelbart-AugmentingHumanIntellect.pdf). This paper is a classic, by the man who invented the computer mouse, but I never got around to reading it until recently.
 
