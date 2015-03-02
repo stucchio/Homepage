@@ -19,6 +19,8 @@ nolinkback: true
 
 [Metropolitan Man](https://www.fanfiction.net/s/10360716/1/The-Metropolitan-Man) - just read this (hat tip: [Sidhant Godiwala](http://www.sidhantgodiwala.com/)) and it's by far my favorite version of Superman. Lex Luthor, rather than being a comic book villain, is an altruistic individual motivated by the good of humanity and avoiding extinction level events.
 
+[Genetic contributions to variation in general cognitive function a meta analysis of genome wide association studies in the CHARGE consortium (N=53,949)](http://www.nature.com/mp/journal/v20/n2/pdf/mp2014188a.pdf).
+
 [The Early Retirement Movement](http://updatedpriors.blogspot.in/2015/02/the-early-retirement-movement.html) - a great article on the relationship between labor and production.
 
 [Liberal Bias in Social Psychology](https://www.psychologytoday.com/blog/rabble-rouser/201310/liberal-bias-in-social-psychology-personal-experience-ii). Interesting paper, and interesting what they needed to do to publish it: "We could not get this published.  It was rejected at two separate journals.  Finally, we decided to bag every mention of liberals being more biased than conservatives, and resubmitted it to another journal.  This time, it was accepted." See a also this [article](https://www.psychologytoday.com/blog/rabble-rouser/201309/liberal-bias-in-social-psychology-personal-experience-i) on the topic.
