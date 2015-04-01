@@ -1,4 +1,4 @@
-title: Assorted links
+title: Assorted links - lots of excitement edition
 date: 2015-04-01 9:30:00
 author: Chris Stucchio
 nolinkback: true
@@ -6,6 +6,8 @@ nolinkback: true
 ![archinowhere](http://payload353.cargocollective.com/1/13/424998/9360251/03_study03-01-01_700.jpg)
 
 [Archinowhere](http://federicobabina.com/ARCHINOWHERE#.VOVsyXWUdhE), by Federico Babina.
+
+Sorry for not posting anything lately. I've got a big backlog of posts, but I've also started a new job which is taking up a lot of time. We are doing exciting work in statistics - if anyone (particularly people in Delhi or Bangalore) wants to learn more, feel free to write.
 
 [How sure are you that large margin implies low VC dimension](https://winvector.github.io/margin/margin.pdf) - a nice review article discussing the major theorem.
 
