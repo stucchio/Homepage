@@ -1,5 +1,5 @@
 title: Assorted links - lots of excitement edition
-date: 2015-06-09 9:30:00
+date: 2015-06-22 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -8,6 +8,8 @@ nolinkback: true
 [Hands-Free Kafka Replication: A Lesson in Operational Simplicity](http://blog.confluent.io/2015/04/07/hands-free-kafka-replication-a-lesson-in-operational-simplicity/). Self-recommending.
 
 This is a [great essay](http://www.moreright.net/anonymity-and-the-right/) by Michael Anissimov discussing why people who know an unpopular secret about the world should publicly tell the world that secret. It's certainly discouraged by our anti-intellectual culture, however. Toward that end: I publicly state that I find neoreactionary types to be the most insightful political thinkers today. Among other things,
+
+[The Tragedy of Light](http://thefutureprimaeval.net/the-tragedy-of-light/) - a discussion on how nerds are insufficiently ambitious. I've observed this as well - consider Salman Khan's claim that his academy is [is not about replacing teachers, it’s about empowering teachers](http://www.telegraph.co.uk/education/educationnews/9568850/Khan-Academy-The-man-who-wants-to-teach-the-world.html).
 
 Great article on a [Thiel Fellow addressing reputation problems in India](http://techcrunch.com/2015/04/06/oyo-rooms) - his startup [Oyo Rooms](http://www.oyorooms.com/) purports to provide hotel rooms with a guaranteed baseline of quality. I'll definitely try it out. Another article on [reducing information problems](http://logos.nationalinterest.in/2015/04/information-asymmetry-in-the-information-age/) w.r.t domestic help, travel and garbage collection.
 
