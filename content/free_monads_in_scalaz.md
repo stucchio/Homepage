@@ -4,7 +4,7 @@ author: Chris Stucchio
 tags: scala, free monad, category theory, scalaz
 category: category theory
 
-In category theory, a Free Object is an algebraic object `M[_]` possessing a natural transformation - a way of lifting a function `f: A => N` into a function from `M[A] => M` which preserves the algebraic structure. In this article I'm going to discuss how this applies to the Free Monad and show how it can be used to compose database operations into transactions - an inherently monadic task.
+In category theory, a Free Object is an algebraic object `M[_]` possessing a natural transformation - a way of lifting a function `f: A => N` into a function from `M[A] => N` which preserves the algebraic structure. In this article I'm going to discuss how this applies to the Free Monad and show how it can be used to compose database operations into transactions - an inherently monadic task.
 
 There are several existing free monad tutorials out there on the net. Most of them start from implementation details and work their way back into explaining category theory and what a free monad is. I'm going to do the opposite, and start from category theory - i.e., the API for free monad - and simply explain how they are used. I'll leave implementation details to [other posts](http://noelwelsh.com/programming/2015/04/13/free-monads-are-simple/).
 
