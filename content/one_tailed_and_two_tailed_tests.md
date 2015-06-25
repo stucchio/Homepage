@@ -3,7 +3,7 @@ date: 2015-01-20 09:30
 author: Chris Stucchio
 tags: ab testing, decision rules
 
-Over the past year or so, there have been a number of articles discussing the use of one tailed vs two tailed A/B tests. For example, [How Optimizely (Almost) Got Me Fired](http://blog.sumall.com/journal/optimizely-got-me-fired.html). The use of a one or two tailed test is an important issue. What [every](https://community.optimizely.com/t5/Strategy-Culture/Let-s-talk-about-Single-Tailed-vs-Double-Tailed/td-p/4220) [analysis](http://www.measuringu.com/blog/ab-testing.php) I've read fails to understand is that the issue cannot be decided at the level of statustics alone - it needs to be decided from within the context of a **decision procedure**.
+Over the past year or so, there have been a number of articles discussing the use of one tailed vs two tailed A/B tests. For example, [How Optimizely (Almost) Got Me Fired](http://blog.sumall.com/journal/optimizely-got-me-fired.html). The use of a one or two tailed test is an important issue. What [every](https://community.optimizely.com/t5/Strategy-Culture/Let-s-talk-about-Single-Tailed-vs-Double-Tailed/td-p/4220) [analysis](http://www.measuringu.com/blog/ab-testing.php) I've read fails to understand is that the issue cannot be decided at the level of statistics alone - it needs to be decided from within the context of a **decision procedure**.
 
 When running an A/B test, the goal almost always to increase conversions rather than simply answer idle curiosity. To decide whether one tailed or two tailed is right for you, you need to understand your entire decision procedure rather than simply the statistics.
 
