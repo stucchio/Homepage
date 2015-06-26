@@ -1,4 +1,4 @@
-title: Assorted links - lots of excitement edition
+title: Assorted links
 date: 2015-06-22 9:31:00
 author: Chris Stucchio
 nolinkback: true
