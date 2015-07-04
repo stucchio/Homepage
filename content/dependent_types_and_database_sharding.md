@@ -1,10 +1,10 @@
 title: Preventing DB sharding errors at compile time with dependent types
-date: 2015-07-01 09:00
+date: 2015-07-06 09:00
 author: Chris Stucchio
 tags: scala, dependent types, databases
 category: scala
 
-Dependent types are a way of proving facts about your program at compile time. One interesting use case of dependent types, which I've discovered recently, is ensuring consistency in a sharded database system.
+Dependent types are a way of proving facts about your program at compile time. One interesting use case of dependent types, which I've discovered recently, is ensuring consistency in a sharded database system. [Sharding](https://en.wikipedia.org/wiki/Shard_(database_architecture)) is a database practice where different pieces of data are stored in different physical databases, depending on underlying properties of the objects.
 
 Consider the following code:
 
@@ -17,13 +17,19 @@ case class BlogPost(content: String, shard: Shard)
 def insertBlogPost(user: User, post: BlogPost) = runDatabaseOperation(user.shard)(conn => ...)
 ```
 
-So far, so good. But unfortunately, problems can arise at runtime:
+We'd like to ensure that each `BlogPost` is storeed in the same `Shard` as the user who wrote it.
+
+Unfortunately, problems can arise at runtime:
 
 ```scala
 insertBlogPost(User("chris", Shard(1)), BlogPost("my blog post", Shard(2)))
 ```
 
-This code cannot possibly run successfully, since the user lives in `Shard(1)` while the blogpost lives in `Shard(2)`. As a result, it is possible for bugs to occur that cannot be checked by the compiler.
+This code cannot possibly run successfully, since the user lives in `Shard(1)` while the blogpost lives in `Shard(2)`.
+
+If the underlying database is a SQL database, this will likely result in various consistency errors - the `BlogPost` will probably fail to be inserted, and further queries to `Shard(1)` of the form `SELECT ... FROM users INNER JOIN blogposts ON blogposts.user_id = user.id WHERE ...` will fail to return the blog post inserted into `Shard(2)`.
+
+As a result, it is possible for bugs to occur that cannot be checked by the compiler.
 
 # Class Hierarchies?
 
@@ -73,14 +79,14 @@ However, the concrete definitions of our data types live inside the `DBTypes` tr
 
 ```scala
 trait DBTypes { self:Shard =>
-  trait MyHasShard extends HasShard {
+  trait HasMyShard extends HasShard {
     val shard: self.type = self
   }
 
-  case class User(username: String) extends MyHasShard with UserLike
-  case class BlogPost(content: String) extends MyHasShard with BlogPostLike
+  case class User(username: String) extends HasMyShard with UserLike
+  case class BlogPost(content: String) extends HasMyShard with BlogPostLike
 }
-``
+```
 
 We define a `runDatabaseOperation` function which requires knowing the relevant shard:
 
@@ -136,7 +142,7 @@ Rather, what should be done is the following:
   }
 ```
 
-This will ensure that the return type of `getPosts` is also guaranteed to live in the same shard as `user`.
+This will ensure that the compiler knows the return type of `getPosts` lives in the same shard as `user`.
 
 # Conclusion
 
