@@ -17,7 +17,7 @@ case class BlogPost(content: String, shard: Shard)
 def insertBlogPost(user: User, post: BlogPost) = runDatabaseOperation(user.shard)(conn => ...)
 ```
 
-We'd like to ensure that each `BlogPost` is storeed in the same `Shard` as the user who wrote it.
+We'd like to ensure that each `BlogPost` is stored in the same `Shard` as the user who wrote it.
 
 Unfortunately, problems can arise at runtime:
 
