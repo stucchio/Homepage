@@ -132,4 +132,4 @@ This cache encapsulates the semantics of both the `SprayCache` and the `Optional
 
 I've often heard it said that higher math is not particularly useful for programming, at least if you are building CRUD apps. On this point I disagree. Although one can build a CRUD app via basic programming skills and sheer force of will, that doesn't mean knowing a little bit more math is useless. Even when building something as simple as a cache, a little bit of higher math can come in handy and make your code a bit more generic.
 
-P.S. [Injera](https://github.com/bayesianwitch/injera), the library I'm working on uses this pattern in slightly more generality. Go check it out, it might come in handy.
+P.S. [Injera](https://github.com/stucchio/injera), the library I'm working on uses this pattern in slightly more generality. Go check it out, it might come in handy.
