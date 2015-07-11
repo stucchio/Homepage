@@ -7,7 +7,7 @@ tags: scala, spray, marshallers, futures
 
 
 
-At [BayesianWitch](http://www.bayesianwitch.com/), I'm using the [spray routing](http://spray.io/) library to provide the web frontend of the recommendation engine. One rather annoying error I've run into several times is the following. Given some type `Foo`, for which a `JsonSerializer` exists, I have cote which looks like the following:
+For various projects I've been using the [spray routing](http://spray.io/) library to provide the web frontend of the recommendation engine. One rather annoying error I've run into several times is the following. Given some type `Foo`, for which a `JsonSerializer` exists, I have cote which looks like the following:
 
     respondWithMediaType(`application/json`) {
       complete {
