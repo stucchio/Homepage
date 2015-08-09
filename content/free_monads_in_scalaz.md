@@ -138,7 +138,7 @@ case class MakeDir[A](d: File, x: A) extends FileActionOp[A]
 case class CreateFile[A](d: File, x: A) extends FileActionOp[A]
 
 object F extends Functor[FileActionOp] {
-  def map[A,B](fa: =>FileActionOp)(f: A => B) = fa match {
+  def map[A,B](fa: =>FileActionOp[A])(f: A => B) = fa match {
     case Pure(x) => Pure(f(x))
     case MakeDir(d,x) => MakeDir(d, f(x))
     case CreateFile(d,x) => CreateFile(d, f(x))
