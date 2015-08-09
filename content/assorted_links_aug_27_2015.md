@@ -19,12 +19,16 @@ I've gotten into [Count Min Sketch](https://7797b024-a-62cb3a1a-s-sites.googlegr
 
 [Great article on how to make commuter rail efficient.](https://pedestrianobservations.wordpress.com/2015/07/26/why-labor-efficiency-is-important/) Hint: eliminate conductors.
 
-# Politics
+# Politics and Culture
 
 [The Rule of Law in the Regulatory State](http://johnhttp://dimacs.rutgers.edu/~graham/pubs/papers/cmencyc.pdfhcochrane.blogspot.in/2015/08/rule-of-law-in-regulatory-state.html). This is a fantastic article by John Cochrane discussing how the modern regulatory state has more or less eliminated the rule of law. The general idea is that many projects require pre-approval from regulatory agencies; these agencies use vaguely defined rules and arbitrary delays in order to hinder political opponents. This article provides a lot of detail to support various claims that neoreactionary types make.
 
 [Antiracism - our flawed new religion](http://www.thedailybeast.com/articles/2015/07/27/antiracism-our-flawed-new-religion.html).
 
+[http://www.ribbonfarm.com/2015/08/06/frontierland/](Frontierland). This article discusses theme parks, and the most interesting part (and the reason I'm citing it) is about how frontier culture can be damaging in the long run. The essential argument is that people move from their old lands to the frontier, give up most of their old culture (which has evolved to work well in civilized lands) and replace it with frontier culture (useful primarily for surviving in frontier territory).
+
 # Biology
 
 [“Ethnic Genetic Interests” Do Not Exist (Neither Does Group Selection)](https://jaymans.wordpress.com/2015/08/02/ethnic-genetic-interests-do-not-exist-neither-does-group-selection/). It's unfortunate that he needs to debunk this, and that such nonsense is becoming so widespread in certain contrarian spheres.
+
+[The Fable of the Dragon Tyrant](http://www.nickbostrom.com/fable/dragon.html) - an interesting article about aging research.
