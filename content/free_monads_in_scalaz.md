@@ -146,6 +146,11 @@ object F extends Functor[FileActionOp] {
 }
 ```
 
+The monad would then be:
+```scala
+type FileAction[A] = Free[FileActionOp,A]
+```
+
 Then to test whether a directory is always created before files are placed in it:
 
 ```scala
