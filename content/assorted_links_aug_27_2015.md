@@ -23,6 +23,10 @@ The National Heart, Lung and Blood institute compared the number of positive res
 
 [Are ClinicalTrials.gov p-values clustered around 0.05?](http://www.statwonk.com/blog/are-clinicaltrialsgov-p-values-clustered-around-005/)
 
+[The Statistics Handicap](http://hunch.net/?p=318). And [statistics vs data science terminology](http://brenocon.com/blog/2008/12/statistics-vs-machine-learning-fight/).
+
+[Is Bayesian A/B Testing Immune to Peeking? Not Exactly](http://varianceexplained.org/r/bayesian-ab-testing/). Great article discussing what Bayesian A/B testing does and doesn't do.
+
 # Economics and Social Sciences
 
 [The Market for Silver Bullets ](http://iang.org/papers/market_for_silver_bullets.html) - about selling computer security. Apparently security markets are highly inefficient - neither lemon nor lime markets, since both buyer and seller can be clueless.
