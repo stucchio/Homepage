@@ -1,35 +1,44 @@
-title: Bayesian Linear Analysis - another way to think about linear regression
-date: 2015-01-19 09:30
+title: Bayesian Linear Regression (in PyMC) - an interesting way to think
+date: 2015-09-28 09:30
 author: Chris Stucchio
 tags: bayesian statistics, linear regression
 mathjax: true
 
+![simple regression](|filename|blog_media/2015/bayesian_linear_regression/simple_regression.png)
 
-Linear regression is a common formula introduced in statistics classes - an easy way to get a best fit line. Alternately, it can be introduced in linear algebra as a way to fit a linear function to a set of points with minimal sum of squares error. In this blog post, I'm going to take a different tactic - I'm going to imagine that Bayesian statistics was invented first. Then I'm going to approach linear regression and linear analysis from this perspective, and see if it gets us anyplace interesting.
+Consider a data set, a sequence of point $@ (x_1, y_1), (x_2, y_2), \ldots, (x_k, y_k)$@. We are interested in discovering the relationship between x and y. Linear regression, at it's simplest, assumes a relationship between x and y of the form $@ y = \alpha x + \beta + e$@. Here, the variable $@ e $@ is a *noise* term - it's a random variable that is independent of $@ x $@, and varies from observation to observation. This assumed relationship is called the *model*.
 
-# Setting up the model
+(In the case where x is a vector, the relationship is assumed to take the form $@ y = \alpha \cdot x + \beta + e$@. But we won't get into that in this post.)
 
-To begin with, we'll start with a set of observable inputs - $@ x_i \in \mathbb{R}^N, i=1\ldots k$@. For each input, there is also an observable output $@ y_i \in \mathbb{R}, i=1\ldots k $@. The general philosophy we want to propose is that we want to predict the output as accurately as possible given a set of prediction coefficients. If we could solve the problem perfectly, we would find an $@ \alpha \in \mathbb{R}^N $@ so that:
+The problem of linear regression is then to estimate $@ \alpha, \beta $@ and possibly $@ e $@.
 
-$$ \alpha \cdot x_i = \sum_{j=1}^N \alpha_j x_{i,j} = y_i $$
+In this blog post, I'll approach this problem from a Bayesian point of view. Ordinary linear regression (as taught in introductory statistics textbooks) offers a recipe which works great under a few circumstances, but has a variety of weaknesses. These weaknesses include an extreme sensitivity to outliers, an inability to incorporate priors, and little ability to quantify uncertainty.
 
-In reality of course, there will be errors. Provided $@ k > N $@, the problem is already overdetermined - except for very special sets of $@ (x_i, y_i) $@, we cannot come up with a solution. So at most the relation $@ y_i = \alpha \cdot x_i $@ must be viewed as an approximation.
+Bayesian linear regression offers a very different way to think about things. Combined with some computation (and note - computationally it's a LOT harder than ordinary least squares), one can easily formulate and solve a very flexible model that addresses most of the problems with ordinary least squares.
 
-Since we are Bayesians, the parameter $@ \alpha $@ is unknown - we only have a set of observations of it. For simplicity lets assume those observations are [independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables). I.e., this means that for every $@ i $@, we have that:
+# The simplest version
+
+To begin with, let's assume we have a one-dimensional dataset $@ (x_1, y_1), \ldots, (x_k, y_k) $@. The goal is to predict $@ y_i $@ as a function of $@ x_i $@. Our model describing $@ y_i $@ is
+
+$$ y_i = \alpha x_i + \beta + e $$
+
+where $@ \alpha $@ and $@ \beta $@ are unknown parameters, and $@ e $@ is the statistical noise. In the Bayesian approach, $@ \alpha $@ and $@ \beta $@ are unknown, and all we can do is form an opinion (compute a posterior) about what they might be.
+
+To start off, we'll assume that our observations are [independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables). This means that for every $@ i $@, we have that:
 
 $$ y_i = \alpha \cdot x_i + e_i $$
 
-where each $@ e_i $@ is a random variable with a pdf given by $@ E(t) $@.
+where each $@ e_i $@ is a random variable. Let's assume that $@ e_i $@ is an absolutely continuous random variable, which means that it has a probability density function given by $@ E(t) $@.
 
-Our goal will be to compute a *posterior* on $@ \alpha $@, i.e. a probability distribution $@ p(\alpha) $@ that represents our degree of belief that any particular $@ \alpha $@ is the "correct" one.
+Our goal will be to compute a *posterior* on $@ (\alpha, \beta) $@, i.e. a probability distribution $@ p(\alpha,\beta) $@ that represents our degree of belief that any particular $@ (\alpha,\beta) $@ is the "correct" one.
 
 At this point it's useful to compare and contrast standard linear regression to the bayesian variety.
 
 In **standard linear regression**, your goal is to find a single estimator $@ \hat{\alpha} $@. Then for any unknown $@ x $@, you get a point predictor $@ y_{approx} = \hat{\alpha} \cdot x $@.
 
-In **bayesian lineare regression**, you get a probability distribution representing your degree of belief as to how likely $@ \alpha $@ is. Then for any unknown $@ x $@, you get a probability distribution on $@ y $@ representing how likely $@ y $@ is. Specifically:
+In **bayesian linear regression**, you get a probability distribution representing your degree of belief as to how likely $@ \alpha $@ is. Then for any unknown $@ x $@, you get a probability distribution on $@ y $@ representing how likely $@ y $@ is. Specifically:
 
-$$ P(y \approx Y) = \int_{\alpha \cdot x \approx Y} \textrm{posterior}(\alpha) d\alpha $$
+$$ p(y = Y) = \int_{\alpha \cdot x + \beta = Y} \textrm{posterior}(\alpha,\beta) d\alpha $$
 
 # How to compute a bayesian estimator?
 
