@@ -5,6 +5,8 @@ nolinkback: true
 
 [Beeple-crap](http://www.beeple-crap.com/) - it's amazing simply how much this guy has produced. It gets better over time.
 
+Very important! [A scone is not a biscuit](http://www.bonappetit.com/recipes/article/scone-is-not-a-biscuit).
+
 [Procedural Brutalism](http://bldgblog.blogspot.com/2014/09/procedural-brutalism.html)
 
 # Computing and Mathematics
