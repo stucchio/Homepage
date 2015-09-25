@@ -7,7 +7,7 @@ tags: scala, breeze, spire, jvm, performance, arrays
 
 
 
-I've been hacking on [Breeze](https://github.com/scalanlp/breeze) lately, which is a scientific library for Scala which aims to replace [Scipy](http://scipy.org). It's got a long way to go, but it's definitely a great library and one that I make significant use of at [BayesianWitch](http://bayesianwitch.com/). One of the great things about using the same language that your scientific library is written in is that you don't need to take a huge (10-100x) performance hit when you need to drop down to using a for loop.
+I've been hacking on [Breeze](https://github.com/scalanlp/breeze) lately, which is a scientific library for Scala which aims to replace [Scipy](http://scipy.org). It's got a long way to go, but it's definitely a great library and one that I make significant use of. One of the great things about using the same language that your scientific library is written in is that you don't need to take a huge (10-100x) performance hit when you need to drop down to using a for loop.
 
 Nevertheless, it's still good if your low level for-loop performance is good. I've spent a few days optimizing the low level array access code in Breeze, and I've run into a puzzle.
 

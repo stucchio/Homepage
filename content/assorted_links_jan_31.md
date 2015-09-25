@@ -15,8 +15,4 @@ nolinkback: true
 
 [Nassim Taleb writes an idiotic article](http://www.edge.org/response-detail/25401) advocating that we should stop using standard deviations. Pointless to read. But [John Mount's takedown](http://www.win-vector.com/blog/2014/01/use-standard-deviation-not-mad-about-mad/?utm_source=rss&utm_medium=rss&utm_campaign=use-standard-deviation-not-mad-about-mad) is useful.
 
-BayesianWitch has released a [Wordpress Affiliate Link Plugin](http://bayesianwitch.com/wordpress/index.html?utm_source=chrisblog)
-
 [For Hire! Bangalore Rickshaw](http://vimeo.com/43397805). It's a nice video that captures the auto experience very well, for those who've never rode one.
-
-

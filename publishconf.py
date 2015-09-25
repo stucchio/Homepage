@@ -15,6 +15,8 @@ SITEURL = 'https://www.chrisstucchio.com'
 
 RELATIVE_URLS = False
 
+VWO_ANALYTICS = True
+
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 
