@@ -1,4 +1,4 @@
-title: Bayesian Linear Regression (in PyMC) - an interesting way to think
+title: Bayesian Linear Regression (in PyMC) - a different way to think about regression
 date: 2015-09-28 09:30
 author: Chris Stucchio
 tags: bayesian statistics, linear regression
@@ -42,19 +42,88 @@ $$ p(y = Y) = \int_{\alpha \cdot x + \beta = Y} \textrm{posterior}(\alpha,\beta)
 
 # How to compute a bayesian estimator?
 
-Obviously Bayes rule is used. Suppose you have a data set $@D = \{ (x_i, y_i) \}$@. Then:
+## Computing Posteriors with PyMC
 
-$$ \textrm{posterior}(\alpha | D) = \frac{ P(D | \alpha) \textrm{prior}(\alpha) } { \textrm{Const} } $$
+To compute the posteriors on $@ (\alpha, \beta) $@ in Python, we first import the PyMC library:
 
-Now given that our samples are [i.i.d](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables), we can write this as:
+```python
+import pymc
+```
 
-$$ \textrm{posterior}(\alpha | D) = \textrm{Const} \times \textrm{prior}(\alpha) \prod_{i=1}^k P(y_i|x_i,\alpha) $$
+We then generate our data set (since this is a simulation), or otherwise load it from an original data source:
 
-Because we assumed the error term has a PDF, we can simplify this to:
+```python
+from scipy.stats import norm
 
-$$ \textrm{posterior}(\alpha | D) = \textrm{Const} \times \textrm{prior}(\alpha) \prod_{i=1}^k E(y_i - \alpha \cdot x_i) $$
+k = 100 #number of data points
+x_data = norm(0,1).rvs(k)
+y_data = x_data + norm(0,0.35).rvs(k) + 0.5
+```
 
-So now the game is afoot. We need to construct a useful prior, $@ \textrm{prior}(\alpha) $@ and a useful error distribution. The specific manner in which we do this is problem dependent, and gives us the ability to model the world more accurately.
+We then define priors on $@ (\alpha, \beta) $@. In this case, we'll choose uniform priors on [-5,5]:
+
+```python
+alpha = pymc.Uniform('alpha', lower=-5, upper=5)
+beta = pymc.Uniform('beta', lower=-5, upper=5)
+```
+
+Finally, we define our observations.
+
+```python
+x = pymc.Normal('x', mu=0,tau=1,value=x_data, observed=True)
+
+@pymc.deterministic(plot=False)
+def linear_regress(x=x, alpha=alpha, beta=beta):
+    return x*alpha+beta
+
+y = pymc.Normal('output', mu=linear_regress, value=y_data, observed=True)
+```
+
+Note that for the values `x` and `y`, we've told PyMC that these values are known quantities that we obtained from observation. Then we run to some Markov Chain Monte Carlo:
+
+```python
+model = pymc.Model([x, y, alpha, beta])
+mcmc = pymc.MCMC(model)
+mcmc.sample(iter=100000, burn=10000, thin=10)
+```
+
+We can then draw samples from the posteriors on alpha and beta:
+
+![posteriors on alpha and beta](|filename|blog_media/2015/bayesian_linear_regression/alpha_beta_posteriors.png)
+
+Unsurprisingly (given how we generated the data) the posterior for $@ \alpha $@ is clustered near $@ \alpha=1 $@ and for $@ \beta $@ near $@ \beta=0.5 $@.
+
+We can then draw a *sample* of regression lines:
+
+![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/scatterplot_posterior.png)
+
+Unlike in the ordinary linear regression case, we don't get a single regression line - we get a probability distribution on the space of all such lines. The width of this posterior represents the uncertainty in our estimate.
+
+Imagine we were to change the variable `k` to `k=10` in the beginning of the python script above. Then we would have only 10 samples (rather than 100) and we'd expect much more uncertainty. Plotting a sample of regression lines reveals this uncertainty:
+
+![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/scatterplot_posterior2.png)
+
+In contrast, if we had far more samples (say `k=10000`), we would have far less uncertainty in the best fit line:
+
+![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/scatterplot_posterior3.png)
+
+## The mathematical way
+
+**Skip this section if you prefer code to math.**
+
+Rather than simply setting up a somewhat overcomplicated model in PyMC, one can also set up the MCMC directly. Supposing we have a data set $@D = \{ (x_i, y_i) \}$@. Then:
+
+$$ \textrm{posterior}(\alpha,\beta | D) = \frac{ P(D | \alpha,\beta) \textrm{prior}(\alpha,\beta) } { \textrm{Const} } $$
+
+If the samples are [i.i.d](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables), we can write this as:
+
+$$ \textrm{posterior}(\alpha,\beta | D) = \textrm{Const} \times \textrm{prior}(\alpha,\beta) \prod_{i=1}^k P(y_i|x_i,\alpha,\beta) $$
+
+Because we assumed the error term has a PDF and is additive, we can simplify this to:
+
+$$ \textrm{posterior}(\alpha, \beta | D) = \textrm{Const} \times \textrm{prior}(\alpha, \beta) \prod_{i=1}^k E(y_i - \alpha \cdot x_i - \beta) $$
+
+Given this formulation, we have now expressed the posterior as being proportional to a known function. This allows us to run any reasonable Markov Chain Monte Carlo algorithm directly and draw samples from the posterior.
 
 # Maximal likelihood - how to do ordinary least squares
 
