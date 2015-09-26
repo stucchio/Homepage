@@ -9,6 +9,8 @@ Very important! [A scone is not a biscuit](http://www.bonappetit.com/recipes/art
 
 [Procedural Brutalism](http://bldgblog.blogspot.com/2014/09/procedural-brutalism.html)
 
+[Very interesting article on the Vatican](http://www.newyorker.com/magazine/2015/09/14/holy-orders-letter-from-the-vatican-alexander-stille), Ratzinger and Francis.
+
 # Computing and Mathematics
 
 [Castra](http://matthewrocklin.com/blog/work/2015/08/28/Storage/) - a much more efficient data storage format than csv. On [github](https://github.com/blaze/castra). Would love to see how this compares to HDF5.
@@ -18,6 +20,10 @@ Very important! [A scone is not a biscuit](http://www.bonappetit.com/recipes/art
 [The Frequentist Argument against the Significance Test](http://bayesfactor.blogspot.co.uk/2015/03/the-frequentist-argument-against.html) and [part 2](http://bayesfactor.blogspot.co.uk/2015/03/the-frequentist-case-against.html).
 
 [How do you know if your model is going to work?](http://www.win-vector.com/blog/2015/09/isyourmodelgoingtowork/) A nice overview on testing models.
+
+[Nock, Hoon, etc. for Non-Vulcans (Why Urbit Matters)](https://popehat.com/2013/12/06/nock-hoon-etc-for-non-vulcans-why-urbit-matters/). After reading this motivation document, take a look at [Urbit: an operating function](http://urbit.org/preview/~2015.9.25).
+
+[Vuvuzela: Scalable Private Messaging Resistant to Traffic Analysis](http://sigops.org/sosp/sosp15/current/2015-Monterey/printable/136-hooff.pdf). Discusses using differential privacy to ensure that an adversary cannot determine whether Alice is messaging Bob or not. (Compare to encryption, which only prevents an adversary from identifying the contents of the message.)
 
 # Economics and Social Sciences
 
@@ -34,6 +40,8 @@ Deadly Caution - apparently the American [FDA's conservativism about approving d
 [Police have the highest rate of domestic violence, the NFL is well below the national average.](http://www.dailykos.com/story/2015/09/10/1420117/-Police-officers-have-a-rate-of-domestic-violence-at-least-300-higher-than-active-players-in-the-NFL)
 
 [Lessons from Gurgaon](https://mason.gmu.edu/~atabarro/Lessons%20from%20Gurgaon.pdf). This is a great article describing how Gurgaon grew to be one of the largest voluntary (almost entirely privately developed) cities in the world, and in part why Faridabad did not. A very important point in the article is monopolistic vs serial corruption - a monopolistic corrupt overlord has the incentive to choose a Laffer-curve maximizing tax revenue, while multiple corrupt parties will kill the goose laying the golden egg. A great example supporting the neoreactionary case in favor of a single dictator.
+
+[Our (US) Bizarre System of Taxing Capital](http://econlog.econlib.org/archives/2015/09/our_bizarre_sys.html).
 
 # Biology
 
