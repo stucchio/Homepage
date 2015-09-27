@@ -40,9 +40,7 @@ In **bayesian linear regression**, you get a probability distribution representi
 
 $$ p(y = Y) = \int_{\alpha \cdot x + \beta = Y} \textrm{posterior}(\alpha,\beta) d\alpha $$
 
-# How to compute a bayesian estimator?
-
-## Computing Posteriors with PyMC
+# Computing Posteriors with PyMC
 
 To compute the posteriors on $@ (\alpha, \beta) $@ in Python, we first import the PyMC library:
 
@@ -107,9 +105,13 @@ In contrast, if we had far more samples (say `k=10000`), we would have far less 
 
 ![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/scatterplot_posterior3.png)
 
-## The mathematical way
+# Handling outliers
 
-**Skip this section if you prefer code to math.**
+Ordinary least squares is notoriously bad at dealing with data having outliers.
+
+# Where does ordinary least squares come from? Maximal likelihood.
+
+**Skip this section if you prefer code to math, and jump ahead to handling outliers.**
 
 Rather than simply setting up a somewhat overcomplicated model in PyMC, one can also set up the MCMC directly. Supposing we have a data set $@D = \{ (x_i, y_i) \}$@. Then:
 
@@ -125,20 +127,28 @@ $$ \textrm{posterior}(\alpha, \beta | D) = \textrm{Const} \times \textrm{prior}(
 
 Given this formulation, we have now expressed the posterior as being proportional to a known function. This allows us to run any reasonable Markov Chain Monte Carlo algorithm directly and draw samples from the posterior.
 
-# Maximal likelihood - how to do ordinary least squares
+Suppose we now choose a very particular distribution - suppose we take $@ E(t) = C e^{-t^2/2} $@. Further, suppose take an [uninformative (and improper) prior](https://en.wikipedia.org/wiki/Prior_probability#Uninformative_priors), namely $@ \textrm{prior}(\alpha, \beta) = 1 $@ - this means we have literally no information on $@ \alpha $@ before we start. In this case:
 
-Suppose we now choose a very particular distribution - suppose we take $@ E(t) = C e^{-t^2/2} $@. Further, suppose take an [uninformative (and improper) prior](https://en.wikipedia.org/wiki/Prior_probability#Uninformative_priors), namely $@ \textrm{prior}(\alpha) = 1 $@ - this means we have literally no information on $@ \alpha $@ before we start. In this case:
-
-$$ \textrm{posterior}(\alpha | D) = \textrm{Const} \prod_{i=1}^k \exp\left(-(y_i - \alpha \cdot x_i\right)^2/2) $$
+$$ \textrm{posterior}(\alpha | D) = \textrm{Const} \prod_{i=1}^k \exp\left(-(y_i - \alpha x_i - \beta \right)^2/2 - \beta) $$
 
 If we attempt to maximize this quantity (or it's log) in order to find the point of maximum likelihood, we obtain the problem:
 
-$$ \textrm{maximize} \left[ \ln\left( \textrm{Const} \prod_{i=1}^k \exp\left(-(y_i - \alpha \cdot x_i\right)^2/2) \right) \right] = $$
+$$ \textrm{argmax} \left[ \ln\left( \textrm{Const} \prod_{i=1}^k \exp\left(-(y_i - \alpha x_i - \beta \right)^2/2) \right) \right] = $$
 
-$$ \textrm{maximize} \left[ \textrm{Const}  \sum_{i=1}^k -(y_i - \alpha \cdot x_i)^2/2 \right]$$
+$$ \textrm{argmax} \left[ \textrm{Const}  \sum_{i=1}^k -(y_i - \alpha \cdot x_i)^2/2 \right] = $$
 
-This is precisely the problem of minimizing the squared error. So an uninformative prior combined with a Gaussian error term allows Bayesian Linear Regression to revert to ordinary least squares.
+$$ \textrm{argmax} \left[ \sum_{i=1}^k -(y_i - \alpha \cdot x_i)^2/2 \right]$$
 
-# Handling outliers
+Here the argmax is computed over $@ (\alpha, \beta) $@. This is precisely the problem of minimizing the squared error. So an uninformative prior combined with a Gaussian error term allows Bayesian Linear Regression to revert to ordinary least squares.
 
-Ordinary least squares is notoriously bad at dealing with data having outliers.
+## Incorporating prior knowledge
+
+Suppose instead that we do have some prior knowledge on $@ \alpha $@. It's not hard to show then that maximal likelihood yields:
+
+$$ \textrm{argmax}\left( \ln\left[ \textrm{prior}(\alpha,\beta) \right] + \left[ \sum_{i=1}^k -(y_i - \alpha \cdot x_i - \beta)^2/2 \right] \right) $$
+
+This is potentially a trickier problem to solve, depending on the functional form of $@ \textrm{prior}(\alpha,\beta) $@. But it's hardly unapproachable. One very important case is:
+
+$$ \textrm{prior}(\alpha, \beta) = \textrm{Const} \exp\left[ \frac{ (a \alpha + \beta - c)^2 }{ 2\sigma^2} \right] $$
+
+This is functionally equivalent to least squares, so similar solver routines can be used. This means that a prior can be incorporated into gaussian least squares in a fairly straightforward manner.
