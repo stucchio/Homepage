@@ -107,7 +107,20 @@ In contrast, if we had far more samples (say `k=10000`), we would have far less 
 
 # Handling outliers
 
-Ordinary least squares is notoriously bad at dealing with data having outliers.
+In many classical statistics textbooks, the concept of an "outlier" is introduced. Textbooks often treat outliers as data points which need to be specially treated - often ignored - because they don't fit the model and can heavily skew results.
+
+Consider the following example. 50 data points were generated. In the left graph, the y-values were chosen according to the rule $@ y = 1.0 x + 0.5 + e $@ where $@ e $@ is drawn from a [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution). In the right graph, the y-values were chosen according to the same rule, but with $@ e $@ drawn from a [Cauchy distribution](https://en.wikipedia.org/wiki/Cauchy_distribution). I then did ordinary least squares regression to find the best fit line.
+
+The red line in the graph is the best fit line, while the green line is the true relation.
+
+![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/least_squares_outlier.png)
+
+The issue is the following. With a normal distribution, the probability of seeing a data point at $@ y=-20$@ or $@ -30 $@ (as described in the figure) is very small, particularly if the line is sloping upward. As a result, the fact that such a data point did occur is very strong evidence in favor of the line having a much smaller upward slope - even though only a few points slope this way.
+
+In fact, a sufficiently large singleton "outlier" can actually shift the slope of the best fit line from positive to negative:
+
+![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/least_squares_outlier2.png)
+
 
 # Where does ordinary least squares come from? Maximal likelihood.
 
