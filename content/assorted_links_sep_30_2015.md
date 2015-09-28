@@ -1,15 +1,17 @@
 title: Assorted links
-date: 2015-08-27 9:31:00
+date: 2015-09-30 9:31:00
 author: Chris Stucchio
 nolinkback: true
+
+![procedural brutalism](https://1.bp.blogspot.com/-5w65LOyU7Uk/VA4MaoYeyoI/AAAAAAAAg0o/KWfskXadJGs/s1600/proceduralbrutalism.gif)
 
 [Beeple-crap](http://www.beeple-crap.com/) - it's amazing simply how much this guy has produced. It gets better over time.
 
 Very important! [A scone is not a biscuit](http://www.bonappetit.com/recipes/article/scone-is-not-a-biscuit).
 
-[Procedural Brutalism](http://bldgblog.blogspot.com/2014/09/procedural-brutalism.html)
-
 [Very interesting article on the Vatican](http://www.newyorker.com/magazine/2015/09/14/holy-orders-letter-from-the-vatican-alexander-stille), Ratzinger and Francis.
+
+[Empathic communication and strategy for Effective Altruism, Part 1](http://effective-altruism.com/ea/o1/empathic_communication_and_strategy_for_effective/). It's an interesting article - describing the use of dark arts - about how emotionally phraming some factual claims (in this case about Effective Altruism) can cause unthinking people to be more receptive. I disagree with the specific details in point 5 a bit - the author advocates effective altruism as a *more empathetic* version of ordinary altruism. This suggests that empathy as a basis for moral decisions is something to strive for. I strongly disagree with this. One example of the flaws in empathy - [empathy has been shown in psychology experiments to be racist](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108582/pdf/fpsyg-02-00108.pdf) (and to favor the attractive, and others). This [translates to the real world](https://archpedi.jamanetwork.com/article.aspx?articleid=2441797) with many horrible results.
 
 # Computing and Mathematics
 
@@ -24,6 +26,8 @@ Very important! [A scone is not a biscuit](http://www.bonappetit.com/recipes/art
 [Nock, Hoon, etc. for Non-Vulcans (Why Urbit Matters)](https://popehat.com/2013/12/06/nock-hoon-etc-for-non-vulcans-why-urbit-matters/). After reading this motivation document, take a look at [Urbit: an operating function](http://urbit.org/preview/~2015.9.25).
 
 [Vuvuzela: Scalable Private Messaging Resistant to Traffic Analysis](http://sigops.org/sosp/sosp15/current/2015-Monterey/printable/136-hooff.pdf). Discusses using differential privacy to ensure that an adversary cannot determine whether Alice is messaging Bob or not. (Compare to encryption, which only prevents an adversary from identifying the contents of the message.)
+
+[Procedural Brutalism](http://bldgblog.blogspot.com/2014/09/procedural-brutalism.html)
 
 # Economics and Social Sciences
 
