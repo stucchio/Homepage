@@ -14,3 +14,7 @@ nolinkback: true
 [Bayesian Reasoning and Deep Learning](http://blog.shakirm.com/wp-content/uploads/2015/10/Bayes_Deep.pdf). Very interesting, from one of the DeepMind guys.
 
 [Why Do High-Frequency Traders Cancel So Many Orders?](http://www.bloombergview.com/articles/2015-10-08/why-do-high-frequency-traders-cancel-so-many-orders-) By Matt Levine, so more or less self recommending.
+
+## Economics and social science
+
+[Sanity for Sociality: A Theory of Religion](http://thefutureprimaeval.net/sanity-for-sociality/). This is a reflection on religion, portraying it as social benefits (look how awesome Mormon life is) at the cost of some sanity. The unanswered question: "...for those of us sitting outside wishing we could be inside, but unwilling or otherwise unable to pay the sanity cost, the question arises: why do all religious, especially the good ones, require a sanity ante?"
