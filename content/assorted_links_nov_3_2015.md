@@ -3,6 +3,12 @@ date: 2015-11-03 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
+<a href="http://amzn.to/1Qiov3T">
+![mondrian cake](http://media.npr.org/assets/img/2013/04/16/mondrian_dessertart21_slide-c8d605b8e5e6c650aec5c946a947c1e8106371ef-s1600-c85.jpg)
+</a>
+
+[Modern Art Desserts](http://amzn.to/1Qiov3T) - a very cool book which I take some inspiration from.
+
 ## Statistics and Computer Science
 
 [JavaScript and fast data structures: some initial experiments](http://lemire.me/blog/archives/2015/10/05/javascript-and-fast-data-structures-some-initial-experiments/)
