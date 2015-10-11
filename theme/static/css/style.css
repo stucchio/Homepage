@@ -78,6 +78,11 @@ body {
     height: auto;
 }
 
+.summary img {
+    max-width: 100%;
+    height: auto;
+}
+
 .entry-content figcaption, .caption {
     font-size: small;
     margin-bottom: 2px;
