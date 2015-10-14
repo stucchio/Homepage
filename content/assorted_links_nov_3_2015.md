@@ -21,6 +21,8 @@ nolinkback: true
 
 [Why Do High-Frequency Traders Cancel So Many Orders?](http://www.bloombergview.com/articles/2015-10-08/why-do-high-frequency-traders-cancel-so-many-orders-) By Matt Levine, so more or less self recommending.
 
+[A Simple Differentially Private Procedure](http://www.win-vector.com/blog/2015/10/a-simple-differentially-private-procedure/). Describes how running the [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)), one can make a statistical procedure differentially private.
+
 ## Economics and social science
 
 [Sanity for Sociality: A Theory of Religion](http://thefutureprimaeval.net/sanity-for-sociality/). This is a reflection on religion, portraying it as social benefits (look how awesome Mormon life is) at the cost of some sanity. The unanswered question: "...for those of us sitting outside wishing we could be inside, but unwilling or otherwise unable to pay the sanity cost, the question arises: why do all religious, especially the good ones, require a sanity ante?"
