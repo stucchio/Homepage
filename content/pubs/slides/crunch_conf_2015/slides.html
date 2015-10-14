@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multiple Comparisons - Make your boss happy with false positives</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+
+      body {
+        font-family: 'Droid Serif';
+        font-size: 20px;
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      h1 { font-size: 4em; }
+      h2 { font-size: 2em; }
+      h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        -moz-border-radius: 5px;
+        -web-border-radius: 5px;
+        background: #e7e8e2;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      li {
+        font-size: 20px;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 2em;
+      }
+      img {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+class: center, middle, inverse
+
+# Multiple Comparisons
+## Make your boss happy with false positives - Guaranteed!
+[Chris Stucchio](https://www.chrisstucchio.com) - [VWO](https://vwo.com)
+
+---
+class: center, middle
+# Conversion rate optimization
+
+[CRO](https://en.wikipedia.org/wiki/Conversion_rate_optimization) is the practice of optimizing a website to increase the number of people *converting* (making a purchase, signing up, providing an email address).
+
+---
+## Multiple creative choices
+
+![advertise on patch](patch_advertise_green.png)
+
+---
+## Multiple creative choices
+
+![advertise on patch](patch_advertise_purple.png)
+
+---
+## Multiple creative choices
+
+![advertise on patch](patch_advertise_pink.png)
+
+---
+class: center, middle
+# Goal
+## Find the one with the highest *conversion rate*
+
+    CR(version) = P( visitor buys advertising | version )
+
+(Hint: purple was the winner.)
+
+---
+class: center, middle
+# Trading
+
+## Predict future price of a security or portfolio.
+## Buy when price is expected to go up in future
+## Sell when future arrives.
+
+---
+## Trading
+
+Between Aug 18 and Aug 24, the S&P 500 lost approximately 10% of it's value.
+
+![SPY crashing](spy_predict_future_1.png)
+
+My prediction: everyone's getting crazy afraid because of China, but this won't last.
+
+## Aug 25: I predicted SPY will go back up...
+
+## ...and I put about $38,000 where my mouth is.
+---
+## Trading
+
+What happened?
+
+![SPY crashing](spy_predict_future_2.png)
+
+## Sep 17: My SPY shares are now worth $40,000.
+
+## Am I smart, or was this just a fluke?
+
+---
+class: center, middle
+# Goal
+## Find a strategy with long term growth, minimal risk
+
+$$ \textrm{maximize} ~ \frac{E[r_p - r]}{E[\sigma]} $$
+
+$@ r_p $@ is growth rate of my portfolio, $@ r $@ is risk-free rate of return, $@ \sigma $@ is standard deviation of my portfolio's excess return.
+
+(This is called the **Sharpe Ratio**, and is a simple example of trading objective function.)
+
+---
+class: center, middle
+# Evaluating a Strategy
+
+---
+# Evaluating a Strategy
+## Conversion rate Optimization
+
+Run an A/B test.
+
+- 50% of users see **Control**
+- 50% of users see **Variation**
+
+---
+# Evaluating a Strategy
+## Conversion rate Optimization
+Measure conversion rate of each variation, let $@ t = c_v/n_v - c_c/n_c $@ be a *test statistic*.
+
+Define:
+
+$$ p = P(t > t_{exp} ~|~ \textrm{null hypothesis}, n_v, n_c ) $$
+
+Probability of seeing results at least as "extreme" as experimental results in a hypothetical A/A test.
+
+If $@ p < 0.05 $@, choose **Variation** otherwise choose **Control**.
+
+Will incorrectly choose **Variation** 5% of the time when **Variation** and **Control** are identical.
+
+---
+# Evaluating a Strategy
+## Trading
+
+Run a **backtest**.
+
+**Train** the model on historical data, say Jan 2014-Sep 2015.
+
+**Run** the strategy on historical data, say Sep 2015-Oct 2015.
+
+**Measure** the profit/loss in the testing period, and compute a Sharpe Ratio.
+
+If the Sharpe Ratio is sufficiently high, deploy the strategy.
+---
+class: center, middle
+# tl;dr; How Single Comparisons Work
+
+---
+# Multiple Comparisons
+
+Multiple comparisons are when you do single comparisons repeatedly.
+
+---
+# Repeated peeks
+
+Run an A/B test, but "peek" at the results every day.
+
+
+- Mon: 5% chance of a false positive
+--
+
+- Tues: 5% chance of a false positive today, 9.75% false positive chance cumulatively
+--
+
+- Wed: 5% chance of a false positive, 14.3% false positive chance cumulatively
+
+--
+
+If you repeatedly peek at a test, your odds of a false positive grow to near certainty.
+
+(This problem is resolved with VWO and Optimizely.)
+
+---
+# Segmentation
+
+- [Segment or Die](http://online-behavior.com/targeting/segment-or-die-214) and [Segment Absolutely Everything](http://www.kaushik.net/avinash/excellent-analytics-tip2-segment-absolutely-everything/)
+- [How to Analyze Your A/B Test Results with Google Analytics](http://conversionxl.com/analyze-ab-test-results-google-analytics/)
+
+Basic idea. An A/B test was run, and returned a null result.
+
+## No difference between test variations.
+
+...Look at the test results at least across these segments...Desktop vs Tablet/Mobile...New vs Returning..."
+
+---
+# Segmentation
+
+Experimental data. Ran an A/B we ran with 10,023 visitors for variation A and 10,097 for B. No difference, p=0.16. Both variations had approximately a 5% conversion rate.
+
+Went to google analytics and broke into segments.
+
+- Mobile/Tablet - insignificant result (p=0.35)
+- East coast - insignificant (p=0.25)
+- West Coast - insignificant (p=0.47)
+- Organic - **significant** (p=0.043) (B is the winner)
+- PPC - insignificant (p=0.16)
+- Apple users - insignificant (p=0.31)
+- Socially referred traffic - insignificant (p=0.76)
+
+Set up targeting, hit organic traffic with version B, everyone else with A. **Win!**
+
+---
+class: center, middle
+# I lied
+
+---
+# Segmentation
+
+Data is simulated.
+
+**Both A and B have identical 5% conversion rates.**
+
+    a_conversions = bernoulli(0.05).rvs(10023)
+    b_conversions = bernoulli(0.05).rvs(10097)
+
+- "Mobile/Tablet" is the first 5,000 samples (`a_conversions[0:5000]`) and "Desktop" is the remainder (`a_conversions[5000:]`).
+- "East coast" is the 1st, 2nd, 4th, 5th, 7th, 8th, etc visitor. "West coast" is the 3rd, 6th, 9th, etc.
+- Other segments are similarly **made up**.
+
+So how come our A/B test said variation B wins for organic traffic?
+
+---
+class: center, middle
+## Probability of false positive
+## 1 segment
+
+#1-(1-0.05)^1 = 0.05
+---
+class: center, middle
+## Probability of false positive
+## 2 segments
+
+#1-(1-0.05)^2 = 0.0975
+---
+class: center, middle
+## Probability of false positive
+## 5 segments
+
+# 1-(1-0.05)^5 = 0.226
+---
+class: center, middle
+## Probability of false positive
+## 15 segments
+
+# 1-(1-0.05)^15 = 0.537
+---
+# Segmentation for fun and profit
+- Step 1: Run an A/B test.
+- Step 2: Segment or Die.
+- Step 3: Find a false positive and show your boss.
+- Step 4: Get promoted
+
+Repeat as needed.
+---
+# Fishing for strategies
+
+Consider an idea for a strategy - say, pairs trading.
+
+Take two "similar" securities, e.g. GOOG and FB.
+![GOOG_FB](goog_fb_pair.png)
+
+---
+# Fishing for strategies
+
+![GOOG_FB](goog_fb_pair.png)
+
+On Sep 24:
+
+- Buy 10 shares of GOOG @ $591.59 - cost $5915.90.
+- Sell 62 shares of FB short @ $94.41 - gain $5853.42.
+
+---
+# Fishing for strategies
+
+![GOOG_FB](goog_fb_pair.png)
+
+On Oct 2:
+
+- Sell 10 shares of GOOG @ 642.36 - gain $6423.60
+- Buy 62 shares of FB @ $94.41 and close short - cost $5708.34
+
+---
+# Fishing for strategies
+
+Net:
+
+- $-5915.90 (buy GOOG)
+- $5853 (sell FB short)
+- $6423.60 (sell GOOG)
+- $-5708.34 (buy FB, close short)
+
+-----------
+Gain: $652.78
+
+---
+# Fishing for strategies
+
+Semi-arbitrary choices to be made:
+
+- Tried GOOG/TWTR, didn't work. Had to play around until I found GOOG/FB which worked.
+- Trade duration - I was looking for 5-15 day trades, why not 15-30 day trades?
+- Trade amplitude - how far apart should the two lines be before I open a trade?
+
+---
+# Fishing for strategies
+
+General strategy development process.
+
+1. Come up with strategy idea, with free parameters (trade duration, specific pairs, amplitude).
+2. Train based on historical data.
+3. Backtest - did it work for Sep 2015-Oct 2015? If not, GOTO 1.
+
+Often discover a trading strategy for Sep 2015-Oct 2015 **only**.
+
+---
+class: center, middle
+
+# **$8,747**
+## How much I lost fishing for pairs
+
+---
+
+
+    </textarea>
+    <script src="remark.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
