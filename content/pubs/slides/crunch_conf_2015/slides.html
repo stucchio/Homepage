@@ -426,9 +426,47 @@ Often discover a trading strategy for Sep 2015-Oct 2015 **only**.
 class: center, middle
 
 # **$8,747**
-## How much I lost fishing for pairs
+
+--
+
+## How much I lost on pairs trading
 
 ---
+# Multiple Comparisons
+
+Core problem. N comparisons:
+
+$$
+P(\textrm{find false winner} ~|~ \textrm{Null Hypothesis}) = 1 - (1-0.05)^N
+$$
+
+$$
+\approx 0.05 \cdot N
+$$
+
+Too many free parameters - conversion rate for each segment.
+
+---
+# Multiple Comparisons
+
+![overfit](data_to_overfit.png)
+
+$@ y_i = x_i + g $@, $@ g $@ being gaussian noise
+
+---
+# Multiple Comparisons
+
+![overfit](data_to_overfit_w_fit.png)
+
+Plotted with a 10th order polynomial fit - fits training data perfectly!
+
+---
+# Multiple Comparisons
+
+![overfit](data_to_overfit_w_fit_new_pts.png)
+
+Not such an accurate prediction.
+
 
 
     </textarea>
