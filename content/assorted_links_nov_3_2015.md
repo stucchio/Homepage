@@ -21,7 +21,7 @@ nolinkback: true
 
 [Why Do High-Frequency Traders Cancel So Many Orders?](http://www.bloombergview.com/articles/2015-10-08/why-do-high-frequency-traders-cancel-so-many-orders-) By Matt Levine, so more or less self recommending.
 
-[A Simple Differentially Private Procedure](http://www.win-vector.com/blog/2015/10/a-simple-differentially-private-procedure/). Describes how running the [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)), one can make a statistical procedure differentially private.
+[A Simple Differentially Private Procedure](http://www.win-vector.com/blog/2015/10/a-simple-differentially-private-procedure/). Describes how running the [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)), one can make a statistical procedure differentially private. Also, relatedly, [Differential privacy in a Bayesian setting through posterior sampling](http://arxiv.org/pdf/1306.1066v4.pdf) describes how computing a posterior and then *sampling* it can result in a differentially private result. This paper is *very* readable, and actually generalizes differential privacy in an interesting way.
 
 ## Economics and social science
 
