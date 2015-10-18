@@ -334,25 +334,25 @@ class: center, middle
 ## Probability of false positive
 ## 1 segment
 
-#1-(1-0.05)^1 = 0.05
+## $$1-(1-0.05)^1 = 0.05$$
 ---
 class: center, middle
 ## Probability of false positive
 ## 2 segments
 
-#1-(1-0.05)^2 = 0.0975
+## $$ 1-(1-0.05)^2 = 0.0975 $$
 ---
 class: center, middle
 ## Probability of false positive
 ## 5 segments
 
-# 1-(1-0.05)^5 = 0.226
+## $$ 1-(1-0.05)^5 = 0.226 $$
 ---
 class: center, middle
 ## Probability of false positive
 ## 15 segments
 
-# 1-(1-0.05)^15 = 0.537
+## $$ 1-(1-0.05)^15 = 0.537 $$
 ---
 # Segmentation for fun and profit
 - Step 1: Run an A/B test.
@@ -361,6 +361,37 @@ class: center, middle
 - Step 4: Get promoted
 
 Repeat as needed.
+---
+# Multiple goals
+
+Most A/B testing tools give you the ability to track multiple goals:
+
+- **Primary Goal**: Revenue
+- **Goal 2**: Mailing list signups
+- **Goal 3**: Add to cart
+- **Goal 4**: Reads at least 3 pieces of content
+- **Goal 5**: Visitor returns
+
+## "Even if the variation doesn't make revenue go up, more email signups are good, right?"
+
+---
+class: center, middle
+## Probability of false positive
+## 1 goal
+
+## $$1-(1-0.05)^1 = 0.05$$
+---
+class: center, middle
+## Probability of false positive
+## 2 goals
+
+## $$ 1-(1-0.05)^2 = 0.0975 $$
+---
+class: center, middle
+## Probability of false positive
+## 5 goals
+
+## $$ 1-(1-0.05)^5 = 0.226 $$
 ---
 # Fishing for strategies
 
@@ -414,13 +445,12 @@ Semi-arbitrary choices to be made:
 ---
 # Fishing for strategies
 
-General strategy development process.
+General process for developing a strategy.
 
 1. Come up with strategy idea, with free parameters (trade duration, specific pairs, amplitude).
-2. Train based on historical data.
-3. Backtest - did it work for Sep 2015-Oct 2015? If not, GOTO 1.
-
-Often discover a trading strategy for Sep 2015-Oct 2015 **only**.
+2. Train based on historical data - say 0-Aug 2015.
+3. Backtest - did we turn a simulated profit in Sep 2015-Oct 2015? If not, GOTO 1.
+4. Deploy it and get rich!
 
 ---
 class: center, middle
@@ -430,6 +460,19 @@ class: center, middle
 --
 
 ## How much I lost on pairs trading
+
+---
+# Fishing for strategies
+
+1. Come up with strategy idea, with free parameters (trade duration, specific pairs, amplitude).
+2. Train based on historical data - say 0-Aug 2015.
+3. Backtest - did we turn a simulated profit in Sep 2015-Oct 2015? **If not, GOTO 1.**
+
+If I ever GOTO 1, then I just used *test* data to develop my *strategy*. I.e., I'm using the test data for training.
+
+Multiple opportunities to find a strategy which works well on Sep-Oct 2015, but not on other timeframes.
+
+[The Garden of Forking Paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf) by Andrew Gelman.
 
 ---
 # Multiple Comparisons
@@ -447,26 +490,102 @@ $$
 Too many free parameters - conversion rate for each segment.
 
 ---
-# Multiple Comparisons
+# Sidak Correction
+
+Can fix this with adjusted p-values. If the p-value cutoff for the *ensemble* of tests is $@ p $@, then for any *individual* test the cutoff is:
+
+$$
+p^\star = 1 - (1-p)^{1/N}
+$$
+
+---
+# Sidak Correction
+
+Example:
+
+- 16 segments
+- p-value cutoff of 5%.
+
+$$
+p^\star = 1 - (1-0.05)^{1/16} = 0.0032
+$$
+
+So if any *individual* segment has a p-value below 0.32%, then test found a significant result with p-value below 5%.
+
+---
+# Sidak Correction
+
+- Segment 1: p-value 0.15
+- Segment 2: p-value 0.30
+- Segment 3: p-value 0.01
+- Segment 4: p-value 0.75
+- ...
+
+**No significant results**
+
+---
+# Sidak Correction
+
+**Problem:** Consider a test with 5% base conversion rate and attempting to measure a 10% lift with an 80% probability (p-value cutoff of 5%).
+
+- 1 segment: 30,244 samples per variation
+- 2 segments: 36,433 samples per variation
+- 6 segments: 46,344 samples per variation
+- 16 segments: 55,131 samples per variation.
+
+So to run the A/B test you need 60,000 visitors.
+
+If you want to segment you need 882,000 visitors!
+
+---
+class: center, middle
+# Regularization
+
+---
+# Regularization
 
 ![overfit](data_to_overfit.png)
 
 $@ y_i = x_i + g $@, $@ g $@ being gaussian noise
 
 ---
-# Multiple Comparisons
+# Regularization
 
 ![overfit](data_to_overfit_w_fit.png)
 
 Plotted with a 10th order polynomial fit - fits training data perfectly!
 
 ---
-# Multiple Comparisons
+# Regularization
 
 ![overfit](data_to_overfit_w_fit_new_pts.png)
 
 Not such an accurate prediction.
 
+---
+# Regularization
+
+Hierarchical models work great for CRO.
+
+**Global effect** $@ \alpha $@ - the effect of the *variation*.
+
+**Segment effect** $@ \beta_i $@ - the effect of the *segment*.
+
+**Individual conversion rate** - $@ \lambda_i = \alpha + \beta_i $@ "in spirit"
+
+$@ \lambda_1 $@ and $@ \lambda_2 $@ are coupled through global effect.
+
+Better use of data *if model is valid*, since data on segment 1 contributes *some* information about segment 2.
+
+---
+# Regularization
+
+![hierarchical modelling](hierarchical_model.png)
+
+---
+# References
+
+[The Garden of Forking Paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf) by Andrew Gelman.
 
 
     </textarea>
