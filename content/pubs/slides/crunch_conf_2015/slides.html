@@ -10,8 +10,8 @@
     </script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <style type="text/css">
-      @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
-      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 
       body {
         font-family: 'Droid Serif';
@@ -197,6 +197,8 @@ What happened?
 
 ## Sep 17: My SPY shares are now worth $40,000.
 
+(Last minute update, Oct 25: $41,000.)
+
 ## Am I smart, or was this just a fluke?
 
 ---
@@ -352,7 +354,7 @@ class: center, middle
 ## Probability of false positive
 ## 15 segments
 
-## $$ 1-(1-0.05)^15 = 0.537 $$
+## $$ 1-(1-0.05)^{15} = 0.537 $$
 ---
 # Segmentation for fun and profit
 - Step 1: Run an A/B test.
@@ -460,19 +462,37 @@ class: center, middle
 --
 
 ## How much I lost on pairs trading
+---
+# Fishing for strategies
+
+## Probability of the backtest giving me a bad result the first time:
+
+## $$ 1-(1-0.05)^1 = 0.05 $$
+
+(Stylized fact)
 
 ---
 # Fishing for strategies
 
-1. Come up with strategy idea, with free parameters (trade duration, specific pairs, amplitude).
-2. Train based on historical data - say 0-Aug 2015.
-3. Backtest - did we turn a simulated profit in Sep 2015-Oct 2015? **If not, GOTO 1.**
+## Probability of the backtest giving me a bad result once in 2 strategies
 
-If I ever GOTO 1, then I just used *test* data to develop my *strategy*. I.e., I'm using the test data for training.
+## $$ 1-(1-0.05)^2 = 0.0975 $$
 
-Multiple opportunities to find a strategy which works well on Sep-Oct 2015, but not on other timeframes.
+(Stylized fact)
 
-[The Garden of Forking Paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf) by Andrew Gelman.
+---
+# Fishing for strategies
+
+## Probability of the backtest giving me a bad result at least once in 15 strategies
+
+## $$ 1-(1-0.05)^{15} = 0.537 $$
+
+(Stylized fact)
+
+---
+class: center, middle
+
+# The problem
 
 ---
 # Multiple Comparisons
@@ -487,7 +507,75 @@ $$
 \approx 0.05 \cdot N
 $$
 
-Too many free parameters - conversion rate for each segment.
+---
+# Re-use of training data
+## A sneaky way to cheat
+
+1. Come up with strategy idea, with free parameters (trade duration, specific pairs, amplitude).
+2. Train based on historical data - say 0-Aug 2015.
+3. Backtest - did we turn a simulated profit in Sep 2015-Oct 2015? **If not, GOTO 1.**
+
+If I ever GOTO 1, then I just used *test* data to develop my *strategy*. That's cheating!
+
+## Multiple comparisons on steroids!
+
+---
+# Re-use of training data
+
+![overfit](data_to_overfit.png)
+
+$@ y_i = x_i + g $@, $@ g $@ being gaussian noise
+
+---
+# Re-use of training data
+
+![overfit](data_to_overfit_w_fit.png)
+
+Plotted with a 10th order polynomial fit - fits training data perfectly!
+
+---
+# Re-use of training data
+
+![overfit](data_to_overfit_w_fit_new_pts.png)
+
+Not such an accurate prediction. Lets go back to step 1, new model!
+
+---
+# Re-use of training data
+
+![overfit](data_to_overfit_w_fit_new_pts_data_reuse.png)
+
+I used training data and found a better model!
+
+**Fits test data**
+
+---
+# Re-use of training data
+
+![overfit](data_to_overfit_w_fit_new_pts_data_reuse_oops.png)
+
+---
+# Reuse of training data
+
+1. Peek at data.
+
+2. Choose a test statistic, and compute p-value:
+
+$$
+p = P(\textrm{find false winner} ~|~ \textrm{Null Hypothesis})
+$$
+
+3. Right thing to compute (but very hard):
+
+$$
+p^\star = P(\textrm{find false winner} ~|~ \textrm{Null Hypothesis}, \textbf{peek})
+$$
+
+Andrew Gelman calls this [The Garden of Forking Paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf).
+
+---
+class: center, middle, inverse
+# How to fix it
 
 ---
 # Sidak Correction
@@ -498,6 +586,12 @@ $$
 p^\star = 1 - (1-p)^{1/N}
 $$
 
+Works because:
+
+$$
+1-(1-p^\star)^N = 1-(1-[1 - (1-p)^{1/N}])^N
+$$
+$$ = 1-([1-p]^{1/N})^N = p $$
 ---
 # Sidak Correction
 
@@ -539,31 +633,10 @@ If you want to segment you need 882,000 visitors!
 
 ---
 class: center, middle
-# Regularization
+# Hierarchical Models
 
 ---
-# Regularization
-
-![overfit](data_to_overfit.png)
-
-$@ y_i = x_i + g $@, $@ g $@ being gaussian noise
-
----
-# Regularization
-
-![overfit](data_to_overfit_w_fit.png)
-
-Plotted with a 10th order polynomial fit - fits training data perfectly!
-
----
-# Regularization
-
-![overfit](data_to_overfit_w_fit_new_pts.png)
-
-Not such an accurate prediction.
-
----
-# Regularization
+# Hierarchical Models
 
 Hierarchical models work great for CRO.
 
@@ -577,16 +650,78 @@ $@ \lambda_1 $@ and $@ \lambda_2 $@ are coupled through global effect.
 
 Better use of data *if model is valid*, since data on segment 1 contributes *some* information about segment 2.
 
+**Prior choice very important here**
+
 ---
-# Regularization
+# Hierarchical Models
 
 ![hierarchical modelling](hierarchical_model.png)
+
+---
+# Differential privacy
+
+Aggregate function is *differentially private* if it doesn't leak information about *individuals*.
+
+**NOT differentially private:** Sum.
+
+- Let x = Sum(salary_at_VWO)
+- Chris Quits!
+- Let y = Sum(salary_at_VWO)
+
+Chris salary = x-y.
+
+---
+# Differential privacy
+
+Things which are differentially private:
+
+- Adding Laplacian noise: $@ f(x) + z $@
+- [Bootstrap Aggregation](https://en.wikipedia.org/wiki/Bootstrap_aggregating) - a fairly common statistical operation.
+- [Bayesian Posterior Sampling](http://arxiv.org/pdf/1306.1066v4.pdf) - compute a posterior, draw a sample of limited size and compute all queries on the sample.
+
+---
+# Differential privacy
+
+![overfit](data_to_overfit_w_fit_new_pts_data_reuse.png)
+
+## Overfitting is memorization.
+
+---
+# Differential privacy
+
+![overfit](data_to_overfit_w_fit_new_pts_data_reuse.png)
+
+## Can't overfit what you don't know
+
+---
+# Conclusion
+
+Multiple comparison problems are everywhere.
+
+Most data analysis is a garden of forking paths.
+
+Data reuse is everywhere.
+
+[Google analytics reports no change when you deploy your big winners](http://blog.sumall.com/journal/optimizely-got-me-fired.html)
+
+[Results don't replicate](https://en.wikipedia.org/wiki/Replication_crisis)
+
+[Traders lose millions due to overfitting](http://www.ams.org/notices/201405/rnoti-p458.pdf)
+
+The world is ending.
 
 ---
 # References
 
 [The Garden of Forking Paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf) by Andrew Gelman.
 
+[The Reusable Holdout: Preserving Statistical Validity in Adaptive Data Analysis](http://rsrg.cms.caltech.edu/netecon/privacy2015/slides/hardt.pdf)
+
+[Gelman's Hierarchical Modelling Book](http://www.amazon.com/gp/product/052168689X/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=052168689X&linkCode=as2&tag=christuc-20&linkId=EYSTJKJSMEZAV6TK)
+
+[Pseudo-Mathematics and Financial Charlatanism: The Effects of Backtest Overfitting on Out-of-Sample Performance](http://www.ams.org/notices/201405/rnoti-p458.pdf)
+
+[The probability of Backtest Overfitting](http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253)
 
     </textarea>
     <script src="remark.min.js" type="text/javascript">
