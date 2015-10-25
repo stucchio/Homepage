@@ -9,6 +9,8 @@ nolinkback: true
 
 [Modern Art Desserts](http://amzn.to/1Qiov3T) - a very cool book which I take some inspiration from.
 
+[Where Superforecasters Start](http://econlog.econlib.org/archives/2015/10/outside_first.html) - tl;dr; the base rate.
+
 ## Statistics and Computer Science
 
 [JavaScript and fast data structures: some initial experiments](http://lemire.me/blog/archives/2015/10/05/javascript-and-fast-data-structures-some-initial-experiments/)
