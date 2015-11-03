@@ -1,5 +1,5 @@
 title: Multiple Comparisons - Make your boss happy with false positives, guaranteed!
-date: 2015-10-12 9:00
+date: 2015-11-02 9:00
 author: Chris Stucchio
 nolinkback: true
 category: ab testing
