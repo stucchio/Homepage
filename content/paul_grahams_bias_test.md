@@ -79,11 +79,13 @@ In fact, I can prove mathematically that this method is a valid hypothesis test.
 
 So here it is.
 
-**Theorem 1:** Take as a null hypothesis the belief that A-members who were selected have the cumulative distribution function $@ a(x) $@ and B-members who were selected have the cdf $@ b(x) $@. Further, we assume that there exists a monotonically increasing function $@ 0 \leq h(x) $@ such that $@ a(x) > h(x) $@ and $@ b(x) > h(x) $@. Then assuming this null hypothesis is true, the probability of observing a result at least as extreme as $@ t $@ is bounded above by:
+**Theorem 1:** Take as a null hypothesis the belief that A-members who were selected have the cumulative distribution function $@ a(x) $@ and B-members who were selected have the cdf $@ b(x) $@. Further, we assume that there exists a monotonically increasing function $@ h(0) = 0 $@, $@ 0 \leq h(x), x > 0 $@ such that $@ a(x) > h(x-C) $@ and $@ b(x) > h(x-C) $@. Then assuming this null hypothesis is true, the probability of observing a result at least as extreme as $@ t $@ is bounded above by:
 
-$$ p \leq \hat{p} = (1-h(C+t/2))^{N_a} + (1-h(C+t/2))^{N_b} $$
+$$ p \leq \hat{p} = (1-h(t/2))^{N_a} + (1-h(t/2))^{N_b} $$
 
 Here $@N_a$@ and $@ N_b$@ are the number of elements in groups A and B.
+
+Note that it is not necessary to know the value of $@ C $@.
 
 An example of $@ a(x), b(x) $@ and $@ h(x) $@ satisfying the assumptions of Theorem 1 is plotted:
 
@@ -91,19 +93,19 @@ An example of $@ a(x), b(x) $@ and $@ h(x) $@ satisfying the assumptions of Theo
 
 The existence of $@ h(x) $@ simply ensures that both groups have a minimal number of members near the decision boundary $@ C $@.
 
-**Proof:** The probability of drawing $@ N_a $@ samples from $@ a(x) $@ and none being contained in $@ [C,C+d/2] $@ is $@ (1-a(C+d/2))^{N_a} \leq (1-h(C+d/2))^{N_a}$@, and similarly for $@ b(x) $@ and $@ N_b $@.
+**Proof:** The probability of drawing $@ N_a $@ samples from $@ a(x) $@ and none being contained in $@ [C,C+d/2] $@ is $@ (1-a(C+d/2))^{N_a} \leq (1-h(d/2))^{N_a}$@, and similarly for $@ b(x) $@ and $@ N_b $@.
 
 Thus, the probability of drawing $@ N_a$@ and $@ N_b $@ samples, at least one of which is contained *within* $@ [C,C+d/2] $@ is bounded below by:
 
 $$
-q = 1 - (1-h(C+d/2))^{N_a} - (1-h(C+d/2))^{N_b}
+q = 1 - (1-h(d/2))^{N_a} - (1-h(d/2))^{N_b}
 $$
 
 Thus, with probability at least $@ q $@, $@ \min \vec{a} \in [C,C+d/2] $@ and $@ \min \vec{b} \in [C,C+d/2] $@. When this occurs, the test statistic is bounded (in absolute value) by $@d/2 + d/2 = d $@.
 
 Inverting this, we find that with probability *at most* $@ \hat{p} = 1-q $@, the test statistic $@ t = \min \vec{a} - \min \vec{b} $@ will be larger than $@ d $@. Thus:
 
-$$ \hat{p} = (1-h(C+t/2))^{N_a} + (1-h(C+t/2))^{N_b} $$
+$$ \hat{p} = (1-h(t/2))^{N_a} + (1-h(t/2))^{N_b} $$
 
 is an upper bound on the p-value of the hypothesis test. **QED.**
 
@@ -141,15 +143,15 @@ We have a similar theorem for statistical power:
 
 **Theorem 2:** Take as an alternative hypothesis that $@ a(x) $@ is supported in $@ [C,\infty] $@ and is bounded below by $@ h(x) $@ as above. However, suppose that $@ b(x) $@ is supported on $@ [C+K,\infty) $@. Then the probability of a false negative is bounded by:
 
-$$ (1-h(C+K))^{N_a} $$
+$$ (1-h(K))^{N_a} $$
 
 The proof of this is very simple, so I'll do it right here:
 
-**Proof:** The only way that $@ t $@ can be smaller than $@ K $@ is if every member of $@ \vec{a} $@ is at least as large as $@ C+K $@. The probability of this occurring is $@(1-a(C+K))^{N_a} \leq (1-h(C+K))^{N_a} $@. **QED.**
+**Proof:** The only way that $@ t $@ can be smaller than $@ K $@ is if every member of $@ \vec{a} $@ is at least as large as $@ C+K $@. The probability of this occurring is $@(1-a(C+K))^{N_a} \leq (1-h(K))^{N_a} $@. **QED.**
 
 Given Theorem 2, we now know how to make sure we have enough samples before we start a test. Suppose that (assuming the same functional form of $@ h(x) $@ as above we want a 95% chance of detecting a bias at least as large as $@ K=0.05 $@. Then we want to make:
 
-$$ (1-h(C+K))^{N_a} \leq 0.05 $$
+$$ (1-h(K))^{N_a} \leq 0.05 $$
 
 Equivalently:
 
