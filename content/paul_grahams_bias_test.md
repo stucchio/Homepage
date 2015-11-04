@@ -89,7 +89,7 @@ An example of $@ a(x), b(x) $@ and $@ h(x) $@ satisfying the assumptions of Theo
 
 ![bias on selected distributions](/blog_media/2015/paul_grahams_bias_test/plot_of_assumptions.png)
 
-In simple terms, the existence of $@ h(x) $@ simply exists to ensure that both groups have a minimal number of members near the decision boundary $@ C $@.
+The existence of $@ h(x) $@ simply ensures that both groups have a minimal number of members near the decision boundary $@ C $@.
 
 **Proof:** The probability of drawing $@ N_a $@ samples from $@ a(x) $@ and none being contained in $@ [C,C+d/2] $@ is $@ (1-a(C+d/2))^{N_a} \leq (1-h(C+d/2))^{N_a}$@, and similarly for $@ b(x) $@ and $@ N_b $@.
 
@@ -106,6 +106,22 @@ Inverting this, we find that with probability *at most* $@ \hat{p} = 1-q $@, the
 $$ \hat{p} = (1-h(C+t/2))^{N_a} + (1-h(C+t/2))^{N_b} $$
 
 is an upper bound on the p-value of the hypothesis test. **QED.**
+
+### Why do we need $@ h(x) $@?
+
+To understand why this assumption that $@ h(x) $@ exists is necessary, consider the following example. Suppose group A is spread out on both the left and right side of the cutoff C, but B is entirely clustered far to the right of the cutoff. For example, see this picture:
+
+![why h is necessary](/blog_media/2015/paul_grahams_bias_test/why_h_is_necessary.png)
+
+In this case, the statistical test will treat the extreme superiority of group B as bias because *every single member of group B exceeds the cutoff*.
+
+Our assumption on the existence of $@ h(x) $@ rules out this possibility. If we graph the CDF's of these distributions rather than the PDF, we can pretty easily see why:
+
+![why h is necessary](/blog_media/2015/paul_grahams_bias_test/why_h_is_necessary2.png)
+
+Because the green line is zero for a very long distance past the cutoff, $@ b(x) < h(x) $@ in this regime. This violates the assumptions of our statistical test.
+
+In practical terms, distributions like this are rather unrealistic. For example, imagine we want to measure whether colleges are biased against Asians. The examples we describe where no $@ h(x) $@ exists represent the situation where *every single Asian person* is significantly better than the cutoff. Perhaps a GPA of 3.0 is required to get into college, but *every single Asian* has a GPA of at least 3.5. Bias is also undetectable here because it has no impact - if Asians are required to have a 3.25 GPA to get into college as compared to a 3.0 for non-Asians, none will ever be rejected due to this bias.
 
 ### How to use it?
 
@@ -164,3 +180,5 @@ Any reader is free to criticize me as being "at the level of an evolution denier
 Because I've got a thick skin, any reader is also free to observe flaws and try to fix them. If we don't create disincentives for publicizing and developing imperfect ideas, we'll probably make progress faster.
 
 **Also note:** As far as handling additive noise, here is where I've gotten stuck. If the tail of the noise is exponential, then I can't figure out how to distinguish between $@ exp(x-C-K) $@ and $@ C exp(x-C) $@. In this case, bias and scaling look the same. Gaussian noise is a lot easier to deal with.
+
+**Special thanks** to [Evan Miller](http://www.evanmiller.org/) and [Sidhant Godiwala](http://www.sidhantgodiwala.com/) for reading drafts of this and helping me make it a lot more clear. If you like my post you'll probably also like their blogs.
