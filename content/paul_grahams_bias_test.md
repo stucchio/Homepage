@@ -1,9 +1,8 @@
 title: The Mathematics of Paul Graham's Bias Test
-date: 2015-11-03 09:00
+date: 2015-11-05 09:00
 author: Chris Stucchio
 tags: bias detection, frequentist statistics, statistics
 mathjax: true
-
 
 A major problem in detecting biased decisionmaking is the problem of unknown inputs. For example, suppose a venture capitalist has a public portfolio which has funded 75% male founders and 25% female. Is this venture capitalist biased against women? It's impossible to know - perhaps only 10% of his applicants were female, in which case he might actually biased in favor of women.
 
@@ -183,4 +182,4 @@ Because I've got a thick skin, any reader is also free to observe flaws and try 
 
 **Also note:** As far as handling additive noise, here is where I've gotten stuck. If the tail of the noise is exponential, then I can't figure out how to distinguish between $@ exp(x-C-K) $@ and $@ C exp(x-C) $@. In this case, bias and scaling look the same. Gaussian noise is a lot easier to deal with.
 
-**Special thanks** to [Evan Miller](http://www.evanmiller.org/) and [Sidhant Godiwala](http://www.sidhantgodiwala.com/) for reading drafts of this and helping me make it a lot more clear. If you like my post you'll probably also like their blogs.
+**Special thanks** to [Evan Miller](http://www.evanmiller.org/) and [Sidhant Godiwala](http://www.sidhantgodiwala.com/) for reading drafts of this and helping me make it a lot more clear. If you like my post you'll probably also like their blogs. Evan Millar also has suggested his own version of this test - I don't fully understand it, but if we are lucky he'll write about it.
