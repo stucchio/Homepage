@@ -58,7 +58,7 @@ $$p = P( |t| > \epsilon| \textrm{null} ) \leq \delta $$
 
 with the property that as $@ \epsilon $@ increases, $@ \delta $@ decreases. This is a bound on the *false positive* probability of the test, or the probability of type 1 error.
 
-*Second*, we need an alternative hypothesis. In our case, this will be that the distribution $@ b(x) $@ is supported on an interval $@ [C+k, \infty) $@. Once we have this, we need to prove that:
+*Second*, we need an alternative hypothesis. In our case, this will be that the distribution $@ b(x) $@ is supported on an interval $@ [C+K, \infty) $@. Once we have this, we need to prove that:
 
 $$ P( |t| < \epsilon| \textrm{alt} ) \leq \delta $$
 
