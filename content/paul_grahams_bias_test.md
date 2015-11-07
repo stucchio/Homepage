@@ -182,4 +182,6 @@ Because I've got a thick skin, any reader is also free to observe flaws and try 
 
 **Also note:** As far as handling additive noise, here is where I've gotten stuck. If the tail of the noise is exponential, then I can't figure out how to distinguish between $@ exp(x-C-K) $@ and $@ C exp(x-C) $@. In this case, bias and scaling look the same. Gaussian noise is a lot easier to deal with.
 
-**Special thanks** to [Evan Miller](http://www.evanmiller.org/) and [Sidhant Godiwala](http://www.sidhantgodiwala.com/) for reading drafts of this and helping me make it a lot more clear. If you like my post you'll probably also like their blogs. Evan Millar also has suggested his own version of this test - I don't fully understand it, but if we are lucky he'll write about it.
+**Special thanks** to [Evan Miller](http://www.evanmiller.org/) and [Sidhant Godiwala](http://www.sidhantgodiwala.com/) for reading drafts of this and helping me make it a lot more clear. If you like my post you'll probably also like their blogs. Evan Miller also has suggested his own version of this test - I don't fully understand it, but if we are lucky he'll write about it.
+
+**Obligatory job ad:** If you are located in Delhi or Pune (or willing to move there) and find this sort of thing interesting, you might enjoy working at Wingify/Visual Website Optimizer. We are hiring data scientists - send me an email if you want to know more.
