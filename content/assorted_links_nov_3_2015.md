@@ -25,8 +25,20 @@ nolinkback: true
 
 [A Simple Differentially Private Procedure](http://www.win-vector.com/blog/2015/10/a-simple-differentially-private-procedure/). Describes how running the [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)), one can make a statistical procedure differentially private. Also, relatedly, [Differential privacy in a Bayesian setting through posterior sampling](http://arxiv.org/pdf/1306.1066v4.pdf) describes how computing a posterior and then *sampling* it can result in a differentially private result. This paper is *very* readable, and actually generalizes differential privacy in an interesting way.
 
+[Everything I Needed to Know (About Publication Bias), I Learned In (Pre-) Kindergarten](https://codeandculture.wordpress.com/2015/11/06/everything-i-needed-to-know-about-publication-bias-i-learned-in-pre-kindergarten/)
+
 ## Economics and social science
 
 [Sanity for Sociality: A Theory of Religion](http://thefutureprimaeval.net/sanity-for-sociality/). This is a reflection on religion, portraying it as social benefits (look how awesome Mormon life is) at the cost of some sanity. The unanswered question: "...for those of us sitting outside wishing we could be inside, but unwilling or otherwise unable to pay the sanity cost, the question arises: why do all religious, especially the good ones, require a sanity ante?"
 
 [Closing the Black-White IQ Gap Debate](http://www.unz.com/article/closing-the-black-white-iq-gap-debate-part-2/). This is a very nice article which digs up data on black American academic performance, comparing it to African immigrant academic performance. Genetic theories of IQ predict that black Americans (genetically 10-50% European) should outperform their African counterparts. Turns out that reality behaves the opposite way. Anecdotally, this makes sense - my ex-girlfriend's (Nigerian) dad sounded like the sort to say ["Hepatitus B? Why not Hepatitis A?"](https://www.google.com/search?q=high+expectations+asian+father&es_sm=93&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIsMjXwLHhyAIVQTU-Ch3n0wzE&biw=1735&bih=862)
+
+[Anatomy of a ‘liberal’: Indian liberals do not offer solutions, they use the term as a class marker](http://blogs.timesofindia.indiatimes.com/The-underage-optimist/anatomy-of-a-liberal-indian-liberals-do-not-offer-solutions-they-use-the-term-as-a-class-marker/). Some very spot on observations, which also apply in modified form to the US. I'm amazed that I'm linking to Chetan Bhagat.
+
+[Living the Good Life? Mortality and Hospital Utilization Patterns in the Old Order Amish](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0051560) This study compares lifespans among Old Order Amish (the anti-technology folks) and regular white people, and discovers that life expectancy increases are unlikely to be caused by large amounts of medical system usage. The Amish live longer than others.
+
+[If I was devising a Panics and Bubbles course...](https://longandvariable.wordpress.com/2014/04/23/if-i-was-devising-a-panics-and-bubbles-course/) A nice reading list about panics, bubbles, and other irrational market behavior.
+
+## Culture
+
+[Scary Halloween costumes](https://www.washingtonpost.com/news/volokh-conspiracy/wp/2015/11/07/administrators-defending-student-free-speech-apparently-reason-for-dismissal-according-to-some-yale-students/). Apparently a college administrator wrote an email to students saying that if a halloween costume is too scary you can just close your eyes, and that she isn't the costume police. Now the students are trying to get her fired. I am not making this up. Freddie Deboer discusses in [It’s my job to take college students seriously](http://fredrikdeboer.com/2015/11/07/its-my-job-to-take-college-students-seriously/)
