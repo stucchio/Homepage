@@ -20,21 +20,21 @@ This A/B testing procedure has two main advantages over the standard Students T-
 
 I won't repeat the [details of the method](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html), instead referring the reader to the original post. The crucial part of the test is determining when to stop. Suppose version A has a higher empirical mean than version B, i.e. $@ \textrm{clicks on A} / \textrm{displays of A} > \textrm{clicks on B} / \textrm{displays of B} $@. Then the test is stopped when:
 
-$$ \int_0^1 \int_0^1 \max(y-x,0) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy \leq \textrm{threshold of caring}$$
+$$ \int_0^1 \int_0^1 \max(x-y,0) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy \leq \textrm{threshold of caring}$$
 
 Or, to simplify:
 
-$$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy \leq \textrm{threshold of caring}$$
+$$ \int_0^1 \int_y^1 (x-y) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy \leq \textrm{threshold of caring}$$
 
 In the [original blog post](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html), the integral is calculated numerically. However, it turns out we can compute it exactly using the following formula. Define first the function:
 
-$$ h(a,b,c,d) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } $$
+$$ h(a,b,c,d) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,d)B(a,b) } $$
 
 Note that $@ h(a,b,c,d) = P(X > Y) $@ where $@ X \sim \beta(a,b) $@ and $@ Y \sim \beta(c,d) $@.
 
 Then:
 
-$$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy = \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) - \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) $$
+$$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy = \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) - \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) $$
 
 The numerical computation in [the original blog post](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) can then be replaced by the above formula.
 
@@ -50,19 +50,21 @@ $$ P(X > y) = \int_{0}^{1} \int_{y}^{1} \frac{x^{a}(1-x)^{b}}{B(a,b)} \frac{y^{c
 
 Evan Miller computed the integral and came up with a closed form solution for it:
 
-$$ P(X > Y) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,b)B(a,b) } \equiv h(a,b,c,d) $$
+$$ P(X > Y) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,d)B(a,b) } \equiv h(a,b,c,d) $$
 
 ## Computing the loss function
 
 We can bootstrap this analysis and compute the loss function. We start by distributing across $@ (y-x) $@:
 
-$$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy = $$
-$$ \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c,d)} dx dy - \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy = $$
+$$ \int_0^1 \int_y^1 (x-y) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy = $$
+$$ \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy - \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c,d)} dx dy  = $$
 
 We then multiply by $@ B(c+1,d)/B(c+1,d)$@ and $@ B(a+1,b)/B(a+1,b)$@ and do simple arithmetic:
 
-$$ \frac{B(c+1,d)}{B(c+1,d)} \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c,d)} dx dy - \frac{B(a+1,b)}{B(a+1,b)} \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy = $$
-$$ \frac{B(c+1,d)}{B(c,d)} \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c+1,d)} dx dy - \frac{B(a+1,b)}{B(a,b)} \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a+1,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy = $$
-$$ \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) - \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) $$
+$$ \frac{B(a+1,b)}{B(a+1,b)} \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy - \frac{B(c+1,d)}{B(c+1,d)} \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c,d)} dx dy  = $$
+$$ \frac{B(a+1,b)}{B(a,b)} \int_0^1 \int_y^1 \frac{x^{a+1}(1-x)^b}{B(a+1,b)} \frac{y^{c}(1-y)^d}{B(c,d)} dx dy - \frac{B(c+1,d)}{B(c,d)} \int_0^1 \int_y^1 \frac{x^a(1-x)^b}{B(a,b)} \frac{y^{c+1}(1-y)^d}{B(c+1,d)} dx dy = $$
+$$ \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) - \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) $$
 
 This is what we wanted to show.
+
+**Note: The original version of this post had two sign errors. Thanks to Frank (unknown last name) for catching the mistake.**

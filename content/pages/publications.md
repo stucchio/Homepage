@@ -1,5 +1,5 @@
 title: Publications
-URL: publications.html
+ URL: publications.html
 Save_as: publications.html
 menubar: true
 
@@ -30,3 +30,4 @@ See also [Stable and Accurate Outgoing Wave Filters for Anisotropic and Nonlocal
 - [Phase Space Analysis in Medical Imaging](pubs/slides/rutgers_math_phys.pdf), given at the Rutgers Mathematical Physics Seminar (Dec 2009). A similar talk was given at the MIT Imaging Seminar (March 2010), but with less introductory material.
 - [Conversion Rates and How to Measure Them](/pubs/slides/helpshift_2014/slides.html), from a Bayesian Point of View. Given at Helpshift, Pune Office, 2014.
 - [Number Crunching in Scala](/pubs/slides/thoughtworks_scientific_2014/slides.html), given at the [Pune Scala Symposium](http://info.thoughtworks.com/pune-scala-symposium-april-12-registration.html), 2014.
+- [Bayesian A/B Testing at VWO](/pubs/slides/gilt_bayesian_ab_2015/slides.html), given at the Gilt Engineering Seminar 2015.
