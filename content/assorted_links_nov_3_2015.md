@@ -27,6 +27,8 @@ nolinkback: true
 
 [Everything I Needed to Know (About Publication Bias), I Learned In (Pre-) Kindergarten](https://codeandculture.wordpress.com/2015/11/06/everything-i-needed-to-know-about-publication-bias-i-learned-in-pre-kindergarten/)
 
+[Measuring Polymorphism in Python Programs](http://delivery.acm.org/10.1145/2820000/2816717/p114-aakerblom.pdf?ip=66.108.92.115&id=2816717&acc=OPEN&key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E6D218144511F3437&CFID=728462494&CFTOKEN=99470396&__acm__=1446998015_297d0e1a4ba615b86108ff14e60c7a4e)
+
 ## Economics and social science
 
 [Sanity for Sociality: A Theory of Religion](http://thefutureprimaeval.net/sanity-for-sociality/). This is a reflection on religion, portraying it as social benefits (look how awesome Mormon life is) at the cost of some sanity. The unanswered question: "...for those of us sitting outside wishing we could be inside, but unwilling or otherwise unable to pay the sanity cost, the question arises: why do all religious, especially the good ones, require a sanity ante?"
@@ -42,3 +44,5 @@ nolinkback: true
 ## Culture
 
 [Scary Halloween costumes](https://www.washingtonpost.com/news/volokh-conspiracy/wp/2015/11/07/administrators-defending-student-free-speech-apparently-reason-for-dismissal-according-to-some-yale-students/). Apparently a college administrator wrote an email to students saying that if a halloween costume is too scary you can just close your eyes, and that she isn't the costume police. Now the students are trying to get her fired. I am not making this up. Freddie Deboer discusses in [It’s my job to take college students seriously](http://fredrikdeboer.com/2015/11/07/its-my-job-to-take-college-students-seriously/)
+
+[A discussion of the costs of migration](http://thosewhocansee.blogspot.hk/2015/10/crashing-gates-crash-course.html), specifically Syrian and fake Syrian economic migrants to Europe. I generally lean in an open borders direction, but I don't think we should ignore the costs of such an approach. We also shouldn't ignore the fact that a large chunk of the "Syrian refugees" are probably neither Syrian nor refugees. This article also suggests that a big chunk of the problem is an unwillingness to enforce non-migratory laws (e.g., anti-rape laws) against migrants, and the fact that many migrants are seeking welfare. My preferred model of migration would be to provide 30 days of bland food and a bed for migrants, anything beyond that requires getting a job and paying for it themselves. And if anyone causes trouble (e.g. running a brothel, or preying on other migrants), the result is immediate and permanent deportation.
