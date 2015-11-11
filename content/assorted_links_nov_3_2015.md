@@ -35,11 +35,13 @@ nolinkback: true
 
 [Closing the Black-White IQ Gap Debate](http://www.unz.com/article/closing-the-black-white-iq-gap-debate-part-2/). This is a very nice article which digs up data on black American academic performance, comparing it to African immigrant academic performance. Genetic theories of IQ predict that black Americans (genetically 10-50% European) should outperform their African counterparts. Turns out that reality behaves the opposite way. Anecdotally, this makes sense - my ex-girlfriend's (Nigerian) dad sounded like the sort to say ["Hepatitus B? Why not Hepatitis A?"](https://www.google.com/search?q=high+expectations+asian+father&es_sm=93&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIsMjXwLHhyAIVQTU-Ch3n0wzE&biw=1735&bih=862)
 
-[Anatomy of a ‘liberal’: Indian liberals do not offer solutions, they use the term as a class marker](http://blogs.timesofindia.indiatimes.com/The-underage-optimist/anatomy-of-a-liberal-indian-liberals-do-not-offer-solutions-they-use-the-term-as-a-class-marker/). Some very spot on observations, which also apply in modified form to the US. I'm amazed that I'm linking to Chetan Bhagat.
+[Anatomy of a ‘liberal’: Indian liberals do not offer solutions, they use the term as a class marker](http://blogs.timesofindia.indiatimes.com/The-underage-optimist/anatomy-of-a-liberal-indian-liberals-do-not-offer-solutions-they-use-the-term-as-a-class-marker/). Some very spot on observations, which also apply in modified form to the US. I'm amazed that I'm linking to Chetan Bhagat. Related thoughts about the US b [Freddie Deboer](http://fredrikdeboer.com/2015/11/09/getting-past-the-coalition-of-the-cool/).
 
 [Living the Good Life? Mortality and Hospital Utilization Patterns in the Old Order Amish](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0051560) This study compares lifespans among Old Order Amish (the anti-technology folks) and regular white people, and discovers that life expectancy increases are unlikely to be caused by large amounts of medical system usage. The Amish live longer than others.
 
 [If I was devising a Panics and Bubbles course...](https://longandvariable.wordpress.com/2014/04/23/if-i-was-devising-a-panics-and-bubbles-course/) A nice reading list about panics, bubbles, and other irrational market behavior.
+
+[Why Education](http://marginalrevolution.com/marginalrevolution/2006/02/why_education_i.html) - Tyler Cowen comes up with a novel theory why education is productive, but which seems almost indistinguishable from the signalling theory. I still believe the [Sheepskin Effect](https://en.wikipedia.org/wiki/Signalling_(economics)) is better predicted by the signalling theory than Cowen's theory, but it is nice to see a new idea out there.
 
 ## Culture
 
