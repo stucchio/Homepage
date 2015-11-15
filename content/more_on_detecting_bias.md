@@ -1,5 +1,5 @@
 title: The Autodidact Ratio: A Better Way to Measure Bias Against Women
-date: 2015-11-16 09:00
+date: 2015-11-16 10:00
 author: Chris Stucchio
 tags: bias detection, frequentist statistics, statistics
 mathjax: true
@@ -28,7 +28,9 @@ Here, $@ m_g $@ represents the number of male graduates, $@ m_0 $@ represents th
 
 Concretely, the smaller $@ e_{m/w} $@ is, the more men/women are discouraged by education. And the smaller $@ a_{m/w} $@ is, the less intrinsic ability men/women have.
 
-Unfortunately, looking at the number of graduates doesn't help us answer the question of bias very much. If $@ w_g \ll m_g $@, this could be because either $@ a_w < a_m $@ or $@ b_w < b_m $@. We are completely unable to distinguish between two alternate hypothesis, namely "tech education discriminates against women" and "women have lower intrinsic ability".
+Unfortunately, looking at the number of graduates doesn't help us answer the question of bias very much. If $@ w_g \ll m_g $@, this could be because either $@ a_w < a_m $@ or $@ e_w < e_m $@. We are completely unable to distinguish between two alternate hypothesis, namely "tech education discriminates against women" and "women have lower intrinsic ability".
+
+Because a large number of ideological people buy into both of these hypothesis, but fiercely disagree with each other, discussion is poisoned. Both groups correctly believe that the data supports them, but fail to recognize it also supports their opponent. What we really need is an alternate measurement which will contradict one of these ideologies (depending of course on the actual value of the measurement).
 
 # The Autodidact Ratio
 
@@ -66,9 +68,9 @@ Fundamentally the problem is that both ideologies accurately predict the measure
 
 The autodidact ratio works around this.
 
-Suppose instead that we've observed $@ w_g^a / w_g \gg m_g^a / m_g $@. If troll wishes to argue that this is not due to bias, he can no longer claim the alternate explanation is that women are dumber than men. His new alternate explanation is that *women are better at learning independently than men.* If said troll wishes to incorporate this new data point into his worldview, he is forced to give up one of his ideological tenets - either the world is biased against women **or** women are intellectually superior to men.
+Suppose instead that we've observed $@ w_g^a / w_g \gg m_g^a / m_g $@. If troll wishes to argue that this is not due to bias, he can no longer claim the alternate explanation is that women are dumber than men. His new alternate explanation is that *women are better at learning independently than men*; that $@ k_w > k_m $@. If said troll wishes to incorporate this new data point into his worldview, he is forced to give up one of his ideological tenets - either the world is biased against women **or** men are intellectually superior to women.
 
-Conversely, suppose we discover that $@ w_g^a / w_g \approx m_g^a / m_g $@. The social justice warrior who wishes to argue that bias still exists must then immediately argue that women are *not intellectually equal to men.* I.e., if $@ e_m = 0.2 $@ and $@ e_w = 0.1 $@, then the only way the autodidact ratios could be equal is if $@ k_m = 2 k_w $@. In much the same way as the internet troll above, the social justice warrior must give up one of her ideological points.
+Conversely, suppose we discover that $@ w_g^a / w_g \approx m_g^a / m_g $@. The social justice warrior who wishes to argue that bias still exists must then immediately argue that women are *not intellectually equal to men.* If the ratios are equal, and $@ a_w = (1/2) a_m $@ for example, then $@ k_w = (1/2) k_m $@. In much the same way as the internet troll above, the social justice warrior must give up one of her ideological points.
 
 Because we've put ideology in both the numerator and the denominator, ideology cancels and we may learn something new.
 
