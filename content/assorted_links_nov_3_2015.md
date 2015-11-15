@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2015-11-03 9:30:00
+date: 2015-11-16 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -45,6 +45,10 @@ nolinkback: true
 
 ## Culture
 
+[A Modest Proposal for Renewed Imperialism](http://worthwhile.typepad.com/worthwhile_canadian_initi/2015/11/a-modest-proposal-for-renewed-imperialism.html). Big idea: Nigerians think Finland is awesome and want to move there. It's not because of the beautiful weather or scenery - it's because of the governance and social technology. So rather than moving the people, why not move the borders?
+
 [Scary Halloween costumes](https://www.washingtonpost.com/news/volokh-conspiracy/wp/2015/11/07/administrators-defending-student-free-speech-apparently-reason-for-dismissal-according-to-some-yale-students/). Apparently a college administrator wrote an email to students saying that if a halloween costume is too scary you can just close your eyes, and that she isn't the costume police. Now the students are trying to get her fired. I am not making this up. Freddie Deboer discusses in [It’s my job to take college students seriously](http://fredrikdeboer.com/2015/11/07/its-my-job-to-take-college-students-seriously/)
 
 [A discussion of the costs of migration](http://thosewhocansee.blogspot.hk/2015/10/crashing-gates-crash-course.html), specifically Syrian and fake Syrian economic migrants to Europe. I generally lean in an open borders direction, but I don't think we should ignore the costs of such an approach. We also shouldn't ignore the fact that a large chunk of the "Syrian refugees" are probably neither Syrian nor refugees. This article also suggests that a big chunk of the problem is an unwillingness to enforce non-migratory laws (e.g., anti-rape laws) against migrants, and the fact that many migrants are seeking welfare. My preferred model of migration would be to provide 30 days of bland food and a bed for migrants, anything beyond that requires getting a job and paying for it themselves. And if anyone causes trouble (e.g. running a brothel, or preying on other migrants), the result is immediate and permanent deportation.
+
+[Servants without Masters](http://thefutureprimaeval.net/servants-without-masters/) - interesting discussion on the difference between having impersonal and institutional servants (Handy/Uber/etc) and a single human personal servant.
