@@ -160,7 +160,7 @@ Implying:
 
 $$ N_a \geq \frac{\ln 0.05}{\ln 0.95} \approx 58.4$$
 
-So this says for us to detect bias at least as large as $@ 0.05 $@ with $@ 95% $@ probability, we need 59 or more samples in each group.
+So this says for us to detect bias at least as large as $@ 0.05 $@ with 95% probability, we need 59 or more samples in each group.
 
 # Paul Graham is mathematically wrong, but he did not deserve the criticism he received
 
