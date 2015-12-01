@@ -1,5 +1,5 @@
 title: The Autodidact Ratio: A Better Way to Measure Bias Against Women
-date: 2015-11-16 10:00
+date: 2015-12-01 10:00
 author: Chris Stucchio
 tags: bias detection, frequentist statistics, statistics
 mathjax: true
