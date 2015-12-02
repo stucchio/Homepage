@@ -31,3 +31,4 @@ See also [Stable and Accurate Outgoing Wave Filters for Anisotropic and Nonlocal
 - [Conversion Rates and How to Measure Them](/pubs/slides/helpshift_2014/slides.html), from a Bayesian Point of View. Given at Helpshift, Pune Office, 2014.
 - [Number Crunching in Scala](/pubs/slides/thoughtworks_scientific_2014/slides.html), given at the [Pune Scala Symposium](http://info.thoughtworks.com/pune-scala-symposium-april-12-registration.html), 2014.
 - [Bayesian A/B Testing at VWO](/pubs/slides/gilt_bayesian_ab_2015/slides.html), given at the Gilt Engineering Seminar 2015.
+- [Multiple Comparisons - Make your boss happy with false positives](/pubs/slides/crunch_conf_2015/slides.html), given at [Crunch Conf 2015](http://crunchconf.com/).
