@@ -1,5 +1,5 @@
 title: My adventures in medical tourism
-date: 2015-11-10 08:30
+date: 2015-12-14 08:30
 author: Chris Stucchio
 tags: medicine, economics, india, medical tourism
 category: culture
@@ -23,9 +23,11 @@ Sometime last year I started having quite a bit of pain in my back and leg. It s
 
 To start with I adjusted my lifestyle - no unilateral exercises, no running, no flexion exercises, more stabilization (e.g. planks).
 
-Over time the problem progressed to the point that I was unable to sit through lunch. At some point I took a lovely Mozambiquan lady to dinner, and I had to stand up twice just to relieve the pain. Standing up or lying down was fine - sitting was the only issue.
+Over time the problem progressed to the point that I was unable to sit through lunch. At some point I took a lovely Mozambiquan lady to dinner and I had to stand up twice just to relieve the pain. Standing up or lying down was fine - sitting was the only issue.
 
 To start off, I made an appointment with Rajesh Parasnis at [Oyster and Pearl Clinic](http://www.onphospital.com/). The experience was quite straightforward. I called up, requested an appointment, and asked the price. I was told over the phone that visiting the doctor would cost me 400rs - about $6.50. Insurance or a lack thereof was not an issue - this was a very simple fee for service arrangement.
+
+(You can interpret this name-drop as an explicit endorsement. In the event you need spine work done I highly recommend this guy.)
 
 After the visit we went through all the basics; rest, physical therapy, anti-inflammatories. None of these things cured my pain, but overall the experience was very straightforward. I asked for work to be done, and I asked the price. I was given the price. I handed over rupees, and got the work done.
 
@@ -35,7 +37,7 @@ So far, no billing errors, no paperwork - in terms of logistical difficulties it
 
 In spite of our best efforts, things got worse. In spite of the rest and pills, things progressed to the point that I was unable to sit at all. The next step in treatment was a [Selective Nerve Root Block](http://www.spinesurgery.com/pain-management/selective-nerve-root-block) - an injection of cortisone into the disk and nerve area. The goal is to reduce the swelling of the disk and lower the pressure.
 
-As always, I was told the price (10,000rs or $160) before the procedure. I scheduled the procedure for the next day and made a quick trip to the ATM. On the day of the injection, things were pretty simple. As before there was no paperwork - just show my receipt and wait for the doctor to arrive. The hospital was clean and modern - more or less exactly what you'd expect in the US. The only noticeable difference difference is that - in the US, only the doctors would be Indian.
+As always, I was told the price (10,000rs or $160) before the procedure. I scheduled the procedure for the next day and made a quick trip to the ATM. On the day of the injection things were pretty simple. As before there was no paperwork - just show my receipt and wait for the doctor to arrive. The hospital was clean and modern - more or less exactly what you'd expect in the US. The only noticeable difference difference is that in the US, only the doctors would be Indian.
 
 I didn't feel great after the injection, but the pain substantially decreased the next day. Overall, things were looking good. I felt no pain, I resumed exercise, things seemed to be moving well.
 
@@ -59,7 +61,7 @@ Once I returned to India, things went smoothly. I visited the doctor immediately
 
 I was also told the price of the surgery up front - 1.4 lakh only, or approximately $2,000. I was also told I might spend a few thousand more on incidental medications after I exit the hospital. I handed over my credit card and prepped for surgery.
 
-![prepped](|filename|/blog_media/2015/data_science_foundations_and_others_review/into_hospital.jpg)
+![prepped](|filename|/blog_media/2014/data_science_foundations_and_others_review/into_hospital.jpg)
 
 I'm quite happy in this picture - I'm on a lot of drugs. I don't normally have such a crazy beard, but at this point it had been about 2 months since I was able to sit down long enough for a haircut.
 
@@ -81,12 +83,10 @@ After surgery the recovery was pretty straightforward. The original problem mani
 
 ![prepped](|filename|/blog_media/2015/medical_tourism/sitting.jpg)
 
-It's now a year later and I've had no further problems with my back. I've certainly had to adjust my lifestyle - I've substituted one leg squats for deadlifts and will probably have chicken legs forever. I've mostly stopped lifting weights, and focus on bodyweight equivalents - inverted shrugs rather than weighted shrugs, levers rather than dumbell rows, and Hindu pushups (working up to handstand pushups) rather than the military press.
+It's now a year later and I've had no further problems with my back. I've certainly had to adjust my lifestyle - I've substituted one leg squats for deadlifts and will probably have chicken legs forever. I've mostly stopped lifting weights, and focus on bodyweight equivalents - inverted shrugs rather than weighted shrugs, levers rather than dumbell rows, and Hindu pushups rather than the military press. I haven't boxed since the surgery. (For anyone who either lacks a gym or who has similar injuries, check out [Beast Skills](http://www.beastskills.com/), [Al Kavadlo](https://www.youtube.com/user/alkavadlo) and [/r/bodyweightfitness](https://www.reddit.com/r/bodyweightfitness). As an added benefit you can often workout outdoors rather than some smelly basement weight room.)
 
-(For anyone who either lacks a gym or who has similar injuries, check out [Beast Skills](http://www.beastskills.com/), [Al Kavadlo](https://www.youtube.com/user/alkavadlo) and [/r/bodyweightfitness](https://www.reddit.com/r/bodyweightfitness).)
+Overall, I'm completely satisfied. The Indian medical system provides fantastic care. It differs a bit from care in the west in that it far more heavily emphasizes rest and hospital care - "quicker and sicker" is not something Indian hospitals do. But regardless of the costs and difficulties in getting care in the US, I still found Indian care to be more or less equivalent.
 
-I've resumed normal activities and am progressing nicely towards the human flag:
+On the cost side, the capitalist underpinnings of the system combined with obsessive cost consciousness of the average Indian has resulted in low and transparent costs to the customer. The costs aren't just low by American standards - they are low even relative to Indian wages. In the US, the billing error on a surgery like this might be approximately 1 year of salary for a typical programmer (say, $150k salary compared to a $117k billing error) and about 2x GDP/capita. In India the total price of 1.4 lac is 0.5-3x a typical programmers salary (0.5 lac - 5 lac) and about 1x GDP/capita.
 
-## Economics
-
-Unlike the US or Europe, India has a predominantly capitalistic medical system.
+On net I highly recommend medical tourism as a way to get care. It's certainly how I'll get anything besides emergency work done.
