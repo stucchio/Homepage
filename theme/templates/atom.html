@@ -33,6 +33,9 @@
                 {% else %}
                 {{article.summary}}
               <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}?utm_medium=rss&amp;utm_source=rss&amp;utm_campaign=rss">more ...</a>
+                {% if article.mathjax %}
+                 <p>Sorry to push you to the web rather than your convenient feed reader. Unfortunately this article has math in it and feed readers don't support mathjax/javascript.</p>
+                {% endif %}
               {% endif %}
               ]]>
             </content>
