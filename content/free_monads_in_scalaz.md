@@ -95,7 +95,7 @@ def runTransaction[A](trans: Sql[A]): Exception \/ A = {
     try {
       val result: A = runTransactionImpl(conn, trans)
       conn.commit()
-      result
+      result.right[Exception]
     } catch {
       case (e:Exception) => {
         conn.rollback()

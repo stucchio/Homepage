@@ -24,9 +24,9 @@ $$ m_g = m_0 \cdot e_m \cdot a_m $$
 
 $$ w_g = w_0 \cdot e_w \cdot a_w $$
 
-Here, $@ m_g $@ represents the number of male graduates, $@ m_0 $@ represents the number of men in the population, $@ e_m $@ represents the fraction of men who are NOT discouraged by education, and $@ a_m $@ represents the fraction of men with the intrinsic ability to do computing. The same variables with a w subscript represent these fractions among women.
+Here, $@ m_g $@ represents the number of male graduates, $@ m_0 $@ represents the number of men in the population, $@ e_m $@ represents the fraction of men who are NOT discouraged by education, and $@ a_m $@ represents the fraction of men with the ability and interest to do computing. The same variables with a w subscript represent these fractions among women.
 
-Concretely, the smaller $@ e_{m/w} $@ is, the more men/women are discouraged by education. And the smaller $@ a_{m/w} $@ is, the less intrinsic ability men/women have.
+Concretely, the smaller $@ e_{m/w} $@ is, the more men/women are discouraged by education. And the smaller $@ a_{m/w} $@ is, the less intrinsic ability/interest men/women have.
 
 Unfortunately, looking at the number of graduates doesn't help us answer the question of bias very much. If $@ w_g \ll m_g $@, this could be because either $@ a_w < a_m $@ or $@ e_w < e_m $@. We are completely unable to distinguish between two alternate hypothesis, namely "tech education discriminates against women" and "women have lower intrinsic ability".
 
