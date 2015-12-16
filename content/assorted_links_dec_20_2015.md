@@ -9,9 +9,15 @@ nolinkback: true
 
 [A Jedi's Path to Jihad](http://decider.com/2015/12/11/the-radicalization-of-luke-skywalker-a-jedis-path-to-jihad/)
 
+[A blacksmith debunks 9/11 conspiracy theories](https://www.youtube.com/watch?v=FzF1KySHmUA)
+
+[Why the US Government must lose Cryptowars 2.0](http://m.csmonitor.com/World/Passcode/2015/0723/Opinion-Why-the-US-government-must-lose-cryptowars-2.0)
+
 ## Computer science and Statistics
 
 [Probabilistic Integration](http://andrewgelman.com/wp-content/uploads/2015/12/1512.00933.pdf) - a really nice paper describing a new way of doing numerical integration.
+
+[Registered Reports at the Royal Society](https://blogs.royalsociety.org/publishing/registered-reports/) - submit a paper based on methodology, it's accepted on that basis, and then published whether the result is true or false. Woot!
 
 ## Economics and Social Science
 
