@@ -8,7 +8,7 @@ mathjax: true
 
 
 
-Earlier this year I published a blog post about a [Baysian decision rule](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) for choosing between two variations, each with a potentially different conversion rate. The basic idea of the decision rule is as follows.
+Earlier this year I published a blog post about a Baysian decision rule (now dead link, but [VWO now uses this for A/B testing](https://vwo.com/bayesian-ab-testing/) and [tech docs are here](https://cdn2.hubspot.net/hubfs/310840/VWO_SmartStats_technical_whitepaper.pdf)) for choosing between two variations, each with a potentially different conversion rate. The basic idea of the decision rule is as follows.
 
 1. Choose a "threshold of caring" - if A and B differ by less than this threshold, you don't care which one you choose.
 2. Choose a prior on the distribution of conversion rates of A and B.
@@ -18,7 +18,7 @@ This A/B testing procedure has two main advantages over the standard Students T-
 
 
 
-I won't repeat the [details of the method](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html), instead referring the reader to the original post. The crucial part of the test is determining when to stop. Suppose version A has a higher empirical mean than version B, i.e. $@ \textrm{clicks on A} / \textrm{displays of A} > \textrm{clicks on B} / \textrm{displays of B} $@. Then the test is stopped when:
+I won't repeat the [details of the method](https://cdn2.hubspot.net/hubfs/310840/VWO_SmartStats_technical_whitepaper.pdf), instead referring the reader to the original post. The crucial part of the test is determining when to stop. Suppose version A has a higher empirical mean than version B, i.e. $@ \textrm{clicks on A} / \textrm{displays of A} > \textrm{clicks on B} / \textrm{displays of B} $@. Then the test is stopped when:
 
 $$ \int_0^1 \int_0^1 \max(x-y,0) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy \leq \textrm{threshold of caring}$$
 
@@ -26,7 +26,7 @@ Or, to simplify:
 
 $$ \int_0^1 \int_y^1 (x-y) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy \leq \textrm{threshold of caring}$$
 
-In the [original blog post](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html), the integral is calculated numerically. However, it turns out we can compute it exactly using the following formula. Define first the function:
+In the [original source](https://cdn2.hubspot.net/hubfs/310840/VWO_SmartStats_technical_whitepaper.pdf), the integral is calculated numerically. However, it turns out we can compute it exactly using the following formula. Define first the function:
 
 $$ h(a,b,c,d) = 1 - \sum_{j=0}^{c-1} \frac{B(a+j,b+d) }{(d+j)B(1+j,d)B(a,b) } $$
 
@@ -36,7 +36,7 @@ Then:
 
 $$ \int_0^1 \int_y^1 (y-x) \frac{x^a(1-x)^b}{B(a,b)} \frac{y^c(1-y)^d}{B(c,d)} dx dy = \frac{B(a+1,b)}{B(a,b)} h(a+1,b,c,d) - \frac{B(c+1,d)}{B(c,d)} h(a,b,c+1,d) $$
 
-The numerical computation in [the original blog post](http://www.bayesianwitch.com/blog/2014/bayesian_ab_test.html) can then be replaced by the above formula.
+The numerical computation in [the original blog post](https://cdn2.hubspot.net/hubfs/310840/VWO_SmartStats_technical_whitepaper.pdf) can then be replaced by the above formula.
 
 # How to compute the formula
 
