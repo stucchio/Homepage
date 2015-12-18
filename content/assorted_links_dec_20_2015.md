@@ -13,6 +13,8 @@ nolinkback: true
 
 [Why the US Government must lose Cryptowars 2.0](http://m.csmonitor.com/World/Passcode/2015/0723/Opinion-Why-the-US-government-must-lose-cryptowars-2.0)
 
+[OpenAI should hold off on choosing tactics](http://conceptspacecartography.com/openai-should-hold-off-on-choosing-tactics/) and [Should AI be Open](http://slatestarcodex.com/2015/12/17/should-ai-be-open/). The more Hansonian view of OpenAI is that it is little more than PR for Musk/Altman/etc - a way of signaling their virtue and forward thinkingness to the world. Of course if it were just PR, I wouldn't expect involvement by Peter Thiel or some of the others. So I don't know what to make of it.
+
 ## Computer science and Statistics
 
 [Probabilistic Integration](http://andrewgelman.com/wp-content/uploads/2015/12/1512.00933.pdf) - a really nice paper describing a new way of doing numerical integration.
