@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2015-12-20 9:30:00
+date: 2015-12-21 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -13,13 +13,17 @@ nolinkback: true
 
 [Why the US Government must lose Cryptowars 2.0](http://m.csmonitor.com/World/Passcode/2015/0723/Opinion-Why-the-US-government-must-lose-cryptowars-2.0)
 
-[OpenAI should hold off on choosing tactics](http://conceptspacecartography.com/openai-should-hold-off-on-choosing-tactics/) and [Should AI be Open](http://slatestarcodex.com/2015/12/17/should-ai-be-open/). The more Hansonian view of OpenAI is that it is little more than PR for Musk/Altman/etc - a way of signaling their virtue and forward thinkingness to the world. Of course if it were just PR, I wouldn't expect involvement by Peter Thiel or some of the others. So I don't know what to make of it.
-
 ## Computer science and Statistics
 
-[Probabilistic Integration](http://andrewgelman.com/wp-content/uploads/2015/12/1512.00933.pdf) - a really nice paper describing a new way of doing numerical integration.
+[Probabilistic Integration](http://andrewgelman.com/wp-content/uploads/2015/12/1512.00933.pdf) - a really nice paper describing a new way of doing numerical integration. In fact, the whole site [www.probabilistic-numerics.org](www.probabilistic-numerics.org) is very interesting.
 
 [Registered Reports at the Royal Society](https://blogs.royalsociety.org/publishing/registered-reports/) - submit a paper based on methodology, it's accepted on that basis, and then published whether the result is true or false. Woot!
+
+[OpenAI should hold off on choosing tactics](http://conceptspacecartography.com/openai-should-hold-off-on-choosing-tactics/) and [Should AI be Open](http://slatestarcodex.com/2015/12/17/should-ai-be-open/). The more Hansonian view of OpenAI is that it is little more than PR for Musk/Altman/etc - a way of signaling their virtue and forward thinkingness to the world. Of course if it were just PR, I wouldn't expect involvement by Peter Thiel or some of the others. So I don't know what to make of it.
+
+An old discussion of [Bayesian Numerical Analysis](http://www.probabilistic-numerics.org/assets/pdf/Diaconis_1988.pdf).
+
+[Multidimensional variation for quasi-Monte Carlo](http://finmath.stanford.edu/~owen/reports/ktfang.pdf), a nice paper that I'm working through to understand variation and quasi-monte carlo techniques. So far I've been having great success using QMC to speed up some very slow integrals I deal with.
 
 ## Economics and Social Science
 
