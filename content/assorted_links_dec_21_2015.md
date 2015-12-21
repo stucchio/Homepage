@@ -13,6 +13,8 @@ nolinkback: true
 
 [Why the US Government must lose Cryptowars 2.0](http://m.csmonitor.com/World/Passcode/2015/0723/Opinion-Why-the-US-government-must-lose-cryptowars-2.0)
 
+[The Problem of Induction](http://plato.stanford.edu/entries/induction-problem/) - an important problem in the philosophy of science, namely on how we justify inductive reasoning. See also [Scott Alexander](http://slatestarcodex.com/2014/09/03/the-guardian-vs-induction/) on the topic.
+
 ## Computer science and Statistics
 
 [Probabilistic Integration](http://andrewgelman.com/wp-content/uploads/2015/12/1512.00933.pdf) - a really nice paper describing a new way of doing numerical integration. In fact, the whole site [www.probabilistic-numerics.org](www.probabilistic-numerics.org) is very interesting.
