@@ -16,11 +16,11 @@ Rather than waving the phone around, wouldn't it be great if the phone could fig
 The basic idea is the following. Suppose the phone measures my position and compass to follow roughly the following trajectory:
 ![motion](/blog_media/2016/bayesian_calibration_of_mobile_phone_compass/trajectory.png)
 
-In this picture, the blue dots represent my position while the black line represents the direction my compass points.
+In this picture, the blue dots represent the measurements of my position while the black arrows represent the direction my compass points - in this case, the directions are off by exactly 1 radian. To correct this bias, we would merely need to rotate the compass displayed on the screen by exactly -1 radian. This would yield a better user experience.
 
-It's pretty apparent from this picture that my motion is roughly up and to the right, or $@ \pi/4 $@. But my compass is not pointing in this direction - it's pointing downward instead. Once we know this we can simply rotate the compass displayed on the screen by $@ +3\pi/4 $@, yielding a good user experience.
+Of course, using simple differencing between positions to measure my direction is not exactly right. Although the data was simulated based on the idea that I was walking in a circle, the noise in measuring my position makes using simple differences between two points inadequate. For example, the arrow from the second to last point (at the bottom of the circle) and the last has an angle of roughly $@ -\pi/4 $@, when it should be pointing at an angle of $@ 0 $@.
 
-Using Bayesian statistics, we can translate this rough intuition into a straightforward algorithm. We can use our position measurements to approximate our direction, and then adjust the compass to match. In this post I'll explain how to do that.
+On the other hand, eyeballing this picture tells us exactly what the right answer is. Using Bayesian statistics, we can translate this rough intuition into a straightforward algorithm. We can use our position measurements to approximate our direction, and then adjust the compass to match. In this post I'll explain how to do that.
 
 # The Model
 
