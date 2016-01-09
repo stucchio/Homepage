@@ -133,7 +133,7 @@ To prevent this, we must *reparamaterize* the problem. We do this by defining a 
         return tan(pi*z-(pi/2.0))
     end
 
-**Fact 2:** Finding the variable $@ y $@ maximizing $@ \ln[L(\vec{c}, \vec{s} | 0.5+\pi^{-1} \arctan(z) )] $@ is equivalent to finding $@ z $@ maximizing $@ \ln[\L(\vec{c}, \vec{s} | z)] $@.
+**Fact 2:** Finding the variable $@ y $@ maximizing $@ \ln[L(\vec{c}, \vec{s} | 0.5+\pi^{-1} \arctan(z) )] $@ is equivalent to finding $@ z $@ maximizing $@ \ln[L(\vec{c}, \vec{s} | z)] $@.
 
 However, this changes the optimization problem. We must now compute gradients with respect to $@ y $@ rather than with respect to $@ z $@. This is easily accomplished via the chain rule:
 
