@@ -1,5 +1,5 @@
 title: Bayesian Calibration of a Mobile Phone Compass
-date: 2016-01-12 09:00
+date: 2016-01-11 09:00
 author: Chris Stucchio
 tags: statistics, bayesian reasoning, mobile
 mathjax: true
