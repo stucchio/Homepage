@@ -19,7 +19,7 @@ If we do not have a lot of data, we would like to relate the conversion rate in 
 
 # A simple model
 
-The first thing to recognize is that we must assume there is some sort of relationship between `ctr['rightrail']` and `ctr['topnav']` for a fixed ad. If there is no such relationship, then we have no hope of making any inference about `ctr['rightrail']` given knowledge of `ctr['topnav']` - the two quantities are simply unelated. The simplest way of relating the conversion rates in each location with each other is via a linear model.
+The first thing to recognize is that we must assume there is some sort of relationship between `ctr['rightrail']` and `ctr['topnav']` for a fixed ad. If there is no such relationship, then we have no hope of making any inference about `ctr['rightrail']` given knowledge of `ctr['topnav']` - the two quantities are simply unrelated. The simplest way of relating the conversion rates in each location with each other is via a linear model.
 
 Specifically, we'll assume that the click through rate of an ad in a given location is the product of two factors - the visibility of the location, and the quality of the ad.
 
