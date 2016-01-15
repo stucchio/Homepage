@@ -95,6 +95,10 @@ To test this algorithm, I generated synthetic data to test this algorithm. I gen
 
 ![motion](/blog_media/2016/bayesian_calibration_of_mobile_phone_compass/sequence_of_posteriors.png)
 
+If we display the average direction (as per the posterior) on a map, we get accurate directions after a few position measurements:
+
+![motion](/blog_media/2016/bayesian_calibration_of_mobile_phone_compass/inferred_directions.png)
+
 Full code is on [github](https://gist.github.com/stucchio/c7a2333c227e24226808).
 
 As can be seen from the graph, the algorithm converges reasonably rapidly (after 5-10 measurements). So this means that after walking far enough for the GPS to make 5-10 distinct measurements, my phone can approximately calibrate the compass, certainly enough to be usable.
