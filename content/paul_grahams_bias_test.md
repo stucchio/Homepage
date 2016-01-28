@@ -176,7 +176,7 @@ That's ok! Very few ideas are perfect when they are first developed. Additionall
 
 Paul Graham isn't a statistician, but I am. His idea is solid. Subject to some assumptions (which probably won't be useful to test if VCs are biased), I was able to tweak his idea and get a valid frequentist hypothesis test from it. This new test is also imperfect - it fails to handle noise in measuring inputs/outputs, for example. No statistical test can detect everything, and this one is just something I put together during a very long transatlantic flight.
 
-Any reader is free to criticize me as being "at the level of an evolution denier" or whatever. That's fine, I have a thick skin. But it's also harmful, since some folks don't have a think skin. Ideas don't spring into the world perfectly formed, with no flaws, ready for immediate use. If we criticize anyone who comes up with a less than perfect idea, we'll just wind up having fewer ideas.
+Any reader is free to criticize me as being "at the level of an evolution denier" or whatever. That's fine, I have a thick skin. But it's also harmful, since some folks don't have a thick skin. Ideas don't spring into the world perfectly formed, with no flaws, ready for immediate use. If we criticize anyone who comes up with a less than perfect idea, we'll just wind up having fewer ideas.
 
 Because I've got a thick skin, any reader is also free to observe flaws and try to fix them. If we don't create disincentives for publicizing and developing imperfect ideas, we'll probably make progress faster.
 

@@ -66,7 +66,7 @@ def markAccountAsUpdated(account: Account, when: DateTime): Sql[Boolean] = Free.
   })
 ```
 
-Once we have these databse operations, we can combine them into a transaction we wish to run:
+Once we have these database operations, we can combine them into a transaction we wish to run:
 
 ```scala
 def getAccountAndMarkAccess(personId: Long): Sql[Account] = for {
