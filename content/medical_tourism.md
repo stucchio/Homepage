@@ -5,7 +5,7 @@ tags: medicine, economics, india, medical tourism
 category: culture
 nolinkback: true
 
-![herniation diagram](http://upload.wikimedia.org/wikipedia/en/9/98/Lumbar_Disc_Lesions%2C_Classification_by_Harry_Gouvas.jpg)
+![herniation diagram](https://upload.wikimedia.org/wikipedia/en/9/98/Lumbar_Disc_Lesions%2C_Classification_by_Harry_Gouvas.jpg)
 
 One of the things I like most about India is it's medical system. As an American, I've experienced both the Indian and US medical systems, and at this point I have a very strong preference for the Indian one. Somewhat surprisingly, the Indian medical system is based on free market capitalism, and as a result it tends to provide a much better experience than the US system.
 
