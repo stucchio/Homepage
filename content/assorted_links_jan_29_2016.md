@@ -20,3 +20,21 @@ nolinkback: true
 Sometime back Paul Graham wrote about [a way to detect bias](http://www.paulgraham.com/bias.html), namely by measuring the relative ability of people who are *selected*. I.e., if women are discriminated against, they should outperform men. I did a little more [math on that topic](https://www.chrisstucchio.com/blog/2015/paul_grahams_bias_test.html). Now Jonathan Adler is using this idea to [investigate whether conservative law professors are discriminated against](https://www.washingtonpost.com/news/volokh-conspiracy/wp/2016/02/01/revisiting-whether-conservative-and-libertarian-law-professors-are-more-productive-than-their-peers/). Apparently conservative law professors are significantly more productive than their liberal counterparts, suggesting that there may be possible discrimination.
 
 [Systems, not Sith: How Inter-service Rivalries Doomed the Galactic Empire](https://www.overthinkingit.com/2012/09/17/star-wars-empire-inter-service-rivalries/?page=all)
+
+[Hedonic Adjustments over long periods of time](http://ashokarao.com/2016/02/02/hedonic-adjustments-over-long-periods-of-time/). This article argues a point I've long held, that inflation is non-transitive. I.e., the rate of inflation from 1970->2016 is not equal to inflation 1970->1990 + 1990->2016. The reason for this is ultimately changes in the basket of goods - changing the basket of goods gets you a very good inflation rate in any given year, but a completely nonsensical one over time.
+
+[Nice introductory article on covariance/contravariance](http://typelevel.org/blog/2016/02/04/variance-and-functors.html).
+
+[Why Costs Matter](https://pedestrianobservations.wordpress.com/2016/01/31/why-costs-matter/) - an article explaining why transit activists need to focus on out of control construction costs. My favorite point of comparison is that the NYC 7-line extension (1 mile of subway, 1 station) cost $2.4 billion, while the Delhi metro (132 miles of track, 160 stations) cost $5 billion.
+
+[Silicon Valley Has an Asian-people Problem](http://www.unz.com/gnxp/silicon-valley-has-an-asian-people-problem/) - the first news report on ethnic diversity in the tech industry which accurately describes the numbers.
+
+[Github: The Quiet Death of One Man's Dream](http://danieltenner.com/2016/02/06/github-the-quiet-death-of-one-mans-dream/).
+
+[Interview with a Quant, Pt 1](https://www.quandl.com/blog/interview-with-a-quant-part-one). Discussion of how to find/test trading strategies. Looking forward to part 2.
+
+[How to become a Bayesian in 8 easy steps](http://alexanderetz.com/2016/02/07/understanding-bayes-how-to-become-a-bayesian-in-eight-easy-steps/). Good listing of papers to read.
+
+Apparently the SAT, including SAT math, will become [more reading heavy](http://www.nytimes.com/2016/02/09/us/sat-test-changes.html). It's supposed to be harder for people who are good at math but might not speak English at home. I wonder what [group of people](https://www.insidehighered.com/news/2015/09/03/sat-scores-drop-and-racial-gaps-remain-large) that is?
+
+Scott Alexander [takes down the github male/female pull request article](http://slatestarcodex.com/2016/02/12/before-you-get-too-excited-about-that-github-study/).
