@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2016-01-29 9:30:00
+date: 2016-02-16 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -37,4 +37,4 @@ Sometime back Paul Graham wrote about [a way to detect bias](http://www.paulgrah
 
 Apparently the SAT, including SAT math, will become [more reading heavy](http://www.nytimes.com/2016/02/09/us/sat-test-changes.html). It's supposed to be harder for people who are good at math but might not speak English at home. I wonder what [group of people](https://www.insidehighered.com/news/2015/09/03/sat-scores-drop-and-racial-gaps-remain-large) that is?
 
-Scott Alexander [takes down the github male/female pull request article](http://slatestarcodex.com/2016/02/12/before-you-get-too-excited-about-that-github-study/).
+Scott Alexander [takes down the github male/female pull request article](http://slatestarcodex.com/2016/02/12/before-you-get-too-excited-about-that-github-study/). He also has a [great comment](http://slatestarcodex.com/2016/02/12/before-you-get-too-excited-about-that-github-study/#comment-325869).
