@@ -3,7 +3,7 @@ URL: work.html
 Save_as: work.html
 menubar: true
 
-I am a Data Scientist (formerly known as "Statistician") and I am currently seeking consulting work.
+I am a Data Scientist (formerly known as "Statistician") and I am currently the director of data science at [Wingify](http://wingify.com/), the makers of [VWO.com](https://vwo.com/) and [Pushcrew](https://pushcrew.com/).
 
 Things I'm good at:
 
