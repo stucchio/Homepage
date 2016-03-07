@@ -77,7 +77,7 @@ $$
 
 Suppose now we have input data - a timeseries `n` and `c` representing visitor count and conversions:
 
-```
+```python
 n = array([ 1000.,  1000.,  1000.,  1000.,  1000.,  1000.,  1000.,  1000.,
             1000.,  1000.,  1000.,  1000.,  1000.,  1000.,  1000.,  1000.,
             1000.,  1000.,  1000.,  1000.])
@@ -88,7 +88,7 @@ c = array([51, 40, 51, 41, 44, 39, 54, 41, 61, 52, 65, 58, 44, 49, 34, 39, 24,
 
 Then let us represent `theta` with an array as well.
 
-```
+```python
 theta = array([ 0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,
                 0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,
                 0.05,  0.05])
@@ -96,14 +96,14 @@ theta = array([ 0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,  0.05,
 
 The log likelihood can be computed via:
 
-```
+```python
 def log_likelihood(n, c, theta):
     return sum(binom.logpmf(c, n, theta))
 ```
 
 And of course the likelihood itself can be computed via:
 
-```
+```python
 def likelihood(n, c, theta):
     return exp(log_likelihood(n,c,theta))
 ```
@@ -198,7 +198,82 @@ Repeating this calculation for all times yields the following plot of the poster
 
 We can draw the conclusion that a jump almost certainly occurred (with probability 99.95%) at some point between t=13 and t=17. This means we should raise an alert!
 
+### Doing the calculation in Python
 
+The following code implements the computation of the posterior:
 
+```python
+from pylab import *
+from scipy.stats import binom
+
+def log_likelihood(n, c, theta):
+    return sum(binom.logpmf(c, n, theta))
+
+def bayesian_jump_detector(n, c, base_cr=0.05, null_prior=0.98, post_jump_cr=0.03):
+    """ Returns a posterior describing our beliefs on the probability of a
+    jump, and if so when it occurred.
+
+    First return value is probability null hypothesis is true, second return
+    value is array representing the probability of a jump at each time.
+    """
+    theta = full(n.shape, base_cr)
+    likelihood = zeros(shape=(n.shape[0] + 1,), dtype=float) #First element represents the probability of no jump
+
+    likelihood[0] = null_prior #Set likelihood equal to prior
+    likelihood[1:] = (1.0-null_prior) / n.shape[0] #Remainder represents probability of a jump at a fixed increment
+
+    likelihood[0] = likelihood[0] * exp(log_likelihood(n, c, theta))
+    for i in range(n.shape[0]):
+        theta[:] = base_cr
+        theta[i:] = post_jump_cr
+        likelihood[i+1] = likelihood[i+1] * exp(log_likelihood(n, c, theta))
+    likelihood /= sum(likelihood)
+    return (likelihood[0], likelihood[1:])
+```
+
+## Experiments with other scenarios
+
+If we now consider a situation with only 100 visitors/time unit, we can run this code as well.
+
+```python
+n = full((20,), 100)
+c = binom(100, 0.05).rvs(20) #No jump in CR occurs
+
+bayesian_jump_detector(n, c, null_prior=0.99)
+
+#Result is:
+(0.99888216914806816,
+ array([  7.28189038e-11,   2.20197564e-10,   6.65856870e-10,
+          2.40083185e-10,   4.26612169e-10,   1.29003536e-09,
+          7.91551819e-10,   1.40653598e-09,   7.23795867e-09,
+          6.33837938e-08,   1.91666673e-07,   1.17604609e-07,
+          1.22800167e-07,   3.71336237e-07,   3.87741199e-07,
+          6.88990834e-07,   3.54550985e-06,   1.82450034e-05,
+          2.71896088e-04,   8.22188376e-04]))
+```
+
+In this case, our confidence in the null hypothesis has increased from 99% to 99.89%.
+
+What if we put a jump in?
+
+```python
+n = full((20,), 100)
+c = binom(100, 0.05).rvs(20)
+c[13:] = binom(100, 0.03).rvs(7) #Jump occurs at t=13
+
+bayesian_jump_detector(n, c, null_prior=0.99)
+
+#Result is:
+(0.92236200077388664,
+ array([  2.78977290e-06,   2.91302001e-06,   5.17624665e-06,
+          2.66366875e-05,   1.37070964e-04,   8.41052693e-05,
+          8.78208876e-05,   2.65562162e-04,   9.57518240e-05,
+          9.99819660e-05,   1.04398988e-04,   5.37231589e-04,
+          4.70461049e-03,   4.11989173e-02,   1.48547950e-02,
+          9.11474243e-03,   1.93120502e-03,   2.01652216e-03,
+          2.10560845e-03,   2.62158967e-04]))
+```
+
+Because in this case we have a lot less data (100 data points/time unit vs 1000), we do not have as much confidence in our result. Our belief in the null hypothesis has dropped from 99% to 92%, and our belief that a drop has occurred near `t=13` has increased to about 6% (with the remaining 2% spread out a little further).
 
 See also a post on [Willie Wheeler's blog](http://williewheeler.com/2016/03/03/anomaly-detection-using-stl/) where he discusses an extension of this problem - what if the base rate $@ \lambda(t) $@ varies with time.
