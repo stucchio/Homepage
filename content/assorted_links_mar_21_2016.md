@@ -19,6 +19,8 @@ nolinkback: true
 
 [Comment on 'Estimating the Reproducibility of Psychological Science'](http://datacolada.org/wp-content/uploads/2016/03/5321-Gilbert-et-al-Comment-on-reproducibility.pdf) - critiques the original replicability project. Gelman [continues to be pessimistic](http://andrewgelman.com/2016/03/05/29195/). [Data Colada](http://datacolada.org/2016/03/03/47/) points out flaws in both. [More commentary](https://hardsci.wordpress.com/2016/03/03/evaluating-a-new-critique-of-the-reproducibility-project/). Also note that *everyone is misinterpreting confidence intervals* - exactly as [predicted](http://www.ejwagenmakers.com/inpress/HoekstraEtAlPBR.pdf) in a different psychology paper.
 
+[Maximum Entropy from Bayes Theorem](https://qchu.wordpress.com/2016/03/06/maximum-entropy-from-bayes-theorem/)
+
 ## Trading and Economics
 
 [A Quant's Approach to Building Trading Strategies, pt 2](https://www.quandl.com/blog/interview-with-a-quant-part-two). And [part 3](https://www.quandl.com/blog/interview-with-a-quant-part-three).
