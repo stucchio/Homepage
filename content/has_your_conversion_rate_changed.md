@@ -38,8 +38,6 @@ $$
 p_1 \leftarrow f(p)
 $$
 
-Since this jump happens at a known constant rate, it can be represented with a Poisson distribution. Thus, the probability that $@ t_1 > T $@ is $@ e^{-\lambda T} $@.
-
 If we could measure $@ \theta(t) $@ directly, it would be straightforward to identify $@p_0$@, $@p_1$@ and $@ t_1 $@. And if we have enough data (say 10,000 data points per unit of time), we can easily observe this:
 
 ![increased variance](/blog_media/2016/has_your_conversion_rate_changed/lots_of_data_timeseris.png)
