@@ -1,5 +1,5 @@
 title: Has your conversion rate changed? An introduction to Bayesian timeseries analysis with Python.
-date: 2016-3-08 08:45
+date: 2016-3-09 08:45
 author: Chris Stucchio
 tags: statistics, bayesian reasoning
 mathjax: true
@@ -274,6 +274,10 @@ bayesian_jump_detector(n, c, null_prior=0.99)
           2.10560845e-03,   2.62158967e-04]))
 ```
 
-Because in this case we have a lot less data (100 data points/time unit vs 1000), we do not have as much confidence in our result. Our belief in the null hypothesis has dropped from 99% to 92%, and our belief that a drop has occurred near `t=13` has increased to about 6% (with the remaining 2% spread out a little further).
+Because in this case we have a lot less data (100 data points/time unit vs 1000), we do not have as much confidence in our result. Our belief in the null hypothesis has dropped from 99% to 92%, and our belief that a drop has occurred near `t=13` has increased to about 6% (with the remaining 2% spread out a little further). That's enough to raise an alert, but not enough to conclusively determine that the effect is real.
 
-See also a post on [Willie Wheeler's blog](http://williewheeler.com/2016/03/03/anomaly-detection-using-stl/) where he discusses an extension of this problem - what if the base rate $@ \lambda(t) $@ varies with time.
+## Conclusion
+
+Bayesian timeseries analysis is just ordinary Bayesian statistics, but we are doing our analysis in a space of functions. Our goal is to characterize probabilistically an unknown function $@ \theta(t) $@ which generates one or more observable data series, e.g. $@ n_t, c_t $@. In this post I've discussed anomaly detection, but this is actually a very general mode of thinking which can be used under a lot of circumstances.
+
+In particular, I hope in a later post to comment on *time varying* conversion rates. Specifically, in another post on his blog, Willie Wheeler [discusses the issue of time periodic conversion rates](http://williewheeler.com/2016/03/03/anomaly-detection-using-stl/). I.e., the assumption here is that absent a negative downward spike, $@ \theta(t) $@ should be time periodic - Tuesday and Saturday differ, but last Tuesday is a lot like this Tuesday. With some luck I'll come back to this topic, and discuss how to handle such situations in a Bayesian formulation.
