@@ -17,7 +17,7 @@ nolinkback: true
 
 [Nice Akka Stream tutorial](https://medium.com/@kvnwbbr/diving-into-akka-streams-2770b3aeabb0)
 
-[Replication crisis crisis: Why I continue in my “pessimistic conclusions about reproducibility”](http://andrewgelman.com/2016/03/05/29195/). I agree completely with Gelman.
+[Comment on 'Estimating the Reproducibility of Psychological Science'](http://datacolada.org/wp-content/uploads/2016/03/5321-Gilbert-et-al-Comment-on-reproducibility.pdf) - critiques the original replicability project. Gelman [continues to be pessimistic](http://andrewgelman.com/2016/03/05/29195/). [Data Colada](http://datacolada.org/2016/03/03/47/) points out flaws in both. [More commentary](https://hardsci.wordpress.com/2016/03/03/evaluating-a-new-critique-of-the-reproducibility-project/). Also note that *everyone is misinterpreting confidence intervals* - exactly as [predicted](http://www.ejwagenmakers.com/inpress/HoekstraEtAlPBR.pdf) in a different psychology paper.
 
 ## Trading and Economics
 
@@ -30,6 +30,8 @@ nolinkback: true
 [Why Minimum Wages can take Time to Destroy Jobs](http://econlog.econlib.org/archives/2016/02/why_minimum_wag.html). Great article illustrating the effects of fixed costs.
 
 [Closed Borders Advocates Walk Out of Tesla Factory](http://www.bloomberg.com/news/articles/2016-02-29/about-100-workers-walk-out-at-tesla-battery-plant-building-site). Apparently some Nevada workers don't like economic competition from (New) Mexicans.
+
+[Ego depletion is really hard to replicate.](http://www.slate.com/articles/health_and_science/cover_story/2016/03/ego_depletion_an_influential_theory_in_psychology_may_have_just_been_debunked.single.html).
 
 ## Culture
 
