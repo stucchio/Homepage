@@ -54,7 +54,7 @@ $$
 
 The important thing about these equations is that **we no longer need to know the innate ability/interest of men and women**. They depend on two factors - the ability of men and women to learn independently, and the level of discouragement each group has suffered. Innate ability is eliminated from the theory.
 
-So now suppose concretely that $@ w_g^a / w_g $@ were much larger than $@ m_g^a / m_g $@. This would mean one of two things - either $@ k_w > k_m$@, or $@ a_w < a_m $@. I.e., either women are better at learning independently than men, or education hinders women more than it hinders men.
+So now suppose concretely that $@ w_g^a / w_g $@ were much larger than $@ m_g^a / m_g $@. This would mean one of two things - either $@ k_w > k_m$@, or $@ e_w < e_m $@. I.e., either women are better at learning independently than men, or education hinders women more than it hinders men.
 
 If we assume men and women have equal learning abilities ($@ k_w = k_m $@) - a fairly common assumption - then the only remaining conclusion is that women are more discouraged than men.
 
@@ -70,7 +70,7 @@ The autodidact ratio works around this.
 
 Suppose instead that we've observed $@ w_g^a / w_g \gg m_g^a / m_g $@. If troll wishes to argue that this is not due to bias, he can no longer claim the alternate explanation is that women are dumber than men. His new alternate explanation is that *women are better at learning independently than men*; that $@ k_w > k_m $@. If said troll wishes to incorporate this new data point into his worldview, he is forced to give up one of his ideological tenets - either the world is biased against women **or** men are intellectually superior to women.
 
-Conversely, suppose we discover that $@ w_g^a / w_g \approx m_g^a / m_g $@. The social justice warrior who wishes to argue that bias still exists must then immediately argue that women are *not intellectually equal to men.* If the ratios are equal, and $@ a_w = (1/2) a_m $@ for example, then $@ k_w = (1/2) k_m $@. In much the same way as the internet troll above, the social justice warrior must give up one of her ideological points.
+Conversely, suppose we discover that $@ w_g^a / w_g \approx m_g^a / m_g $@. The social justice warrior who wishes to argue that bias still exists must then immediately argue that women are *not intellectually equal to men.* If the ratios are equal, and $@ e_w = (1/2) e_m $@ for example, then $@ k_w = (1/2) k_m $@. In much the same way as the internet troll above, the social justice warrior must give up one of her ideological points.
 
 Because we've put ideology in both the numerator and the denominator, ideology cancels and we may learn something new.
 
