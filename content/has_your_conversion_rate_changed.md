@@ -1,5 +1,5 @@
 title: Has your conversion rate changed? An introduction to Bayesian timeseries analysis with Python.
-date: 2016-3-09 08:45
+date: 2016-3-14 08:45
 author: Chris Stucchio
 tags: statistics, bayesian reasoning
 mathjax: true
@@ -16,7 +16,7 @@ In pictures, here's what happens:
 
 ![increased variance](/blog_media/2016/has_your_conversion_rate_changed/law_of_large_numbers.png)
 
-Based on this analysis it's pretty clear no static threshold can be used. However, we can use
+Based on this analysis it's pretty clear no static threshold can be used - a tight threshold for the 10,000 visitor time periods would have a huge number of false positives for the 1,000 visitor case.
 
 This problem can be resolved by a Bayesian timeseries model.
 
@@ -67,7 +67,7 @@ $$
 Sometimes more usefully, we might wish to consider the log likelihood:
 
 $$
-\log\left[ P(c_1, c_2, \ldots | \theta(t), n_1, n_2, \ldots) ]\right] = \sum_i \log\left[ {n_i \choose c_i } \right] \left( c_i \log(\theta(i)) (n_i - c_i)\log(1-\theta(t)) \right)
+\log\left[ P(c_1, c_2, \ldots | \theta(t), n_1, n_2, \ldots) ]\right] = \sum_i \log\left[ {n_i \choose c_i } \right] \left[ c_i \log(\theta(i)) +  (n_i - c_i)\log(1-\theta(t)) \right]
 $$
 
 
@@ -120,9 +120,7 @@ Now consider an "alternate hypothesis" - the assumption that the conversion rate
 $$\theta^{14}(t) = 0.05, t \leq 14 $$
 $$\theta^{14}(t) = 0.03, t > 14 $$
 
-This is a very specific alternate hypothesis, but this process is done mainly for illustrative purposes.
-
-(I put "null hypothesis" and "alternate hypothesis" in scare quotes since I'm not planning on using them in a Frequentist manner.)
+This is a very specific alternate hypothesis (it's exactly how I generated the data) which I'm choosing for illustrative purposes. I put "null hypothesis" and "alternate hypothesis" in scare quotes since I'm not planning on using them in a Frequentist manner.
 
 Using the likelihood formula for $@ P(c_1, c_2, \ldots | \theta(t), n_1, n_2, \ldots) $@ above, we find that:
 
@@ -147,7 +145,7 @@ The fact that the log likelihood peaks at $@ t=14 $@ suggesting that whatever we
 
 ## Bayesian Inference
 
-Bayesian inference takes our rough intuition - that we should consider a drop in conversion rate at $@ t = 14 $@ - and quantifies it.
+Bayesian inference takes our rough intuition - that we should consider a drop in conversion rate at $@ t = 14 $@ to be more likely than before - and quantifies it.
 
 To do Bayesian inference, we need to come up with a prior. As a prior, I'll assume that a drop in conversion rate is unlikely - only 2%. I'll also assume that the probability of a drop occurring at any given time is equal.
 
