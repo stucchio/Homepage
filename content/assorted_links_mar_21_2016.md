@@ -21,6 +21,8 @@ nolinkback: true
 
 [Maximum Entropy from Bayes Theorem](https://qchu.wordpress.com/2016/03/06/maximum-entropy-from-bayes-theorem/)
 
+[Reckoning with the past](http://michaelinzlicht.com/getting-better/2016/2/29/reckoning-with-the-past) - in which a scientist discusses the possibility that his life's work might be wrong.
+
 ## Trading and Economics
 
 [A Quant's Approach to Building Trading Strategies, pt 2](https://www.quandl.com/blog/interview-with-a-quant-part-two). And [part 3](https://www.quandl.com/blog/interview-with-a-quant-part-three).
@@ -37,6 +39,8 @@ nolinkback: true
 
 ## Culture
 
+[Scott Sumner on why he doesn't use Twitter](http://www.themoneyillusion.com/?p=31553).
+
 Great article on [violence and mental illness](http://siderea.livejournal.com/1256347.html).
 
 A ["tech bro"](https://justink.svbtle.com/open-letter-to-mayor-ed-lee-and-greg-suhr-police-chief) wrote a letter to the Mayor of SF complaining about the homeless. He was widely criticized for it, but the actual letter is worth reading. *"A distraught, and high person was right in front of the restaurant, yelling, screaming, yelling about cocaine, and even, attempted to pull his pants down and show his genitals."* Apparently the "tech bro" believes that a legitimate function of government is preventing such things.
@@ -46,3 +50,5 @@ A ["tech bro"](https://justink.svbtle.com/open-letter-to-mayor-ed-lee-and-greg-s
 [Why India Needs it's Quack Doctors](https://www.good.is/articles/why-india-needs-its-quack-doctors).
 
 [Evidence Based Medicine is (micro-)Fascism](https://www.ucl.ac.uk/Pharmacology/dc-bits/holmes-deconstruction-ebhc-06.pdf). What is this I don't even know?
+
+[Math education research is mostly nonsense](https://www.math.upenn.edu/~wilf/website/PSUTalk.pdf). Having read a few papers there, I can't disagree.
