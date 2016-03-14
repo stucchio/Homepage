@@ -1,14 +1,22 @@
-title: Is your algorithm discriminatory? The answer to this question should make everyone uncomfortable.
+title: Alien Intelligences and discriminatory algorithms
 date: 2016-03-15 10:00
 author: Chris Stucchio
 tags: bias detection, frequentist statistics, statistics
 mathjax: true
 
-Predictive algorithms are becoming increasingly used in the wider world; predicting crime, creditworthiness, advertisement delivery or others. As AI-driven decisions are becoming more commonplace, pundits and journalists have [become](http://www.nytimes.com/2015/09/25/us/police-program-aims-to-pinpoint-those-most-likely-to-commit-crimes.html?_r=0) [increasingly](http://techcrunch.com/2015/08/02/machine-learning-and-human-bias-an-uneasy-pair/) [concerned](https://www.schneier.com/blog/archives/2016/01/replacing_judgm.html) that such algorithms might be "discriminatory" against various special classes of humans. Typically these pundits attribute to algorithms various human qualities; the mere ability to discriminate by race is treated as an assumption that the algorithm is doing so and in the same way that humans would.
+![let that be your last battlefield](/blog_media/2016/is_your_algorithm_discriminatory/star_trek.jpg)
 
-Cathy O'Neil - aka [mathbabe](http://mathbabe.org/) - is one of the foremost writers in this field. In spite of her blog's title, she uses negligible amounts of math but lots of emotional rhetoric to groundlessly criticize statistics in order to sell books.
+In the Star Trek episode [Let That Be Your Last Battlefield](https://en.wikipedia.org/wiki/Let_That_Be_Your_Last_Battlefield) the Enterprise encounters two human-looking aliens (as is the Star Trek custom) from the planet Cheron. One is black on the left and white on the right while the other is reversed. These aliens are full of intense hatred towards each other due primarily to the reversal of coloration. This episode was broadcast in 1969 and was a pretty ham-handed criticism of American racial attitudes at the time. We, the human viewers, are of course oblivious to whatever happened on Cheron prior to this episode. As a result we find the actions of the two Cheronese completely nonsensical - the only fact that is relevant for us is the fact that the Cheronese are in danger of destroying the Enterprise.
 
-Unfortunately this is all a load of anthropomorphic nonsense. Algorithms aren't people. While humans are known to be easily biased on physical traits of other humans, algorithms aren't. To a human, "race" or "sex" is a fundamental trait of another person. To an algorithm, it's merely the 26'th element of a 100 element array, or it's data not provided at all. It's a fair criticism that algorithms can reproduce biases in their inputs. But the *assumption* that they will do this is fundamentally flawed. In reality, if the inputs to an algorithm are sufficiently informative it can *correct* the bias in the inputs!
+As aliens to the Cheronese, we (either the viewer or Captain Kirk) just don't care. Insofar as we might favor one Cheronese over the other, that would only be due to the danger or reward to the Enteprirse. Captain Kirk cares about protecting the ship and discovering new life and new civilizations - minor aesthetic differences between two people from the same civilization are irrelevant to him.
+
+On Star Trek, all the aliens are just humans with colored makeup. In real life, aliens will be truly different. One very important category of "alien" is machine learning - machine learning algorithms are completely alien to us and this fact is unfortunately lost on a lot of innumerate journalists.
+
+As AI-driven decisions are becoming more commonplace (e.g. in predicting crime, creditworthiness, advertisement delivery), pundits and journalists have [become](http://www.nytimes.com/2015/09/25/us/police-program-aims-to-pinpoint-those-most-likely-to-commit-crimes.html?_r=0) [increasingly](http://techcrunch.com/2015/08/02/machine-learning-and-human-bias-an-uneasy-pair/) [concerned](https://www.schneier.com/blog/archives/2016/01/replacing_judgm.html) that such algorithms might be "discriminatory" against various special classes of humans. Typically these pundits attribute to algorithms various human qualities; the mere ability to discriminate by race is treated as an assumption that the algorithm is doing so and in the same way that humans would. Cathy O'Neil - aka [mathbabe](http://mathbabe.org/) - is one of the foremost writers in this field. In spite of her blog's title, she uses negligible amounts of math but lots of emotional rhetoric to groundlessly criticize statistics in order to sell books.
+
+Unfortunately this is all a load of anthropomorphic nonsense. Algorithms aren't people. While humans are known to be easily biased on physical traits of other humans, algorithms aren't. To a human, "race" or "sex" is a fundamental trait of another person. An algorithm cares about the 26'th element of a 100 element array as much as Kirk cares about who is black on the left - if it's predictive of something he cares about he'll pay attention, otherwise he doesn't care. It's a fair criticism that algorithms can reproduce biases in their inputs. But the *assumption* that they will do this - just like humans do - is fundamentally flawed.
+
+In reality, if the inputs to an algorithm are sufficiently informative, the algorithm will *correct* the bias in the inputs!
 
 This post is going to be somewhat mathematical. Unfortunately, while it's easy to criticize algorithms on emotional and anthropomorphic terms, it's very hard to defend them on that basis. So I'm going to introduce and explain linear regression - the simplest machine learning algorithm that I can think of - and show what conditions lead to algorithmic discrimination.
 
@@ -16,15 +24,15 @@ This post is going to be somewhat mathematical. Unfortunately, while it's easy t
 
 This article is about *when* and *why* an algorithm would discriminate, and more importantly when it *won't*. To illustrate this I'm going to construct a few hypothetical worlds, run an algorithm on that hypothetical world, and illustrate the output. By inverting this process, we can conclude that *if* an algorithm behaves a certain way, that is evidence that the *world* behaves in a corresponding manner (this is the uncomfortable part).
 
-At the end I also discuss some ethical issues, but I take no particular position. My main goal here is to push discussion of this issue into a less innumerate direction.
+At the end I also discuss some ethical issues, but I take no particular position. My main goal here is to push discussion of this issue in a less innumerate direction.
 
 ### What this article is NOT about
 
-This article is strictly NOT about badly implemented algorithms. Most of the people commenting on algorithmic discrimination are not arguing that a specific algorithm has an off-by-one error or proposing that we switch from a random forest to a deep neural network. I don't recall ever seeing any LaTeX on mathbabe.org. In the event that an algorithm is *incorrectly* predicting outcomes (whether in a biased or unbiased way) then we can all agree it should be corrected. Rather, I'm discussing the specific mechanics of algorithmic discrimination in order to move past the anthropomorphic nonsense.
+This article is strictly NOT about badly implemented algorithms. Most of the people commenting on algorithmic discrimination are not arguing that a specific algorithm has an off-by-one error or proposing that we switch from a random forest to a deep neural network. I've never seen any LaTeX on mathbabe.org. In the event that an algorithm is *incorrectly* predicting outcomes, we can all agree that statisticians should do their jobs better.
 
-All the simulation experiments in this article will be carefully tuned to avoid this situation. I'll just generate gaussian data and fit a linear model to it via least squares. The key point here is to avoid methodological errors - because I'm setting up the problem to be simple and easily solvable, you can't get a significantly better result by improving it.
+All the simulation experiments in this article will be carefully tuned to avoid this situation. I'll be generating gaussian data and fiting a linear model to it via least squares. The key point here is to avoid methodological errors - because I'm setting up the problem to be simple and easily solvable, you can't get a significantly better result via better algorithm choices. Instead, we'll need to actually recognize and confront the reality of what can happen with *good* algorithms that return *correct* results.
 
-I'm very strictly NOT claiming that all real world models are perfect, I'm just assuming that bad models are a math problem with a math solution, and therefore beyond the reach of folks like mathbabe.
+I'm very strictly NOT claiming that all real world models are perfect, I'm just assuming that bad models are a math problem with a math solution (and therefore beyond the reach of Techcrunch).
 
 ## Different kinds of discrimination
 
@@ -45,13 +53,15 @@ for a in applicants:
 predictive_algorithm(applicants)
 ```
 
-I'm going to call a data set where direct information has been removed **scrubbed**.
+I'm going to call a data set without direct information on protected classes **scrubbed**.
 
 **Disparate Impact:** This is when you have an unbiased algorithm, but the outcome of that algorithm is affects different protected classes differently. Direct discrimination can certainly cause a disparate impact, but there are lots of other possible causes. For example, if black people are taller than white people, a basketball competition will have a disparate inpact in their favor.
 
 **Redundant encoding:** This is what happens when you give an algorithm lots of data, and ask it to learn hidden features of the underlying probability distribution. The redundant encoding may then rediscover (at least probabilistically) some data which has been scrubbed.
 
 An example of this, consider the following example [from Delip Rao](http://deliprao.com/archives/129). A data set has race scrubbed from it. However, it includes location and income. A second order kernel might then discover `Feature6578 = Loc=EastOakland && Income<10k`. This feature is strongly correlated with race. So although race was scrubbed from the algorithm, this data was redundantly encoded in the data.
+
+One really important thing to recognize is that none of these forms of discrimination necessarily yield *incorrect* results. This means that if gambler A has a gambling strategy based on some sort of discriminatory algorithm, and gambler B has a non-discriminatory one, gambler A might be systematically taking money from gambler B.
 
 ## Linear regression
 
@@ -86,7 +96,11 @@ def y_predict(x):
 
 Using the numpy library for python, one can also simplify this to `return dot(alpha, x) + beta`, but I wrote out the for-loop once for pedagogical purposes.
 
-The goal of linear regression is to find the best possible values of `alpha` (an array of floats) and `beta` (a float) which fit the data.
+The goal of linear regression is to find the values of `alpha` (an array of floats) and `beta` (a float) which fit the data as closely as possible, perhaps subject to specific constraints (e.g. sparsity, matching a prior). In this post I'll always be doing least squares fits - choosing $@ \alpha, \beta$@ to minimize
+
+$$
+\sum_{i=1}^N \left|y_i - \vec{\alpha} \cdot \vec{x}_i - \beta \right|^2
+$$
 
 ### Pythonic example
 
@@ -116,7 +130,7 @@ The output array is:
 array([ 0.98027674,  2.0033624 ,  3.00109578])
 ```
 
-Which is pretty close to the true value used to generate the input.
+This is pretty close to the true value used to generate the input, as it should be.
 
 ### Real world example
 
@@ -153,7 +167,9 @@ The output is something along the lines of `alpha=[ 0.36679413,  0.32865146,  0.
 
 In this case, we have no significant discrimination, no disparate impact, and no redundant coding.
 
-Most importantly, the algorithm had the opportunity to introduce bias but chose not to. That's hardly surprising; the algorithm's only desire in life is minimizing squared error - being unkind to black people a silly thing that humans seem to enjoy for no apparent reason.
+Most importantly, the algorithm had the opportunity to introduce bias but chose not to. That's hardly surprising; the algorithm's only desire in life is minimizing squared error - being unkind to black people a silly thing that humans seem to enjoy for no apparent reason. If race is not useful in minimizing squared error then any algorithm designed to do so will ignore it.
+
+Another great essay on distinguishing algorithmic desires from human desires is Bostrom's [parable of the paperclip maximizer](http://www.nickbostrom.com/ethics/ai.html) (see also [lesswrong](https://wiki.lesswrong.com/wiki/Paperclip_maximizer)).
 
 ## What if black people don't perform as well?
 
@@ -164,7 +180,8 @@ data = norm(0,1).rvs((N, nvars))
 data = zeros(shape=(N,nvars), dtype=float)
 data[:,0:2] = norm(0,1).rvs((N,2)) #Z-score variables
 data[:,2] = bernoulli(0.25).rvs(N) #Race, 1 if black
-data[where(data[:,2] == 1),0:2] -= 0.5 # Black people just have lower predictors
+data[where(data[:,2] == 1),0:2] -= 0.5 # Black people have lower SAT/GPA
+alpha_true = [0.368, 0.287, 0] #But holding SAT/GPA fixed, race doesn't matter.
 
 output = dot(data, alpha_true) + norm(0,1).rvs(N)
 ```
@@ -181,6 +198,8 @@ Out [15]: -0.300591159584
 In [16]: mean(output[where(data[:,2] == 0)]) #white people
 Out [15]: -0.0107252756984
 ```
+
+So in this case, our model has a disparate impact because it accurately reflects the world. If we want to avoid a disparate impact, the only way we can do that is by adding `+0.30` to the scores of black people, but then we'll be increasing the squared error significantly.
 
 ## What if measurements are biased?
 
@@ -282,20 +301,38 @@ In this situation, it's pretty easy to determine if a person is black - compute 
 
 The algorithm doesn't care about this redundant encoding because even if it knew, that's not useful. However, if we bias the inputs, suddenly the algorithm does care. Biasing the inputs (as described above) yields `alpha = [ 0.32504926  0.30582667  0.14417805  0.08187899  0.11585452]`.
 
+Equivalently, as discussed above, if race is *directly causal* (which is mathematically equivalent to bias), then the algorithm will also care.
+
 In short, redundant encoding has the same effect (albeit weaker) as directly encoding race. It allows an algorithm to correct for biased inputs or (mathematically equivalently) to discover that one group is intrinsically better/worse performing than another. But that's all it does - discover these effects. It doesn't introduce these effects if they are not present in the data.
 
 *Redundant encoding* does not cause algorithms to vote for Donald Trump. It doesn't make otherwise friendly algorithms wear bedsheets and burn a cross. All it does is give them a piece of data and *allow* them to discover how well that data predicts outcomes. Furthermore, they will only discover the redundant encoding if the data actually matters (very different from what [humans](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108582/) [do](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0048546))!
 
 ## Ethical questions
 
-Most of the folks discussing ethical issues surrounding algorithms are, unfortunately, being either innumerate or disingenuous. Mainstream articles discussing algorithmic discrimination implicitly (if not explicitly) take as a premise that racism and stereotypes are *factually incorrect* and therefore an algorithm exhibiting them must be wrong. Morality is conflated with factual accuracy. Models repeatedly reproducing unpleasant stereotypes is evidence supporting the accuracy of that stereotype rather than evidence that models are somehow racially biased.
+Most of the folks discussing ethical issues surrounding algorithms are, unfortunately, being either innumerate or disingenuous. Machine learning algorithms are not humans in disguise - they are completely alien "intelligences" which think about things in a totally different manner than we do.
+
+![let that be your last battlefield](/blog_media/2016/is_your_algorithm_discriminatory/vulcan_vs_romulan.jpg)
+
+An alien intelligence (human viewers or Captain Kirk) look at the Vulcan and the Romulan above and don't see a big difference. I doubt anyone reading who isn't a Star Trek fan does either. However, over time, Kirk and the viewers learned to tell the difference. Vulcans tend to be peaceful science types like Spock. Romulans tend to be hostile and [destroy Federation outposts](http://memory-alpha.wikia.com/wiki/Balance_of_Terror_(episode)). The prospect of being shot with energy weapons is the only thing that leads an alien intelligence to work hard to distinguish the difference between them - if both were equally hostile or equally peaceful, the viewer would treat their differences like those of the Cheronians.
+
+Machine learning is an alien intelligence. When implemented correctly it will not reproduce human biases; when human biases lead to *factually incorrect* results the alien intelligence will correct them as best it can. Even when given information about factors which bias humans, the alien intelligence will not learn that they matter *unless they do*. Algorithms care about different categories of human as little as dogs or goats do.
+
+This leads us to an uncomfortable conclusion. In everyday life we usually assume that racism and stereotypes are *factually incorrect* and driven by human biases; therefore eliminating them we will get better outcomes all around.
+
+In fact, when different flavors of intelligence all converge to the same belief, that's evidence that the belief might be true. Intuitively we know and accept this fact. If 10 scientists - each using a different statistical methodology (aka a different alien intelligence) and experiment design - all draw the same conclusion about Gallium Arsenide photonic crystals then we will likely believe them.
+
+We need to start accepting the possibility that the algorithms might be factually correct and then figure out what to do about it.
+
+The real ethical issues being raised are a lot trickier than what Techcrunch and Mathbabe want to admit. Suppose we build a credit allocation algorithm that turns out to be "racist" - i.e., the algorithm accurately predicts that a black person will be more likely to default than a similarly situated white person. Should we ignore this effect, and scrub the model sufficiently in order to eliminate this prediction? That seems like burying our heads in the sand. Is it even beneficial for any individual? Giving a person a loan they are likely to default on seems harmful to both the lender and the borrower. Similarly for admitting a person to a college they are likely to flunk out of.
+
+(I've seen [an analysis](https://randomcriticalanalysis.wordpress.com/2015/11/22/on-the-relationship-between-negative-home-owner-equity-and-racial-demographics/#my_analysis) on this topic but I haven't fully gone through the details. It looks to be in the ballpark of correct, though of course statistics is hard.)
+
+Ultimately there are no easy choices here. It would be wonderful if we had an algorithm which was racially unbiased (neither via direct discrimination nor redundant encoding) accurately predicts college dropouts/delinquent loans/etc, and also serves the needs of "social justice" (a poorly defined term which I understand mainly by mood affiliation). Unfortunately the more we look, the more it seems that the accurate algorithms don't satisfy all these criteria. The ethical question which no one really wants to discuss is choosing our tradeoffs - how many delinquent loans is more individual or group fairness worth?
+
+### My biases
 
 My initial inclination, as of a few years back, was to support race-blind policies - policies which eliminate direct discrimination and *possibly* redundant encoding. Such policies seem intrinsically fair to me. At this point I'm not so sure - the analysis above in the section "What if measurements are biased" suggests this might not be optimal. If we directly include race in a statistical analysis we can accurately correct for existing biases in the input data. This kind of suggests support for traditional affirmative action except that the *sign* is wrong - the most accurate correction we could do (at least for college admissions) would heavily *penalize* blacks and *benefit* Asians (the exact opposite of current policies).
 
-The real ethical issues being raised are a lot trickier than the pundits want to admit. Suppose we build a credit allocation algorithm that turns out to be "racist" - i.e., the algorithm accurately predicts that a black person will be more likely to default than a similarly situated white person. (I've seen [an analysis](https://randomcriticalanalysis.wordpress.com/2015/11/22/on-the-relationship-between-negative-home-owner-equity-and-racial-demographics/#my_analysis) on this topic, but I haven't fully gone through the details. It looks to be in the ballpark of correct, modulo obvious limitations.)
-
-Should we ignore this effect, and scrub the model sufficiently in order to eliminate this prediction? That seems like burying our heads in the sand. Emotionally *I want to do this* because holding the same factual beliefs as a bunch of racists offends my sensibilities. But I'm also too much of a scientist.
-
 On the other hand, using an algorithm which is directly discriminatory or uses redundant encoding is intrinsically unfair on the level of individuals. I don't like this very much either.
 
-Ultimately there are no easy choices here. It would be wonderful if we had an algorithm which was racially unbiased (neither via direct discrimination nor redundant encoding) accurately predicts college dropouts/delinquent loans/etc, and also serves the needs of "social justice" (a poorly defined term which I understand mainly by mood affiliation). Unfortunately the more we look, the more it seems that the accurate algorithms don't satisfy all these criteria. The ethical question which no one really wants to discuss is choosing our tradeoffs - how many delinquent loans is more individual or group fairness worth?
+I'm really just confused on the topic.
