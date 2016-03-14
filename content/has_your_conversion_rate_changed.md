@@ -134,8 +134,8 @@ $$ \log \left[ P(c_1, c_2, \ldots | \theta^{14}(t), n_1, n_2, \ldots) \right] = 
 
 Now lets consider a range of alternate hypothesis, each representing the possibility of a jump at a different time:
 
-$$\theta^{i}(t) = 0.05, i \leq 14 $$
-$$\theta^{i}(t) = 0.03, i > 14 $$
+$$\theta^{i}(t) = 0.05, t \leq i $$
+$$\theta^{i}(t) = 0.03, t > i $$
 
 We can plot the log likelihood of these various alternate hypothesis. The green line in this plot represents the "null hypothesis" that no jump occurred, and the conversion rate remained 5% for all time.
 
