@@ -52,3 +52,5 @@ A ["tech bro"](https://justink.svbtle.com/open-letter-to-mayor-ed-lee-and-greg-s
 [Evidence Based Medicine is (micro-)Fascism](https://www.ucl.ac.uk/Pharmacology/dc-bits/holmes-deconstruction-ebhc-06.pdf). What is this I don't even know?
 
 [Math education research is mostly nonsense](https://www.math.upenn.edu/~wilf/website/PSUTalk.pdf). Having read a few papers there, I can't disagree.
+
+[Splain it to me](https://status451.com/2016/01/06/splain-it-to-me/) - great article illustrating how some people perceive communication as sharing knowledge, while others perceive it as raising/lowering status.
