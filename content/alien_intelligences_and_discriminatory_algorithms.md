@@ -205,7 +205,7 @@ So in this case, our model has a disparate impact because it accurately reflects
 
 It's been claimed in many places that the SAT, high school GPA, and similar measures are biased against some groups. What would be the effect of this?
 
-Lets suppose we have the following relationship. Each person has an intrinsic `ability`. SAT and high school exit exam are *noisy* measurements of `ability`. Also, lets assume that these measurements are biased - the measurements reduce the scores of black people, but they do not reduce our output variable (namely SAT). Our model looks like this:
+Lets suppose we have the following relationship. Each person has an intrinsic `ability`. SAT and high school exit exam are *noisy* measurements of `ability`. Also, lets assume that these measurements are biased - the measurements reduce the scores of black people, but they do not reduce our output variable (namely college performance). Our model looks like this:
 
 ```python
 ability = norm(0,1).rvs(N) #The true driver
