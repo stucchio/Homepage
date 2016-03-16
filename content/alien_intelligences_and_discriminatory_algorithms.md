@@ -271,6 +271,20 @@ The net result is the same - `alpha = [ 0.32258076  0.32353926  0.3253351 ]`. Th
 
 This means that we cannot distinguish between the inputs being biased or the factor we are biased on actually being directly causal. I.e., as far as linear regression (and many similar algorithms) is concerned, the propositions "SAT/Exit exams are biased against blacks" is equivalent to the statement "Blacks are 'intrinsically' superior in a manner not reflected in exit exam/SAT". The word 'intrinsically' means that either blackness, or some hidden variable which is correlated with it (the more likely possibility), directly causes outcomes to change.
 
+### What if you don't have enough training data?
+
+Over at [Algorithmic Fairness](https://algorithmicfairness.wordpress.com/2016/03/15/npr-can-computers-be-racist/), Sorelle points out that sometimes an algorithm doesn't have sufficient training data to actually detect bias in the manner I've described:
+
+>As Jacky implies, the training data itself is biased. In this case, likely by including more photos of white people and animals than of Black people.
+>...
+>If an all-white company attempts to use their current employees as training data, i.e., attempts to find future employees who are like their current employees, then they’re likely to continue being an all-white company.
+
+What Sorelle fails to account for is that bias has no consistent direction. Bias like what he describes may exist, but our alien intelligence has no particular reason to prefer this bias to be negative. In terms of our analogy above, suppose Captain Kirk jumped to conclusions as to which kind of Cherosian is more dangerous to the Enterprise than the other. Is there any reason for Kirk's bias to be positive towards the Black-Left Cherosian than the Black-Right one?
+
+As noted above, in the academic example described, the bias in favor of blacks due to excluding racial data is actually positive! By using a white student body and then doing the linear regression [described here](http://ftp.iza.org/dp8733.pdf) would yield *more* black students, not less. Over time, as the sample size for black students increased, and linear regression was repeated, it would eventually become more accurate and we'd accurately fix the bias.
+
+Furthermore, this kind of issue falls well within the category of [statisticians not doing their job well](https://www.chrisstucchio.com/blog/2015/dont_use_bandits.html). Fixing the bias is just a matter of running an experiment; allow in enough black students to measure performance in order to get a sufficiently high sample size (due to the $@ n^{-1/2} $@ law, $@ n_w $@ does not have to approach $@ n_b $@).
+
 ## What if we scrub race, but redundantly encode it?
 
 Lets now consider the situation where race doesn't matter, and we've scrubbed the data, but we redundantly encode it.
