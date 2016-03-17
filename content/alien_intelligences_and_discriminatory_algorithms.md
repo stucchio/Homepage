@@ -6,7 +6,7 @@ mathjax: true
 
 ![let that be your last battlefield](/blog_media/2016/is_your_algorithm_discriminatory/star_trek.png)
 
-In the Star Trek episode [Let That Be Your Last Battlefield](https://en.wikipedia.org/wiki/Let_That_Be_Your_Last_Battlefield) the Enterprise encounters two human-looking aliens (as is the Star Trek custom) from the planet Cheron. These aliens are full of intense ethnic hatred towards each other based on historical issues on their planet. This episode was broadcast in 1969 and was a pretty ham-handed criticism of American racial attitudes at the time. We, the human viewers, are of course oblivious to whatever happened on Cheron prior to this episode - most likely the human readers of my blog didn't notice that the Cheronese are mirror images of each other. As a result we find the hatred and conflict between the two Cheronese completely nonsensical.
+In the Star Trek episode [Let That Be Your Last Battlefield](https://en.wikipedia.org/wiki/Let_That_Be_Your_Last_Battlefield) the Enterprise encounters two human-looking aliens (as is the Star Trek custom) from the planet Cheron. These aliens are full of intense ethnic hatred towards each other based on historical issues on their planet. This episode was broadcast in 1969; to a 2016 TV watcher like myself it comes off as a ham-handed criticism of American racial attitudes at the time. We, the human viewers, are of course oblivious to whatever happened on Cheron prior to this episode - most likely the human readers of my blog didn't notice that the Cheronese are mirror images of each other. As a result we find the hatred and conflict between the two Cheronese completely nonsensical.
 
 As aliens to the Cheronese, we (either the viewer or Captain Kirk) just don't care. Insofar as we might favor one Cheronese over the other, that would only be due to the danger or reward to the Enterprise. Captain Kirk cares about protecting the ship and discovering new life and new civilizations - minor aesthetic differences between two people from the same civilization are irrelevant to him.
 
@@ -32,7 +32,7 @@ This article is strictly NOT about badly implemented algorithms. Most of the peo
 
 All the simulation experiments in this article will be carefully tuned to avoid this situation. I'll be generating gaussian data and fitting a linear model to it via least squares. The key point here is to avoid methodological errors - because I'm setting up the problem to be simple and easily solvable, you can't get a significantly better result via better algorithm choices. Instead, we'll need to actually recognize and confront the reality that good algorithms might yield correct results we don't like.
 
-I'm very strictly NOT claiming that all real world models are perfect, I'm just assuming that bad models are a math problem with a math solution (and therefore beyond the reach of Techcrunch).
+I'm very strictly NOT claiming that all real world models are perfect. I'm just assuming that bad models are a math problem with a math solution and therefore beyond the reach of Techcrunch and Mathbabe.
 
 ## Different kinds of discrimination
 
@@ -62,6 +62,8 @@ I'm going to call a data set without direct information on protected classes **s
 An example of this, consider the following example [from Delip Rao](http://deliprao.com/archives/129). A data set has race scrubbed from it. However, it includes location and income. A second order kernel might then discover `Feature6578 = Loc=EastOakland && Income<10k`. This feature is strongly correlated with race. So although race was scrubbed from the algorithm, this data was redundantly encoded in the data.
 
 One really important thing to recognize is that none of these forms of discrimination necessarily yield *incorrect* results. This means that if gambler A has a gambling strategy based on some sort of discriminatory algorithm, and gambler B has a non-discriminatory one, gambler A might be systematically taking money from gambler B.
+
+**Bias:** This is a statistical property of an algorithm, and there are a variety of fairly technical definitions in different contexts. The most useful one here is that bias is the difference between an estimator's expected value and the true value of a parameter.
 
 ## Linear regression
 
@@ -165,7 +167,7 @@ output = dot(data, alpha_true) + norm(0,1).rvs(N)
 
 The output is something along the lines of `alpha=[ 0.36679413,  0.32865146,  0.0110941 ]` - we rediscover that SAT and exit exam matter, and race doesn't. Due to statistical noise, the coefficient on race (the third variable) isn't zero, but it's very close. Additionally, there is no particular sign on it - depending on how the noise looks, our predictor might slightly overpredict or underpredict black GPA.
 
-In this case, we have no significant discrimination, no disparate impact, and no redundant coding.
+In this case, we have no significant discrimination, no disparate impact, and no redundant coding. We also have no bias.
 
 Most importantly, the algorithm had the opportunity to introduce bias but chose not to. That's hardly surprising; the algorithm's only desire in life is minimizing squared error - being unkind to black people a silly thing that humans seem to enjoy for no apparent reason. If race (or `x[2]` to the algorithm) is not useful in minimizing squared error then the square error minimizer will ignore it, just as Captain Kirk barely noticed the mirror image of the aliens.
 
@@ -199,7 +201,7 @@ In [16]: mean(output[where(data[:,2] == 0)]) #white people
 Out [15]: -0.0107252756984
 ```
 
-So in this case, our model has a disparate impact because it accurately reflects the world. If we want to avoid a disparate impact, the only way we can do that is by adding `+0.30` to the scores of black people, but then we'll be increasing the squared error significantly.
+So in this case, our model has a disparate impact because it accurately reflects the world. If we want to avoid a disparate impact, the only way we can do that is by adding `+0.30` to the scores of black people, but then we'll be increasing the squared error significantly. We also have no bias.
 
 ## What if measurements are biased?
 
@@ -271,20 +273,6 @@ The net result is the same - `alpha = [ 0.32258076  0.32353926  0.3253351 ]`. Th
 
 This means that we cannot distinguish between the inputs being biased or the factor we are biased on actually being directly causal. I.e., as far as linear regression (and many similar algorithms) is concerned, the propositions "SAT/Exit exams are biased against blacks" is equivalent to the statement "Blacks are 'intrinsically' superior in a manner not reflected in exit exam/SAT". The word 'intrinsically' means that either blackness, or some hidden variable which is correlated with it (the more likely possibility), directly causes outcomes to change.
 
-### What if you don't have enough training data?
-
-Over at [Algorithmic Fairness](https://algorithmicfairness.wordpress.com/2016/03/15/npr-can-computers-be-racist/), Sorelle points out that sometimes an algorithm doesn't have sufficient training data to actually detect bias in the manner I've described:
-
->As Jacky implies, the training data itself is biased. In this case, likely by including more photos of white people and animals than of Black people.
->...
->If an all-white company attempts to use their current employees as training data, i.e., attempts to find future employees who are like their current employees, then they’re likely to continue being an all-white company.
-
-What Sorelle fails to account for is that bias has no consistent direction. Bias like what he describes may exist, but our alien intelligence has no particular reason to prefer this bias to be negative. In terms of our analogy above, suppose Captain Kirk jumped to conclusions as to which kind of Cherosian is more dangerous to the Enterprise than the other. Is there any reason for Kirk's bias to be positive towards the Black-Left Cherosian than the Black-Right one?
-
-As noted above, in the academic example described, the bias in favor of blacks due to excluding racial data is actually positive! By using a white student body and then doing the linear regression [described here](http://ftp.iza.org/dp8733.pdf) would yield *more* black students, not less. Over time, as the sample size for black students increased, and linear regression was repeated, it would eventually become more accurate and we'd accurately fix the bias.
-
-Furthermore, this kind of issue falls well within the category of [statisticians not doing their job well](https://www.chrisstucchio.com/blog/2015/dont_use_bandits.html). Fixing the bias is just a matter of running an experiment; allow in enough black students to measure performance in order to get a sufficiently high sample size (due to the $@ n^{-1/2} $@ law, $@ n_w $@ does not have to approach $@ n_b $@).
-
 ## What if we scrub race, but redundantly encode it?
 
 Lets now consider the situation where race doesn't matter, and we've scrubbed the data, but we redundantly encode it.
@@ -321,11 +309,27 @@ In short, redundant encoding has the same effect (albeit weaker) as directly enc
 
 *Redundant encoding* does not cause algorithms to vote for Donald Trump. It doesn't make otherwise friendly algorithms wear bedsheets and burn a cross. All it does is give them a piece of data and *allow* them to discover how well that data predicts outcomes. Furthermore, they will only discover the redundant encoding if the data actually matters (very different from what [humans](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108582/) [do](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0048546))!
 
+## What if you do make statistical errors?
+
+Over at [Algorithmic Fairness](https://algorithmicfairness.wordpress.com/2016/03/15/npr-can-computers-be-racist/), Sorelle points out that sometimes an algorithm doesn't have sufficient training data to actually detect and correct for bias in the manner I've described:
+
+>If an all-white company attempts to use their current employees as training data, i.e., attempts to find future employees who are like their current employees, then they’re likely to continue being an all-white company.
+
+What Sorelle fails to account for is that bias has no consistent sign. Bias like what he describes may exist, but our alien intelligence has no particular reason to give this bias a negative sign. In terms of our analogy above, suppose Captain Kirk jumps to conclusions as to which kind of Cherosian is more dangerous to the Enterprise than the other. Is there any reason for Kirk's bias to be positive towards the Black-Left Cherosian rather than the Black-Right one?
+
+As noted above, in the academic example described, the bias in favor of blacks due to excluding racial data is actually positive! By using a white student body and then doing the linear regression [described here](http://ftp.iza.org/dp8733.pdf) would yield *more* black students, not less. Correcting the bias involves heavily penalizing black applicants; failing to detect the need for this penalty will result in more being admitted. Bias can have a positive sign!
+
+I've seen similar effects in [credit decisions](https://randomcriticalanalysis.wordpress.com/2015/11/22/on-the-relationship-between-negative-home-owner-equity-and-racial-demographics/#my_analysis), though I haven't gone through the details. (I'm a big fan of the randomcriticalanalysis blog because he provides his data.)
+
+Furthermore, this kind of issue falls well within the category of [statisticians not doing their job well](https://www.chrisstucchio.com/blog/2015/dont_use_bandits.html). Algorithms and processes may prematurely converge, but better statistics can prevent this. Fixing the bias is just a matter of running an experiment; allow in enough black students to measure performance in order to get a sufficiently high sample size (due to the $@ n^{-1/2} $@ law, $@ n_w $@ does not have to approach $@ n_b $@).
+
+The key point to takeaway is that bias can have any sign, positive or negative. Alien intelligences might develop bias, but there is no reason whatsoever to expect that their bias will be positive or negative. Sorelle's assumption that alien bias will mimic human bias is nothing but anthropomorphic reasoning.
+
 ## Ethical questions
 
 Most of the folks discussing ethical issues surrounding algorithms are, unfortunately, being either innumerate or disingenuous. Machine learning algorithms are not humans in disguise - they are completely alien "intelligences" which think about things in a totally different manner than we do.
 
-![let that be your last battlefield](/blog_media/2016/is_your_algorithm_discriminatory/vulcan_vs_romulan.jpg)
+![vulcans vs romulans](/blog_media/2016/is_your_algorithm_discriminatory/vulcan_vs_romulan.jpg)
 
 An alien intelligence (human viewers or Captain Kirk) look at the Vulcan and the Romulan above and don't see a big difference. I doubt anyone reading who isn't a Star Trek fan does either. However, over time, Kirk and the viewers learned to tell the difference. Vulcans tend to be peaceful science types like Spock. Romulans tend to be hostile and [destroy Federation outposts](http://memory-alpha.wikia.com/wiki/Balance_of_Terror_(episode)). The prospect of being shot with energy weapons is the only thing that leads an alien intelligence to work hard to distinguish the difference between them - if both were equally hostile or equally peaceful, the viewer would treat their differences like those of the Cheronians.
 
@@ -333,7 +337,7 @@ Machine learning is an alien intelligence. When implemented correctly it will no
 
 This leads us to an uncomfortable conclusion. In everyday life we usually assume that racism and stereotypes are *factually incorrect* and driven by human biases; therefore eliminating them we will get better outcomes all around.
 
-When different flavors of intelligence all converge to the same belief, that's evidence that the belief might be true. Intuitively we know and accept this fact. If 10 scientists - each using a different statistical methodology and experiment design - all draw the same conclusion about Gallium Arsenide photonic crystals then we will likely believe them.
+When different flavors of intelligence all converge to the same belief, that's evidence that the belief might be true. Intuitively we know and accept this fact. If 10 scientists - each using a different statistical methodology and experiment design - all draw the same conclusion about Gallium Arsenide photonic crystals then we will likely believe them. When 10 data scientists running 20 algorithms draw the same conclusion about humans, we instead call the statistics racist.
 
 We need to start accepting the possibility that discriminatory algorithms might be factually correct and then figure out what to do about it.
 
@@ -343,7 +347,7 @@ The real ethical issues being raised are a lot trickier than what Techcrunch and
 
 Ultimately there are no easy choices here. It would be wonderful if we had an algorithm which was racially unbiased (neither via direct discrimination nor redundant encoding), accurately predicts college dropouts/delinquent loans/etc, and also serves the needs of "social justice" (a poorly defined term which I understand mainly as mood affiliation). Unfortunately the more we look, the more it seems that we can't have all of these things simultaneously. The ethical question which no one really wants to discuss is what tradeoffs we are willing to make. How many delinquent loans is more individual or group fairness worth?
 
-### My biases
+### My priors
 
 My initial inclination, as of a few years back, was to support race-blind policies - policies which eliminate direct discrimination and *possibly* redundant encoding. Such policies seem intrinsically fair to me. At this point I'm not so sure - the analysis above in the section "What if measurements are biased" suggests this might not be optimal. If we directly include race in a statistical analysis we can accurately correct for existing biases in the input data. This kind of suggests support for traditional affirmative action except that the *sign* is wrong - the most accurate correction we could do (at least for college admissions) would heavily *penalize* blacks and *benefit* Asians (the exact opposite of current policies).
 
