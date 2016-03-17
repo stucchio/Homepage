@@ -23,6 +23,8 @@ nolinkback: true
 
 [Reckoning with the past](http://michaelinzlicht.com/getting-better/2016/2/29/reckoning-with-the-past) - in which a scientist discusses the possibility that his life's work might be wrong.
 
+[The Harmonic Mean of the Likelihood: Worst Monte Carlo Method Ever](https://radfordneal.wordpress.com/2008/08/17/the-harmonic-mean-of-the-likelihood-worst-monte-carlo-method-ever/)
+
 ## Trading and Economics
 
 [A Quant's Approach to Building Trading Strategies, pt 2](https://www.quandl.com/blog/interview-with-a-quant-part-two). And [part 3](https://www.quandl.com/blog/interview-with-a-quant-part-three).
@@ -56,3 +58,7 @@ A ["tech bro"](https://justink.svbtle.com/open-letter-to-mayor-ed-lee-and-greg-s
 [Splain it to me](https://status451.com/2016/01/06/splain-it-to-me/) - great article illustrating how some people perceive communication as sharing knowledge, while others perceive it as raising/lowering status.
 
 Trump is winning because it's socially acceptable to write articles like this: [Working Class Whites Have Moral Responsibilities](http://www.nationalreview.com/corner/432796/working-class-whites-have-moral-responsibilities-defense-kevin-williamson) (which actually discusses mostly the welfare class). But it's not socially acceptable to write a similar article about welfare class blacks, or other privileged groups. Trump is winning because the folks this article discuss believe he's in their corner.
+
+I don't know if I should be more or less shocked about the [Clinton email scandal than before](http://arstechnica.com/information-technology/2016/03/nsa-refused-clinton-a-secure-blackberry-like-obama-so-she-used-her-own/):
+> As I had been speculating, the issue here is one of personal comfort… [Secretary Clinton] does not use a computer, so our view of someone wedded to their e-mail (why doesn't she use her desktop when in the SCIF?) doesn't fit this scenario...
+> Given the NSA's refusal to give Clinton what she wanted, the secretary apparently decided to continue to use her personal e-mail server for State Department business, while her staff was fully aware of the security risks associated with using her BlackBerry.
