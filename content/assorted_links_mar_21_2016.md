@@ -54,3 +54,5 @@ A ["tech bro"](https://justink.svbtle.com/open-letter-to-mayor-ed-lee-and-greg-s
 [Math education research is mostly nonsense](https://www.math.upenn.edu/~wilf/website/PSUTalk.pdf). Having read a few papers there, I can't disagree.
 
 [Splain it to me](https://status451.com/2016/01/06/splain-it-to-me/) - great article illustrating how some people perceive communication as sharing knowledge, while others perceive it as raising/lowering status.
+
+Trump is winning because it's socially acceptable to write articles like this: [Working Class Whites Have Moral Responsibilities](http://www.nationalreview.com/corner/432796/working-class-whites-have-moral-responsibilities-defense-kevin-williamson) (which actually discusses mostly the welfare class). But it's not socially acceptable to write a similar article about welfare class blacks, or other privileged groups. Trump is winning because the folks this article discuss believe he's in their corner.
