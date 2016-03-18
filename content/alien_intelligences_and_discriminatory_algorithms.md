@@ -1,5 +1,5 @@
 title: Alien Intelligences and discriminatory algorithms
-date: 2016-03-15 10:00
+date: 2016-03-21 10:00
 author: Chris Stucchio
 tags: bias detection, frequentist statistics, statistics
 mathjax: true
