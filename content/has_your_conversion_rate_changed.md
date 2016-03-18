@@ -67,7 +67,7 @@ $$
 Sometimes more usefully, we might wish to consider the log likelihood:
 
 $$
-\log\left[ P(c_1, c_2, \ldots | \theta(t), n_1, n_2, \ldots) ]\right] = \sum_i \log\left[ {n_i \choose c_i } \right] \left[ c_i \log(\theta(i)) +  (n_i - c_i)\log(1-\theta(t)) \right]
+\log\left[ P(c_1, c_2, \ldots | \theta(t), n_1, n_2, \ldots) ]\right] = \sum_i \left( \log\left[ {n_i \choose c_i } \right] + \left[ c_i \log(\theta(i)) +  (n_i - c_i)\log(1-\theta(t)) \right] \right)
 $$
 
 
