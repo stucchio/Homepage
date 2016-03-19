@@ -26,21 +26,49 @@ A function `predict: PastData => Prob[Time => Price]` is a probabilistic predict
 
 The predictor we'll try to compute will be a probabilistic one.
 
-The model I'm going to take is a fairly simple one - piecewise linear stock price movements. Specifically, let $@ s(t) $@ be a stock price. I'll assume:
+To start with, lets grab some data from [Quandl](https://www.quandl.com) (docs on using [quandl from python](https://www.quandl.com/help/python)):
 
-$$ s(t) = s(t_0) + b_0 t + g_t, t_0 < t < t_1 $@
-$$ s(t) = s(t_1) + b_1 t + g_t, t_1 < t < t_2 $@
+```
+In [1]: import Quandl
+
+In [3]: vde = Quandl.get("GOOG/NYSE_VDE, authtoken='hahasuckers')
+Out[3]:
+              Open    High     Low   Close     Volume
+Date
+1997-08-21    0.00   94.25   92.09   92.59    5392600
+1997-08-22    0.00   92.73   90.56   92.56    7172900
+...            ...     ...     ...     ...        ...
+2016-03-15  201.36  202.53  201.05  202.17   93169090
+2016-03-16  201.60  203.82  201.55  203.34  129303179
+
+[4685 rows x 5 columns]
+```
+
+Yay, Quandl!
+
+The model I'm going to take is a fairly simple one - piecewise linear stock price movements. Consider the following chart (a plot of `vde.Open`):
+
+![simple model](/blog_media/2016/bayesian_stock_price_analysis/comparison_to_data.png)
+
+This is a plot of the price of the ETF [VDE](https://finance.yahoo.com/q?s=VDE) - an energy-derived ETF. The intuition behind our strategy is that there are underlying trends - the red lines - with additional noise. If we can identify the red lines, we can probably make money!
+
+So lets start by building a generative model.
+
+## Generative model of stock prices
+
+The generative model is a random process which we believe accurately explains where future data will come from.
+
+Since we want a piecewise linear model, we can set it up as follows. Let $@ s(t) $@ be the logarithm of a stock price. I'll assume:
+
+$$ s(t) = s(t_0) + b_0 t + g_t, t_0 < t < t_1 $$
+$$ s(t) = s(t_1) + b_1 t + g_t, t_1 < t < t_2 $$
 etc
 
-Here $@g_t $@ is a noise term. So what this model assumes is that the stock prices moves along a noisy straight line from time $@ t_0 $@ to $@ t_1 $@, then it moves along a *different* straight line from $@ t_1$@ to $@ t_2 $@, etc. Here's an example of a simulated timeseries according to this law:
-
-![simple model](/blog_media/2016/bayesian_stock_price_analysis/simple_model.png)
-
-The blue line illustrates the linear motion, and the green line illustrates the true stock price.
+Here $@g_t $@ is a noise term. So what this model assumes is that the stock prices moves along a noisy straight line from time $@ t_0 $@ to $@ t_1 $@, then it moves along a *different* straight line from $@ t_1$@ to $@ t_2 $@, etc.
 
 There are two parts of this model which are currently unspecified - what is $@ g_t $@, how to choose $@ b_i $@ and also how the times $@ t_1, t_2, \ldots $@ are chosen. A more or less obvious choice would be to let $@ g_t $@ be a [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion) or perhaps an [Ornstein-Uhlenbeck process](https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process). The times $@ t_i $@ can be determined by simply assuming a fixed probability distribution on $@ \delta t_i = t_{i+1} - t_i $@.
 
-So python code to generate a timeseries might look something like:
+Python code to generate a timeseries might look something like this:
 
 ```python
 from scipy.stats import norm, poisson
@@ -70,26 +98,10 @@ def gen_series(N, start_price=10.0):
     return x
 ```
 
+And the following is a graph of real data generated from a process like this:
+
+![simple model](/blog_media/2016/bayesian_stock_price_analysis/generated_model.png)
+
+
 
 ### Data
-
-To begin, all the data I I'll be using is available via [Quandl](https://www.quandl.com). There are docs on using [quandl from python](https://www.quandl.com/help/python).
-
-```
-In [1]: import Quandl
-
-In [3]: Quandl.get("GOOG/NYSE_SPY", authtoken='hahasuckers')
-Out[3]:
-              Open    High     Low   Close     Volume
-Date
-1997-08-21    0.00   94.25   92.09   92.59    5392600
-1997-08-22    0.00   92.73   90.56   92.56    7172900
-...            ...     ...     ...     ...        ...
-2016-03-15  201.36  202.53  201.05  202.17   93169090
-2016-03-16  201.60  203.82  201.55  203.34  129303179
-
-[4685 rows x 5 columns]
-```
-
-
-Yay, Quandl!
