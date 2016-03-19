@@ -57,6 +57,9 @@ A ["tech bro"](https://justink.svbtle.com/open-letter-to-mayor-ed-lee-and-greg-s
 
 [Splain it to me](https://status451.com/2016/01/06/splain-it-to-me/) - great article illustrating how some people perceive communication as sharing knowledge, while others perceive it as raising/lowering status.
 
+[Scott Alexander reviews Trump's book](http://slatestarcodex.com/2016/03/19/book-review-the-art-of-the-deal/).
+>Reading about the system makes me both grateful and astonished that any structures have ever been erected in the United States at all, and somewhat worried that if anything ever happens to Donald Trump and a few of his close friends, the country will lose the ability to legally construct artificial shelter and we will all have to go back to living in caves.
+
 Trump is winning because it's socially acceptable to write articles like this: [Working Class Whites Have Moral Responsibilities](http://www.nationalreview.com/corner/432796/working-class-whites-have-moral-responsibilities-defense-kevin-williamson) (which actually discusses mostly the welfare class). But it's not socially acceptable to write a similar article about welfare class blacks, or other privileged groups. Trump is winning because the folks this article discuss believe he's in their corner.
 
 I don't know if I should be more or less shocked about the [Clinton email scandal than before](http://arstechnica.com/information-technology/2016/03/nsa-refused-clinton-a-secure-blackberry-like-obama-so-she-used-her-own/):
