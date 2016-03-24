@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2016-03-20 9:30:00
+date: 2016-03-25 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -24,6 +24,8 @@ nolinkback: true
 [Reckoning with the past](http://michaelinzlicht.com/getting-better/2016/2/29/reckoning-with-the-past) - in which a scientist discusses the possibility that his life's work might be wrong.
 
 [The Harmonic Mean of the Likelihood: Worst Monte Carlo Method Ever](https://radfordneal.wordpress.com/2008/08/17/the-harmonic-mean-of-the-likelihood-worst-monte-carlo-method-ever/)
+
+[A great article](http://www.terryburnham.com/2015/04/a-trick-for-higher-sat-scores.html) about how bad scientific ideas with "meme"-entum survive.
 
 ## Trading and Economics
 
