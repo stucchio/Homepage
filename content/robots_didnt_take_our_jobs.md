@@ -2,6 +2,7 @@ title: Robots didn't take our jobs
 date: 2016-05-10 10:00
 author: Chris Stucchio
 tags: economics, singularity, robots
+nolinkback: true
 
 I live a strange life - due to a funny life situation, I travel regularly between India and the US. One of the starkest differences is observing how many jobs machines have taken in the wealthy US, leaving the US with a dire surplus of labor.
 
