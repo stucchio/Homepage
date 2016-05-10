@@ -15,6 +15,8 @@ Jeremy Kun [explains the SVD](https://jeremykun.com/2016/04/18/singular-value-de
 
 [Simpson's Paradox](https://growthecon.com/blog/Decomposition/).
 
+[Professors intentionally slow down science to make themselves look better](http://lemire.me/blog/2016/05/06/professors-intentionally-slow-down-science-to-make-themselves-look-better). Great article on the perverse incentives of academic publishing, and a call to "find all government-funded studies without reporting and openly shame the offenders."
+
 ## Econ and social sci
 
 [Countries with Higher Levels of Gender Equality Show Larger National Sex Differences in Mathematics Anxiety and Relatively Lower Parental Mathematics Valuation for Girls](http://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0153857).
@@ -23,12 +25,18 @@ Jeremy Kun [explains the SVD](https://jeremykun.com/2016/04/18/singular-value-de
 >Yes, bank "safety" regulations demand that banks purposely lend to people that one can pretty clearly see will not pay it back, and demand that they do not lend money to people that one can pretty clearly see will pay it back...
 >In today's rather rule-free environment, the CFPB -- or Department of Justice -- might just discover it doesn't like the demographics of Stanford MBAs as target borrowers.
 
+[Hayek was wrong because Girard was right](https://originofspecious.wordpress.com/2016/02/17/hayek-was-wrong-because-girard-was-right/). This is a great article about Rene Girard (I need to read more of him), discussing how society survives due to the scapegoating mechanism.
+
+>Here, again, Girard’s theory renders unsurprising that which economists and political scientists are at a loss to explain: for instance how the favoured ‘cure’ for economic depression is to visit structural violence upon low-paid immigrants, racial minorities, the homeless, the unemployed and the disabled.
+
+That particular bit seems dated - now the 'cure' for economic problems is visiting structural violence upon racists, the wealthy, bankers and employers of low skilled labor. But the scapegoating mechanism remains the same, just a new target.
+
 ## Culture
 
 [Mukbang and haul videos](http://arstechnica.com/gaming/2016/04/mukbang-and-hauls-the-rise-of-super-indulgent-eating-and-shopping-videos/) - super indulgent eating/shopping videos. I just don't understand this stuff, but I want to at least be aware of it. Where can I get updates about such things?
 
 [Noir Shanghai](http://www.designboom.com/art/amey-kandalgaonkar-dark-deco-shanghai-04-29-2016/). Simply beautiful.
 
-[Why the NRA hates Smart Guns](http://techcrunch.com/2016/04/30/why-the-nra-hates-smart-guns/). This is a surprisingly good article, particularly for Tech Crunch.
+[Why the NRA hates Smart Guns](http://techcrunch.com/2016/04/30/why-the-nra-hates-smart-guns/). This is a surprisingly good article, particularly for TechCrunch.
 
 [The Long Term Consequencs of Teacher Discretion in Grading](http://papers.nber.org/tmp/97077-w22207.pdf). Apparently giving students good (unearned) grades has far reaching and beneficial effects - it suggests a beneficial signalling effect *within the school system* rather than future labor markets. Very interesting.
