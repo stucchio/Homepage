@@ -1,5 +1,5 @@
 title: Robots didn't take our jobs
-date: 2016-03-29 10:00
+date: 2016-05-10 10:00
 author: Chris Stucchio
 tags: economics, singularity, robots
 
