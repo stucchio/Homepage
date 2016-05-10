@@ -1,11 +1,23 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
+{% block title %} {{tag}}{% endblock %}
 {% block breadcrumbs %}
     {% if DISPLAY_BREADCRUMBS %}
     <ol class="breadcrumb">
         <li><a href="{{ SITEURL }}" title="{{ SITENAME }}"><i class="fa fa-home fa-lg"></i></a></li>
-        <li><a href="{{ SITEURL }}/{{ TAGS_URL }}" title="Tags">Tags</a></li>
-        <li class="active">{{ tag }}</li>
+        <li class="active">Archives</li>
     </ol>
     {% endif %}
 {% endblock %}
-{% block title %}{{ tag }} - {{ SITENAME }}{% endblock %}
+
+{% block content %}
+    <section id="content">
+        <h1>Articles tagged with <b>{{tag}}</b></h1>
+
+        <dl>
+            {% for article in dates %}
+                <dt>{{ article.locale_date }}</dt>
+                <dd><a href='{{ SITEURL }}/{{ article.url }}'>{{ article.title }}</a></dd>
+            {% endfor %}
+        </dl>
+    </section>
+{% endblock %}
