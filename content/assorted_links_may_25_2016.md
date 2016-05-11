@@ -19,7 +19,7 @@ Jeremy Kun [explains the SVD](https://jeremykun.com/2016/04/18/singular-value-de
 
 ## Econ and social sci
 
-[Countries with Higher Levels of Gender Equality Show Larger National Sex Differences in Mathematics Anxiety and Relatively Lower Parental Mathematics Valuation for Girls](http://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0153857).
+[Countries with Higher Levels of Gender Equality Show Larger National Sex Differences in Mathematics Anxiety and Relatively Lower Parental Mathematics Valuation for Girls](http://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0153857). Relatedly, European countries with higher levels of gender equality [do not have more female CEOs](http://marginalrevolution.com/marginalrevolution/2016/05/the-nordic-gender-equality-paradox.html).
 
 [The Uberization of Banking](http://www.wsj.com/article_email/the-uberization-of-banking-1461967266-lMyQjAxMTE2NzMzMDQzNzA3Wj) discusses a non-bank lender who discovered that if you aren't a bank, you are permitted to lend to people with a high probability of repayment. [John Cochrane](http://johnhcochrane.blogspot.com/2016/04/equity-financed-banking.html) comments on it. From Cochrane:
 >Yes, bank "safety" regulations demand that banks purposely lend to people that one can pretty clearly see will not pay it back, and demand that they do not lend money to people that one can pretty clearly see will pay it back...
