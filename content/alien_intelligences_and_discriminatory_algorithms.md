@@ -1,9 +1,8 @@
 title: Alien Intelligences and discriminatory algorithms
-date: 2016-05-25 10:00
+date: 2016-03-21 10:00
 author: Chris Stucchio
 tags: bias detection, frequentist statistics, statistics
 mathjax: true
-nolinkback: true
 
 ![let that be your last battlefield](/blog_media/2016/is_your_algorithm_discriminatory/star_trek.png)
 
