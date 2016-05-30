@@ -1,5 +1,5 @@
 title: Concurrent bloom filters
-date: 2016-05-30 09:00
+date: 2016-05-30 10:00
 author: Chris Stucchio
 tags: scala, java, bloom filters, probabilistic algorithms
 category: algorithms
