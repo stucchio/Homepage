@@ -56,7 +56,7 @@ As an example of another job, consider food vendors. In India there are a huge n
 
 He starts the night as a guy with food but not money; he ends the night as a guy with money but not food. In some of the more corrupt and westernized areas (e.g. [Bandra](https://en.wikipedia.org/wiki/Bandra)) the police will actually carefully police the vendors and make sure only the approved ones get to work. But that's a very special case - for my western readers, Bandra is roughly the Bombay equivalent of Beverly Hills.
 
-In the US, the situation is far more fraught. Consider the NYT article [Outlaws Make Better Lunches](http://www.nytimes.com/2011/07/15/opinion/15zachbrooks.html). Apparently all food walas are technically illegal, but if a food wala maintains good relations with assorted politically connected people (police, nearby brick&mortar competition) then law might not be enforced. As one might expect, the number of people who are good at cooking is far larger than the number of people who are good at cooking *and* crony-style politics. From the article:
+In the US, the situation is far more fraught. Consider the NYT article [Outlaws Make Better Lunches](http://www.nytimes.com/2011/07/15/opinion/15zachbrooks.html). Apparently all food walas are technically illegal, but if a food wala maintains good relations with assorted politically connected people (police, nearby brick&mortar competition) then law might not be enforced. As one might expect, the number of people who are good at cooking is far smaller than the number of people who are good at cooking *and* crony-style politics. From the article:
 
 > ...nor can it fully legalize street vending, because opening up hundreds of rent-free spots would damage the real estate economy.
 
