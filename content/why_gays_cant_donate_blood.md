@@ -2,7 +2,7 @@ title: Why Can't Gay Men Donate Blood? A Bayesian Analysis
 date: 2016-06-16 10:00
 author: Chris Stucchio
 tags: statistics, bayesian statistics, false positives
-mathjax: true
+nolinkback: true
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">It’s legal to buy an AR-15 assault rifle. It’s illegal for a gay man to donate blood to victims of the massacre. The world makes no sense.</p>&mdash; John Barcus (@johnrtworld) <a href="https://twitter.com/johnrtworld/status/742007515030786048">June 12, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
