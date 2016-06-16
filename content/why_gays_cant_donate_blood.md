@@ -1,4 +1,4 @@
-title: Why can't Gay Men Donate Blood? A Bayesian Analysis
+title: Why Can't Gay Men Donate Blood? A Bayesian Analysis
 date: 2016-06-16 10:00
 author: Chris Stucchio
 tags: statistics, bayesian statistics, false positives
