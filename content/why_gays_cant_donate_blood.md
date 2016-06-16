@@ -82,3 +82,5 @@ Now suppose a gay person donates blood, and an HIV test turns up negative. The r
 In short, allowing gay people to donate blood is nearly as dangerous as letting straight people donate blood and then **not testing it!**
 
 I guess this twitter meme is wrong. The world does make sense. It turns out the Red Cross isn't anti-gay - they just did the math and decided to protect people who receive donated blood.
+
+Incidentally, if anyone has more accurate numbers than what I've provided, please let me know. I can't see how the result will drastically change based on plausible variations in these numbers, but I do want to be as accurate as possible.
