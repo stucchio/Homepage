@@ -73,7 +73,7 @@ P(HIV | gay, negative test) = P(negative test | HIV) P(HIV | gay) / P(negative t
 
 That's a lot higher.
 
-## Interpreting this result
+## Base rates matter
 
 Suppose a non-gay person donates blood. No HIV test is run on this blood. The risk of this blood having HIV is 0.2%.
 
@@ -83,4 +83,6 @@ In short, allowing gay people to donate blood is nearly as dangerous as letting 
 
 I guess this twitter meme is wrong. The world does make sense. It turns out the Red Cross isn't anti-gay - they just did the math and decided to protect people who receive donated blood.
 
-Incidentally, if anyone has more accurate numbers than what I've provided, please let me know. I can't see how the result will drastically change based on plausible variations in these numbers, but I do want to be as accurate as possible.
+The broader lesson here is that base rates (in this case, `P(HIV|gay)` and `P(HIV|straight)`) matter. A  test will have a lot more false negatives when applied to a highly risky subpopulation than when applied in general. As such, negative results for that subpopulation are a lot less useful than they are in general. You can't rely on test results alone, you need information about the inputs to the test also.
+
+**P.S.** If anyone has more accurate numbers than what I've provided, please let me know. I can't see how the result will drastically change based on plausible variations in these numbers, but I do want to be as accurate as possible.
