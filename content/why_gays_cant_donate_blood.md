@@ -36,8 +36,8 @@ Second, the [CDC estimates](http://www.cdc.gov/nchs/data/nhsr/nhsr077.pdf) that 
 So now lets answer the question.
 
 ```
-P(HIV|gay) = (0.6% of population) x (0.67% of HIV infections are gay) / (1.1% of total population) = 36%
-P(HIV|not gay) = (0.6% of population) x (0.33% of HIV infections are not gay) / (98.9% of total population) = 0.2%
+P(HIV|gay) = (0.6% of population) x (67% of HIV infections are gay) / (1.1% of total population) = 36%
+P(HIV|not gay) = (0.6% of population) x (33% of HIV infections are not gay) / (98.9% of total population) = 0.2%
 ```
 
 ## Computing a posterior
