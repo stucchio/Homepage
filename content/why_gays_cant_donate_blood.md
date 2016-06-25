@@ -40,6 +40,8 @@ P(HIV|gay) = (0.6% of population) x (67% of HIV infections are gay) / (1.1% of t
 P(HIV|not gay) = (0.6% of population) x (33% of HIV infections are not gay) / (98.9% of total population) = 0.2%
 ```
 
+**Edit 2016/06/25:** Apparently only 19% of gay men have HIV, according to [this CDC link](http://www.cdc.gov/mmwr/preview/mmwrhtml/mm5937a2.htm?s_cid=mm5937a2_w) provided by Tom in the comments.
+
 ## Computing a posterior
 
 Now lets address the question - suppose we run an HIV test on donated blood. What is the probability of infection after this?
@@ -72,6 +74,8 @@ P(HIV | gay, negative test) = P(negative test | HIV) P(HIV | gay) / P(negative t
 ```
 
 That's a lot higher.
+
+**Edit 2016/06/25:** Using Tom's better estimate the actual number is 0.09%. So getting 2 pints of blood from 2 independent gay men with negative HIV results is roughly as dangerous as getting 1 pint of *untested* blood from a straight man.
 
 ## Base rates matter
 
