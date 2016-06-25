@@ -4,7 +4,7 @@ author: Chris Stucchio
 tags: statistics
 nolinkback: true
 
-While writing a [previous post](https://www.chrisstucchio.com/blog/2016/why_gays_cant_donate_blood.html), I learned a pretty shocking fact: [19% of gay men have HIV](http://www.cdc.gov/mmwr/preview/mmwrhtml/mm5937a2.htm?s_cid=mm5937a2_w). That's a lot! A while back I had broken-condom sex with a very tall lady from sub-Saharan Africa who I later learned was a pimpstress - for months afterwards I was really scared that I got HIV. But this is a totally different order of magnitude!
+While writing a [previous post](https://www.chrisstucchio.com/blog/2016/why_gays_cant_donate_blood.html), I learned a pretty shocking fact: [19% of gay men have HIV](http://www.cdc.gov/mmwr/preview/mmwrhtml/mm5937a2.htm?s_cid=mm5937a2_w). That's a lot! A while back I had broken-condom sex with a lady from sub-Saharan Africa who I later learned was a pimpstress - for months afterwards I was really scared that I got HIV. But this is a totally different order of magnitude!
 
 (Note to travellers: Indian condoms suck. Bring your own.)
 
@@ -68,4 +68,4 @@ These calculations are pretty easy to do. Surely, in the wake of Orlando, someon
 
 So how come no one is talking about this? Why do our politicians, the media establishment, and the rest focus all their attention on guns and completely ignore the lurking danger of gay sex?
 
-P.S. I'm not pushing any policy position here. I strongly oppose regulating guns and gay sex. Guns in particular; back in 1994 the aforementioned pimpstress (at the time just a toddler) was saved by [men with illegally owned guns](https://en.wikipedia.org/wiki/Rwandan_Patriotic_Front). I'm just crunching numbers and criticizing people who are unwilling to discuss relative risk factors.
+P.S. I'm not pushing any policy position here. I strongly oppose regulating guns and gay sex. Guns in particular; back in 1994 the aforementioned pimpstress was saved by [men with illegally owned guns](https://en.wikipedia.org/wiki/Rwandan_Patriotic_Front). I'm just crunching numbers and criticizing people who are unwilling to discuss relative risk factors.
