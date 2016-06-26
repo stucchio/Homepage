@@ -20,21 +20,21 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Gun_violence_in_the_Unite
 
 So as a ballpark, guns and gay sex both hit a lot of people really hard.
 
-But we need to do a bit more. Getting HIV - unlike getting shot - is not a nearly immediate death sentence. We need to understand how bad it is to get HIV - fortunately epidemiology has developed the [Quality Adjusted Life Year (QUALY)](https://en.wikipedia.org/wiki/Quality-adjusted_life_year) to measure this.
+But we need to do a bit more. Getting HIV - unlike getting shot - is not a nearly immediate death sentence. We need to understand how bad it is to get HIV - fortunately epidemiology has developed the [Quality Adjusted Life Year (QALY)](https://en.wikipedia.org/wiki/Quality-adjusted_life_year) to measure this.
 
-The following [source](https://www.health.ny.gov/diseases/aids/ending_the_epidemic/docs/key_resources/data_committee_resources/lifetime_costs.pdf) suggests that the number of QUALYs that an HIV infection costs is between 22.9 and 31.9. If we apply a 3% discount rate to these numbers, we wind up with a cost between 9.34 and 13.18 discounted QUALYs.
+The following [source](https://www.health.ny.gov/diseases/aids/ending_the_epidemic/docs/key_resources/data_committee_resources/lifetime_costs.pdf) suggests that the number of QALYs that an HIV infection costs is between 22.9 and 31.9. If we apply a 3% discount rate to these numbers, we wind up with a cost between 9.34 and 13.18 discounted QALYs.
 
 It's a bit trickier to compute this for gun violence. I can't find an easy source, but we can compute a ballpark figure.
 
-Assume most violence happens among men aged 20-30, and assume a male life expectancy of 78.7. Then in terms of undiscounted QUALYs, a gun death will cost between 48.7 and 58.7 QUALYs (I'll round up to 49 and 59). At a 3% discount rate, this is a cost of 25.6-27.6 QUALYs.
+Assume most violence happens among men aged 20-30, and assume a male life expectancy of 78.7. Then in terms of undiscounted QALYs, a gun death will cost between 48.7 and 58.7 QALYs (I'll round up to 49 and 59). At a 3% discount rate, this is a cost of 25.6-27.6 QALYs.
 
-In total, we find that the cost of guns is between 1,493,030 and 1,797,730 QUALYs. In contrast, the cost of gay-sex induced HIV is 673,672 and 938,434 QUALYs.
+In total, we find that the cost of guns is between 1,493,030 and 1,797,730 QALYs. In contrast, the cost of gay-sex induced HIV is 673,672 and 938,434 QALYs.
 
 ## The denominators
 
-It is of course insufficient to simply measure the effect. The question is not merely how many QUALYs are lost in total - the question is how many are lost *per unit*.
+It is of course insufficient to simply measure the effect. The question is not merely how many QALYs are lost in total - the question is how many are lost *per unit*.
 
-Unfortunately, I'm not exactly sure what the relevant unit is, so I'm going to compute a variety of units.
+Unfortunately, I'm not exactly sure what the relevant unit is so I'm going to compute a variety of units and compare results.
 
 More basic numbers.
 
@@ -46,17 +46,17 @@ According to the CDC, [1.8% of men are gay and 0.4% are bisexual](http://www.cdc
 
 We can now begin to measure risk.
 
-Let us first consider the risk per gun in existence. Simple division shows that per gun, the cost is between 0.005-0.006 QUALYs lost, 0.0026 discounted QUALYs.
+Let us first consider the risk per gun in existence. Simple division shows that per gun, the cost is between 0.005-0.006 QALYs lost, 0.0026 discounted QALYs.
 
 On the other hand, if we attribute gun deaths to *new* guns owned by civilians, then we discover the range is 0.135-0.654 per purchase (0.071-0.286 discounted).
 
 Now lets consider the cost per year of gay sex. Not all gay men have sex - some are celibate, as required by the priesthood - so lets assume that between 0% and 75% of gay men are celibate. (I lean towards the 0% estimate - I am quite jealous of the gay people I know since they seem to get laid whenever they want. I'm a vegetarian heterosexual, but I think my life would be a lot better if I were an omnivorous bisexual. I could eat all the meat!)
 
-Running these calculations shows that the cost of 1 year of gay sex ranges from 0.088-0.977 QUALYs (0.0358-0.40 discounted).
+Running these calculations shows that the cost of 1 year of gay sex ranges from 0.088-0.977 QALYs (0.0358-0.40 discounted).
 
 ## Risk factors
 
-My general preference is to compare 1 year of gun ownership to 1 year of gay sex - just intuitively that seems like the right comparison. I'm also inclined to use undiscounted numbers. Based on this, we discover that the gay sex is at least 14.7x as dangerous as guns (comparing the upper bound of guns to the lower bound of gay sex) and at most 195.4x as dangerous.
+My general preference is to compare 1 year of gun ownership to 1 year of gay sex - intuitively that seems like the right comparison. I'm also inclined to use undiscounted numbers. Based on this, we discover that the gay sex is at least 14.7x as dangerous as guns (comparing the upper bound of guns to the lower bound of gay sex) and at most 195.4x as dangerous.
 
 Wow! That's a lot.
 
@@ -64,7 +64,7 @@ Even if we use the per-purchase numbers, we discover that gay sex is at best 0.6
 
 ## My confusion
 
-These calculations are pretty easy to do. Surely, in the wake of Orlando, someone in government or the media must have noticed these relative risk factors. The massive number of gay guys with HIV was unknown to me (a heterosexual with minimal interest in public health). But what about our policy experts? Surely Obama has asked the FBI director how many QUALYs gun violence costs us, and how many QUALYs gay sex costs us.
+These calculations are pretty easy to do. Surely, in the wake of Orlando, someone in government or the media must have noticed these relative risk factors. The massive number of gay guys with HIV was unknown to me (a heterosexual with minimal interest in public health). But what about our policy experts? Surely Obama has asked the FBI director how many QALYs gun violence costs us, and how many QALYs gay sex costs us.
 
 So how come no one is talking about this? Why do our politicians, the media establishment, and the rest focus all their attention on guns and completely ignore the lurking danger of gay sex?
 
