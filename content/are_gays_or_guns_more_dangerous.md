@@ -1,5 +1,5 @@
 title: Which is more dangerous, guns or gay sex?
-date: 2016-06-27 10:00
+date: 2016-06-29 10:00
 author: Chris Stucchio
 tags: statistics
 nolinkback: true
