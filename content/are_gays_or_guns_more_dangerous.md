@@ -8,7 +8,7 @@ While writing a [previous post](https://www.chrisstucchio.com/blog/2016/why_gays
 
 (Note to travellers: Indian condoms suck. Bring your own.)
 
-With all the discussion about Orlando, and politicians arguing about whether the problem is guns or Islam, I've become curious. Is it possible that gay sex is the 800 pound gorilla in the room?
+With all the discussion about Orlando, and politicians arguing about whether the problem is guns or Islam, I've become curious. Is it possible that gay sex is the elephant in the room?
 
 Lets crunch some numbers and find out.
 
