@@ -3,6 +3,9 @@ date: 2016-08-09 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
+![nick gaetano still life](http://nickgaetano.com/Illustration/Painting/fullsize/LEMON_LIME_fs.jpg)
+
+I've recently discovered that [Nick Gaetano](http://nickgaetano.com/index-illustration_retro.html), who painted the covers of recent prints of various Ayn Rand novels, is actually a fairly prolific artist. I like a great deal of his work.
 
 ## Computer science and stats
 
