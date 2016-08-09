@@ -55,11 +55,11 @@ Now lets consider two people - one gay, one straight - who have donated blood. T
 We can answer this with Bayes rule.
 
 ```
-P(HIV | straight, negative test) = P(negative test | HIV) P(HIV | straight) / P(negative test)
-    = 0.3% x 0.2% / P(negative test)
+P(HIV | straight, negative test) = P(negative test | HIV) P(HIV | straight) / P(negative test | straight)
+    = 0.3% x 0.2% / P(negative test | straight)
 ```
 
-The probability of a negative test is `P(negative test | HIV) P(HIV) + P(negative test| no HIV) P(no HIV)`, which is `0.3% x 0.2% + 98.5% x 99.8% = 98.3%`. Plugging this in yields:
+The probability of a negative test is `P(negative test | HIV) P(HIV|straight) + P(negative test| no HIV) P(no HIV|straight)`, which is `0.3% x 0.2% + 98.5% x 99.8% = 98.3%`. Plugging this in yields:
 
 ```
 P(HIV | straight, negative test) = 6.1e-6
@@ -68,7 +68,7 @@ P(HIV | straight, negative test) = 6.1e-6
 Now lets repeat this calculation for a gay person.
 
 ```
-P(HIV | gay, negative test) = P(negative test | HIV) P(HIV | gay) / P(negative test)
+P(HIV | gay, negative test) = P(negative test | HIV) P(HIV | gay) / P(negative test|gay)
     = 0.3% x 36% / (0.3% x 36% + 98.5% x 64%)
     = 0.17%
 ```
