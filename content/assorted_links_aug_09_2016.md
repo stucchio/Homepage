@@ -27,6 +27,8 @@ Two interesting papers on AI risk: [Safely Interruptible Agents](https://intelli
 
 [Westeros is Poorly Designed](https://medium.com/migration-issues/westeros-is-poorly-designed-3b01cf5cdcaf#.30caeiy5r).
 
+[Thomas Piketty Says Labor’s Share of Income Is Declining, But Is It?](http://blogs.wsj.com/economics/2015/03/26/thomas-piketty-says-labors-share-of-income-is-declining-but-is-it/)
+
 ## Culture
 
 First of all, since I'm posting a little on Brexit, let me disclose my bets. On the first trading day after Brexit, I went long Britain and long EU. Also bought some SPY at a discount. Weeks later, I'm significantly up. Woot!
