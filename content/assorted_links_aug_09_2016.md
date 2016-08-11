@@ -23,6 +23,8 @@ Two interesting papers on AI risk: [Safely Interruptible Agents](https://intelli
 
 [Cheat Codes for Contravariance and Covariance](http://blog.originate.com/blog/2016/08/10/cheat-codes-for-contravariance-and-covariance/)
 
+A great article on [generic vs statistical beliefs](http://www.spsp.org/blog/are-stereotypes-accurate). The specific topic under discussion is Jussim's [book on stereotype accuracy](http://amzn.to/2aMx08x). It distinguishes *generic* beliefs ("Asians are good at math", "mosquitoes carry west nile") from statistically accurate beliefs ("Asians are right handed", "books are paperback"), and suggests that interpreting things under the lens of generic beliefs stereotypes may not be accurate. I'd consider the question in the following way; I'd postulate that are generic beliefs simply shorthands for a belief that "X has information content about Y". For example, telling me a person is Asian significantly increases my posterior probability that he is good at math, but telling me a person is Asian does not increase my posterior probability that he is right handed. I'd love to learn more abou tthis concept of generic beliefs, if anyone has links I'd love to read them.
+
 ## Economics
 
 [Finance and Opportunity in India](http://www.bis.org/review/r140811a.htm), by Raghu Rajan.
