@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2016-08-09 9:30:00
+date: 2016-08-12 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -20,6 +20,8 @@ I've recently discovered that [Nick Gaetano](http://nickgaetano.com/index-illust
 Two interesting papers on AI risk: [Safely Interruptible Agents](https://intelligence.org/files/Interruptibility.pdf) and [Concrete Problems in AI Safety](https://arxiv.org/pdf/1606.06565v1.pdf).
 
 [Notes on Notation and Thought](https://github.com/hypotext/notation). Great article listing various fields where choosing the right notation leads to significantly improved thought processes - e.g., inventing new juggling moves by developing a notation for juggling.
+
+[Cheat Codes for Contravariance and Covariance](http://blog.originate.com/blog/2016/08/10/cheat-codes-for-contravariance-and-covariance/)
 
 ## Economics
 
