@@ -2,7 +2,6 @@ title: The Probability Monad and Why it's Important for Data Science
 date: 2016-08-24 09:45
 author: Chris Stucchio
 tags: statistics, bayesian reasoning, functional programming
-mathjax: true
 category: statistics
 
 Very often one builds a statistical model in pieces. For example, imagine one has a binary event which may or may not occur - to work with my thematic example, a visitor arrives on a webpage and he may or may not convert. A reasonable question to ask is "if I have 100 visitors, how many of them can I expect to convert?" Assume now that I *know* the conversion rate `lmbda`; in this case the maximum likelihood point estimate for the number of conversions is `100*lmbda` and the probability distribution of possible events that could occur is `binom(100, lmbda)` (i.e. a [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution)). But what happens if `lmbda`  is not known, but instead [a random variable](/blog/2013/bayesian_analysis_conversion_rates.html)?
@@ -14,6 +13,8 @@ In both cases, I made assumptions that certain quantities were known exactly, an
 In this blog post I'll show why this is fundamentally not a problem. That's because probability is a [monad](https://en.wikipedia.org/wiki/Monad_(category_theory)), and this monadic structure allows me to combine various analysis in a natural and obvious way.
 
 **Required background**: I am assuming that the reader of this post has a moderate amount of knowledge of probability theory, and a moderate amount of knowledge of functional programming. I will be *assuming* that functors (objects with a `map` method) and monads (objects which also have `flatMap` or `bind` or `>>=` on them) are known to the reader.
+
+Also, for a more mathematical look at this topic, I'm mostly taking this stuff from the papers [A Categorical Approach to Probability Theory](/blog_media/2016/probability_the_monad/A categorical approach to probability theory by Michèle Giry.pdf) (by Giry) and [A Categorical Foundation for Bayesian Probability](/blog_media/2016/probability_the_monad/1205.1488v3.pdf) (by Culbertson and Surtz). This post is more intended for programmers than mathematicians.
 
 ## Probability in the language of type theory
 
@@ -144,3 +145,54 @@ object ProbFunctor extends Functor[Prob] {
 In this case, we can do the calculations by hand. Suppose we compute `prob(u=x)`. Then the value of `inverseImage` is the set of all `T` for which `f(t) == x`, and this happens to be `List(a,b)`. Next we compute `inverseImage.map(p.prob _)` which works out to be `List(1/3, 1/3)`. Finally we sum that list, resulting in 2/3.
 
 Woot! Both of our representations work out correctly.
+
+### But a functor isn't enough
+
+Lets consider now the following situation. We run an experiment, and measure our conversion rate [as described here](/blog/2013/bayesian_analysis_conversion_rates.html). The net result is that we form an opinion on the conversion rate:
+
+```scala
+val conversionRate = new Rand[Real] {
+  def draw = BetaDistribution(numConversions + 1, numVisitors - numConversions + 1).draw
+}
+```
+
+Given the previous discussion, we now have the following idea - lets take this and `map` it with our `numConversions` function above:
+
+```scala
+val expectedConversions =
+  conversionRate.map(lmbda => numConversions(lmbda, 100))
+```
+
+Unfortunately, if we look at the type of `expectedConversions`, it works out to be `Rand[Rand[Int]]`. That's not what we wanted - we really wanted a `Rand[Int]`.
+
+So what we need to do is somehow flatten a `Prob[Prob[Int]]` or a `Rand[Rand[Int]]` down to a `Prob[Int]` or `Rand[Int]`.
+
+In the sampling approach, there is one pretty obvious approach. Recall how we defined `map` on a `Rand[T]` object - we applied the function to the result of drawing a random number. What if we draw a new sampel? I'll write an implementation of this and suggestively name it `bind`:
+
+```scala
+object RandMonad extends Monad[Rand] {
+  def bind[T, U](p: Rand[T])(f: T => Rand[U]): Rand[U] = new Rand[U] {
+    def draw: U = f(p.draw).draw
+  }
+}
+```
+
+Clearly the type signature of this matches. It also makes intuitive sense. In the probabilistic formulation we can do the same thing:
+
+```scala
+object ProbMonad extends Monad[Prob] {
+  def bind[T, U](p: Prob[T])(f: T => Prob[U]): Prob[U] = new Prob[U] {
+    def prob(u: U): Real = {
+      val probSpace: List[(T,U)] = cartesianProduct(allT, allU)
+      val slice = probSpace.filter( tu => tu._2 == u )
+      return slice.map( tu => p.prob(tu._1)*f(tu._1).prob(tu._2) ).sum()
+    }
+  }
+}
+```
+
+To understand what we are doing here, it makes sense to visualize. Lets represent the cartesian product `probSpace` above as a grid - suppose `allT = {1, 2, ..., 16}` and `allU = {1, 2, ..., 16}`. Then consider the function `density: (T,U) => Real` defined by `density(t,u) = p.prob(tu._1)*f(tu._1).prob(tu._2)`. (One example of such a function is plotted below.)
+
+![slices](/blog_media/2016/probability_the_monad/slices.png)
+
+Then the result of bind is a new probability which results by taking a vertical slice, at the x-coordinate `u`, and summing over the vertical line. This is, of course, purely a function of `u` now since all the dependence on `t` has been averaged out.
