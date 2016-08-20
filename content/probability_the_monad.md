@@ -146,7 +146,7 @@ In this case, we can do the calculations by hand. Suppose we compute `prob(u=x)`
 
 Woot! Both of our representations work out correctly.
 
-### But a functor isn't enough
+## Probability as a monad
 
 Lets consider now the following situation. We run an experiment, and measure our conversion rate [as described here](/blog/2013/bayesian_analysis_conversion_rates.html). The net result is that we form an opinion on the conversion rate:
 
@@ -195,4 +195,4 @@ To understand what we are doing here, it makes sense to visualize. Lets represen
 
 ![slices](/blog_media/2016/probability_the_monad/slices.png)
 
-Then the result of bind is a new probability which results by taking a vertical slice, at the x-coordinate `u`, and summing over the vertical line. This is, of course, purely a function of `u` now since all the dependence on `t` has been averaged out.
+Then the result of bind is a new probability which results by taking a vertical slice, at the x-coordinate `u`, and summing over the vertical line. This is, of course, purely a function of `u` now since all the dependence on `t` has been averaged out. The result of summing is displayed in the graph via the black line, interpreted as a 1-dimensional plot of `u`.
