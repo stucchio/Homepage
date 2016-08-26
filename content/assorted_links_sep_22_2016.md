@@ -11,9 +11,13 @@ nolinkback: true
 
 [A Simple Explanation for the Replication Crisis](http://simplystatistics.org/2016/08/24/replication-crisis/). Great piece by Andrew Gelman.
 
+[Debugging machine learning](https://nlpers.blogspot.com/2016/08/debugging-machine-learning.html)
+
 ## Economics
 
 [Passive Investing Is Worse for Society Than Marxism](https://www.bloomberg.com/news/articles/2016-08-23/bernstein-passive-investing-is-worse-for-society-than-marxism). An interesting article which makes the argument that while Marxism at least *attempts* to optimize capital flows, passive investing does not.
+
+[American Exceptionalism](http://greyenlightenment.com/american-exceptionalism-8189/). Kind of contradicts my personal pessimism about the US.
 
 ## Culture
 
