@@ -10,9 +10,9 @@ In a [previous post](/blog/2016/delayed_reactions.html), I considered the proble
 
 In both cases, I made assumptions that certain quantities were known exactly, and then I used those exact numbers to derive a probability distribution on the quantity of interest. But in reality, those quantities are not known exactly - merely probabilistically.
 
-In this blog post I'll show why this is fundamentally not a problem. That's because probability is a [monad](https://en.wikipedia.org/wiki/Monad_(category_theory)), and this monadic structure allows me to combine various analysis in a natural and obvious way.
+In this blog post I'll show why this is fundamentally not a problem. That's because probability is a [monad](https://en.wikipedia.org/wiki/Monad_(category_theory)) and this monadic structure allows me to combine various analysis in a natural and obvious way.
 
-**Required background**: I am assuming that the reader of this post has a moderate amount of knowledge of probability theory, and a moderate amount of knowledge of functional programming. I will be *assuming* that functors (objects with a `map` method) and monads (objects which also have `flatMap` or `bind` or `>>=` on them) are known to the reader.
+**Background**: I am assuming that the reader of this post has a moderate amount of knowledge of probability theory, and a moderate amount of knowledge of functional programming. I will be *assuming* that functors (objects with a `map` method) and monads (objects which also have `flatMap` or `bind` or `>>=` on them) are known to the reader.
 
 Also, for a more mathematical look at this topic, I'm mostly taking this stuff from the papers [A Categorical Approach to Probability Theory](/blog_media/2016/probability_the_monad/A categorical approach to probability theory by Michèle Giry.pdf) (by Giry) and [A Categorical Foundation for Bayesian Probability](/blog_media/2016/probability_the_monad/1205.1488v3.pdf) (by Culbertson and Surtz). This post is more intended for programmers than mathematicians.
 
@@ -196,3 +196,50 @@ To understand what we are doing here, it makes sense to visualize. Lets represen
 ![slices](/blog_media/2016/probability_the_monad/slices.png)
 
 Then the result of bind is a new probability which results by taking a vertical slice, at the x-coordinate `u`, and summing over the vertical line. This is, of course, purely a function of `u` now since all the dependence on `t` has been averaged out. The result of summing is displayed in the graph via the black line, interpreted as a 1-dimensional plot of `u`.
+
+## How to do it in practice?
+
+Lets now consider a concrete question. I have a Bernoulli event, for example visitors arriving at a webpage. I've now run an experiment and measured 53 conversions out of 200 visitors. Computing the posterior on the true conversion rate is a straightforward matter that [I've discussed previously](/blog/2013/bayesian_analysis_conversion_rates.html):
+
+![slices](/blog_media/2016/probability_the_monad/true_cr.png)
+
+But the question arises - what *empirical* conversion rate can we expect over the next 100 visitors? This is now a question that's straightforwardly answered with the probability monad. We do this as follows:
+
+```scala
+val empiricalCR = for {
+   l <- new Beta(51, 151)
+   n <- Binomial(100, l)
+   } yield (n/100.0)
+```
+
+(In case you are wondering, this is valid [scala breeze](https://github.com/scalanlp/breeze) code, just `import breeze.stats.distributions._`.)
+
+The result of this is a probability distribution describing the empirical conversion rate. We can draw samples from it and plot a histogram:
+
+![slices](/blog_media/2016/probability_the_monad/empirical_cr.png)
+
+The resulting distribution is a bit wider than the distribution of the true conversion rate. That makes intuitive sense - the empirical conversion rate has two sources of variance, uncertainty in the true conversion rate and uncertainty in the binomial distribution of 100 samples.
+
+### Implementing it in less advanced languages
+
+We can of course do the same calculations manually. In python, the following vectorized code seems to work in this particular case:
+
+```python
+l = beta(51, 151).rvs(1024*1024)
+n = binom(100, l).rvs()
+```
+
+But this would be trickier in more general cases. For example:
+
+```scala
+val funkyDistribution = for {
+   l <- new Beta(51, 151)
+   d <- if (l < 0.5) { Normal(5, 1) } else { Normal(-5, 1) }
+} yield (d)
+```
+
+You could of course hack something together, but with the monadic code it all fits together in the obvious simple way.
+
+## Conclusion
+
+Probability is a monad. This allows us to take probabilistic models with *deterministic* inputs, and flatmap them together to build full-on probabilistic models. This can be done either mathematically (in order to derive a model to build) and much of it can be done programmatically. Our various
