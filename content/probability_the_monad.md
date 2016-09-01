@@ -1,5 +1,5 @@
 title: The Probability Monad and Why it's Important for Data Science
-date: 2016-08-24 09:45
+date: 2016-09-05 09:45
 author: Chris Stucchio
 tags: statistics, bayesian reasoning, functional programming
 category: statistics
