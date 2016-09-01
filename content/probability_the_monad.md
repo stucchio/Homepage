@@ -220,7 +220,19 @@ The result of this is a probability distribution describing the empirical conver
 
 The resulting distribution is a bit wider than the distribution of the true conversion rate. That makes intuitive sense - the empirical conversion rate has two sources of variance, uncertainty in the true conversion rate and uncertainty in the binomial distribution of 100 samples.
 
-### Implementing it in less advanced languages
+## What's happening under the hood
+
+In the realm of pure mathematics, what's happening here is pretty simple.
+
+When you have a probability distribution on a space `T`, you have a measure `mu` mapping (some) subsets of `T` into `[0,1]`. I.e. you have a function `mu: Meas[T] => [0,1]`. Hear `Meas[T]` represents the measurable subsets of `T` - for simplicity, if `T` were simply the integers than `Meas[T]` could just be all sets of integers.
+
+A nondeterministic model would be a function `f: t => Meas[U]`. Then the `map` operation `mu.map(f)` would have type `mu.map(f): Meas[T x U] => [0,1]` - i.e., it would be a measure on the product space `T x U` consisting of pairs of elements `(t,u)`.
+
+Finally, the `flatMap` operation would consist of mapping, but then integrating over the `T` variable.
+
+As noted earlier, this is described in much greater detail in [A Categorical Approach to Probability Theory](/blog_media/2016/probability_the_monad/A categorical approach to probability theory by Michèle Giry.pdf) (by Giry) and [A Categorical Foundation for Bayesian Probability](/blog_media/2016/probability_the_monad/1205.1488v3.pdf) (by Culbertson and Surtz). So this approach is both practical and also on solid theoretical footing.
+
+## Implementing it in less advanced languages
 
 We can of course do the same calculations manually. In python, the following vectorized code seems to work in this particular case:
 
@@ -238,8 +250,11 @@ val funkyDistribution = for {
 } yield (d)
 ```
 
-You could of course hack something together, but with the monadic code it all fits together in the obvious simple way.
+It's always possible, of course, to simply hack something together. Because this approach is on solid theoretical footing, one can derive results solely within the language of probability theory, and then take the result and turn it into python code.
+
+But I personally favor the programmatic approach - it's always easier for me when the theory maps directly onto the code.
+
 
 ## Conclusion
 
-Probability is a monad. This allows us to take probabilistic models with *deterministic* inputs, and flatmap them together to build full-on probabilistic models. This can be done either mathematically (in order to derive a model to build) and much of it can be done programmatically. Our various
+Probability is a monad. This allows us to take probabilistic models with *deterministic* inputs, and flatmap them together to build full-on probabilistic models. This can be done either mathematically (in order to derive a model to build) and much of it can be done programmatically. It's a great way to make statistical models composable, which is a very important real world consideration. Deriving probabilistic models from deterministic inputs is easy, and chaining easy steps together is usually a lot more straightforward than actually solving the full problem in one shot.
