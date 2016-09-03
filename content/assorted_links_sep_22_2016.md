@@ -25,6 +25,8 @@ nolinkback: true
 
 [The Role of Headhunters in Wage Inequality: It's All About Matching](https://editorialexpress.com/cgi-bin/conference/download.cgi?db_name=EEAESEM2016&paper_id=1093). Paper argues that income inequality is rising because high skilled labor markets were previously inefficient and the rich were underpaid. Now headhunters have helped the markets to clear.
 
+[India's role in exporting health care](https://hbr.org/2013/11/delivering-world-class-health-care-affordably). India's hub&spoke model of health care, where spokes focus on diagnosis/funneling to the hub, apparently saves a lot of costs. Relatedly, [my post on medical tourism](https://www.chrisstucchio.com/blog/2015/medical_tourism.html).
+
 ## Culture
 
 [The Most Intolerant Wins: The Dictatorship of the Small Minority](https://medium.com/@nntaled/the-most-intolerant-wins-the-dictatorship-of-the-small-minority-3f1f83ce4e15#.bqg1659rq) by Nassim Taleb.
