@@ -15,6 +15,8 @@ nolinkback: true
 
 [Scott Alexander on tail risk](http://slatestarcodex.com/2016/08/31/terrorists-vs-chairs-an-outlier-story/).
 
+[Science is not always self correcting](http://www.gwern.net/docs/iq/2015-cofnas.pdf). A great article by Cofnas on scientist's tendency to treat *positive* claims as *normative* and then reject positive conclusions for being evil.
+
 ## Economics
 
 [Passive Investing Is Worse for Society Than Marxism](https://www.bloomberg.com/news/articles/2016-08-23/bernstein-passive-investing-is-worse-for-society-than-marxism). An interesting article which makes the argument that while Marxism at least *attempts* to optimize capital flows, passive investing does not.
@@ -34,3 +36,5 @@ nolinkback: true
 [The Social Crucifixion of IOError](https://contraspin.co.nz/the-weaponising-of-social-pt1-the-crucifixion-of-ioerror/), [part 2](https://contraspin.co.nz/the-weaponising-of-social-pt-2-stomping-on-ioerrors-grave/) and [part 3](https://contraspin.co.nz/the-weaponising-of-social-part-3-the-resurrection-of-ioerror/). It's a good analysis of what I now believe to be a mobbing against Jakob Applebaum, an attack on him by some adversaries within his circles who for some reason have decided they dislike him.
 
 I recently learned about [IQ shredders](http://www.xenosystems.net/iq-shredders/), [more](https://bloodyshovel.wordpress.com/2013/03/26/lee-kuan-yew-drains-your-brains-for-short-term-gain/) and . A truly interesting concept - cities like Singapore, Mumbai and NYC attract the smartest people, reduces their fertility to below replacement levels, and thereby reduces IQ for humans in the future.
+
+[Socially Enforced Thought Boundaries](https://carcinisation.com/2014/10/02/socially-enforced-thought-boundaries/) - a nice article criticizing Randall Munroe's xkcd comic which comes out advocating the shunning of people who express skepticism of sacred beliefs.
