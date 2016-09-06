@@ -14,7 +14,7 @@ In this blog post I'll show why this is fundamentally not a problem. That's beca
 
 **Background**: I am assuming that the reader of this post has a moderate amount of knowledge of probability theory, and a moderate amount of knowledge of functional programming. I will be *assuming* that functors (objects with a `map` method) and monads (objects which also have `flatMap` or `bind` or `>>=` on them) are known to the reader.
 
-Also, for a more mathematical look at this topic, I'm mostly taking this stuff from the papers [A Categorical Approach to Probability Theory](/blog_media/2016/probability_the_monad/A categorical approach to probability theory by Michèle Giry.pdf) (by Giry) and [A Categorical Foundation for Bayesian Probability](/blog_media/2016/probability_the_monad/1205.1488v3.pdf) (by Culbertson and Surtz). This post is more intended for programmers than mathematicians.
+Also, for a more mathematical look at this topic, I'm mostly taking this stuff from the papers [A Categorical Approach to Probability Theory](/blog_media/2016/probability_the_monad/categorical_probability_giry.pdf) (by Giry) and [A Categorical Foundation for Bayesian Probability](/blog_media/2016/probability_the_monad/1205.1488v3.pdf) (by Culbertson and Surtz). This post is more intended for programmers than mathematicians.
 
 ## Probability in the language of type theory
 
@@ -230,7 +230,7 @@ A nondeterministic model would be a function `f: t => Meas[U]`. Then the `map` o
 
 Finally, the `flatMap` operation would consist of mapping, but then integrating over the `T` variable.
 
-As noted earlier, this is described in much greater detail in [A Categorical Approach to Probability Theory](/blog_media/2016/probability_the_monad/A categorical approach to probability theory by Michèle Giry.pdf) (by Giry) and [A Categorical Foundation for Bayesian Probability](/blog_media/2016/probability_the_monad/1205.1488v3.pdf) (by Culbertson and Surtz). So this approach is both practical and also on solid theoretical footing.
+As noted earlier, this is described in much greater detail in [A Categorical Approach to Probability Theory](/blog_media/2016/probability_the_monad/categorical_probability_giry.pdf) (by Giry) and [A Categorical Foundation for Bayesian Probability](/blog_media/2016/probability_the_monad/1205.1488v3.pdf) (by Culbertson and Surtz). So this approach is both practical and also on solid theoretical footing.
 
 ## Implementing it in less advanced languages
 
