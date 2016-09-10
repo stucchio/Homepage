@@ -17,6 +17,8 @@ nolinkback: true
 
 [Science is not always self correcting](http://www.gwern.net/docs/iq/2015-cofnas.pdf). A great article by Cofnas on scientist's tendency to treat *positive* claims as *normative* and then reject positive conclusions for being evil.
 
+[Distributional Inequalities for the Binomial Law](https://projecteuclid.org/download/pdf_1/euclid.aop/1176995801). The next time you approximate a binomial by a gaussian, pull this paper out. It'll give you some rigorous bounds.
+
 ## Economics
 
 [Passive Investing Is Worse for Society Than Marxism](https://www.bloomberg.com/news/articles/2016-08-23/bernstein-passive-investing-is-worse-for-society-than-marxism). An interesting article which makes the argument that while Marxism at least *attempts* to optimize capital flows, passive investing does not.
