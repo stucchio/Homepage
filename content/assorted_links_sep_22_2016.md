@@ -33,6 +33,8 @@ nolinkback: true
 
 ## Culture
 
+[Politics is Upstream of AI](http://thefutureprimaeval.net/politics-is-upstream-of-ai/). An article which discusses the dangers of politically driven AI development. One important counterpoint to this article is that we don't need to *imagine* Soviet AI - it actually existed. One of the great results of Soviet AI is the concept of shadow prices; it's a theorem of Pontryagin (I think, might be remembering here) that the Lagrange multiplier of the socialist calculation problem is the market price that would appear *assuming* customers had the same utility function that socialist planners think they do.
+
 [The Most Intolerant Wins: The Dictatorship of the Small Minority](https://medium.com/@nntaled/the-most-intolerant-wins-the-dictatorship-of-the-small-minority-3f1f83ce4e15#.bqg1659rq) by Nassim Taleb.
 
 [The Social Crucifixion of IOError](https://contraspin.co.nz/the-weaponising-of-social-pt1-the-crucifixion-of-ioerror/), [part 2](https://contraspin.co.nz/the-weaponising-of-social-pt-2-stomping-on-ioerrors-grave/) and [part 3](https://contraspin.co.nz/the-weaponising-of-social-part-3-the-resurrection-of-ioerror/). It's a good analysis of what I now believe to be a mobbing against Jakob Applebaum, an attack on him by some adversaries within his circles who for some reason have decided they dislike him.
