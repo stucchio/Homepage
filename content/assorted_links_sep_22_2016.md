@@ -23,6 +23,8 @@ A cool idea: [Adiabatic Monte Carlo](https://arxiv.org/pdf/1405.3489.pdf).
 
 [Easy Parsing with Parser Combinators](http://www.lihaoyi.com/post/EasyParsingwithParserCombinators.html) (in Scala).
 
+[The Cybernetics Scare and the Origins of the Internet](http://balticworlds.com/the-cybernetics-scare-and-the-origins-of-the-internet/).
+
 ## Economics
 
 [Passive Investing Is Worse for Society Than Marxism](https://www.bloomberg.com/news/articles/2016-08-23/bernstein-passive-investing-is-worse-for-society-than-marxism). An interesting article which makes the argument that while Marxism at least *attempts* to optimize capital flows, passive investing does not.
@@ -30,6 +32,8 @@ A cool idea: [Adiabatic Monte Carlo](https://arxiv.org/pdf/1405.3489.pdf).
 [American Exceptionalism](http://greyenlightenment.com/american-exceptionalism-8189/). Kind of contradicts my personal pessimism about the US.
 
 [It's a long way down](http://www.themoneyillusion.com/?p=10259). Scott Sumner (toward the end of the post) discusses how much worse poverty can be, comparing the US to Mexico, Mexico to China 2011, China 2011 to China 1997, etc.
+
+[Do Immigrants Import their Economic Destiny?](http://evonomics.com/do-immigrants-import-their-economic-destiny-garrett-jones/) The ideas contained herein are, for me, the only strong argument against open borders.
 
 [The Role of Headhunters in Wage Inequality: It's All About Matching](https://editorialexpress.com/cgi-bin/conference/download.cgi?db_name=EEAESEM2016&paper_id=1093). Paper argues that income inequality is rising because high skilled labor markets were previously inefficient and the rich were underpaid. Now headhunters have helped the markets to clear.
 
