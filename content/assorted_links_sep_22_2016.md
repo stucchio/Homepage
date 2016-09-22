@@ -3,6 +3,10 @@ date: 2016-09-22 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
+![brutal house](/blog_media/2016/assorted_links_sep_22_2016/Brutal-architecture-90x80cm-web-1024x932.jpg)
+
+[Cinta Vidal](http://cintavidal.com/) is really interesting.
+
 ## Math, Stats, Computer Science
 
 [“Why Should I Trust You?” Explaining the Predictions of Any Classifier](https://arxiv.org/pdf/1602.04938.pdf)
