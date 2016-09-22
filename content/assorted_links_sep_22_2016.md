@@ -13,7 +13,7 @@ nolinkback: true
 
 [Physics, Topology, Logic and Computation: A Rosetta Stone](http://math.ucr.edu/home/baez/rosetta.pdf) - a great paper on category theory, explaining connections between computation, mathematics and quantum physics.
 
-[A Simple Explanation for the Replication Crisis](http://simplystatistics.org/2016/08/24/replication-crisis/). Great piece by Andrew Gelman.
+[A Simple Explanation for the Replication Crisis](http://andrewgelman.com/2016/09/21/what-has-happened-down-here-is-the-winds-have-changed/). Great piece by Andrew Gelman.
 
 [Debugging machine learning](https://nlpers.blogspot.com/2016/08/debugging-machine-learning.html)
 
