@@ -236,6 +236,8 @@ This is pretty cool. Our machine learning algorithm doesn't seem to be doing wha
 
 So in this example, we have *no disparate impact* and *no bias*. We do, however, have *direct discrimination* - the algorithm is discriminating in favor of blacks in order to cancel out biases earlier in the process.
 
+**Also note:** Under other circumstances, it's totally uncontroversial to claim that a statistical algorithm can eliminate bias. For example, you probably find it completely unsurprising that I can use statistics to [correct for bias in a mobile phone's compass](/blog/2016/bayesian_calibration_of_mobile_phone_compass.html).
+
 ### Real world interlude
 
 The analysis above yields some interesting testable predictions. Supposing bias exists, we should be able to detect it by directly conditioning on race and observing the coefficient. If the coefficient is *positive*, it means that the observables are biased against that race. If it's negative, it means they are biased in favor. And if it's zero, it means things are unbiased.
