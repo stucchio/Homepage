@@ -14,3 +14,5 @@ nolinkback: true
 [A meta analysis of student evaluations](/blog_media/2016/assorted_links_nov_3_2016/Meta_analysis_of_faculty's_teaching_effectiveness_Student_evaluation_of_teaching_ratings_and_student_learning_are_not_related__student_evaluations_meta_analysis.pdf) shows that student evaluations of professors are more or less uncorrelated with teaching effectiveness. I'm not particularly surprised - I always considered student evaluations to be a measure of attractiveness, sympathy and how easy the tests are.
 
 ## Culture
+
+[Is Empathy Necessary for Morality?](http://subcortex.com/IsEmpathyNecessaryForMoralityPrinz.pdf)
