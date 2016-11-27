@@ -111,8 +111,4 @@ If we do not impose regularization conditions, then if any data points exist whi
 
 ![approximating gaussians with beta distributions](/blog_media/2016/boundary_respecting_kernels/gaussian_unregularized.png)
 
-However, the *CDF* of the distribution does NOT become singular, merely non-differentiable.
-
-![approximating gaussians with beta distributions](/blog_media/2016/boundary_respecting_kernels/gaussian_unregularized_cdf.png)
-
-The nature of the problem is that the PDF behaves like $@ x^K $@ for some $@ -1 < K < 0 $@ near $@ x=0 $@. This is an integrable singularity, and the CDF then behaves like $@ x^{K+1} $@ which is a continuous function.
+However, the *CDF* of the distribution does NOT become singular, merely non-differentiable. The nature of the problem is that the PDF behaves like $@ x^K $@ for some $@ -1 < K < 0 $@ near $@ x=0 $@. This is an integrable singularity, and the CDF then behaves like $@ x^{K+1} $@ which is a continuous function.
