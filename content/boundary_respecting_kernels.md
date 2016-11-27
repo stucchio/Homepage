@@ -29,7 +29,13 @@ The way to resolve this issue is to replace the Gaussian kernel with a kernel th
 
 The beta distribution takes two parameters, $@ \alpha $@ and $@ \beta$@, has mean $@ \alpha/(\alpha+\beta) $@ and variance $@ \alpha\beta/((\alpha+\beta)^2(\alpha+\beta+1)) $@.
 
-So what we'll do is choose a bandwidth parameter $@ K $@, set $@ \alpha = dK $@ and $@ \beta = (1-d)K $@ for a data point $@ d $@. Then the mean will be $@ \alpha/\(\alpha+\beta) = dK/(dK+(1-d)K) = d $@. The value $@ K $@ will be chosen so as to make the variance equal to a gaussian.
+So what we'll do is choose a bandwidth parameter $@ K $@, set $@ \alpha = dK $@ and $@ \beta = (1-d)K $@ for a data point $@ d $@. Then the mean will be $@ \alpha/\(\alpha+\beta) = dK/(dK+(1-d)K) = d $@. The value $@ K $@ can then be chosen so as to make the variance equal to a gaussian, i.e.:
+
+$@
+K = \frac{d(1-d)}{V} - 1
+$@
+
+(This calculation is done in the appendix.)
 
 If we remain away from the boundary, a beta distribution approximates a gaussian very closely:
 
@@ -57,8 +63,6 @@ for i in range(1000):
     gaussian_kernel += norm(data[i], sigma).pdf(xx) / 1000.0
 ```
 
-In the appendix I explain where this formula for K comes from. It's a relatively simple calculation, I just didn't want to mess with the flow of the post.
-
 ## Generalizations
 
 A generalization of this idea can be used on the unit simplex, i.e. the set of vectors with $@ \vec{d}_i \geq 0 $@ and $@ \sum_i \vec{d}_i = 1 $@.
@@ -74,6 +78,8 @@ Another situation which can arise is in [MCMC](https://en.wikipedia.org/wiki/Met
 ## Conclusion
 
 When using kernel approximations, don't treat the process as a black box. One can often preserve valuable properties and get more accurate results simply by making model-based tweaks to the kernel. This is a very important fact I learned in my academic career as a (computational) harmonic analyst, but which I don't see the data science community adopting.
+
+**Special thanks** to [Lisa Mahapatra](http://lisamahapatra.com/) for massively improving my data visualizations.
 
 ## Appendix: Where does the formula for K come from?
 
@@ -97,4 +103,16 @@ $@
 K = \frac{d(1-d)}{V} - 1
 $@
 
-There is one important fact to note. For $@ d < V $@, the resulting $@ K $@ will actually become negative. This will result in invalid beta distributions. So we actually need to bound $@ K $@ below. I found values in the neighborhood of 100-200 work reasonably well in practice.
+There is one important fact to note. For $@ d < V $@, the resulting $@ K $@ will actually become negative. This will result in a singular beta distribution. So to get a non-singular PDF, we need to bound $@ K $@ below by zero; in practice I've found choosing $@ K = \max(\frac{d(1-d)}{V} - 1, 100) $@ works reasonably well.
+
+### Unregularized vs regularized
+
+If we do not impose regularization conditions, then if any data points exist which make $@ K $@ negative, the pdf becomes singular at $@ x=0 $@ and/or $@ x=1 $@.
+
+![approximating gaussians with beta distributions](/blog_media/2016/boundary_respecting_kernels/gaussian_unregularized.png)
+
+However, the *CDF* of the distribution does NOT become singular, merely non-differentiable.
+
+![approximating gaussians with beta distributions](/blog_media/2016/boundary_respecting_kernels/gaussian_unregularized_cdf.png)
+
+The nature of the problem is that the PDF behaves like $@ x^K $@ for some $@ -1 < K < 0 $@ near $@ x=0 $@. This is an integrable singularity, and the CDF then behaves like $@ x^{K+1} $@ which is a continuous function.
