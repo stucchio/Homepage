@@ -1,5 +1,5 @@
 title: Respecting Boundaries with Inhomogeneous Kernels
-date: 2016-11-30 07:50
+date: 2016-11-29 07:50
 author: Chris Stucchio
 tags: statistics, kernel density estimation, boundary conditions
 mathjax: true
@@ -41,7 +41,9 @@ If we remain away from the boundary, a beta distribution approximates a gaussian
 
 ![approximating gaussians with beta distributions](/blog_media/2016/boundary_respecting_kernels/beta_approx1.png)
 
-But near the boundary the beta distribution changes shape to remain zero there:
+In this graph (and all the graphs to follow), the blue line represents a Gaussian KDE while the green line represents the Beta KDE.
+
+But if we center a gaussian and a beta distribution at a point near the boundary, the beta distribution changes shape to avoid crossing the line $@ x=0 $@:
 
 ![approximating gaussians with beta distributions](/blog_media/2016/boundary_respecting_kernels/beta_approx2.png)
 
