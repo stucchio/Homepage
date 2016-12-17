@@ -32,6 +32,12 @@ A discussion of Trump's Carrier deal, by [Larry Summers](https://www.washingtonp
 
 [CDC is unable to reliably connect "food deserts" and obesity](http://www.cdc.gov/pcd/issues/2013/12_0123.htm). Also, [Yes there are grocery stores in Detroit](http://www.urbanophile.com/2011/01/25/yes-there-are-grocery-stores-in-detroit-by-james-griffioen/).
 
+[...the argument that job loss in manufacturing is due to trade deficits rather than automation is simply innumeracy.](http://econlog.econlib.org/archives/2016/12/europe_has_a_ma.html)
+
+Trump is considering an [economically literate FDA chief](https://www.statnews.com/2016/12/07/trump-fda-oneill/), with very clear Peter Thiel influence. I'm starting to think Peter Thiel might have been right about this one.
+
+The Chronicle of Higher Education laments the fact that [economics is too capitalistic](http://www.chronicle.com/article/When-Economics-Was-Radical/238539), and celebrates the AEA founder who denounced Lassez faire. [Alex Tabarrok](http://marginalrevolution.com/marginalrevolution/2016/12/richard-t-ely-alt-right-founder-american-economic-association.html) points out exactly what this means. (Hint: Lassez faire suggests that whites and negros should be allowed to breed, while the anti-capitalists the Chronicle celebrates did not think this.)
+
 ## Culture
 
 [Is Empathy Necessary for Morality?](http://subcortex.com/IsEmpathyNecessaryForMoralityPrinz.pdf)
