@@ -4,7 +4,7 @@ author: Chris Stucchio
 tags: big data, buzzwords, hadoop
 
 
-
+![image possibly inspired by this post](/blog_media/2013/hadoop_hatred/oreilly.jpeg)
 
 
 "So, how much experience do you have with Big Data and Hadoop?" they asked me. I told them that I use Hadoop all the time, but rarely for jobs larger than a few TB. I'm basically a big data neophite - I know the concepts, I've written code, but never at scale.
