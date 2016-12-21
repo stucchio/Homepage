@@ -1,5 +1,5 @@
 title: Assorted links
-date: 2016-12-14 9:30:00
+date: 2016-12-21 9:30:00
 author: Chris Stucchio
 nolinkback: true
 
@@ -38,6 +38,8 @@ Trump is considering an [economically literate FDA chief](https://www.statnews.c
 
 The Chronicle of Higher Education laments the fact that [economics is too capitalistic](http://www.chronicle.com/article/When-Economics-Was-Radical/238539), and celebrates the AEA founder who denounced Lassez faire. [Alex Tabarrok](http://marginalrevolution.com/marginalrevolution/2016/12/richard-t-ely-alt-right-founder-american-economic-association.html) points out exactly what this means. (Hint: Lassez faire suggests that whites and negros should be allowed to breed, while the anti-capitalists the Chronicle celebrates did not think this.)
 
+[What if](http://cafehayek.com/2016/12/41844.html) powerful political and ideological forces stood to benefit if the general public believed that small orange rocks dropped into swimming pools cause no increases in the water levels of swimming pools? ...there would be no shortage of physicists who conduct and publish studies allegedly offering evidence that, indeed, the dropping of small orange rocks into swimming pools does not tend to raise the water levels of swimming pools (and, indeed, might even lower pools water levels!).
+
 ## Culture
 
 [Is Empathy Necessary for Morality?](http://subcortex.com/IsEmpathyNecessaryForMoralityPrinz.pdf)
@@ -49,3 +51,5 @@ The Chronicle of Higher Education laments the fact that [economics is too capita
 [Another useful description of class in America](http://siderea.livejournal.com/1260265.html). This article definitely resonates with me. A woman I know with a penchant for feminism and social justice - a dark skinned Indian with the accent that sounds British to people who've never lived in India - recently remarked to me that she's concerned about police harasment. I asked how often the American police harassed her and it turns out the answer is "never", and she refused my bet that it will remain "never" in 2017. For me the answer is very far from "never". I also can't request a cortisone (anti-inflammatory) injection from doctors without them thinking I'm seeking narcotics.
 
 [Who gave us post truth, conspiracy culture?](http://hurryupharry.org/2016/11/27/who-gave-us-post-truth-conspiracy-culture-and-the-alt-right/)
+
+[Donna Zuckerberg](https://eidolon.pub/how-to-be-a-good-classicist-under-a-bad-emperor-6b848df6e54a), a classicist of some note (mostly due to her famous brother, here's his [website](https://facebook.com)) advocates refusing to share the classics with the alt-right. The [alt-right](http://www.socialmatter.net/2016/12/20/classics-white-supremacy-response-donna-zuckerberg/) response is significantly more intellectual.
