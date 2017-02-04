@@ -1,5 +1,5 @@
 title: Bayesian Linear Regression (in PyMC) - a different way to think about regression
-date: 2015-09-28 09:30
+date: 2017-02-09 09:30
 author: Chris Stucchio
 tags: bayesian statistics, linear regression
 mathjax: true
