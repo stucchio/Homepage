@@ -145,4 +145,5 @@ I've written other articles related to this post. I have one post [comparing ban
 
 [1] If a single Beta distribution doesn't fit, one can also use a convex combination of Beta distributions. The math works out just as nicely.
 
-P.S. After I published this blog post, [this related article](http://camdp.com/blogs/multi-armed-bandits) was also pointed out to me, as was this [online simulation](https://googledrive.com/host/0B2GQktu-wcTiWDB2R2t2a2tMUG8/) of the Bayesian bandit.
+P.S. After I published this blog post, [this related article](http://camdp.com/blogs/multi-armed-bandits) was also pointed out to me, as was this [online simulation](
+https://learnforeverlearn.com/bandits/) of the Bayesian bandit.

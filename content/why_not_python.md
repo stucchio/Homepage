@@ -38,15 +38,15 @@ In pythonic pseudocode, we want to do something like this:
 
     def process_quote_stream(statistics_process_queues):
         for fix_blob in fix_message_stream(broker_host, broker_port):
-	    quote = deserialize_from_fix(fix_blob)
-	    for q in statistics_process_queues:
+            quote = deserialize_from_fix(fix_blob)
+            for q in statistics_process_queues:
                 q.put(quote)
 
 
     def first_statistics_process(queue):
         while True:
-	    quote = queue.get(block=True)
-	    statistic += quote.some_value
+            quote = queue.get(block=True)
+            statistic += quote.some_value
 
     def second_statistics_process(queue):
         ...

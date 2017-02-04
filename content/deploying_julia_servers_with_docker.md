@@ -208,7 +208,7 @@ docker run -i --env=POSTGRES_PGPASS=PASSWORD --env=POSTGRES_PGUSER=cybersyn --en
     -t stucchio/juliaweb:0.3.2 "cd /var/lib/cybersyn && julia Web.jl"
 
 ```
-In production, of course, port 8000 should not be exposed. Rather, the Julia webserver should be hidden behind a [revere proxy](http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/) - there is plenty of documentation on building a docker image with an nginx reverse proxy, so I'll just [link to it](http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/). Here is [my configuration](https://gist.github.com/stucchio/54331ebdee08bcadd051).
+In production, of course, port 8000 should not be exposed. Rather, the Julia webserver should be hidden behind a [reverse proxy](http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/) - there is plenty of documentation on building a docker image with an nginx reverse proxy, so I'll just [link to it](http://jasonwilder.com/blog/2014/03/25/automated-nginx-reverse-proxy-for-docker/). Here is [my configuration](https://gist.github.com/stucchio/54331ebdee08bcadd051).
 
 # Conclusion
 
