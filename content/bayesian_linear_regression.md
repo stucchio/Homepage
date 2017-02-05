@@ -121,6 +121,19 @@ In fact, a sufficiently large singleton "outlier" can actually shift the slope o
 
 ![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/least_squares_outlier2.png)
 
+However, if we use Bayesian linear regression and simply change the distribution on the error in Y to a similar cauchy distribution, things work fine.
+
+![BLR with cauchy error](|filename|blog_media/2015/bayesian_linear_regression/bayesian_linear_regression_cauchy2.png)
+
+In this picture, we have 50 data points with Cauchy-distributed errors. The black line represents the true line used to generate the data. The green line represents the best possible least squares fit, which is driven primarily by the data point at (1, 10). The red lines represent samples drawn from the Bayesian posterior on $@ (\alpha, \beta) $@.
+
+In code, all I did to make this fix was:
+
+```
+-y = pymc.Normal('output', mu=linear_regress, value=y_data, observed=True)
++y = pymc.Cauchy('output', alpha=linear_regress, beta=0.35, value=y_data, observed=True)
+```
+
 
 # Where does ordinary least squares come from? Maximal likelihood.
 
