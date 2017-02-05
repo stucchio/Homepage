@@ -15,7 +15,7 @@ Lets crunch some numbers and find out.
 ## The numerators
 
 In 2014 there were about [44,000](http://www.cdc.gov/hiv/statistics/overview/) new cases of HIV. Of these, 29,418 were caused by men having sex with men.
-ug
+
 According to [Wikipedia](https://en.wikipedia.org/wiki/Gun_violence_in_the_United_States) there were 11,078 homicides with guns and 19,392 suicides with guns in 2010.
 
 So as a ballpark, guns and gay sex both hit a lot of people really hard.
