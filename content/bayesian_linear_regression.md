@@ -14,7 +14,7 @@ The problem of linear regression is then to estimate $@ \alpha, \beta $@ and pos
 
 In this blog post, I'll approach this problem from a Bayesian point of view. Ordinary linear regression (as taught in introductory statistics textbooks) offers a recipe which works great under a few circumstances, but has a variety of weaknesses. These weaknesses include an extreme sensitivity to outliers, an inability to incorporate priors, and little ability to quantify uncertainty.
 
-Bayesian linear regression offers a very different way to think about things. Combined with some computation (and note - computationally it's a LOT harder than ordinary least squares), one can easily formulate and solve a very flexible model that addresses most of the problems with ordinary least squares.
+Bayesian linear regression (BLR) offers a very different way to think about things. Combined with some computation (and note - computationally it's a LOT harder than ordinary least squares), one can easily formulate and solve a very flexible model that addresses most of the problems with ordinary least squares.
 
 # The simplest version
 
@@ -115,13 +115,15 @@ The red line in the graph is the best fit line, while the green line is the true
 
 ![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/least_squares_outlier.png)
 
-The issue is the following. With a normal distribution, the probability of seeing a data point at $@ y=-20$@ or $@ -30 $@ (as described in the figure) is very small, particularly if the line is sloping upward. As a result, the fact that such a data point did occur is very strong evidence in favor of the line having a much smaller upward slope - even though only a few points slope this way.
+The Cauchy distribution is actually pretty pathological - it's variance is infinite. The result of this is that "outliers" are not actually uncommon at all - extremely large deviations from the mean are perfectly normal.
+
+With a normal distribution, the probability of seeing a data point at $@ y=-20$@ or $@ -30 $@ (as described in the figure) is very small, particularly if the line is sloping upward. As a result, the fact that such a data point did occur is very strong evidence in favor of the line having a much smaller upward slope - even though only a few points slope this way.
 
 In fact, a sufficiently large singleton "outlier" can actually shift the slope of the best fit line from positive to negative:
 
 ![posteriors on x](|filename|blog_media/2015/bayesian_linear_regression/least_squares_outlier2.png)
 
-However, if we use Bayesian linear regression and simply change the distribution on the error in Y to a similar cauchy distribution, things work fine.
+However, if we use Bayesian linear regression and simply change the distribution on the error in Y to a cauchy distribution, Bayesian linear regression adapts perfectly:
 
 ![BLR with cauchy error](|filename|blog_media/2015/bayesian_linear_regression/bayesian_linear_regression_cauchy2.png)
 
@@ -134,10 +136,9 @@ In code, all I did to make this fix was:
 +y = pymc.Cauchy('output', alpha=linear_regress, beta=0.35, value=y_data, observed=True)
 ```
 
+This fairly simple fix helps the model to recover.
 
 # Where does ordinary least squares come from? Maximal likelihood.
-
-**Skip this section if you prefer code to math, and jump ahead to handling outliers.**
 
 Rather than simply setting up a somewhat overcomplicated model in PyMC, one can also set up the MCMC directly. Supposing we have a data set $@D = \{ (x_i, y_i) \}$@. Then:
 
@@ -167,14 +168,19 @@ $$ \textrm{argmax} \left[ \sum_{i=1}^k -(y_i - \alpha \cdot x_i)^2/2 \right]$$
 
 Here the argmax is computed over $@ (\alpha, \beta) $@. This is precisely the problem of minimizing the squared error. So an uninformative prior combined with a Gaussian error term allows Bayesian Linear Regression to revert to ordinary least squares.
 
-## Incorporating prior knowledge
+One very important fact is that because OLS computes the peak of BLR, one can think of OLS as being a cheap approximation to BLR.
 
-Suppose instead that we do have some prior knowledge on $@ \alpha $@. It's not hard to show then that maximal likelihood yields:
+# Easier modeling, uncertainty representation
 
-$$ \textrm{argmax}\left( \ln\left[ \textrm{prior}(\alpha,\beta) \right] + \left[ \sum_{i=1}^k -(y_i - \alpha \cdot x_i - \beta)^2/2 \right] \right) $$
+Bayesian Linear Regression is an important alternative to ordinary least squares. Even if you don't use it often due to it's computationally intensive nature, it's worth thinking about as a conceptual aid.
 
-This is potentially a trickier problem to solve, depending on the functional form of $@ \textrm{prior}(\alpha,\beta) $@. But it's hardly unapproachable. One very important case is:
+Whenever I think of breaking out least squares, I work through the steps of BLR in my head.
 
-$$ \textrm{prior}(\alpha, \beta) = \textrm{Const} \exp\left[ \frac{ (a \alpha + \beta - c)^2 }{ 2\sigma^2} \right] $$
+1. Are my errors normally distributed or close to it?
+2. Do I have enough data so that my posterior will be narrow?
 
-This is functionally equivalent to least squares, so similar solver routines can be used. This means that a prior can be incorporated into gaussian least squares in a fairly straightforward manner.
+In the event that these assumptions are true, it's reasonably safe to use OLS as a computationally cheap approximation to BLR.
+
+Sometimes the approximations simply aren't true. For example, a stock trading strategy I ran for a while had a very strong requirement of non-normal errors. Once I put the non-normal errors in, and quantified uncertainty (i.e. error in the slope and intercept of the line), my strategy went from losing $1500/month to gaining $500/month.
+
+For this reason I encourage thinking of regression in Bayesian terms. I've adopted this in my thinking and I find the benefits vastly exceed the costs.
