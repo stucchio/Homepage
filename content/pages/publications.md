@@ -32,3 +32,7 @@ See also [Stable and Accurate Outgoing Wave Filters for Anisotropic and Nonlocal
 - [Number Crunching in Scala](/pubs/slides/thoughtworks_scientific_2014/slides.html), given at the [Pune Scala Symposium](http://info.thoughtworks.com/pune-scala-symposium-april-12-registration.html), 2014.
 - [Bayesian A/B Testing at VWO](/pubs/slides/gilt_bayesian_ab_2015/slides.html), given at the Gilt Engineering Seminar 2015.
 - [Multiple Comparisons - Make your boss happy with false positives](/pubs/slides/crunch_conf_2015/slides.html), given at [Crunch Conf 2015](http://crunchconf.com/).
+
+## Technical reports
+
+- [Bayesian A/B Testing at VWO](pubs/VWO_SmartStats_technical_whitepaper.pdf), with assistance from the VWO Marketing and Engineering teams. Sep 2015. Describes the technical details of how VWO's A/B testing algorithm works.
