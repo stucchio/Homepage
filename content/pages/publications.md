@@ -35,4 +35,4 @@ See also [Stable and Accurate Outgoing Wave Filters for Anisotropic and Nonlocal
 
 ## Technical reports
 
-- [Bayesian A/B Testing at VWO](pubs/VWO_SmartStats_technical_whitepaper.pdf), with assistance from the VWO Marketing and Engineering teams. Sep 2015. Describes the technical details of how VWO's A/B testing algorithm works.
+- [Bayesian A/B Testing at VWO](/pubs/VWO_SmartStats_technical_whitepaper.pdf), with assistance from the VWO Marketing and Engineering teams. Sep 2015. Describes the technical details of how VWO's A/B testing algorithm works.
