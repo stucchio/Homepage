@@ -394,7 +394,7 @@ class: middle
 <tr><td>
 # Did Richard Spencer ever hurt anyone?
 ## Put your money where your mouth is
-Lisa argued that maybe Spencer deserved to get punched, maybe he beat up some people or set their house on fire, or something like that.
+[@lisamahapatra](https://twitter.com/lisamahapatra) argued that maybe Spencer deserved to get punched, maybe he beat up some people or set their house on fire, or something like that.
 
 At the time of this conversation I'm in Bombay airport, and know nothing other than what I saw on twitter.
 
@@ -423,10 +423,12 @@ prior = array([0.5, 0.5])
 class: middle
 # Did Richart Spencer ever hurt anyone?
 
-I suspect that if he were some scary violent terrorist, reporters probably wouldn't be so politely interviewing him while he wears a sweater vest. I'm 60% confident of this.
+If he's a violent terrorist, it's unlikely he'd look like a hipster. If he's a peaceful internet troll, it's moderately more likely that he'll look like a hipster.
+
+**He looks like a hipster!**
 
 ```
-likelihood = array([0.60, 0.40])
+likelihood = array([0.15, 0.10])
 posterior = likelihood * prior
 posterior /= sum(posterior)
 # Posterior = [0.6, 0.4]
@@ -538,12 +540,12 @@ class: middle
 Our choice of prior - in this case `prior = array([0.994, 0.006])` matters significantly. Here are some alternate choices:
 
 - Front row guy is straight. Then `prior = array([0.998, 0.002])`
-- Front row guy is gay. Then `prior = array([0.64, 0.36])`
+- Front row guy is gay. Then `prior = array([0.80, 0.20])`
 
 Running the same calculation yields:
 
 - Front row guy is straight. Posterior (after positive HIV test) yields an 11.8% chance he has HIV.
-- Front row guy is gay. Posterior (after positive HIV test) yields a 97.4% chance he has HIV.
+- Front row guy is gay. Posterior (after positive HIV test) yields a 94.3% chance he has HIV.
 
 **Exercise:** Suppose the test comes up negative. Repeat the calculation for this case.
 
