@@ -70,20 +70,18 @@ cost = zeros(t.shape, dtype=float)
 revenue = zeros(t.shape, dtype=float)
 profit = zeros(t.shape, dtype=float)
 
-for i in range(0,100, 5):
+for i in range(0,100, 1):
     c, r, p = customer_cash_flow(t, i)
     cost += c
     revenue += r
     profit += p
 ```
 
-Here's a graph of the result. Each x-tick represents a new customer being added.
+Here's a graph of the result. A new customer is added at every unit of time.
 
 ![simple regression](|filename|blog_media/2017/uber_trough/constant_customer_acquisition_rate.png)
 
-The jerkiness of the graph is just an artifact of our simple model.
-
-But the key point here is that the SaaS trough lasts a much longer time than before.
+The key point here is that the SaaS trough lasts a much longer time than before.
 
 ## Exponential growth
 
