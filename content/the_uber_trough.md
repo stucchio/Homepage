@@ -3,6 +3,7 @@ date: 2017-04-20 08:00
 author: Chris Stucchio
 tags: uber, economics, financial modeling
 category: economics
+mathjax: true
 
 It's a widely cited fact that Uber has continually lost money since it started. Uber opponents widely cite this fact hoping that once the VCs stop investing, Uber will collapse and we can return to the era of yellow cabs. Another stylized fact about Uber is that it's [profitable in many cities](http://fortune.com/2016/06/16/uber-profitable-markets/). In this post I'm going to do some basic financial modeling, and explain why these two facts make me very bullish on Uber.
 
@@ -183,3 +184,23 @@ At this point new investments should also stop. Sometime after this Uber can bec
 I have no insider knowledge on whether Uber is actually long term profitable on individual cohorts, beyond what they've told the media. I also have no knowledge of whether Uber can successfully make the transition from growth to utility; if a company fails to cut their acquisition costs at the right time, they may crash and burn regardless of their per-customer profitability.
 
 However, the point I want to make in this article is the following. Uber's current trajectory is perfectly consistent with the trajectory that many currently profitable SaaS business have taken. There is no fundamental reason to believe that Uber will crash and burn, either when growth stops or VCs stop funding it. Uber does not appear to be on VC-funded life support - by all indications it's on VC-funded hypergrowth, and can probably eventually become profitable once that growth stops.
+
+## Appendix - more mathematical analysis of hypergrowth
+
+Unless you like formulas, skip this section. I'm building a discrete time model to understand exactly when hypergrowth implies exponential unprofitability.
+
+Consider a discrete time model. Assume that a customer generates a profit of $1 for $@ t > 0 $@ and costs $@ A $@ at $@ t = 0 $@. Assume further that the company has $@ e^{\alpha t } $@ customers at time $@ t $@. At time $@ t $@ the company has $@ c $@ customers. Based on hypergrowth, at time $@ t + 1 $@ the following happens:
+
+- The company acquires $@c (e^{\alpha} - 1)$@ customers.
+- The company gains $@ c $@ units of revenue from older customers.
+- The company loses $@ c (e^{\alpha} - 1) A $@ due to customer acquisition costs.
+
+The profit/loss $@ p $@ is therefore:
+
+$@ p = c - c(e^{\alpha} - 1)A = c (1 - A(e^{\alpha}-1)) $@
+
+If $@ A(e^{\alpha}-1) < 1 $@, then the company will have profit growing exponentially. On the flip side, if $@ A(e^{\alpha}-1) > 1 $@, then the company's losses will grow exponentially.
+
+What's really important to note here is that **faster growth implies greater losses!**
+
+![simple regression](|filename|blog_media/2017/uber_trough/growth_vs_profitability.png)
