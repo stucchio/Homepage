@@ -52,7 +52,7 @@ alpha = 50k / 95k = 0.526
 beta = 10k / 50k = 0.200
 ```
 
-But we can do better than this. We can use logical inference to deduce that in every case where `B` occurred, `A` also occurred. So we actually know that `A` occurred 5.5k times, and `A` then `B` occurred 15k times. So we can then estimate:
+But we can do better than this. We can use logical inference to deduce that in every case where `B` occurred, `A` also occurred. So we actually know that `A` occurred 55k times, and `A` then `B` occurred 15k times. So we can then estimate:
 
 ```
 alpha = 55k / 100k = 0.550
