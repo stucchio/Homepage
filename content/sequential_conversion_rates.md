@@ -3,6 +3,7 @@ date: 2017-06-19 09:45
 author: Chris Stucchio
 tags: statistics, bayesian reasoning, missing data, conversion rate optimization
 category: statistics
+nolinkback: true
 
 I recently analyzed a somewhat puzzling data set. I was sending HTTP POST requests to a system. The system's would then acknowledge receipt of these requests (returning a 200 status code), and some time later (it was a slow asynchronous process) send a web hook to a specified URL *if the request was successful*. However, successful was far from certain; most requests actually failed. My job was to measure the success rate.
 
