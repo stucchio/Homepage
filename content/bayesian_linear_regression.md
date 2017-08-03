@@ -26,7 +26,7 @@ where $@ \alpha $@ and $@ \beta $@ are unknown parameters, and $@ e $@ is the st
 
 To start off, we'll assume that our observations are [independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables). This means that for every $@ i $@, we have that:
 
-$$ y_i = \alpha \cdot x_i + e_i $$
+$$ y_i = \alpha \cdot x_i + \beta + e_i $$
 
 where each $@ e_i $@ is a random variable. Let's assume that $@ e_i $@ is an absolutely continuous random variable, which means that it has a probability density function given by $@ E(t) $@.
 
