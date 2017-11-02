@@ -2,7 +2,7 @@
 ##
 # This section should match your Makefile
 ##
-PY=python
+PY=python3
 PELICAN=pelican
 PELICANOPTS=
 
@@ -67,7 +67,8 @@ function start_up(){
   pelican_pid=$!
   echo $pelican_pid > $PELICAN_PID
   cd $OUTPUTDIR
-  $PY -m pelican.server $port &
+  $PY -m http.server &
+  # $PY -m pelican.server $port &
   srv_pid=$!
   echo $srv_pid > $SRV_PID
   cd $BASEDIR
@@ -90,7 +91,7 @@ port=''
 [[ $# -eq 2 ]] && port=$2
 
 if [[ $1 == "stop" ]]; then
-  shut_down
+    shut_down
 elif [[ $1 == "restart" ]]; then
   shut_down
   start_up $port
