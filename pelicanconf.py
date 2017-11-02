@@ -72,3 +72,6 @@ DEBUG = True
 #RELATIVE_URLS = True
 
 TODAY = datetime.now()
+
+PLUGIN_PATHS = ['plugins/m.css/pelican-plugins']
+PLUGINS = ['m.htmlsanity', 'm.math']

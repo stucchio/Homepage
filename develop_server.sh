@@ -66,7 +66,9 @@ function start_up(){
   $PELICAN --debug --autoreload -r $INPUTDIR -o $OUTPUTDIR -s $CONFFILE $PELICANOPTS &
   pelican_pid=$!
   echo $pelican_pid > $PELICAN_PID
+  sleep 1
   cd $OUTPUTDIR
+  echo "I'm in the outputdir " `pwd`
   $PY -m http.server &
   # $PY -m pelican.server $port &
   srv_pid=$!
