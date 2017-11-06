@@ -1,6 +1,6 @@
 Why Indian companies should take on different projects than competing Valley companies - an application of Cobb-Douglas
 #######################################################################################################################
-:date: 2017-10-31 01:30
+:date: 2017-11-07 08:30
 :author: Chris Stucchio
 :tags: economics, cobb douglas, business
 
