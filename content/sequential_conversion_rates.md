@@ -1,5 +1,5 @@
 title: Inferring data loss (and correcting for it) from fundamental relationships
-date: 2017-06-19 09:45
+date: 2017-09-01 09:45
 author: Chris Stucchio
 tags: statistics, bayesian reasoning, missing data, conversion rate optimization
 category: statistics
