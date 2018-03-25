@@ -89,6 +89,12 @@
     {% endif %}
 
 {% include 'includes/ga.html' %}
+
+{% if article %}
+{% if article.canonical %}
+    <link rel="canonical" href="{{article.canonical}}"/>
+{% endif %}
+{% endif %}
 </head>
 <body>
 
