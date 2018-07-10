@@ -40,7 +40,7 @@ PAGE_LANG_SAVE_AS = 'pages/{slug}-{lang}.html'
 
 
 DEFAULT_CATEGORY = ('Articles')
-ARTICLE_EXCLUDES = ('pages',)
+ARTICLE_EXCLUDES = ['pages', 'static', 'pubs/slides']
 
 THEME = './theme/'
 HIDE_SIDEBAR = True

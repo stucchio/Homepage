@@ -70,7 +70,7 @@
 
     {% if article %}
       {% if article.mathjax %}
-        <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
@@ -79,7 +79,7 @@
       {% endif %}
     {% elif page %}
       {% if page.mathjax %}
-        <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
           tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
@@ -87,8 +87,6 @@
         </script>
       {% endif %}
     {% endif %}
-
-{% include 'includes/ga.html' %}
 
 {% if article %}
 {% if article.canonical %}
@@ -129,6 +127,7 @@
                 <li><a href="https://github.com/stucchio">Code</a></li>
                 <li><a href="{{SITEURL}}/blog/index.html">Blog</a></li>
                 <li><a href="{{SITEURL}}/publications.html">Talks/Papers</a></li>
+                <li><a href="{{SITEURL}}/work.html">Work</a></li>
                 {% if DISPLAY_CATEGORIES_ON_MENU %}
                     {% for cat, null in categories %}
                         <li {% if cat == category %}class="active"{% endif %}>
@@ -167,7 +166,7 @@
 </div>
 {% include 'includes/footer.html' %}
 
-<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="{{ SITEURL}}/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ SITEURL }}/theme/js/bootstrap.min.js"></script>
