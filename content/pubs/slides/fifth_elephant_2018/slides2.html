@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>An intuitive understanding of Bayesian Linear Regression</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$@','$@'], ['\\(','\\)']]}
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+
+      body {
+        font-family: 'Droid Serif';
+        font-size: 20px;
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      h1 { font-size: 4em; }
+      h2 { font-size: 2em; }
+      h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        -moz-border-radius: 5px;
+        -web-border-radius: 5px;
+        background: #e7e8e2;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      li {
+        font-size: 20px;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 2em;
+      }
+      img {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+class: center, middle, inverse
+
+# Bayesian Linear Regression and Generalized Linear Models
+[Chris Stucchio](https://www.chrisstucchio.com) - [Simpl](https://getsimpl.com)
+
+---
+<img src="cricket_img.jpg" style="height:500px"></img>
+# Who will win?
+---
+class: center, middle
+## Gambling on Cricket
+
+In tonight's game, Quiador is batting against Cronje. What will happen?
+
+Here's what we know:
+```
+batter | bowler   | game_id | runs
+----------------------------------
+dev    | cronje   | 1       | 3
+khan   | tendulkar| 2       | 1
+qiador | dhoni    | 2       | 0
+dev    | tendulkar| 3       | 2
+```
+
+(Actually most of my data comes from Baseball, because Major League Baseball has an API and cricket leagues don't.)
+
+---
+## A theoretical model
+
+Theory:
+
+- Batter $@ i $@ has an intrinsic skill level $@b_i$@.
+- Bowler $@ j $@ has an intrinsic skill level $@p_j$@.
+
+Assume the score in game $@ k $@ for the pairing of batter $@ i $@ against bowler $@ j $@ is
+
+$$ s_{ijk} \leftarrow G(\mu = c + b_i + p_j)  $$
+
+Further assumption: scores are *independent* - i.e., if Sachin scores 5 runs in game 7, this doesn't affect Dev's score in game 9.
+
+**Goal:** Find `c, b_i, p_j`.
+
+---
+<img src="jcb_backhoe_rentals.png" style="height:450"></img>
+# What is it worth?
+---
+class: center, middle
+## Pricing of backhoes
+
+A new Backhoe is on the market - what price should the seller ask for?
+
+Here's what we know:
+
+```
+hours | 4wd | price
+-------------------
+4000  | 0   | $30,000
+7000  | 1   | $47,000
+5000  | 0   | $26,000
+...
+```
+
+(Data courtesy of [Heavy Equipment Research](https://heavyequipmentresearch.com/Backhoe), a startup I'm advising.)
+---
+## A theoretical model
+
+Theory:
+
+- The value of a machine degrades over time at a constant rate.
+- Machines with 4 weel drive are worth more.
+
+$$ s_i \leftarrow G(c - a \cdot h_i - b \cdot f_i) $$
+
+Here $@ h_i $@ is hours used, and $@ f_i $@ is whether or not the machine has 4 wheel drive.
+
+This means the score is drawn from a probability distribution $@ G $@ having mean $@ \mu = c + b_i + p_j $@.
+
+Further assumption: prices are *independent* - i.e., if one backhoe sells for $90,000, this will not affect the sale price of others.
+
+---
+<img src="gordon_gecko.jpg" style="height:500px"></img>
+# Greed is good
+
+---
+class: middle
+## Stock prices
+
+A new millisecond is about to arrive. In what direction will our stock of interest (in this case JNUG) tick?
+
+Here's what we know:
+
+```
+Time| GOOG   | GS    | JNUG, 10ms later
+--------------------------
+0ms | 1196   | 232   | 12.88
+1ms | 1196.6 | 231.9 | 12.86
+2ms | 1196.2 | 232.1 | 12.87
+...
+
+```
+
+GOOG and GS are fast moving stocks, JNUG slow. Want to use fast stocks to predict behavior of slow one.
+
+---
+## A theoretical model
+
+Theory:
+
+$$ \textrm{JNUG}\_{t+10ms} \leftarrow G(a\_{goog} \textrm{GOOG}\_t + a\_{gs} \textrm{GS}\_t) $$
+
+Here $@ S_{t} $@ is the price of a stock $@ S $@ at time $@ t $@.
+
+Alternate (more realistic) theory:
+
+$$ \Delta \textrm{JNUG}\_{t+10ms} \leftarrow G(a\_{goog} \Delta \textrm{GOOG}\_t  + a\_{gs} \Delta \textrm{GS}\_t) $$
+
+Here $@ \Delta S_t $@ means the stock price *movement* at time $@ t $@. The important distinction between these two theories is that the standard deviation of JNUG in the latter theory is $@ O(\sqrt{t}) $@, while in the former it's constant.
+
+(This assumes that the distribution G obeys the assumptions of the C.L.T.)
+
+---
+## A theoretical model, in pythonic form
+
+Assume that the simulation we are living in has been programmed as follows:
+
+```
+a = ...M-dimensional array
+
+def single_row_result(x):
+    """ Either a game result, or a backhoe price... """
+    z = dot(a, x) + c
+    return G(mean=z, scale=f(z)).rvs()
+
+data = []
+for i in input_data:
+    data.append({ 'x' : i,
+                  'y' : single_row_result(x)
+                })
+```
+
+The class `G` is any probability distribution from `scipy.stats` - e.g. `norm`, `expon`, or maybe even some custom subclass.
+
+Let us henceforth call `x` the input and `y` the output.
+
+**Goal:** Assume we know which `G` is chosen. Given only the output `data`, approximate the value of `a`.
+
+This is called a [Generalized Linear Model](https://en.wikipedia.org/wiki/Generalized_linear_model).
+
+---
+class: center
+## Data Science vs Statistics
+
+<img src="the_matrixl.jpg" style="height:400px"></img>
+
+## Imagine we live in a simulated world
+---
+### The statistician
+The statistician says, "our machine overlords are running **this** program:"
+
+```
+true_a = ???
+data = ...straightforward program here...
+```
+
+"I know the code, I just don't know `true_a`, so let me try to find it."
+
+--
+
+### The data scientist
+
+The data scientist says "I don't know the code, but I bet I can write a cheap clone of it by searching through the space of lots of programs."
+
+```
+for p in programs_with_low_complexity:
+    if |reality - p| not too big:
+        return p
+```
+
+--
+
+## This talk is about statistics.
+
+---
+class: center, middle
+# Bayesian Statistics
+## The mathematically optimal way to change your opinion
+
+---
+## Opinions as math
+
+Let $@ \vec{a} $@ represent the (usually hidden) state of the world, i.e. a specific parameter choice made by the Machines.
+
+We represent opinions as probability distributions. A probability distribution is a function satisfying:
+
+$$ P(\vec{a}) \geq 0 $$
+
+$$ \int P(\vec{a}) d\vec{a} = 1 $$
+
+Meaning:
+
+$$ P(\vec{a} \in A) = \int_A P(\vec{a}) d\vec{a} $$
+
+Intuitively: the bigger $@ P(\vec{a}) $@ is, the more likely we consider $@ \vec{a} $@ to be.
+
+---
+## Bayesian Statistics
+
+Probability distributions are **opinions**.
+
+Start with a **prior** opinion - a probability distribution $@ P(\vec{a}) $@ which is larger for values of $@ \vec{a} $@ that we find more plausible. This is what we believe *before we have any evidence.*
+
+--
+
+Given data or an observation we can **change our opinion** via Bayes rule:
+
+$$ P( \vec{a} | \textrm{data}) = \frac{P( \textrm{data} | \vec{a} ) P(\vec{a}) } { P(\textrm{data}) } $$
+
+The value $@ P( \vec{a} | \textrm{data}) $@ is called the **posterior**.
+
+--
+
+**Big idea:** $@ P( \textrm{data} | \vec{a} ) $@ is bigger for values of $@ \vec{a} $@ that are consistent with the data we saw, and smaller for values of theta that are inconsistent. Bayes rule is saying "if the data is inconsistent with theory $@ \vec{a} $@, then change our opinion so that we don't believe $@ \vec{a} $@ to be as plausible as we did before."
+
+---
+## Our theoretical model in this framework
+
+**Assumption:** Data outputs are independent and identically distributed. This means:
+
+$$ P(\textrm{data} | \vec{a}) = \Pi_i G( y_i, \vec{a} \cdot \vec{x}) $$
+
+for some known probability distribution $@ G $@.
+
+**Most basic example:** a normal distribution.
+
+$$ G(y\_i, \vec{a} \cdot \vec{x}) = N(\vec{a} \cdot \vec{x}, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(z-\vec{a} \cdot \vec{x})^2}{2\sigma^2}\right)$$
+
+--
+
+## Important fact
+
+The denominator $@ P(\textrm{data}) $@ does not vary with $@ \vec{a} $@, while the other two terms do.
+
+---
+class: center, middle
+# Bayesian Linear Regression
+
+---
+# Bayesian Linear Regression
+
+The BLR "algorithm".
+
+1. Write down your prior $@ P(\vec{a}) $@ and your error distribution $@ g(\vec{x}) $@.
+2. Write down the distribution:
+$$ P(\vec{a} | \textrm{data}) = \textrm{const} \left[ \Pi_i G(y_i, \vec{a} \cdot \vec{x}_i ) \right] P(\vec{a}) $$
+3. Let the computer do a bunch of work to find the solution.
+
+**Not a specific algorithm**, rather a framework for coming up with other algos.
+
+---
+## MCMC: Let the computer do a bunch of work
+
+The [Markov Chain Monte Carlo](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) algorithm is a brute force method to draw samples from a probability distribution known up to a constant.
+
+**MCMC algorithm:**
+
+- Input: A function `f` approximating $@ f(\vec{a}) = \textrm{const} P( \vec{a} | \textrm{data}) = P( \textrm{data} | \vec{a} ) P(\vec{a}) \textrm{const} $@.
+- Output: A sequence of samples drawn from the distribution $@ P( \vec{a} | \textrm{data}) $@.
+
+Implemented in PyMC library. Convergence rate is $@ O(N^{1/2}) $@.
+
+(How this works is a different talk.)
+
+--
+
+**Important point:** You don't need to know $@ P(\textrm{data}) $@, the denominator of Bayes rule.
+
+---
+class: middle, center
+
+# "About 70% of the computing power in the world right now is currently computing MCMC."
+## - Anonymous Wall St. Quant, approx 2008.
+
+(It's quite possible that SGD has replaced MCMC in the past 10 years.)
+
+---
+## Implementing in PyMC
+
+```
+import pymc
+
+a = pymc.Normal('a', mu=0, tau=10) #Prior
+c = pymc.Uniform('c, mu=0, tau=10) #Prior
+
+x = pymc.Normal('x', mu=0,tau=1,value=x_data, observed=True)
+
+@pymc.deterministic(plot=False)
+def linear_regress(x=x, alpha=alpha, beta=beta):
+    return x*a + c
+
+y = pymc.Normal('output', mu=linear_regress, value=y_data, observed=True)
+
+model = pymc.Model([x, y, a, c])
+mcmc = pymc.MCMC(model)
+mcmc.sample(iter=100000, burn=10000, thin=10)
+
+```
+
+This code runs the MCMC algorithm (and isn't fast).
+
+---
+## Implementing in PyMC
+
+<img src="scatterplot_posterior.png" style="height:400px"></img>
+
+```
+aa = mcmc.trace('a')[:] # Posterior
+cc = mcmc.trace('c')[:] # Posterior
+
+for i in range(len(aa)):
+    plot(arange(-3,3,0.1), aa[i]*x+cc[i], color='r')
+plot(x_data, y_data, 'bo')
+```
+
+---
+## Implementing in PyMC
+
+<img src="scatterplot_posterior2.png" style="height:400px"></img>
+
+Less data results in more uncertainty.
+
+---
+## Max Aposteriori Estimation
+
+Another approach is called Max Aposteriori. Rather than drawing a sample of plausible results, we instead find the single most plausible result:
+
+$$ \vec{a}\_{map} = \textrm{argmax}\_{\vec{a}} \textrm{const} \left[\Pi_i P(\textrm{data}_i | \vec{a} ) \right] P(\vec{a}) $$
+
+If $@ P(\vec{a}) $@ and $@ g(z) $@ are differentiable, then this can be done via (possibly stochastic) gradient descent.
+
+--
+
+**Computational trick:** Typically $@ \nabla_a P(\vec{a} | \textrm{data}) $@ is either very large or very small, and gradients get unpleasantly large. Since the log function is monotonically increasing, we can alternately maximize the log probability:
+
+$$ \vec{a}\_{map} = \textrm{argmax}\_{\vec{a}} \left[ \left( \sum_i \ln \left(G(y_i, \vec{a}\cdot \vec{x}_i)\right) \right)  + \ln\left(P(\vec{a})\right) \right] $$
+
+---
+## Max Aposteriori Estimation
+
+```
+def log_prior(a):
+    return -1*dot(a,a)/20
+
+def log_likelihood(a, xx, yy):
+    return -1*pow(dot(xx, a) - yy, 2).sum()
+
+k = int(0.7*N) # 70% of data is training data
+
+min_result = minimize(lambda a: -1*log_prior(a) +
+                          -1*log_likelihood(a, x[0:k], y[0:k]), x0 = [0,0,0])
+```
+
+Minimization can be handled via your favorite optimization technique. Gradient descent is always a good choice.
+
+---
+## Max Aposteriori Estimation
+
+The regression coefficients can be read off the `min_result.x`:
+```
+      fun: 116.18068918822462
+ hess_inv: array([[ 1.66544166,  1.66531567, -3.33061034],
+       [ 1.66531567,  1.66567567, -3.33084272],
+       [-3.33061034, -3.33084272,  6.66178994]])
+      jac: array([7.62939453e-06, 4.76837158e-06, 3.81469727e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 65
+      nit: 7
+     njev: 13
+   status: 0
+  success: True
+        x: array([1.12705054, 2.07623114, 1.79182738])
+```
+
+In terms of programming API, Max Aposteriori is a lot like Least Squares - you get a single "best" estimator.
+
+
+---
+class: center, middle
+# Ordinary Least Squares
+## Frequentist perspective
+---
+## Ordinary Least Squares (OLS)
+
+We assume there's a true value of $@ \vec{a} $@. Ask the question, if we knew the value of $@ \vec{a} $@, how likely is it that we would have seen the data that we just saw?
+
+I.e., the frequentist asks the question "what is $@ P(\textrm{data} | \vec{a} ) $@?" This is basically ignoring the $@ P(\vec{a}) $@ part in Bayes rule above.
+
+Very importantly, your subjective prior opinions of how the world works *are not part of this process.*
+
+---
+## Simplest possible version
+
+Lets let $@ g(z) = \exp(-z^2/2) $@, or in python, `g = lambda z: norm(-1*z*z/2).rvs()`.
+
+Assume that data is generated by the following code, which is run by our simulation overlords:
+
+```
+x = uniform(0,1).rvs(100)
+true_a = 3
+def g(z):
+    return norm(z).rvs()
+y = g(true_a*x)
+```
+
+<img src="toy_example.png" style="height:300px"></img>
+
+---
+## Simplest possible version
+
+Now given only the data (i.e. `x` and `y`), we want to approximate `true_a`. We can do this via grid search:
+
+```
+aa = arange(0,10, 0.01)
+
+likelihood = numpy.zeros(len(aa))
+for i in range(len(aa)):
+    likelihood[i] = exp(-1*sum(pow(y-x*aa[i], 2))/2)
+plot(aa, likelihood)
+```
+
+<img src="toy_example_solution.png" style="height:300px"></img>
+
+---
+## Simplest possible version
+
+<img src="toy_example_solution.png" style="height:300px"></img>
+
+Eyeballing the graph, we can guesstimate that the true value of `a` is between 2.5 and 3.5, with 3 being the most likely value.
+
+Finding the max more precisely can be done via gradient descent.
+
+---
+## What else does this tell us?
+
+<img src="toy_example_varyn.png" style="height:400px"></img>
+
+I repeated the experiment above, but instead doing `x = uniform(0,1).rvs(10)` and `x = uniform(0,1).rvs(1000)`. Very importantly, our estimates become narrower as we get more data.
+
+---
+
+## Least Squares
+
+We wrote the likelihood this way:
+
+$$ P( \textrm{data} | \vec{a} ) = \Pi_i g( \vec{a} \cdot \vec{x} - y )$$
+
+$$ = \Pi_i \exp( -(\vec{a} \cdot \vec{x}_i - y_i)^2/2) $$
+
+$$ = \exp\left( - \frac{1}{2} \sum_i (\vec{a} \cdot \vec{x}_i - y_i)^2 \right) $$
+
+Now lets take the log of both sides:
+
+$$ \ln \left[ P( \textrm{data} | \vec{a} ) \right] = - \frac{1}{2} \sum_i (\vec{a} \cdot \vec{x}_i - y_i)^2 $$
+
+Choosing $@ \vec{a} $@ to compute **maximum likelihood** is equivalent to choosing $@ \vec{a} $@ in order to minimize the sum of the squares!
+
+---
+class: center, middle
+
+# Opinions > Data
+
+---
+## Multicollinearity = Correlations in input data
+
+Consider backhoe pricing.
+
+```
+hours | age       | price
+---------------------------
+4000  | 3 years   | $30,000
+7000  | 5.5 years | $47,000
+5000  | 4 years   | $26,000
+...
+```
+
+Clear correlation between age (years since machine built) and hours (number of hours the machine has spent working).
+---
+## Multicollinearity
+
+Imagine there was no relationship between `age` and `hours`, and `hours` was the dominant factor. Something like this:
+
+```
+x_data = zeros(shape=(2,N), dtype=float)
+x_data[0,:] = norm(0,1).rvs(N)
+x_data[1,:] = norm(0,1).rvs(N)
+y_data = 2*x_data[0,:] + norm(0,0.5).rvs(N) + 1
+```
+
+Then the likelihood, $@ P(\textrm{data} | \vec{a}) $@ will look like this:
+
+<img src="no_multicollinearity.png" style="height:300px"></img>
+---
+## With Multicollinearity
+
+But in reality, the data looks more like it's generated this way:
+
+```
+N = 100
+x_data = zeros(shape=(2,N), dtype=float)
+x_data[0,:] = norm(0,1).rvs(N)
+x_data[1,:] = norm(0,0.2).rvs(N) + x_data[0,:]
+y_data = 2*x_data[0,:] + norm(0,0.5).rvs(N) + 1
+```
+
+<img src="with_multicollinearity.png" style="height:300px"></img>
+---
+## With Multicollinearity
+
+<img src="with_multicollinearity.png" style="height:300px"></img>
+
+Eyeballing this graph, the following are approximately equally likely.
+
+- `a[0] = 2` and `a[1] = 0`
+- `a[0] = 3` and `a[1] = -1`
+- `a[0] = 1` and `a[1] = 1`
+- ...etc...
+
+---
+## With Multicollinearity
+
+```
+# Training data
+N = 100
+x = numpy.zeros(shape=(N,3), dtype=float)
+x[:,0:2] = norm(0,5).rvs((N,2))
+x[:,2] = 0.5*x[:,0] + 0.5*x[:,1] + norm(0,0.01).rvs(N)
+
+y = 2*x[:,0]+3*x[:,1] + norm(0,1).rvs(N) + 1
+```
+And slightly out of sample test data:
+```
+x[k:,2] = 0.4*x[k:,0] + 0.6*x[k:,1] + norm(0,0.01).rvs(N-k)
+y[k:] = 1.96*x[k:,0] + 3.03*x[k:,1] + norm(0,1).rvs(N-k)
+```
+---
+## With Multicollinearity
+
+```
+lr = LinearRegression(fit_intercept=True)
+```
+Results:
+```
+[-11.50265948, -10.49631498,  13.49606167]
+```
+<img src="multicollinearity_problem.png" style="height:350px"></img>
+
+---
+## Using Bayesian Reasoning
+
+Start with a prior, by asking the experts: "Heavy Equipment guys, what's important here?"
+
+"Hours are the important thing. That's where the machine picks up wear and tear."
+
+--
+
+$$ P(a) \sim \exp(-a\_{\textrm{age}}^2/2) \exp(-a\_{\textrm{hours}}^2/100^2) $$
+
+<img src="proper_prior.png" style="height:300px"></img>
+
+
+---
+## Using Bayesian Reasoning
+
+$$ P(a | \textrm{data}) \sim P(\textrm{data}|a) \exp(-a^2/2) $$
+
+<img src="multicollinearity_with_prior.png" style="height:300px"></img>
+
+Result makes more sense.
+
+---
+## Using Bayesian Reasoning
+
+```
+def log_prior(a):
+    return dot(a,a)/20
+
+def log_likelihood(a, xx, yy):
+    return pow(dot(xx, a) - yy, 2).sum()
+
+k = int(0.7*N)
+
+min_result = minimize(lambda a: log_prior(a) +
+                 log_likelihood(a, x[0:k], y[0:k]), x0 = [0,0,0])
+```
+Results:
+```
+[1.12705054, 2.07623114, 1.79182738]
+```
+---
+## Using Bayesian Reasoning
+<img src="multicollinearity_bayesian.png" style="height:350px"></img>
+
+Lose much less accuracy on out-of-sample data; model generalizes much better.
+
+---
+## Improved Numerical Stability
+
+(Example simplified from previous slides.)
+
+Input data: lots of outputs in the ballpark of 0-5.
+
+--
+
+Ordinary linear regression. "I can get you a bunch of numbers between 0-5 like this:"
+
+$$ [101, -100] \cdot [1, 1] = 1 $$
+
+
+Bayesian: It's *unrealistic* to model the world as two huge numbers magically cancelling to give realistic small numbers. Do this instead:
+
+$$ [1.9, -0.95] \cdot [1, 1] = 0.95 $$
+
+--
+
+## Out of sample results
+
+Change inputs from `[1,1]` to `[1.2, 0.8]`)
+
+Frequentist: $@ [101, -100] \cdot [1.2, 0.8] = 42 $@
+
+Bayesian: $@ [1.9, -0.95] \cdot [1.2, 0.8] = 1.52 $@
+
+---
+## Ridge Regression
+
+$$ P( \textrm{data} | \vec{a} ) P(\vec{a}) = \left[ \Pi_i g( \vec{a} \cdot \vec{x} - y ) ] \right] P(\vec{a}) $$
+
+$$ = \left[ \Pi_i \exp( -(\vec{a} \cdot \vec{x}_i - y_i)^2/2) \right] \exp(-|\Gamma a|^2/2) $$
+
+$$ = \exp\left( - \left[ \frac{1}{2} \sum_i (\vec{a} \cdot \vec{x}_i - y_i)^2 \right] - \frac{|\Gamma a|^2}{2} \right) $$
+
+Now lets take the log of both sides:
+
+$$ \ln \left[ P( \textrm{data} | \vec{a} ) \right] = - \frac{1}{2} \sum_i (\vec{a} \cdot \vec{x}_i - y_i)^2 - \frac{|\Gamma a|^2}{2} $$
+
+This is known [Ridge Regression](https://en.wikipedia.org/wiki/Tikhonov_regularization), or as [sklearn.linear_model.Ridge](http://scikit-learn.org/stable/modules/linear_model.html#ridge-regression) in Python.
+
+---
+## Other choices for $@ P(\vec{a}) $@
+
+**Lasso regression**
+
+$$ P(\vec{a}) = \exp\left( -|\vec{a}|_1 \right) = \exp \left( - \sum_j |a_j| \right) $$
+
+This prior suggests $@ \vec{a} $@ is more likely to be *sparse*, i.e. it prefers for $@ \vec{a}_j $@ to be exactly zero than close to zero.
+
+**Informed opinion**
+
+$$ P(\vec{a}) = \exp(-|\vec{a} - \vec{b}|\_{1,2}^{1,2} / \sigma^2) $$
+
+This suggests before getting new data, we think $@ \vec{a} $@ is reasonably close to $@ \vec{b} $@. I.e., $@ \vec{b} $@ is a good initial guess.
+
+---
+class: center, middle
+# "I have no opinion"
+## Most of the problems of ordinary least squares are caused by the Frequentist lack of an opinion
+
+---
+## Priors and instability of undersampled data
+
+```
+batter | bowler   | game_id | runs
+----------------------------------
+dev    | cronje   | 1       | 3
+khan   | tendulkar| 2       | 1
+chris  | dhoni    | 4       | 4 # This is Chris's first game ever
+...
+```
+
+Assume our typical batter has a skill of 1.
+
+---
+## Priors and instability of undersampled data
+
+Now lets do least squares. Lets find parameters $@ b\_i, p\_j $@ minimizing:
+
+$$ | b\_{\textrm{chris}} + p\_{dhoni} - 4 |^2 + \sum\_{ij} | b\_{i} + p\_{i} - y_{ij} |^2 $$
+
+where the sum is taken over all the other terms not involving chris.
+
+Suppose the minimizer over the second part includes $@ p\_{dhoni} = 1 $@. Then we can set the first term equal to zero with $@ b\_{\textrm{chris}} = 3 $@.
+
+Conclusion: Chris did really good in his first game, and we've concluded he's 3x as good as the average batter.
+
+## Believable?
+
+---
+## Priors and undersampled data
+
+What do we believe before we have evidence?
+
+For arbitrary reasons - e.g., I watch lots of cricket - I have come to believe that the distribution of typical batter skills is:
+
+$$ P(\vec{a}_i ) \sim \exp( (a_i - 1)^2 / 2 \sigma^2 ) $$
+
+To choose $@ \sigma $@, ask the question "how many games will someone need to score 2 points before I believe their skill is 1.5?"
+
+A more data driven way to estimate this is something called [empirical bayes](...). This method treats the distribution of batter skills as $@ \exp(a_i / \gamma) $@ and puts a meta-prior on $@ \gamma $@. It's Bayes rule all the way down.
+
+---
+## Priors and undersampled data
+
+<img src="posterior_evolution.gif" style="height:450px"></img>
+
+---
+class: center, middle
+<img src="jesus-walking-on-water.jpg" style="height:450px"></img>
+# Outliers are a miracle
+
+---
+class: center, middle
+<img src="outliers.png" style="height:400px"></img>
+# Outliers are a miracle
+
+---
+## Strong opinions, huge changes
+
+Suppose $@ g(z) = \exp(-z^2/2) $@. The probability of an outlier is exceedingly small.
+
+In the above graph, that's a 4-sigma outlier. This has probability $@ 3.16 \times 10^{-5} $@ which happened in a 100 point data set. According to our world view, this is a miraculously rare event!
+
+## Change your world view
+
+Stop assuming gaussian errors.
+
+---
+## Fatter tails
+
+Alternate choices for $@ g(z) $@
+
+<img src="fat_tails.png" style="height:400px"></img>
+
+---
+## Fatter tails
+
+- Normal distribution: 4-sigma outlier has probability $@ 3.16 \times 10^{-5} $@
+- Exponential distribution $@ \exp(-|x|) $@ has probability 0.0091
+- Cauchy distribution $@ 1/(1+x^2) $@ has probability 0.075.
+
+Normal distribution: "OMG a miracle has occurred, I will change my whole world view!"
+
+Cauchy distribution: "That kind of thing happens every day, who cares?"
+
+--
+## Guesstimate based on data
+
+Eyeball estimate: in our data set, approximately 1 data point out of 100 seems to be this far out. That fits the ballpark of the exponential distribution.
+
+---
+## Fatter tails
+
+Choose $@ g(\vec{a} \cdot \vec{x} - y) = \exp(-|\vec{a} \cdot \vec{x} - y|) $@.
+
+```
+def log_likelihood(a, xx, yy):
+    return vec_norm(a*xx - yy, 1).sum()
+
+min_result = minimize(lambda a: log_likelihood(a, x[0:k], y[0:k]), x0 = [0],
+                      method='nelder-mead')
+```
+
+<img src="outlier_handling.png" style="height:350px"></img>
+
+---
+class: center
+
+<img src="nntaleb_deadlift.jpg" style="height:450px"></img>
+
+[Nassim Taleb](https://twitter.com/nntaleb/status/959169842933886977): I am tired, tired, tired of people who say 'We know about fat tails' yet 1) fail to use them, see 2) the consequences, 3) realize accepting fat tails means CHANGING completely the way to do statistical inference. And NO, nothing has been done by nobody.
+
+---
+## Less bias, more variance
+
+The model we've used seems to fit the data better than OLS. But there is a cost:
+
+$$ y = \vec{a} \cdot \vec{x} + \epsilon $$
+
+$$ \epsilon \leftarrow G $$
+
+Fatter $@ G $@ means lower confidence in the actual value of $@ y $@.
+
+--
+
+## Computing credible intervals
+
+```
+def pctd(d, p):
+    return minimize(lambda x: abs(d.cdf(x) - p), x0=[0], method='nelder-mead').x[0]
+```
+Width of 98% credible interval of $@ \exp(-x^2/2) $@ is +/- 2.33.
+
+Width of 98% credible interval of $@ \exp(-|x|) $@ is +/- 4.6.
+
+**Actual prediction of $@ y $@ is more uncertain!**
+
+
+---
+class: center, middle
+# Non-gaussian data
+
+---
+## Non-gaussian data
+
+Cricket scores (and Baseball scores, where I originally discovered this) don't behave like gaussians at all.
+
+<img src="batter_pts_1.png" style="height:400px"></img>
+
+---
+## Non-gaussian data
+
+Cricket scores (and Baseball scores, where I originally discovered this) don't behave like gaussians at all.
+
+<img src="batter_pts_2.png" style="height:400px"></img>
+---
+## Non-gaussian data
+
+Cricket scores (and Baseball scores, where I originally discovered this) don't behave like gaussians at all.
+
+<img src="batter_pts_3.png" style="height:400px"></img>
+
+---
+## Homoskedasticity
+
+One major requirement for OLS to work is homoskedasticity.
+
+<img src="homoskedasticity.png" style="height:400px"></img>
+
+This means the error should be normally distributed, and the variance should not change with x.
+
+---
+## Heteroskedasticity
+
+Sometimes this is violated - for example, in stock price movements.
+
+<img src="heteroskedasticity.png" style="height:400px"></img>
+
+Volatility is highly dependent on $@ \Delta s $@!
+
+---
+## Same trick, different g
+
+Assume linear relationship between input, output *and volatility*:
+
+$$ P(y_i | \vec{a}) = \frac{ 1} {\sqrt{2 (a\_2 x)^2}} \exp\left(-\frac{ (y_i-\vec{a}\_1x - \vec{a}\_0)^2 }{2 (a\_2 x)^2  }  \right) $$
+
+Plugging this into the formula for the log probability and doing arithmetic yields:
+
+$$ \ln \left[ P( \textrm{data} | \vec{a} ) \right] = - \sum_i \left[ \frac{ (y_i-\vec{a}\_1x - \vec{a}\_0)^2 }{2 (a\_2 x)^2  } + \ln[a\_2 x] \right] $$
+
+**Important fact:** In addition to learning how the mean of $@ y $@ varies with $@ \vec{x} $@, we are also learning how it's variance changes with $@ \vec{x} $@. This is impossible with least squares alone.
+
+---
+## Same trick, different g
+
+Math:
+
+$$ \ln \left[ P( \textrm{data} | \vec{a} ) \right] = - \sum_i \left[ \frac{ (y_i-\vec{a}\_1x - \vec{a}\_0)^2 }{2 (a\_2 x)^2  } + \ln[a\_2 x] \right] $$
+
+Python:
+
+```
+def log_likelihood(a, xx, yy):
+    return pow((y-exp(a[1])*x-a[0])/(sqrt(2)*exp(a[2])*x), 2).sum()\
+           + log(exp(a[2])*x).sum()
+
+min_result = minimize(lambda a: log_likelihood(a, x, y), x0 = [0,0,0])
+```
+
+**Computational trick:** Rather than solving a constrained optimization problem for `a[1]`, `a[1] >= 0`, I replaced `a[1]` with `exp(a[1])` in order to get an unconstrained one.
+
+---
+## Same trick, different g
+
+<img src="heteroskedasticity2.png" style="height:400px"></img>
+
+Not only does the ML model fit the data, it accurately predicts the variance.
+
+---
+## None of this is limited to linear regression
+
+Assumptions I made:
+
+$$ y \leftarrow G(\vec{a} \cdot \vec{x}) $$
+
+Nothing I did is specific to this case. Consider your favorite differentiable model:
+
+$$ y \leftarrow G(f(\vec{a}, \vec{x})) $$
+
+Here $@ f(\vec{a}, \vec{x}) $@ could be a neural network or anything else. Literally everything else I described can be done here also. For example, max likelihood or max aposteriori is just a matter of computing:
+
+$$ \textrm{argmax}_{\vec{a}} \sum_i \ln G(f(\vec{a}, \vec{x}_i)) + \ln P(\vec{a}) $$
+
+The chain rule $@ \nabla_a G(f(\vec{a}, \vec{x})) = G'(f(\vec{a}, \vec{x})) \nabla_a f(\vec{a}, \vec{x}) $@ allows gradient descent/backpropagation.
+
+---
+# Conclusion
+
+## The Feynman Problem solving Algorithm
+
+1. Write down the problem
+2. Think really hard
+3. Write down the solution
+
+---
+# Conclusion
+
+## The Feynman Problem solving Algorithm
+
+1. **Write down the problem**
+2. Think really hard
+3. Write down the solution
+
+The key takeaway from my talk is **stop skipping step 1.**
+
+
+
+    </textarea>
+    <script src="remark.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
