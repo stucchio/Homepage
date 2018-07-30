@@ -2,6 +2,7 @@ title: The Mathematics of Paul Graham's Bias Test
 date: 2015-11-05 09:00
 author: Chris Stucchio
 tags: bias detection, frequentist statistics, statistics
+category: ai ethics
 mathjax: true
 
 A major problem in detecting biased decisionmaking is the problem of unknown inputs. For example, suppose a venture capitalist has a public portfolio which has funded 75% male founders and 25% female. Is this venture capitalist biased against women? It's impossible to know - perhaps only 10% of his applicants were female, in which case he might actually biased in favor of women.
