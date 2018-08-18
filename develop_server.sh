@@ -8,7 +8,7 @@ PELICANOPTS=
 
 BASEDIR=$(pwd)
 INPUTDIR=$BASEDIR/content
-OUTPUTDIR=/tmp/pelican_preview
+OUTPUTDIR=/tmp/pelican_preview/
 CONFFILE=$BASEDIR/pelicanconf.py
 
 ###
@@ -70,7 +70,7 @@ function start_up(){
   cd $OUTPUTDIR
   echo "I'm in the outputdir " `pwd`
   $PY -m http.server &
-  # $PY -m pelican.server $port &
+  $PY -m pelican.server $port &
   srv_pid=$!
   echo $srv_pid > $SRV_PID
   cd $BASEDIR

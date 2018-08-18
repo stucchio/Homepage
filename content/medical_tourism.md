@@ -61,10 +61,6 @@ Once I returned to India, things went smoothly. I visited the doctor immediately
 
 I was also told the price of the surgery up front - 1.4 lakh only, or approximately $2,000. I was also told I might spend a few thousand more on incidental medications after I exit the hospital. I handed over my credit card and prepped for surgery.
 
-![prepped](|filename|/blog_media/2014/data_science_foundations_and_others_review/into_hospital.jpg)
-
-I'm quite happy in this picture - I'm on a lot of drugs. I don't normally have such a crazy beard, but at this point it had been about 2 months since I was able to sit down long enough for a haircut.
-
 After I got out of surgery I wasn't nearly so happy. There were no painkillers, I was desperately thirsty and forbidden from drinking anything for several hours. But the pain in my back was gone.
 
 Unlike a US hospital (or so I'm told), they were in no rush to get me out the door. Economically this was a bit surprising - I paid a flat fee for the surgery, hospital visit, and everything else - so they were not making any money by keeping me in there an extra day. I stayed in for 4 days afterwards, and even the (very bad) food was included in the price. They wanted me to stay a fifth day, but I was desperate to get out.
@@ -79,9 +75,7 @@ I didn't take a great picture. But the total cost of the surgery was 1.4 lakh on
 
 ## The aftermath
 
-After surgery the recovery was pretty straightforward. The original problem manifested as an inability to sit down. This is me a week after I was discharged from the hospital, enjoying brunch in a comfortable sitting position.
-
-![prepped](|filename|/blog_media/2015/medical_tourism/sitting.jpg)
+After surgery the recovery was pretty straightforward. The original problem manifested as an inability to sit down. That was resolved within a week.
 
 It's now a year later and I've had no further problems with my back. I've certainly had to adjust my lifestyle - I've substituted one leg squats for deadlifts and will probably have chicken legs forever. I've mostly stopped lifting weights, and focus on bodyweight equivalents - inverted shrugs rather than weighted shrugs, levers rather than dumbell rows, and Hindu pushups rather than the military press. I haven't boxed since the surgery. (For anyone who either lacks a gym or who has similar injuries, check out [Beast Skills](http://www.beastskills.com/), [Al Kavadlo](https://www.youtube.com/user/alkavadlo) and [/r/bodyweightfitness](https://www.reddit.com/r/bodyweightfitness). As an added benefit you can often workout outdoors rather than some smelly basement weight room.)
 
