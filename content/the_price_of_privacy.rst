@@ -1,6 +1,6 @@
 Why you can't have privacy on the internet
 ##########################################
-:date: 2018-08-09 08:30
+:date: 2018-08-20 08:30
 :author: Chris Stucchio
 :tags: economics, privacy
 
