@@ -1,6 +1,6 @@
 Why you can't have privacy on the internet
 ##########################################
-:date: 2018-08-20 08:30
+:date: 2018-08-22 08:30
 :author: Chris Stucchio
 :tags: economics, privacy
 
@@ -75,7 +75,7 @@ Peter Thiel notes that reducing fraud was the difference between loss and profit
 
 In the long run, the cost of fraud must be passed on to the consumer. Either the payment provider or the merchant will eat the cost of fraud, and will in turn raise prices on consumers to compensate.
 
-**Will you pay 120rs for a 100rs movie ticket in order to protect your privacy from your payment provider?** It's important to note that while the extra 20rs may seem to go to the payment network in reality it will go to the smartest scammers.
+**Will you pay 120rs for a 100rs movie ticket in order to protect your privacy from your payment provider?** It's important to note that while the extra 20rs may seem to go to the payment network, in reality it will go to the smartest scammers.
 
 There is plenty of fraud that occurs beyond payment networks. On Uber, there are fake drivers that take fake passengers on trips and demand to be paid even though the fake passengers have paid with stolen credit cards. Many fraud rings attempt to misuse incentive systems (e.g. "refer a friend, get 100rs off your next order") in order to generate credits with which they can purchase saleable goods. A merchant aggregator is also at risk from the submerchants; movie theatres/restaurants/etc will attempt to exploit BookMyShow/Seamless/etc, in general, submerchants will attempt to make fraudulent transactions on the aggregator and demand payment for them.
 
@@ -88,11 +88,11 @@ Even if you were willing to pay for it, privacy is illegal
 
 **Answer**: Money laundering.
 
-Here in India, the bulk of the privacy intrusions I run into are coming from the government. It is government regulations which require me to submit passport photocopies/personal references/etcto get a SIM card, government regulations requiring an OTP in order to use free Wifi at Starbucks (thus connecting my internet usage to said SIM), and prohibitions against the use of encryption are generally pushed by national governments. Things were pretty similar in the US.
+Here in India, the bulk of the privacy intrusions I run into are coming from the government. It is government regulations which require me to submit passport photocopies/personal references/etc in order to get a SIM card. Tracking my wifi use by connecting my Starbucks WiFi to a phone number via OTP is another government regulation. Prohibitions against the use of encryption are generally pushed by national governments. Things were pretty similar in the US.
 
 It is, of course, impossible for a service provider to satisfy the government's desire to spy on users without doing so itself.
 
-The desire for the government to spy on users extends far beyond preventing money laundering. In the United States, Congress has demanded information and action from technology companies in order to prevent Russians from posting Pepe memes on Twitter or attempting to organize "Blacktivism" on Facebook. The Kingdom bans most encrypted communication, and many democratic nations (the US, India,
+The desire for the government to spy on users extends far beyond preventing money laundering. In the United States, Congress has demanded information and action from technology companies in order to prevent Russians from posting Pepe memes on Twitter or attempting to organize "Blacktivism" on Facebook. The Kingdom bans most encrypted communication, and many democratic nations (the US, India, UK, France) have politicians pushing in the same direction.
 
 In the intermediary stages, there is a large amount of information that the government requires service providers to keep. This typically includes accounting details (required by tax departments), both purchase history as well as KYC information used by tax authorities to track down tax evaders (e.g., Amazon is required to keep and provide to the IRS tax related information about vendors using Amazon as a platform).
 
@@ -121,4 +121,6 @@ This is a fundamental collective action problem, and no player in the game seems
 
 And as any network approaches viability, it's early adopters will be these sorts of undesirables.
 
-Make no mistake; I want this privacy preserving network to exist. But the first step in making that happen is recognizing and acknowledging the very real barriers to making it happen.
+Make no mistake; I want this privacy preserving network to exist. I have no problem with teaching evolution and exploring it's consequences, advocating atheism over Islam, laundering drug money, or teaching people how to manufacture firearms. But I'm very much in a minority on this.
+
+And if, like me, you want this privacy preserving network, the first step in making that happen is recognizing and acknowledging the very real barriers to making it happen.
