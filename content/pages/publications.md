@@ -35,6 +35,7 @@ See also [Stable and Accurate Outgoing Wave Filters for Anisotropic and Nonlocal
 - [How to Change your Opinion with Python and Bayes Rule](/pubs/slides/pydelhi_2017/slides.html), given at [PyDelhi 2017](https://cfp.pydelhi.org/pydelhi-conference-2017/proposals/).
 - [Loans for Ladies, Stags pay Extra: The Role of Ethics in AI/ML](/pubs/slides/loans_for_ladies.pdf), given at [50p 2008](https://50p.in/2018/) in Bangalore, 2018.
 - [Bayesian Linear Regression and Generalized Linear Models](/pubs/slides/fifth_elephant_2018/slides2.html), given at [Fifth Elephant](https://fifthelephant.in/2018/) in Bangalore, 2018.
+- [AI Ethics, Impossibility Theorems and Tradeoffs](/pubs/slides/crunchconf_2018/slides.pdf), given at [CrunchConf 2018](https://www.crunchconf.com/) in Budapest.
 
 ## Technical reports
 
