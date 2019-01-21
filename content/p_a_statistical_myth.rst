@@ -1,6 +1,6 @@
 Barometric Pressure, a statistical myth: Why one common argument against IQ is flawed
 #######################################################################################################################
-:date: 2019-01-16 08:30
+:date: 2019-01-21 08:30
 :author: Chris Stucchio
 :tags: statistics
 
