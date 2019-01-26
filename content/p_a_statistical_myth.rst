@@ -9,7 +9,7 @@ Anyone following Nassim Taleb's dissembling on IQ lately has likely stumbled acr
 
 Let us examine examine `pressure <https://en.wikipedia.org/wiki/Pressure>`_.
 
-Let us discuss a particular experiment in mechanical engineering. Consider a steel vessel impervious to air. This steel vessel has one or more pistons attached, each piston of a different area. For those having difficulty visualizing, a piston works like this:
+In particular, we will study a particular experiment in mechanical engineering. Consider a steel vessel impervious to air. This steel vessel has one or more pistons attached, each piston of a different area. For those having difficulty visualizing, a piston works like this:
 
 .. image:: |filename|blog_media/2019/p_a_statistical_myth/piston.gif
 
@@ -51,7 +51,7 @@ The end result of the self-confirming circle of test construction is a peculiar 
 
 Of course, if P was the only way of accounting for the phenomena observed in physical tests, then, despite all these problems, it would have some claim on us. But of course it isn't. My playing around with Boltzmann's kinetic theory of gases has taken, all told, about a day, and gotten me at least into back-of-the-envelope, Fermi-problem range.
 
-All of this, of course, is completely compatible with P having some ability, when plugged into a linear regression, to predict things like the force on a piston or whether a boiler is likely to explode.  I could even extend my model, allowing the particles in the gas to interact with one another, or allowing them to have shape (such as the cylindrical shape of a nitrogen molecule) and angular momentum which can also contain energ. By that point, however, I'd be doing something so obviously dumb that I'd be accused of unfair parody and arguing against caricatures and straw-men.
+All of this, of course, is completely compatible with P having some ability, when plugged into a linear regression, to predict things like the force on a piston or whether a boiler is likely to explode.  I could even extend my model, allowing the particles in the gas to interact with one another, or allowing them to have shape (such as the cylindrical shape of a nitrogen molecule) and angular momentum which can also contain energy. By that point, however, I'd be doing something so obviously dumb that I'd be accused of unfair parody and arguing against caricatures and straw-men.
 
 Shalizi is right, but only about a trivial philosophical point
 ==============================================================
@@ -64,7 +64,7 @@ The argument made by Shalizi (and repeated by Taleb) is fundamentally the follow
 
 The most important fact to note is that "statistical myth" does *not* mean that the quantity cannot be used for practical purposes. The vast majority of mechanical engineers, chemists, meteorologists and others can safely use the theory of pressure without ever worrying about the fact that air is actually made up of individual particles. (One major exception is mechanical engineers doing microfluidics, where the volumes are small enough that individual atoms become important.) If the theory of pressure says that your boiler may explode, your best bet is to move away from it.
 
-Rather, "statistical myth" merely means that the macroscale quantity is not intrinsic, but can be explained in terms of microscopic quantities. This is important to scientists and others doing fundamental research. Understanding how the macroscale is derived from the microscale is useful in predicting behaviors when the standard micro-to-macro assumptions fail (e.g., in our pressure example above, what happens when N is small).
+Rather, "statistical myth" merely means that the macroscale quantity is not some intrinsic property of the gas but can instead be explained in terms of microscopic quantities. This is important to scientists and others doing fundamental research. Understanding how the macroscale is derived from the microscale is useful in predicting behaviors when the standard micro-to-macro assumptions fail (e.g., in our pressure example above, what happens when N is small).
 
 As this applies to IQ, Shalizi and Taleb are mostly just saying, "the theory of *g* is wrong because the brain is made out of neurons, and neurons are made of atoms!" The latter claim is absolutely true. A neuron is made out of atoms and it's behavior can potentially be understood purely by modeling the individual atoms it's made out of. Similarly, the brain is made out of neurons, and it's behavior can potentially be predicted simply by modeling the neurons that comprise it.
 
