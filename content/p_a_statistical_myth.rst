@@ -7,7 +7,7 @@ Barometric Pressure, a statistical myth: Why one common argument against IQ is f
 
 Anyone following Nassim Taleb's dissembling on IQ lately has likely stumbled across an argument, originally created by `Cosma Shalizi <http://bactra.org/weblog/523.html>`_, which purports to show that the psychometric *g* is a statistical myth. But I realized that based on this argument, not only is psychometrics a deeply flawed science, but so is thermodynamics!
 
-Let us examine examine `pressure <https://en.wikipedia.org/wiki/Pressure>`_.
+Let us examine `pressure <https://en.wikipedia.org/wiki/Pressure>`_.
 
 In particular, we will study a particular experiment in mechanical engineering. Consider a steel vessel impervious to air. This steel vessel has one or more pistons attached, each piston of a different area. For those having difficulty visualizing, a piston works like this:
 
