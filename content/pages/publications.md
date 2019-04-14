@@ -23,6 +23,10 @@ Most publications (exception: <a href="pubs/DCFS.pdf">[1]</a>, <a href="pubs/sol
 
 See also [Stable and Accurate Outgoing Wave Filters for Anisotropic and Nonlocal Waves](pubs/facm_proceedings.pdf), with A. Soffer.> Conference Proceedings, Frontiers in Appled and Computational Mathematics, 2008 (dedicated to Daljit S. Ahluwalia on his 75th birthday).
 
+## Articles
+
+- [A.I. 'Bias' Doesn't Mean what Journalists Say it Means](https://jacobitemag.com/2017/08/29/a-i-bias-doesnt-mean-what-journalists-want-you-to-think-it-means/) - 2017, Jacobite Magazine.
+
 ## Slides from Talks
 
 - *Stable Outgoing Wave Filters for Anisotropic Waves*, given at [FACM 2008 in Newark](http://m.njit.edu/Events/FACM08/) and also the [2008 SIAM meeting in San Diego](http://www.siam.org/meetings/an08/program.php). In <a href="pubs/slides/SIAM_July_2008.tgz">tarballed Keynote</a> and <a href="pubs/slides/SIAM_July_2008.pdf">pdf</a>. Movies are not visible in the pdf file.
