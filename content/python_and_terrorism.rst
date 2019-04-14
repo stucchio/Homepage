@@ -5,11 +5,9 @@ Is white nationalism a serious problem? Extracting wikipedia data with Python.
 :tags: terrorism, python
 
 
-I recently saw a `silly twitter exchange <https://twitter.com/AOC/status/1107757871477985280>`_ between two of the lyingest politicians in American politics. Given that they have both explicitly expressed the viewpoint that morals matter more than numbers and being "technically correct", I figured that I should use python to answer the question of whether white supremacists are a serious problem worldwide.
+I recently saw a `silly twitter exchange <https://twitter.com/AOC/status/1107757871477985280>`_ between two of the lyingest politicians in American politics. Given that they have both explicitly expressed the viewpoint that morals matter more than numbers and being "technically correct", I figured that I should use python to answer the question of whether white supremacists are a serious problem worldwide. In the silly twitter exchange, Trump says it's a small group of people with serious problems while Alexandria O. Cortez claims "White supremacists committed the largest # of extremist killings in 2017". This question is easily answerable.
 
-In the silly twitter exchange, Trump says it's a small group of people with serious problems while Alexandria O. Cortez claims "White supremacists committed the largest # of extremist killings in 2017". This question is easily answerable.
-
-The real audience for this post is python developers who want to see a couple of cool pydata tricks I've learned recently.
+So actually no, this blog isn't about politics. But I recently discovered `pandas.read_html`, and two idiot politicianss tweeting at each other is as good as reason as any to write a blog post about it. The real audience for this post is python developers who want to see a couple of cool pydata tricks I've learned recently.
 
 Cool python trick #1: `pandas.read_html`
 ----------------------------------------
@@ -37,7 +35,7 @@ The function `read_html` is doing all the heavy lifting here.
 
 The result of this is a dataframe listing a location, a perpetrator, a number of deaths/injuries, and a few more columns. It's not super clean, but at least it's pretty structured.
 
-This `read_html` function is awesome, because I needed to do literally no work parsing.
+This `read_html` function is awesome because I needed to do literally no work parsing.
 
 Cool python trick #2: the `wikipedia` module
 --------------------------------------------
@@ -78,14 +76,14 @@ Some of these are broad catch-all terms that simply reflect my ignorance. For ex
 
 This classification scheme let me classify 92% of the 9933 deaths due to terrorism. Note that Islam alone accounted for at least 82%, and eyeballing the groups I didn't match it's probably higher.
 
-There were also a number of attacks that I found very hard to classify, e.g. `Patani independence <https://en.wikipedia.org/wiki/Barisan_Revolusi_Nasional>`_ or `Fulani pastoralism <https://buzznigeria.com/fulani-herdsmen-attack/>`_. Key summary of the Fulani Pastoralism conflict: the Fulani people of Nigeria are mostly nomadic cow herders and they are getting into violent land disputes with non-Fulani farmers expanding their farms, and who don't want Fulani cows eating/trampling their crops. The world is a big place and it's full of all sorts of bad shit most folks have never heard of.
+There were also a number of attacks that I found very hard to classify, e.g. `Patani independence <https://en.wikipedia.org/wiki/Barisan_Revolusi_Nasional>`_ or `Fulani pastoralism <https://buzznigeria.com/fulani-herdsmen-attack/>`_. Key summary of the Fulani Pastoralism conflict: the Fulani people of Nigeria are mostly nomadic cow herders and they are getting into violent land disputes with non-Fulani farmers who don't want Fulani cows eating/trampling their crops. The world is a big place and it's full of all sorts of bad shit most folks have never heard of.
 
 Conclusion
 ----------
 
 It looks like Donald Trump is right and AOC is wrong. Even if we take high end estimates of the number of people killed by white supremacists in 2017 (34 in the US according to the SPLC), it seems like a small problem compared to things like Anti-Balaka, Communism or `Balochistan independence <https://en.wikipedia.org/wiki/Insurgency_in_Balochistan>`_.
 
-There are many individual terrorist groups that I imagine most readers have never heard of, such as Indian Naxalites (communists) or the Independent Nasserite Movement (a Socialist pan-Arab nationalist movement), all of which kill far more people than white supremacists.
+There are many individual terrorist groups that I imagine most readers have never heard of, such as Indian Naxalites (communists), which kill far more people than white supremacists.
 
 Also, far more importantly for most of my readers, you can easily extract data from Wikipedia into a dataframe using `pandas.read_html` and the `wikipedia` module.
 
@@ -93,3 +91,7 @@ Methodology
 -----------
 
 You can find my python notebook `here </blog_media/2019/python_and_terrorism/Untitled1.ipynb>`_.
+
+**Correction:** A previous version of this post described an "Independent Nasserite Movement (a Socialist pan-Arab nationalist movement)", which was a reference to `Al Mourabitoun <https://en.wikipedia.org/wiki/Al-Mourabitoun>`_. However that might have been me getting confused by wikipedia results - I think the actual attack in 2017 was done by a different `Al Mourabitoun <https://en.wikipedia.org/wiki/Al-Mourabitoun_(militant_group)>`_ which is just ordinary boring Islamist violence. So we probably need to add another 77 or so to the Islam row.
+
+**Also**, at least one commenter noted that the SPLC counts 34 dead due to white nationalists, which is higher than I get from Wikipedia. I don't particularly trust the SPLC, but I do reference it above. It still doesn't really change the results. Fulani Pastoralism killed more people.
