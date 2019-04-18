@@ -5,9 +5,9 @@ Is white nationalism a serious problem? Extracting wikipedia data with Python.
 :tags: terrorism, python
 
 
-I recently saw a `silly twitter exchange <https://twitter.com/AOC/status/1107757871477985280>`_ between two of the lyingest politicians in American politics. Given that they have both explicitly expressed the viewpoint that morals matter more than numbers and being "technically correct", I figured that I should use python to answer the question of whether white supremacists are a serious problem worldwide. In the silly twitter exchange, Trump says it's a small group of people with serious problems while Alexandria O. Cortez claims "White supremacists committed the largest # of extremist killings in 2017". This question is easily answerable.
+I recently saw a `silly twitter exchange <https://twitter.com/AOC/status/1107757871477985280>`_ between two of the lyingest politicians in American politics. Given that they have both explicitly expressed the viewpoint that morals matter more than numbers and being "technically correct", I figured that I should just check for myself. On twitter, Trump says white nationalism is a small group of people with serious problems while Alexandria O. Cortez claims "White supremacists committed the largest # of extremist killings in 2017". This question is easily answerable...*with Python*.
 
-So actually no, this blog isn't about politics. But I recently discovered `pandas.read_html`, and two idiot politicianss tweeting at each other is as good as reason as any to write a blog post about it. The real audience for this post is python developers who want to see a couple of cool pydata tricks I've learned recently.
+So actually no, this blog isn't about politics. But I recently discovered `pandas.read_html`, and two idiot politicians tweeting at each other is as good as reason as any to write a blog post about it. The real audience for this post is python developers who want to see a couple of cool pydata tricks I've learned recently.
 
 Cool python trick #1: `pandas.read_html`
 ----------------------------------------
