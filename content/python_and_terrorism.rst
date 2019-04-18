@@ -92,6 +92,6 @@ Methodology
 
 You can find my python notebook `here </blog_media/2019/python_and_terrorism/Untitled1.ipynb>`_.
 
-**Correction:** A previous version of this post described an "Independent Nasserite Movement (a Socialist pan-Arab nationalist movement)", which was a reference to `Al Mourabitoun <https://en.wikipedia.org/wiki/Al-Mourabitoun>`_. However that might have been me getting confused by wikipedia results - I think the actual attack in 2017 was done by a different `Al Mourabitoun <https://en.wikipedia.org/wiki/Al-Mourabitoun_(militant_group)>`_ which is just ordinary boring Islamist violence. So we probably need to add another 77 or so to the Islam row.
+**Correction:** A previous version of this post described an "Independent Nasserite Movement (a Socialist pan-Arab nationalist movement)", which was a reference to `Al Mourabitoun <https://en.wikipedia.org/wiki/Al-Mourabitoun>`_. However that might have been me getting confused by wikipedia results - I think the actual attack in 2017 was done by a `different Al Mourabitoun <https://en.wikipedia.org/wiki/Al-Mourabitoun_(militant_group)>`_ which is just ordinary boring Islamist violence. So we probably need to add another 77 or so to the Islam row.
 
 **Also**, at least one commenter noted that the SPLC counts 34 dead due to white nationalists, which is higher than I get from Wikipedia. I don't particularly trust the SPLC, but I do reference it above. It still doesn't really change the results. Fulani Pastoralism killed more people.
