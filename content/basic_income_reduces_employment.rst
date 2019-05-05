@@ -145,6 +145,10 @@ In the case of Seattle/Denver, I plotted the effect observed in each year. In th
 
 The result can be seen above. The typical effects of a Basic Income are in the same ballpark as those of the Great Recession.
 
+The conclusion we can draw from this is that all the available evidence suggests that a Basic Income will have a very large and negative effect on the economy.
+
+We can also anticipate that the effect will be worse if people believe that a Basic Income is likely to be permanent. As can be seen by comparing the 3 and 5 year groups in the Seattle/Denver experiment, people assigned to a longer term BI reduced their work effort significantly more than those assigned to the short term BI.
+
 
 Appendix: Proof that Diminishing Marginal Utility implies a work disincentive from Basic Income
 ===============================================================================================
