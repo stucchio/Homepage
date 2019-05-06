@@ -1,6 +1,6 @@
-Basic Income will reduce labor supply by 10%
-############################################
-:date: 2019-05-12 08:30
+Don't believe the hype: Basic Income reduces labor supply by 10%, which is a lot
+################################################################################
+:date: 2019-05-06 08:30
 :author: Chris Stucchio
 :tags: basic income, economics
 
