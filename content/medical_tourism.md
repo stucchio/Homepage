@@ -31,13 +31,13 @@ To start off, I made an appointment with Rajesh Parasnis at [Oyster and Pearl Cl
 
 After the visit we went through all the basics; rest, physical therapy, anti-inflammatories. None of these things cured my pain, but overall the experience was very straightforward. I asked for work to be done, and I asked the price. I was given the price. I handed over rupees, and got the work done.
 
-So far, no billing errors, no paperwork - in terms of logistical difficulties it was
+So far, no billing errors, no paperwork - in terms of logistics it was stupidly easy.
 
 ## It didn't get better
 
 In spite of our best efforts, things got worse. In spite of the rest and pills, things progressed to the point that I was unable to sit at all. The next step in treatment was a [Selective Nerve Root Block](http://www.spinesurgery.com/pain-management/selective-nerve-root-block) - an injection of cortisone into the disk and nerve area. The goal is to reduce the swelling of the disk and lower the pressure.
 
-As always, I was told the price (10,000rs or $160) before the procedure. I scheduled the procedure for the next day and made a quick trip to the ATM. On the day of the injection things were pretty simple. As before there was no paperwork - just show my receipt and wait for the doctor to arrive. The hospital was clean and modern - more or less exactly what you'd expect in the US. The only noticeable difference difference is that in the US, only the doctors would be Indian.
+As always, I was told the price (10,000rs or $160) before the procedure. I scheduled the procedure for the next day and made a quick trip to the ATM. On the day of the injection things were pretty simple. As before there was no paperwork - just show my receipt and wait for the doctor to arrive. The hospital was clean and modern - more or less exactly what you'd expect in the US. The only noticeable difference difference is that in the US only the doctors would be Indian, whereas here even the orderlies and janitors are.
 
 I didn't feel great after the injection, but the pain substantially decreased the next day. Overall, things were looking good. I felt no pain, I resumed exercise, things seemed to be moving well.
 
@@ -84,3 +84,7 @@ Overall, I'm completely satisfied. The Indian medical system provides fantastic 
 On the cost side, the capitalist underpinnings of the system combined with obsessive cost consciousness of the average Indian has resulted in low and transparent costs to the customer. The costs aren't just low by American standards - they are low even relative to Indian wages. In the US, the billing error on a surgery like this might be approximately 1 year of salary for a typical programmer (say, $150k salary compared to a $117k billing error) and about 2x GDP/capita. In India the total price of 1.4 lac is 0.5-3x a typical programmers salary (0.5 lac - 5 lac) and about 1x GDP/capita.
 
 On net I highly recommend medical tourism as a way to get care. It's certainly how I'll get anything besides emergency work done.
+
+## Update, 2019
+
+I highly endorse Rajesh Parasnis. I've been moving slowly - adding perhaps 5lbs every 4 workouts - but my last deadlift was 3x6 at 290lb (my bodyweight is about 225). 3 plates is within reach. That's hardly beast mode but it's far better than I ever expected in 2015.
