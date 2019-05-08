@@ -77,7 +77,7 @@ The New Jersey Experiment
 
 The `New Jersey Experiment <|filename|blog_media/2019/basic_income_reduces_employment/New_Jersey_Graduated_Work_Incentive_Experiment__ED099531.pdf>`_ ran from 1967-1974. In this experiment the income levels ranged from 50% to 125% of the poverty line, and the experiment included 1350 randomly selected low income families in NJ and PA. Each family in the experiment received 3 years of Basic Income. As with the Rural Income Experiment, many subgroup analysis were performed (on a relatively low number of families per subgroup) and inconsistent results were obtained across subgroups.
 
-The overall results were a reduction in labor supply (hours worked) by 13.9% for white families, 6.1% for black families and 1.5% for Spanish speaking families. The labor force participation rate reduction was 9.8%, 5% and +/- 6.7% for White, Black and Spanish speaking families respectively. (Due to the poor quality of the scan, I can't make out the digits after teh decimal for black families or whether the effect is positive or negative in table 3.)
+The overall results were a reduction in labor supply (hours worked) by 13.9% for white families, 6.1% for black families and 1.5% for Spanish speaking families. The labor force participation rate reduction was 9.8%, 5% and +/- 6.7% for White, Black and Spanish speaking families respectively. (Due to the poor quality of the scan, I can't make out the digits after the decimal for black families or whether the effect is positive or negative in table 3.)
 
 I do not endorse the level of excessive subgroup analysis they performed. In such a small sample they should have just done an overall analysis. But the experiment was designed in 1967 so I'll be forgiving of the authors - my viewpoint of their methodology is, of course, heavily informed by living through the modern replication crisis.
 
@@ -88,7 +88,7 @@ The studies I've surveyed were all social experiments performed in the 1970's. A
 
 The experiments were also all pre-Replication Crisis, and as a result they feature excessive subgroup analysis, experimenter degrees of freedom, and for this reason I don't fully believe most of the fine grained effects these studies purport to measure.
 
-However, there is one very clear and significant tope line effect that is consistent across every experiment: a roughly 10% reduction in labor supply.
+However, there is one very clear and significant top line effect that is consistent across every experiment: a roughly 10% reduction in labor supply.
 
 Theory: Why would this be true?
 ===============================
