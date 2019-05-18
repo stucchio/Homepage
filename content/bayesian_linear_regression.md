@@ -3,6 +3,7 @@ date: 2017-02-09 09:30
 author: Chris Stucchio
 tags: bayesian statistics, linear regression
 mathjax: true
+featured: true
 
 ![simple regression](|filename|blog_media/2015/bayesian_linear_regression/simple_regression.png)
 

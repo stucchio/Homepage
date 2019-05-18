@@ -149,6 +149,21 @@ The conclusion we can draw from this is that all the available evidence suggests
 
 We can also anticipate that the effect will be worse if people believe that a Basic Income is likely to be permanent. As can be seen by comparing the 3 and 5 year groups in the Seattle/Denver experiment, people assigned to a longer term BI reduced their work effort significantly more than those assigned to the short term BI.
 
+Update on Keynesian Economics
+=============================
+
+A few commenters on reddit suggest that unemployment due to "low aggregate demand" is somehow different from reduced labor force participation due to Basic Income. However, this idea is based on either MMT or some weird newspaper columnist pop-Keynesianism; it is not in any way based on the economic mainstream.
+
+Mainstream economist version of Keynesian theory says that in a recession, people do not work because they have sticky nominal wages but a shock has resulted in their real output dropping. Concretely, a worker has a nominal wage demand of :math:`W` dollars. He used to produce :math:`K` widgets at a cost of :math:`W/K` each, but for whatever reason he can now only produce :math:`K_2 < K` widgets. His real output is now :math:`K_2` which has nominal value :math:`K_2 (W/K) = (K_2/K) W < W`.
+
+In order to productively employ him the nominal wage must be reduced by a factor of :math:`K_2/K`. However, the worker refuses to work unless he is paid :math:`W` dollars.
+
+The Keynesian prescription of stimulating aggregate demand solves this problem by inflation; if the price of a single widget can be increased by a factor of :math:`K/K_2`, then the worker can again be paid a wage of :math:`W` dollars.
+
+In essense, stimulating aggregate demand is about tricking prideful workers into reducing their real wage demands so that they stop being lazy and go back to work.
+
+In spite of the difference in mood affiliation, Keynesian economics claims that recessions reduce labor supply for the exact same reason a Basic Income does: workers refusing to work.
+
 
 Appendix: Proof that Diminishing Marginal Utility implies a work disincentive from Basic Income
 ===============================================================================================

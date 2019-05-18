@@ -3,7 +3,7 @@ date: 2012-04-16 10:00
 author: Chris Stucchio
 tags: economics, trading, high frequency trading
 category: high frequency trading
-
+featured: true
 
 
 

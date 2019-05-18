@@ -2,7 +2,7 @@ title: Don't use Hadoop - your data isn't that big
 date: 2013-09-16 11:30
 author: Chris Stucchio
 tags: big data, buzzwords, hadoop
-
+featured: true
 
 ![image possibly inspired by this post](/blog_media/2013/hadoop_hatred/oreilly.jpeg)
 

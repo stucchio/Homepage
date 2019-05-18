@@ -2,6 +2,7 @@ title: Wingify releases Bayesian A/B tester
 date: 2015-10-01 09:33
 author: Chris Stucchio
 tags: ab testing, bayesian statistics
+featured: true
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ofPEb-TSp08" frameborder="0" allowfullscreen></iframe>
 
