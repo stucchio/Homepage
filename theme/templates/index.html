@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1><a href="/blog/index.html">Selected blog posts</a></h1>
-<p>Posts listed on the homepage are the more popular or interesting ons. Click <a href="/archives.html">here</a> for the <a href="/archives.html">chronological blog listing.</a></p>
+<p>Posts listed on the homepage are the more popular or interesting ones. Click <a href="/archives.html">here</a> for the <a href="/archives.html">chronological blog listing.</a></p>
     {% if articles %}
         {% for article in (articles_page.object_list if articles_page else articles) %}
           {% if article.featured %}
