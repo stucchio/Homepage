@@ -7,9 +7,9 @@ Backtest your SQL queries - they are models too
 
 I was recently discussing a project with a younger data scientist and I noticed a curious mismatch between our language. We had an API that we wanted to impose rate limits on. We want to ensure that 99% of our good customers have a good experience and never hit the rate limit, while locking down the heaviest users to prevent overload. We also want to limit the potential damage caused by malicious usage.
 
-Luckily all usage was nicely logged in redshift. For simplicity, lets assume we have a table ``endpoint_usage`` with columns ``endpoint_url``, ``user_id``, ``daily_requests``, ``date`` and ``malicious``. The ``malicious`` flag is an indication of malicious usage of the API, and is unfortunately not something which can be computed in realtime. (If we could compute it in realtime, then we could simply use this flag instead of a rate limit.)
+Luckily all usage was nicely logged in redshift. For simplicity, lets assume we have a table ``endpoint_usage`` with columns ``endpoint_url``, ``user_id``, ``daily_requests``, ``date`` and ``malicious``. The ``malicious`` flag is an indication of malicious usage of the API, and is unfortunately not something which can be computed in realtime. (If we could compute it in realtime then we could simply use this flag instead of a rate limit.)
 
-Our analysis was therefore quite simple - we'll just measure the historical usage of our bottom 99% of non-malicious customers and use that. The code was not much more sophisticated than this::
+Our analysis was quite simple - we'll just measure the historical usage of our bottom 99% of non-malicious customers and use that. The code was not much more sophisticated than this::
 
   SELECT endpoint_url,
          PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY daily_requests) OVER (PARTITION BY endpoint_url) AS num_requests_99pct
@@ -19,19 +19,19 @@ Our analysis was therefore quite simple - we'll just measure the historical usag
 
 We are excluding malicious users from this query because we do not care about keeping them happy.
 
-The SQL is complex, but what it's doing is computing the 99'th percentile of ``daily_requests`` over each ``endpoint_url``. Unfortunately Postgres/Redshift do not have a ``PERCENTILE`` aggregate function. Only a window function is provided and the syntax for window functions is a bit more complex. If we were taking the 100'th percentile (i.e. ``MAX``) instead of the 99'th, it would simply be::
+The SQL in the second line of the query is complex, but all it's doing is computing the 99'th percentile of ``daily_requests`` over each ``endpoint_url``. Unfortunately Postgres/Redshift do not have a ``PERCENTILE`` aggregate function. Only a window function is provided and the syntax for window functions is a bit more complex than aggregates. If we were taking the 100'th percentile (i.e. ``MAX``) instead of the 99'th, it would simply be::
 
    SELECT endpoint_url, MAX(daily_requests)
     FROM endpoint_usage
       WHERE (NOT malicious)
     GROUP BY endpoint_url
 
-Those of you who know what I do know I'm actually not rate limiting an API, but instead allocating capital and choosing bet sizes for real money gambles. But those are trade secrets so I'll stick to this example.
+(Those of you who know what I do know I'm actually not rate limiting an API, but instead allocating capital and choosing bet sizes for real money gambles. But those are trade secrets so I'll stick to this example.)
 
 
 Me: "Is the rate limit model ready to go?"
 
-Her: "You mean running the rate limit SQL query on a cron job?"
+Her: "You mean running the rate limit SQL query?"
 
 Me: "Yes, but also are we backtesting the model?"
 
@@ -90,6 +90,31 @@ If ``num_rate_limited`` is 1% of ``total_usage``, we're in business! Our modelin
 
 If it's not, then we might need to do more work.
 
+Coding note
+~~~~~~~~~~~
+
+One way to implement this would be as a single big query::
+
+   WITH rate_limits AS (SELECT endpoint_url,
+                               PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY daily_requests) OVER (PARTITION BY endpoint_url) AS num_requests_99pct
+                          FROM endpoint_usage
+                            WHERE (NOT malicious)
+                                  AND (date < '2019-11-01')
+                        GROUP BY endpoint_url)
+
+
+   SELECT endpoint_url, COUNT(*) AS total_usage,
+         SUM(CASE WHEN (daily_requests > num_requests_99pct) THEN 1 ELSE 0) AS num_rate_limited,
+     FROM endpoint_usage
+       INNER JOIN rate_limits ON (endpoint_usage.endpoint_url = rate_limits.endpoint_url)
+     WHERE (NOT malicious)
+           AND (date >= '2019-11-01') AND (date < '2019-12-01')
+     GROUP BY endpoint_url
+
+I would, however, recommend an alternate approach. I would write a python script which takes an ``end_date`` parameter and runs a query which excludes all data only made available after ``end_date``.
+
+This function would be used *in both training and backtesting*, so that there is only a single chunk of code to change if the algorithm changes. The danger we are protecting against here is forgetting to change the backtesting query when we change the model query.
+
 
 Does the model change over time?
 --------------------------------
@@ -105,8 +130,8 @@ Putting it into production
 Instead of simply running this SQL query once and hard coding the result, we can have a much more robust system with a moderate amount of effort. We'll follow the exact same steps as putting a data science model into production:
 
 1. Set up a cron job (or better, an `Airflow dag <https://airflow.apache.org/>`_ to run the query (i.e. train the model) every month.
-2. Set up a second cron job to run the backtest every month. This means that on Jan 1, the code should generate rate limits using data available up to Dec 1. Then it should check how many users exceeded those rate limits during Dec 1-Dec 31. The results of this should be posted to a slack channel, a dashboard, or some other regularly monitored location.
-3. Ensure proper alerting. If the API usage in redshift drops below some expected level, raise an alert - the model might be broken due to insufficient data (or data collection might simply be broken). If the number of non-malicious users getting rate limited exceeds an expected threshold (e.g. 3-5%), similarly an alert should be raised. Models are finicky things and you should not skimp on the sanity checks.
+2. Set up a second cron job to run the backtest every month. This means that on Jan 1, the code should generate rate limits using data available up to Dec 1. Then it should check how many users exceeded those rate limits during Dec 1-Dec 31. The results of this should be posted to a slack channel or monthly email.
+3. Ensure proper alerting. If the API usage in redshift drops below some expected level, raise an alert - the model might be broken due to insufficient data (or data collection might simply be broken). Similarly, if the number of non-malicious users getting rate limited exceeds an expected threshold (e.g. 3-5%) then an alert should be raised. Models are finicky things and sanity checks are needed.
 
 (Obviously adjust "monthly" to whatever makes sense for your use case.)
 
