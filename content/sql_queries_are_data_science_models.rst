@@ -9,7 +9,7 @@ I was recently discussing a project with a younger data scientist and I noticed 
 
 Luckily all usage was nicely logged in redshift. For simplicity, lets assume we have a table ``endpoint_usage`` with columns ``endpoint_url``, ``user_id``, ``daily_requests``, ``date`` and ``malicious``. The ``malicious`` flag is an indication of malicious usage of the API, and is unfortunately not something which can be computed in realtime. (If we could compute it in realtime then we could simply use this flag instead of a rate limit.)
 
-Our analysis was quite simple - we'll just measure the historical usage of our bottom 99% of non-malicious customers and use that. The code was not much more sophisticated than this::
+Our analysis was quite simple - we'll just measure the historical usage of our bottom 99% of non-malicious customers - grouped by ``endpoint_url`` - and use that. The code was not much more sophisticated than this::
 
   SELECT endpoint_url,
          PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY daily_requests) OVER (PARTITION BY endpoint_url) AS num_requests_99pct
@@ -26,7 +26,7 @@ The SQL in the second line of the query is complex, but all it's doing is comput
       WHERE (NOT malicious)
     GROUP BY endpoint_url
 
-(Those of you who know what I do know I'm actually not rate limiting an API, but instead allocating capital and choosing bet sizes for real money gambles. But those are trade secrets so I'll stick to this example.)
+(Those of you who know what I do know I'm actually not rate limiting an API, but instead allocating capital and choosing bet sizes for real money gambles. But this example is safely removed from trade secrets so I'm sticking with it.)
 
 
 Me: "Is the rate limit model ready to go?"
@@ -39,27 +39,21 @@ Her: "What do you mean 'model'? It's just a SQL query."
 
 Me: ...gave explanation that makes up the rest of this blog post...
 
-To be very clear, I am not attempting to dress up a SQL query as something more sophisticated than it is. I am not a big fan of the hype train that turns simple linear regression into "AI".
-
-Nevertheless, I believe that concepts made popular in data science are valuable even for simple programming tasks such as this.
+To be very clear, I am not attempting to dress up a SQL query as something more sophisticated than it is. I am not a big fan of the hype train that turns simple linear regression into "AI" However, I believe that concepts made popular in data science are valuable even for simple programming tasks such as this.
 
 
-Big Idea: Your Analysis is a Model
-==================================
+What's a "model"?
+=================
 
-Fundamentally a model is code that attempts to predict the future. Unfortunately, predicting the future is hard, so we need to be very careful about doing it.
+Fundamentally, a model is a piece of code that attempts to predict the future based on past data. In many data science applications this means that the model will be something complex; a deep neural network, a gradient boosting machine, or even a linear regressor. In this case our model is something simpler - simple a hash map ``endpoint_url -> rate_limit``. Just as the model is simple, the process computing it is also quite easy. The most obvious way to do it would be to simply open up Jupyter, run the analysis once, and then hardcode the result into the production system.
 
-The analysis being performed above is quite simple. The most obvious way to do it would be to simply open up Jupyter, run the analysis once, and then hardcode the result into the production system. Most product managers would be very happy with this.
+The danger in simply doing this is that the future may not simply be a repeat of the past. Our goal is to rate limit the API in such a way as to minimize the impact on *future* non-malicious users. We are attempting to predict the future, specifically future usage of the API.
 
-But ultimately, we aren't doing a historical analysis. Our goal is to rate limit the API in such a way as to minimize the impact on *future* non-malicious users. We are attempting to predict the future, specifically future usage of the API.
-
-We're making an implicit modeling assumption here that should be made explicit: past usage and future usage are very similar.
-
-Just like any other data science model, our predictions might be wrong (or at least less right than we think).
+Just like any other data science model, we should therefore run a `backtest <https://en.wikipedia.org/wiki/Backtesting>`_ to determine if our predictions would have worked well in the past had we used them.
 
 
-All models should be backtested
--------------------------------
+How does backtesting work?
+--------------------------
 
 To backtest a model is to simulate what *would have* happened had we used the model in the past.
 
@@ -91,7 +85,7 @@ If ``num_rate_limited`` is 1% of ``total_usage``, we're in business! Our modelin
 If it's not, then we might need to do more work.
 
 Coding note
-~~~~~~~~~~~
+-----------
 
 One way to implement this would be as a single big query::
 
@@ -135,4 +129,4 @@ Instead of simply running this SQL query once and hard coding the result, we can
 
 (Obviously adjust "monthly" to whatever makes sense for your use case.)
 
-Ultimately, the idea of running a train/test split on historical data and auto-update your parameters is a very powerful paradigm. It is normally applied to complex data science models (think: gradient boosting, neural networks), but even many simple tasks can benefit from this process as well.
+Ultimately, the idea of running a train/test split on historical data and auto-update your parameters is a very powerful paradigm. It is normally applied to complex data science models but even many simple tasks can benefit from this process as well.
