@@ -1,6 +1,6 @@
 Backtest your SQL queries - they are models too
 ###############################################
-:date: 2019-12-15 08:30
+:date: 2019-12-09 08:30
 :author: Chris Stucchio
 :tags: data science, sql, programming
 
