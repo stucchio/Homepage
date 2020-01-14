@@ -5,14 +5,14 @@ Is white nationalism a serious problem? Extracting wikipedia data with Python.
 :tags: terrorism, python
 
 
-I recently saw a `silly twitter exchange <https://twitter.com/AOC/status/1107757871477985280>`_ between two of the lyingest politicians in American politics. Given that they have both explicitly expressed the viewpoint that morals matter more than numbers and being "technically correct", I figured that I should just check for myself. On twitter, Trump says white nationalism is a small group of people with serious problems while Alexandria O. Cortez claims "White supremacists committed the largest # of extremist killings in 2017". This question is easily answerable...*with Python*.
+I recently saw a `silly twitter exchange <https://twitter.com/AOC/status/1107757871477985280>`_ between two of the lyingest politicians in American politics. Given that they have both explicitly expressed the viewpoint that morals matter more than numbers and being "technically correct", I figured that I should just check for myself. On twitter, Trump says white nationalism is a small group of people with serious problems while Alexandria O. Cortez claims "White supremacists committed the largest # of extremist killings in 2017". This question is easily answerable... *with Python*.
 
-So actually no, this blog isn't about politics. But I recently discovered `pandas.read_html`, and two idiot politicians tweeting at each other is as good as reason as any to write a blog post about it. The real audience for this post is python developers who want to see a couple of cool pydata tricks I've learned recently.
+So actually no, this blog isn't about politics. But I recently discovered :code:`pandas.read_html`, and two idiot politicians tweeting at each other is as good as reason as any to write a blog post about it. The real audience for this post is python developers who want to see a couple of cool pydata tricks I've learned recently.
 
-Cool python trick #1: `pandas.read_html`
-----------------------------------------
+Cool python trick #1: :code:`pandas.read_html`
+----------------------------------------------
 
-This is one of the coolest tricks I've learned in 2019. The `pandas` library has a method, `read_html <http://pandas.pydata.org/pandas-docs/version/0.19.2/generated/pandas.read_html.html>`_ which takes a webpage as input and returns a list of dataframes containing the tables on that webpage.
+This is one of the coolest tricks I've learned in 2019. The :code:`pandas` library has a method, `read_html <http://pandas.pydata.org/pandas-docs/version/0.19.2/generated/pandas.read_html.html>`_ which takes a webpage as input and returns a list of dataframes containing the tables on that webpage.
 
 So to answer the question about terrorism in 2017, I'm going to browse Wikipedia's `List of Terrorist Incidents in 2017 <https://en.wikipedia.org/wiki/List_of_terrorist_incidents_in_2017>`_.
 
@@ -31,18 +31,18 @@ Therefore, to extract the data I'll do this::
         data.append(load_month(month))
     data = pandas.concat(data)
 
-The function `read_html` is doing all the heavy lifting here.
+The function :code:`read_html` is doing all the heavy lifting here.
 
 The result of this is a dataframe listing a location, a perpetrator, a number of deaths/injuries, and a few more columns. It's not super clean, but at least it's pretty structured.
 
-This `read_html` function is awesome because I needed to do literally no work parsing.
+This :code:`read_html` function is awesome because I needed to do literally no work parsing.
 
-Cool python trick #2: the `wikipedia` module
---------------------------------------------
+Cool python trick #2: the :code:`wikipedia` module
+--------------------------------------------------
 
-In this data, there were 230 separate perpetrators listed *after* cleaning up some of the obvious data issues (e.g. some rows containing `Al Shabaab` and others containing `Al-Shabaab`). That's far too much for me to manually classify everything.
+In this data, there were 230 separate perpetrators listed *after* cleaning up some of the obvious data issues (e.g. some rows containing ``"Al Shabaab"`` and others containing ``"Al-Shabaab"``). That's far too much for me to manually classify everything.
 
-So instead I used the `wikipedia` module.::
+So instead I used the :code:`wikipedia` module.::
 
     import wikipedia
 
@@ -56,7 +56,7 @@ So instead I used the `wikipedia` module.::
 
     count['perp_summary'] = count['perpetrator_cleaned'].apply(get_summary)
 
-This gets me a summary of each terrorist group, assuming wikipedia can easily find it. For example, here's the result of `get_summary('Al-shabaab')`:
+This gets me a summary of each terrorist group, assuming wikipedia can easily find it. For example, here's the result of :code:`get_summary('Al-shabaab')`:
 
     'Harakat al-Shabaab al-Mujahideen, more commonly known as al-Shabaab (lit. \'"The Youth" or "The Youngsters", but can be translated as "The Guys"\'), is a jihadist fundamentalist group based in East Africa. In 2012, it pledged allegiance to the militant Islamist organization Al-Qaeda.[...a bunch more...]
 
@@ -85,7 +85,7 @@ It looks like Donald Trump is right and AOC is wrong. Even if we take high end e
 
 There are many individual terrorist groups that I imagine most readers have never heard of, such as Indian Naxalites (communists), which kill far more people than white supremacists.
 
-Also, far more importantly for most of my readers, you can easily extract data from Wikipedia into a dataframe using `pandas.read_html` and the `wikipedia` module.
+Also, far more importantly for most of my readers, you can easily extract data from Wikipedia into a dataframe using :code:`pandas.read_html` and the :code:`wikipedia` module.
 
 Methodology
 -----------

@@ -3,6 +3,7 @@ date: 2016-06-29 10:00
 author: Chris Stucchio
 tags: statistics
 nolinkback: true
+no_archive: true
 
 While writing a [previous post](https://www.chrisstucchio.com/blog/2016/why_gays_cant_donate_blood.html), I learned a pretty shocking fact: [19% of gay men have HIV](http://www.cdc.gov/mmwr/preview/mmwrhtml/mm5937a2.htm?s_cid=mm5937a2_w). That's a lot! A while back I had broken-condom sex with a lady from sub-Saharan Africa who I later learned was a pimpstress - for months afterwards I was really scared that I got HIV. But this is a totally different order of magnitude!
 
