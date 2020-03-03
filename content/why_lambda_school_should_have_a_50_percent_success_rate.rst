@@ -131,14 +131,20 @@ The average conversion rate goes to ``(14%+4.2%+2.1%)/3 = 6.76%``, a mere 4% imp
 On the other hand it's important to look at aggregate numbers. In these scenarios, improving conversion rates has increased sales by 50-100%. The additional sales have significantly lower margin, but it's still an increase in profits.
 
 
-Employee productivity should be lower in cheaper places
-=======================================================
+Why Indian software developers are lower quality than Western ones
+==================================================================
 
-I've made this argument `elsewhere in more detail <https://www.chrisstucchio.com/blog/2017/cobbs_douglas.html>`_, but I'll give a short summary here. Consider two competing companies - one in India, one in the US. The cost per employee of the US company is significantly higher than that of the Indian company.
+I've made this argument `elsewhere in more detail <https://www.chrisstucchio.com/blog/2017/cobbs_douglas.html>`_, but I'll give a short summary here.
 
-As a result, the Indian company should invest more money into lower value projects (that primarily use human labor as the input). In the example I described in that `blog post <https://www.chrisstucchio.com/blog/2017/cobbs_douglas.html>`_, the Indian had a labor cost 1/5 that of the American company. As a result they should hire 5x more employees, earn 2.2x as much revenue, and have a productivity per employee only 44% that of the American company. (These numbers are very approximate.)
+The cost of an American developer is approximately 3-10x the cost of a similar Indian developer. In my experience (I lived in India for many years), there are plenty of Indian developers and data scientists just as good as any in the US. (If you are seeking employees, I know of a good company that everyone is leaving from. I can connect you to people.)
 
-Note that this result is obtained *even though Indian employees are assumed to be identical to American ones*.
+Yet the reputation of Indian developers among Americans is quite low. People commonly talk about outsourced projects run by teams of idiots, and have generally strong criticisms of Indian developers in general.
+
+I never had this experience, but I also subject anyone I hire in India to the same level of hiring rigor that I subject Americans to.
+
+We can reconcile these two views simply by observing that as you lower the cost of a failure (e.g. making a bad hire), it is economically optimal to allow a higher rate of failure. This means that Indian companies competing with American companies should have a lower hiring bar, by the same logic as above. This will drag the *average* quality of Indian developers down; similarly low quality American developers would simply not get hired as developers.
+
+Thus, the Indian software engineering market has lower quality simply because low costs have allowed a larger pool of people to enter.
 
 
 Conclusion
