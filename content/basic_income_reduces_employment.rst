@@ -149,6 +149,19 @@ The conclusion we can draw from this is that all the available evidence suggests
 
 We can also anticipate that the effect will be worse if people believe that a Basic Income is likely to be permanent. As can be seen by comparing the 3 and 5 year groups in the Seattle/Denver experiment, people assigned to a longer term BI reduced their work effort significantly more than those assigned to the short term BI.
 
+Update 2020/3/5: Confirming the theory with out-of-time data!
+=============================================================
+
+(This section added to the blog post on 2020/3/5.)
+
+As of 2019, I predicted that a Basic Income in North America would generally reduce labor supply by double digit amounts, approximately 10%. I now have out-of-time data that vindicates this prediction!
+
+From 2017-2018, `Southern Ontario <|filename|blog_media/2019/basic_income_reduces_employment/southern-ontarios-basic-income-experience.pdf>`_ ran a new Basic Income experiment. For what I believe to be political reasons, the pilot study was cancelled and the assessment was not performed using official government records. To make up for this lack of good data collection, some academics ran a poll on some of the people who were receiving Basic Income during the pilot. Due to this methodology - entirely self reported based on people's recollection of things from years ago - this study is far more speculative than the ones above.
+
+However, the results are generally consistent with all the other studies. Of the BI recipients who were employed 6 months prior to receiving Basic Income, 23.9% report being unemployed during the Basic Income pilot. Of the people unemployed prior to BI, 81.8% remain unemployed. Changes in working hours were not measured.
+
+This more recent study offers results in the same ballpark as all the older studies; Basic Income appears to reduce labor supply by double digit percentages. My prediction came true in out-of-time data!
+
 Update on Keynesian Economics
 =============================
 
