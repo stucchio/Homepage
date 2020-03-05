@@ -5,9 +5,9 @@ Cost Matters: Why Lambda School should have a lower success rate than college
 :tags: education, decision theory
 
 
-Lambda school has recently come under fire by the mainstream media for having success rates smaller than 100%, as well as for having a founder who is a nerd. The articles imply
+Lambda School has recently come under fire by the mainstream media for having success rates smaller than 100%, as well as for having a founder who is a nerd. The articles imply that Lambda School is somehow ripping off it's students - possibly by, um, tricking hedge funds into paying for their education - though no real mechanism for this is provided.
 
-(I'm not actually joking about that last part - the `MSM article <http://archive.is/HU2vj>`_ that I found literally talks about how he doesn't have enough friends.) But this critique is the height of innumeracy; there is no intrinsic reason Lambda School or any other institution *should* have high success rates.
+(I'm not actually joking about the nerd part - the `MSM article <http://archive.is/HU2vj>`_ that I found literally talks about how he doesn't have enough friends.) But this critique is the height of innumeracy; there is no intrinsic reason Lambda School or any other institution *should* have high success rates.
 
 In this blog post I'm going to do some really simple probability and expose an important tradeoff that I've observed people ignoring in many different contexts - Lambda School and MOOCs, in business, and elsewhere. This article is more about decision theory than Lambda School - but the recent controversy over Lambda School having a lower than 100% success rate makes a good jumping off point.
 
@@ -81,8 +81,8 @@ As another example, we might be choosing which adwords (and landing pages matche
 We are now faced with the task of choosing which gambles we want to take. Armed with the decision rule we came up with above we have a simple way to decide this: if ``w/l > (1-p[i])/p[i]`` we will accept gamble ``i``.
 
 
-Lowering the cost of failure *should* lower your success rate
--------------------------------------------------------------
+Lowering the cost of failure allows one to accept a lower success rate
+----------------------------------------------------------------------
 
 Let us now consider a set of gambles; lets assume that ``p[i] = i/10`` for ``i=0..10``. Suppose for simplicity that ``w=2, l=8``. This implies that the positive sum gambles are the ones with ``p[i] >= 0.8`` or ``i >= 8``.
 
@@ -90,20 +90,20 @@ If we choose gambles according to this rule, we will only choose to gamble at ``
 
 Suppose now we reduced the cost of failure; say instead of ``l=8`` we had ``l=2``. In this case, the positive sum gambles are the ones with ``p[i] >= 0.5`` or ``i=5...10``. The average success rate of over all of these gambles is ``0.75``, which is lower than the ``0.9`` we had at a cost of ``l=8``.
 
-Here's the core economics of this. If you lower the cost of something, it makes sense to lower quality versions of that something.
+Here's the core economics of this. If you lower the cost of something, it makes sense to lower quality standards of that something.
 
-Intuitive example: Wikipedia, Lambda School vs College
-------------------------------------------------------
+Intuitive example: Wikipedia, Lambda School and College
+-------------------------------------------------------
 
-On the topic of educational institutions, consider my favorites: Wikipedia and Duckduckgo. These institutions have very high failure rates for me; quite often, I search for something and do not find what I'm looking for. Obviously, Wikipedia is not a failure simply because I search for lots of things I don't find.
+On the topic of educational institutions, consider my favorites: Wikipedia and Duckduckgo. These institutions have very high failure rates for me; quite often, I search for something and do not find what I'm looking for. Obviously, Wikipedia is not in any sense bad for consumers simply because I search for lots of things I don't find.
 
 And the reason for this is obvious; Wikipedia is free. If it's useful 20% of the time and takes me 5 seconds to search for something, that's an average of 25 seconds of search per useful result. That's a win.
 
-In contrast, a college with a 20-30% success rate (and `they do exist <https://moneyinc.com/worst-colleges-in-america/>`_) is taking tens of thousands of dollars from students and providing very little value in return. This is much worse.
+In contrast, a college with a 20-30% success rate (and `they do exist <https://moneyinc.com/worst-colleges-in-america/>`_) is taking tens of thousands of dollars from students and providing very little value in return. This is much worse even though the success rate is the same.
 
-Lambda school operates somewhere in between these two extremes. It's a lot cheaper than college - particular for the people who don't succeed. This means that the socially optimal result (from the perspective of a student) is that Lambda School should admit more students until it's success rate drops significantly below college.
+Lambda school operates somewhere in between the extremes of Wikipedia and College. It's a lot cheaper than college - particular for the people who don't succeed. This means that the socially optimal result (from the perspective of a student) is that Lambda School should admit more students until it's success rate drops significantly below college.
 
-I understand the sentiment that high failure rates
+I understand the sentiment that high failure rates are a problem, but hopefully the example of Wikipedia provides intuition about why a low cost method of education can be valuable even if it's success rate is low.
 
 
 You can never raise your conversion rate
@@ -120,9 +120,9 @@ The channels available are:
 
 Assuming these channels provide equal traffic, bids will be placed on channels A and B only. C is unprofitable so no bids are placed.
 
-Now suppose the price of adwords falls by 30%; channel A now costs $1.4/click while B and C cost $0.7/click. At this point the cost per conversion of channel C has dropped to ``$0.7/0.015 = $46.67 < $50``. This channel then gets switched on.
+Now suppose the price of adwords falls by 30%; channel A now costs $1.4/click while B and C cost $0.7/click. At this point the cost per conversion of channel C has dropped to ``$0.7/0.015 = $46.67 < $50``. At this time channel C gets switched on.
 
-However, the net result of this is that the conversion rate has dropped from ``(10% + 3%)/2=6.5%`` to ``(10%+3%+1.5%)/3 = 4.8%``. Profit margins have dropped too. The net result here is that traffic has increased by 50%, but the new 50% are low margin, barely profitable users with low conversion rates. These new users drag the average down.
+However, the net result of this is that the conversion rate has dropped from ``(10% + 3%)/2=6.5%`` to ``(10%+3%+1.5%)/3 = 4.8%``. Profit margins have dropped too. The net result here is that traffic has increased by 50%, but the new 50% are low margin, barely profitable users with low conversion rates. These new users drag the average down even as they add profits to the bottom line.
 
 On the flip side of this phenomenon, it's very difficult to *raise* conversion rates. Imagine a sitewide improvement that results in the conversion rate on every channel increasing by 40% (but prices remained the same). This raises the conversion rate of channel C to 2.1%, lowering the cost per conversion to $47.61 and making it profitable.
 
@@ -146,6 +146,7 @@ We can reconcile these two views simply by observing that as you lower the cost 
 
 Thus, the Indian software engineering market has lower quality simply because low costs have allowed a larger pool of people to enter.
 
+(Note: I'm singling out India only because I lived and worked there for many years.)
 
 Conclusion
 ==========
