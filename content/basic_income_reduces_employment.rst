@@ -64,7 +64,7 @@ The widely disparate results reported across subgroups also suggest that the sub
 The Gary Experiment
 -------------------
 
-The `Gary Experiment <|filename|blog_media/2019/basic_income_reduces_employment/Findings_from_the_Gary_Income_Maintenance_Experiment__Gary Income Maintenance Experiment.pdf>`_ was focused on mitigating urban Black poverty. It was run from 1971-1974 and had a sample of 1800 families (43% of which were the control group). 60% of participating familes were female headed. Dual earning families were generally excluded from the experiment because their income was too high.
+The `Gary Experiment <|filename|blog_media/2019/basic_income_reduces_employment/gary_income_maintenance_experiment.pdf>`_ was focused on mitigating urban Black poverty. It was run from 1971-1974 and had a sample of 1800 families (43% of which were the control group). 60% of participating familes were female headed. Dual earning families were generally excluded from the experiment because their income was too high.
 
 The size of the BI was pretty similar to those of the other experiments - 70% and 100% of the poverty level.
 
