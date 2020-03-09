@@ -3,7 +3,7 @@ Isotonic: A Python package for doing fancier versions of isotonic regression
 :date: 2020-03-10 08:30
 :author: Chris Stucchio
 :tags: python, statistics
-
+:featured: true
 
 
 Frequently in data science, we have a relationship between :code:`X` and :code:`y` where (probabilistically) :code:`y` increases as :code:`X` does. The relationship is often not linear, but rather reflects something more complex. Here's an example of a relationship like this:
