@@ -126,10 +126,10 @@ Here :math:`f(x)` is monotone decreasing and :math:`\delta(x-x_0)` is the point 
 .. math::
    \min_{0 \leq \lambda \leq 1} \min_{x} \min_{y \geq x} \left[ F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y) \right]
 
-Let :math:`x=x_0-\epsilon`, `y=x_0+\epsilon` and :math:`\lambda=\frac{1}{2}-\epsilon`. Then:
+Let :math:`x=x_0-\epsilon`, :math:`y=x_0+\epsilon^2` and :math:`\lambda=\frac{1-\epsilon}{1+\epsilon}`. Then:
 
 .. math::
-   x + \lambda(y-x) = (x_0-\epsilon) + (\frac{1}{2} - \epsilon)\left[x_0+\epsilon - (x_0-\epsilon)\right] = x_0-\epsilon^2
+   x + \lambda(y-x) = (x_0-\epsilon) + \frac{1-\epsilon}{1+\epsilon}\left[x_0+\epsilon^2 - (x_0-\epsilon)\right] = x_0-\frac{\epsilon^3}{1+\epsilon}
 
 Now substituting this in, we discover:
 
@@ -137,37 +137,37 @@ Now substituting this in, we discover:
    F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y)
 
 .. math::
-   = F(x_0-\epsilon^2) - (\frac{1}{2} + \epsilon) F(x_0-\epsilon) - (\frac{1}{2} -\epsilon) F(x_0+\epsilon)
+   = F(x_0-\frac{\epsilon^3}{1+\epsilon}) - \frac{2\epsilon}{1+\epsilon} F(x_0-\epsilon) - \frac{1-\epsilon}{1+\epsilon} F(x_0+\epsilon)
 
-Note that:
 
-.. math::
-   F(x) = \int_0^x (1-\beta)f(t) dt + \beta 1(x > x_0)
+Letting :math:`\bar{F}(x) = \int_0^x f(x) dx`, we observe that :math:`F(x) = (1-\beta)\bar{F}(x) + 1_{x \geq x_0}`. Since :math:`f(x)` is absolutely continuous, :math:`\bar{F}(x)` is of course a continuous function.
 
-Substituting this into the above, we find:
+Let us now take the limit as :math:`\epsilon \rightarrow 0`:
 
 .. math::
-   = \int_0^{x_0-\epsilon^2} (1-\beta) f(t) dt - (\frac{1}{2} + \epsilon)\int_0^{x_0-\epsilon} (1-\beta) f(t) dt
-.. math::
-   - (\frac{1}{2}-\epsilon)\int_0^{x_0+\epsilon} (1-\beta) f(t) dt - (\frac{1}{2}-\epsilon)\beta
-
-Taking the limit as :math:`\epsilon \rightarrow 0` yields
+   \lim_{\epsilon \rightarrow 0} F(x_0-\frac{\epsilon^3}{1+\epsilon}) - \frac{2\epsilon}{1+\epsilon} F(x_0-\epsilon) - \frac{1-\epsilon}{1+\epsilon} F(x_0+\epsilon)
 
 .. math::
-   = \int_0^{x_0} (1-\beta) f(t) dt - \frac{1}{2}\int_0^{x_0} (1-\beta) f(t) dt - \frac{1}{2}\int_0^{x_0} (1-\beta) f(t) dt - \frac{1}{2}\beta
+   = (1-\beta)\bar{F}(x_0 - 0) - \frac{2\cdot0}{1+0} (1-\beta)\bar{F}(x_0 - 0) - \frac{1-0}{1+0} \left( (1-\beta) \bar{F}(x_0 + 0) + \beta \right)
 
 .. math::
-   = - \frac{\beta}{2}
-
-This of course implies that:
+   = (1-\beta)\bar{F}(x_0) - 0 - (1-\beta) \bar{F}(x_0) - \beta
 
 .. math::
-   \min_{0 \leq \lambda \leq 1} \min_{x} \min_{y \geq x} \left[ F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y) \right] \leq - \frac{\beta}{2}
+   = -\beta
+
+
+This implies that
+
+.. math::
+   \min_{0 \leq \lambda \leq 1} \min_{x} \min_{y \geq x} \left[ F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y) \right] \leq - \beta,
+
+since the minima is of course smaller than any limit.
 
 By the same argument as in the previous section - using the DKQ inequality to relate :math:`F(x)` to :math:`F_n(x)` - we can therefore conclude that:
 
 .. math::
-   q \leq - \frac{\beta}{2} + 2\epsilon
+   q \leq - \beta + 2\epsilon
 
 with probability :math:`1-e^{-2n\epsilon^2}`.
 
@@ -184,7 +184,7 @@ We can combine these results into a hypothesis test which is capable of distingu
 Suppose now that
 
 .. math::
-   \beta \geq 4 \left(\sqrt{\frac{-\ln(p)}{2n}} + \sqrt{\frac{-\ln(1-r)}{2n}} \right).
+   \beta \geq 2 \left(\sqrt{\frac{-\ln(p)}{2n}} + \sqrt{\frac{-\ln(1-r)}{2n}} \right).
 
 Then with probability at least :math:`r`, we will reject the null hypothesis.
 
@@ -196,22 +196,28 @@ Due to the slowness of the convergence implied by the DKW inequality, we unfortu
 +-------+---------------+
 | n     | :math:`\beta` |
 +=======+===============+
-| 1000  | 0.309         |
+| 1000  | 0.155         |
 +-------+---------------+
-| 2000  | 0.219         |
+| 2000  | 0.109         |
 +-------+---------------+
-| 5000  | 0.138         |
+| 5000  | 0.0692        |
 +-------+---------------+
-| 10000 | 0.0979        |
+| 10000 | 0.0490        |
 +-------+---------------+
-| 25000 | 0.0619        |
+| 25000 | 0.0310        |
 +-------+---------------+
-| 100000| 0.0310        |
+| 100000| 0.0155        |
 +-------+---------------+
 
 Thus, this method is really only suitable for detecting either large anomalies or in situations with large sample sizes.
 
-Strengthing assumptions
-=======================
+Somewhat importantly, this method is not particularly sensitive to the p-value cutoff. For example, with a 1% cutoff rather than a 5%, we can detect spikes of size :math:`\beta=0.055` at :math:`n=10000`.
 
-If we make stronger regularity assumptions on :math:`f(x)`, we can
+This makes the method reasonably suitable for surveillance purposes. By setting the p-value cutoff reasonably low (e.g. 1% or 0.1%), we sacrifice very little measurement power on a per-test basis. This allows us to run many versions of this test in parallel and then use either the `Sidak correction <https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction>`_ to control the group-wise false positive rate or `Benjamini-Hochburg <https://en.wikipedia.org/wiki/False_discovery_rate#Benjamini%E2%80%93Hochberg_procedure>`_ to control the false discovery rate.
+
+Conclusion
+==========
+
+At the moment this test is not all I was hoping for. It's quite versatile, in the sense of being fully nonparametric and assuming little beyond the underlying distribution being monotone decreasing. But while theoretically the convergence is what one would expect, in practice the constants involved are large. I can only detect spikes in histograms after they've become significantly larger than I'd otherwise like.
+
+However, it's still certainly better than nothing. This method would have worked in several of the practical examples I described at the beginning and would have flagged issues earlier than than I detected them via manual processes. I do believe this method is worth adding to suites of automated anomaly detection. But if anyone can think of ways to improve this method, I'd love to hear about them.
