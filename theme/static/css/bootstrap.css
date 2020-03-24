@@ -399,11 +399,10 @@ h6,
 .h5,
 .h6 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.1;
   color: inherit;
 }
-
 h1 small,
 h2 small,
 h3 small,
@@ -482,7 +481,8 @@ h3,
 
 h4,
 .h4 {
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 550;
 }
 
 h5,
