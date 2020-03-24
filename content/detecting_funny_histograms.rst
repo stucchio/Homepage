@@ -1,6 +1,6 @@
 Scalably Detecting Odd-looking Histograms
 #########################################
-:date: 2020-03-25 08:30
+:date: 2020-03-24 08:30
 :author: Chris Stucchio
 :tags: python, statistics, outlier detection
 :featured: true
@@ -49,6 +49,8 @@ In contrast, a pdf with a spike in it will fail to be concave near the spike. He
 
 .. image:: |filename|blog_media/2020/detecting_funny_histograms/non_concave_cdf.png
 
+At :math:`x=10` the chord (the red line) is above the graph of the CDF (the green line).
+
 In mathematical terms, concavity of the true CDF can be expressed as the relation:
 
 .. math::
@@ -59,15 +61,17 @@ or equivalently:
 .. math::
    F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y) \geq 0
 
-Since we do not know :math:`F(x)` exactly, we of course cannot measure this directly. However this does suggest a test statistic which we can use - our goal is to show that if this test statistic is sufficiently negative, then a spike must exist:
+Since we do not know :math:`F(x)` exactly, we of course cannot measure this directly. But given a sample, we can construct the empirical CDF which is nearly as good:
+
+.. math::
+   F_n(x) = \frac{1}{n} \sum_{i=1}^n 1_{x \geq x_i}.
+
+Using the empirical CDF and the definition of concavity suggests a test statistic which we can use:
 
 .. math::
    q = \min_{0 \leq \lambda \leq 1} \min_{x} \min_{y \geq x} \left[ F_n(x + \lambda (y-x)) - (1-\lambda)F_n(x) - \lambda F_n(y) \right]
 
-Here :math:`F_n(x)` is the empirical distribution function,
-
-.. math::
-   F_n(x) = \frac{1}{n} \sum_{i=1}^n 1_{x \geq x_i}.
+Our goal is to show that if this test statistic is sufficiently negative, then a spike must exist.
 
 When :math:`q` becomes negative, this shows that :math:`F_n(x)` is non-concave. However, the empirical distribution function is by definition non-concave, as can be seen clearly when we zoom in:
 
@@ -75,7 +79,7 @@ When :math:`q` becomes negative, this shows that :math:`F_n(x)` is non-concave. 
 
 Mathematically we can also see this simply by noting that :math:`1_{x \geq x_i}` is not concave. However, this non-concavity has order of magnitude :math:`O(n^{-1})`, so to deal with this we can simply demand that :math:`q < -1/n`.
 
-There is a larger problem caused - potentially - by deviation between the empirical distribution :math:`F_n(x)` and the true, continuous and concave cdf :math:`F(x)`. This however can also be controlled.
+There is a larger problem caused - potentially - by deviation between the empirical distribution :math:`F_n(x)` and the true, continuous and concave cdf :math:`F(x)`. This however can also be controlled and will be controlled in the next section.
 
 Controlling false positives
 ---------------------------
