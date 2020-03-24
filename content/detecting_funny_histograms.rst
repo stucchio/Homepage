@@ -3,7 +3,6 @@ Scalably Detecting Odd-looking Histograms
 :date: 2020-03-24 08:30
 :author: Chris Stucchio
 :tags: python, statistics, outlier detection
-:featured: true
 
 A lot of suspicious behavior can be detected simply by looking at a histogram. Here's a nice example. There's a paper `Distributions of p-values smaller than .05 in Psychology: What is going on? <|filename|blog_media/2020/detecting_funny_histograms/bbbec3c0722a5f0eedd09f5f23043a47b6a6.pdf>`_ which attempts to characterize the level of data manipulation performed in academic psychology. Now under normal circumstances, one would expect a nice smooth distribution of p-values resulting from honest statistical analysis.
 
