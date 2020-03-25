@@ -22,9 +22,15 @@ In contrast, under normal circumstances, a graph of the same quantity would typi
 
 A third example - with graphs very similar to the previous example - happened to me when debugging some DB performance issues. We had a database in US-East which was replicated to US-West. Read performance in US-West was weirdly slow, and when we made a histogram of request times, it turned out that the slowness was driven primarily by a spike at around 90ms. Coincidentally, 90ms was the ping time between our US-East and US-West servers. It turned out that a misconfiguration resulted in the US-West servers occasionally querying the US-East read replica instead of the US-West one, adding 90ms to the latency.
 
+A fourth example comes from the paper `Under Pressure?  Performance Evaluation of Police Officers as an Incentive to Cheat: Evidence from Drug Crimes in Russia <|filename|blog_media/2020/detecting_funny_histograms/EEAESEM2019-1123.pdf>`_ which discovers odd spikes in the amount of drugs found in police searches.
+
+.. image:: |filename|blog_media/2020/detecting_funny_histograms/drugs.png
+
+It sure is very strange that so many criminals all choose to carry the exact amount of heroin needed to trigger harsher sentencing thresholds, and never a few grams less.
+
 In short, many histograms should be relatively smooth and decreasing. When such histograms display a spike, that spike is a warning sign that something is wrong and we should give it further attention.
 
-In all the cases above, I these histograms were made as part of a post-hoc analysis. Once the existence of a problem was suspected, further evidence was gathered and the spike in the histogram was one piece of evidence. I've always been interested in the question - can we instead automatically scan histograms for spikes like the above and alert humans to a possible problem when they arise?
+In all the cases above, I made these histograms as part of a post-hoc analysis. Once the existence of a problem was suspected, further evidence was gathered and the spike in the histogram was one piece of evidence. I've always been interested in the question - can we instead automatically scan histograms for spikes like the above and alert humans to a possible problem when they arise?
 
 This blog post answers the question in the affirmative, at least theoretically.
 
