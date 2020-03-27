@@ -186,3 +186,5 @@ Because I've got a thick skin, any reader is also free to observe flaws and try 
 **Followup:** The paper [The Problem of Infra-Marginality in Outcome Tests for Discrimination](https://5harad.com/papers/threshold-test.pdf) has been published, which improves these ideas to a version that is actually usable.
 
 **Special thanks** to [Evan Miller](http://www.evanmiller.org/) and [Sidhant Godiwala](http://www.sidhantgodiwala.com/) for reading drafts of this and helping me make it a lot more clear. If you like my post you'll probably also like their blogs. Evan Miller also has suggested his own version of this test - I don't fully understand it, but if we are lucky he'll write about it.
+
+**Update:** I discovered a paper, [The Problem of Infra-Marginality in Outcome Tests for Discrimination](/blog_media/2015/paul_grahams_bias_test/threshold-test.pdf) which directly addresses this issue. From what I can tell, it's doing a fairly complex hierarchical Bayesian model that's along the same lines as what's described here.
