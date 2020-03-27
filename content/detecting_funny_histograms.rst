@@ -42,7 +42,7 @@ To model this problem in the frequentist hypothesis testing framework, let us as
 
 In contrast, for the alternative hypothesis - something worth flagging as potentially bad - I'll assume that the distribution is a mixture distribution with pdf :math:`(1-\beta) f(x) + \beta s(x) dx`. Here :math:`s(x)` is monotonically increasing, or more typically :math:`s(x) = \delta(x-x_0)`.
 
-**Observation:** Consider a probability distribution :math:`f(x)` that is monotonically decreasing. Then the cumulative distribution function :math:`F(x)=\int_0^x f(t) dt` is concave. This can be proven by noting that it's derivative, :math:`F'(x) = f(x)` is monotonically decreasing.
+**Observation:** Consider a probability distribution :math:`f(x)` that is monotonically decreasing. Then the cumulative distribution function :math:`F(x)=\int_0^x f(t) dt` is `concave <https://en.wikipedia.org/wiki/Concave_function>`_. This can be proven by noting that it's derivative, :math:`F'(x) = f(x)` is monotonically decreasing.
 
 Our hypothesis test for distinguishing between the null and alternative hypothesis will be based on concavity. Specifically, if there are spikes in a histogram of the pdf of a distribution, then it's CDF may cease to be concave at the point of the spike. Here's an illustration. First, consider the empirical CDF of a distribution which is monotonically decreasing:
 
@@ -56,15 +56,15 @@ In contrast, a pdf with a spike in it will fail to be concave near the spike. He
 
 At :math:`x=10` the chord (the red line) is above the graph of the CDF (the green line).
 
-In mathematical terms, concavity of the true CDF can be expressed as the relation:
+In mathematical terms, `concavity <https://en.wikipedia.org/wiki/Concave_function>`_ of the true CDF can be expressed as the relation:
 
 .. math::
-   F(x + \lambda (y-x)) \geq (1-\lambda)F(x) + \lambda F(y)
+   F(x + \alpha (y-x)) \geq (1-\alpha)F(x) + \alpha F(y)
 
 or equivalently:
 
 .. math::
-   F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y) \geq 0
+   F(x + \alpha (y-x)) - (1-\alpha)F(x) - \alpha F(y) \geq 0
 
 Since we do not know :math:`F(x)` exactly, we of course cannot measure this directly. But given a sample, we can construct the empirical CDF which is nearly as good:
 
@@ -74,7 +74,7 @@ Since we do not know :math:`F(x)` exactly, we of course cannot measure this dire
 Using the empirical CDF and the definition of concavity suggests a test statistic which we can use:
 
 .. math::
-   q = \min_{0 \leq \lambda \leq 1} \min_{x} \min_{y \geq x} \left[ F_n(x + \lambda (y-x)) - (1-\lambda)F_n(x) - \lambda F_n(y) \right]
+   q = \min_{0 \leq \alpha \leq 1} \min_{x} \min_{y \geq x} \left[ F_n(x + \alpha (y-x)) - (1-\alpha)F_n(x) - \alpha F_n(y) \right]
 
 Our goal is to show that if this test statistic is sufficiently negative, then a spike must exist.
 
@@ -91,19 +91,25 @@ Controlling false positives
 
 To control false positives, there is a useful mathematical tool we can use to control this - the `DKW inequality <https://en.wikipedia.org/wiki/Dvoretzky%E2%80%93Kiefer%E2%80%93Wolfowitz_inequality>`_ (abbreviating Dvoretzky–Kiefer–Wolfowitz). This is  a stronger version of the `Glivenko-Cantelli Theorem <https://en.wikipedia.org/wiki/Glivenko%E2%80%93Cantelli_theorem>`_, but which provides uniform convergence over the range of the cdf.
 
-We use it as follows. Let :math:`(x, y, \lambda)` be the point at which the value of :math:`q` is achieved. Let :math:`z = x + \lambda(y-x)`.
+We use it as follows.
+
+Recall that :math:`q` is defind as a minima of :math:`\left[ F_n(x+\alpha(y-x)) - (1-\alpha)F_n(x) - \alpha F_n(y)\right]`. Let us choose :math:`(x,y,\alpha)` now to be the value at which that minima is achieved. Note that this requires that :math:`x < y` are two points in the domain of :math:`F(x)` and :math:`\alpha \in [0,1]`. Let us also define :math:`z=x + \alpha(y-x)` in order to simplify the calculation.
+
+Now lets do some arithmetic, starting from the definition of concavity of the CDF:
 
 .. math::
-   F(z) - (1-\lambda)F(x) - \lambda F(y) =
+   F(z) - (1-\alpha)F(x) - \alpha F(y) =
 
 .. math::
-   = F(z) - (1-\lambda)F(x) - \lambda F(y) - q + q
+   = F(z) - (1-\alpha)F(x) - \alpha F(y) - q + q
 
 .. math::
-   = F(z) - (1-\lambda)F(x) -  \lambda F(y) - \left[ F_n(z) - (1-\lambda)F_n(x) - \lambda F_n(y)\right] + q
+   = F(z) - (1-\alpha)F(x) -  \alpha F(y) - \left[ F_n(z) - (1-\alpha)F_n(x) - \alpha F_n(y)\right] + q
+
+(This line follows since :math:`\left[ F_n(x+\alpha(y-x)) - (1-\alpha)F_n(x) - \alpha F_n(y)\right] = q` due to our choice of :math:`(x,y,\alpha)` above.)
 
 .. math::
-   = \left(F(z) - F_n(z) \right) + (1-\lambda) \left(F(x) - F_n(x) \right) + \lambda \left( F(y)-F_n(y) \right) + q
+   = \left(F(z) - F_n(z) \right) + (1-\alpha) \left(F(x) - F_n(x) \right) + \alpha \left( F(y)-F_n(y) \right) + q
 
 The DKW inequality tells us that for any :math:`\epsilon > 0`,
 
@@ -113,7 +119,7 @@ The DKW inequality tells us that for any :math:`\epsilon > 0`,
 Substituting this into the above, we can therefore say that with probability :math:`e^{-2n\epsilon^2}`,
 
 .. math::
-   F(z) - (1-\lambda)F(x) - \lambda F(y) \leq q + 2\epsilon
+   F(z) - (1-\alpha)F(x) - \alpha F(y) \leq q + 2\epsilon
 
 If :math:`q + 2\epsilon < 0`, this lets us reject the null hypothesis that :math:`F(x)` is concave, or equivalently, that :math:`f(x)` is monotonically decreasing. Conversely, given a value of :math:`q`, we can invert to gain a p-value. We summarize this as a theorem:
 
@@ -133,17 +139,17 @@ Here :math:`f(x)` is monotone decreasing and :math:`\delta(x-x_0)` is the point 
 
 
 .. math::
-   \min_{0 \leq \lambda \leq 1} \min_{x} \min_{y \geq x} \left[ F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y) \right]
+   \min_{0 \leq \alpha \leq 1} \min_{x} \min_{y \geq x} \left[ F(x + \alpha (y-x)) - (1-\alpha)F(x) - \alpha F(y) \right]
 
-Let :math:`x=x_0-\epsilon`, :math:`y=x_0+\epsilon^2` and :math:`\lambda=\frac{1-\epsilon}{1+\epsilon}`. Then:
+Let :math:`x=x_0-\epsilon`, :math:`y=x_0+\epsilon^2` and :math:`\alpha=\frac{1-\epsilon}{1+\epsilon}`. Then:
 
 .. math::
-   x + \lambda(y-x) = (x_0-\epsilon) + \frac{1-\epsilon}{1+\epsilon}\left[x_0+\epsilon^2 - (x_0-\epsilon)\right] = x_0-\frac{\epsilon^3}{1+\epsilon}
+   x + \alpha(y-x) = (x_0-\epsilon) + \frac{1-\epsilon}{1+\epsilon}\left[x_0+\epsilon^2 - (x_0-\epsilon)\right] = x_0-\frac{\epsilon^3}{1+\epsilon}
 
 Now substituting this in, we discover:
 
 .. math::
-   F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y)
+   F(x + \alpha (y-x)) - (1-\alpha)F(x) - \alpha F(y)
 
 .. math::
    = F(x_0-\frac{\epsilon^3}{1+\epsilon}) - \frac{2\epsilon}{1+\epsilon} F(x_0-\epsilon) - \frac{1-\epsilon}{1+\epsilon} F(x_0+\epsilon)
@@ -169,7 +175,7 @@ Let us now take the limit as :math:`\epsilon \rightarrow 0`:
 This implies that
 
 .. math::
-   \min_{0 \leq \lambda \leq 1} \min_{x} \min_{y \geq x} \left[ F(x + \lambda (y-x)) - (1-\lambda)F(x) - \lambda F(y) \right] \leq - \beta,
+   \min_{0 \leq \alpha \leq 1} \min_{x} \min_{y \geq x} \left[ F(x + \alpha (y-x)) - (1-\alpha)F(x) - \alpha F(y) \right] \leq - \beta,
 
 since the minima is of course smaller than any limit.
 
@@ -230,3 +236,5 @@ Conclusion
 At the moment this test is not all I was hoping for. It's quite versatile, in the sense of being fully nonparametric and assuming little beyond the underlying distribution being monotone decreasing. But while theoretically the convergence is what one would expect, in practice the constants involved are large. I can only detect spikes in histograms after they've become significantly larger than I'd otherwise like.
 
 However, it's still certainly better than nothing. This method would have worked in several of the practical examples I described at the beginning and would have flagged issues earlier than than I detected them via manual processes. I do believe this method is worth adding to suites of automated anomaly detection. But if anyone can think of ways to improve this method, I'd love to hear about them.
+
+I've searched, but haven't found a lot of papers on this. One of the closest related ones is `Multiscale Testing of Qualitative Hypotheses <|filename|blog_media/2020/detecting_funny_histograms/euclid.aos.996986504.pdf>`_.
