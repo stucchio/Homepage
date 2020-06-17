@@ -211,7 +211,8 @@ textarea {
 
 table {
   border-collapse: collapse;
-  border-spacing: 0;
+  border-spacing: 0px;
+  border: 1px solid #dddddd;
 }
 
 @media print {
@@ -1659,6 +1660,7 @@ th {
   line-height: 1.428571429;
   vertical-align: top;
   border-top: 1px solid #dddddd;
+  border: 1px solid #dddddd;
 }
 
 .table > thead > tr > th {
