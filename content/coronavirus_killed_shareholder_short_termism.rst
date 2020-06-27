@@ -9,8 +9,6 @@ It's become a popular meme that "shareholders only care about the next quarter".
 
 But is this meme true?
 
-Relatedly, consider
-
 Coronavirus gives us a great empirical test of this theory.
 
 Formalizing the theory
