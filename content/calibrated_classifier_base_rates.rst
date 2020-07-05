@@ -1,6 +1,6 @@
 Calibrating a classifier when the base rate changes
 ###################################################
-:date: 2020-06-25 08:30
+:date: 2020-07-07 08:30
 :author: Chris Stucchio
 :tags: statistics, model calibration, labels hift
 :featured: true
@@ -17,14 +17,25 @@ Once the fraudsters fucked off, fraud attempts dropped to perhaps 1% of our tran
 
 This phenomenon is called **label shift**. The problem with label shift is that the base rate for the target class changes with time and this significantly affects the precision of the classifier.
 
+Typical characteristics of the problem
+--------------------------------------
+
+In general, the following are characteristics of the problem that I'm generally interested in:
+
+1. :math:`N` not too large - potentially under 100k.
+2. :math:`\alpha` in the ballpark of 0.1% to 5%.
+
+These kinds of problems are typical in security, fraud prevention, medicine, and other situations of attempting to detect harmful anomalous behavior.
+
+=============================================
 Precision, Risk Thresholds and Loss Functions
 =============================================
 
 For most classifiers the ultimate goal is to make a decision. The decision is taken in order to minimize some loss function which represents the real world cost of making a mistake.
 
-Consider as an example a clasifier :math:`f: \mathbb{R}^K \rightarrow \mathbb{R}` used to predict a disease. Let us define :math:`\vec{x} \in \mathbb{R}^K` to be our feature vector, :math:`z \in [0,1]` to be our risk score and :math:`y \in 0,1` the outcome in question.
+Consider as an example a clasifier :math:`f: \mathbb{R}^K \rightarrow \mathbb{R}` used to predict a disease. Let us define :math:`\vec{x} \in \mathbb{R}^K` to be our feature vector, :math:`z \in [0,1]` to be our risk score and :math:`y \in 0,1` whether or not the patient actually has the disease.
 
-A loss function might represent the loss in `QUALYs <https://en.wikipedia.org/wiki/Quality-adjusted_life_year>`_ from making an error. Concretely, suppose that a failure to diagnose a disease results in the immediate death of the patient - this is a loss of :code:`78 - patient's age` QUALYs. On the flip side, treatment is also risky - perhaps 5% of patients are allergic and also die instantly. This is a loss of :code:`5% x (78 - patient's age)`. Represented mathematically, our loss function is:
+A loss function might represent the loss in `QUALYs <https://en.wikipedia.org/wiki/Quality-adjusted_life_year>`_ from making an error. Concretely, suppose that a failure to diagnose a disease results in the immediate death of the patient - this is a loss of :code:`78 - patient's age` QUALYs. On the flip side, treatment is also risky - perhaps 5% of patients are allergic and also die instantly. This is a loss of :code:`5% x (78 - patient's age)` [#lifeexpectancycalc]_. Represented mathematically, our loss function is:
 
 .. math::
    L(\textrm{treat}; 0) = 0.05
@@ -39,7 +50,7 @@ A loss function might represent the loss in `QUALYs <https://en.wikipedia.org/wi
    L(\textrm{no~treat}; 1) = 1
 
 
-Let us also suppose that we have a calibrated risk score, i.e. a monotonically increasing function :math:`c: [0,1]->[0,1]` with the property that :math:`c(z)=P(y=1|\vec{z})`. For a given patient, the expected loss from treatment is therefore:
+Let us also suppose that we have a calibrated risk score, i.e. a monotonically increasing function :math:`c: [0,1]->[0,1]` with the property that :math:`c(z)=P(y=1|z)`. For a given patient, the expected loss from treatment is therefore:
 
 .. math::
    E[L(\textrm{treat}; y)] = (1-c(z)) \cdot 0.05 + c(z) \cdot 1 = 0.05 + 0.95 c(z)
@@ -72,7 +83,7 @@ Let's consider the effect of this on decisionmaking. Going back to our disease e
 
 But once :math:`\alpha=0.1`, the actual infection probability of a person with :math:`z=0.65` is nearly 40%. As per the loss function calculation earlier, we want to treat any patient with a 5.26% or greater chance of being sick!
 
-In the literature, when making batch predictions, there's a `known technique for solving this <|filename|blog_media/2020/calibrated_classifier_base_rates/Adjusting_the_Outputs_of_a_Classifier_to_New_a_Priori_Probabilities_A_Simple_Procedure__Saerens2002a.pdf>`_ [#saerens]_. The basic idea is the following. For a set of raw risk scores :math:`z_i, i=1\ldots N`, we know they are drawn from the distribution:
+In the literature, when making batch predictions, there's a `known technique for solving this <|filename|blog_media/2020/calibrated_classifier_base_rates/Adjusting_the_Outputs_of_a_Classifier_to_New_a_Priori_Probabilities_A_Simple_Procedure__Saerens2002a.pdf>`_ (see discussion [#saerens]_). The basic idea is the following. For a set of raw risk scores :math:`z_i, i=1\ldots N`, we know they are drawn from the distribution:
 
 .. math::
    z_i \leftarrow [(1-\alpha)f_0(Z) + \alpha f_1(Z)] dz
@@ -84,7 +95,7 @@ Thus, one can estimate :math:`\alpha` via the maximum likelihood principle (alth
 
 Maximizing this is straightforward - take logs, compute :math:`\frac{\partial L}{\partial \alpha}`, use `scipy.optimize.minimize <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html>`_.
 
-
+===========================================
 What happens when the distribution changes?
 ===========================================
 
@@ -94,7 +105,7 @@ However in practice, we often discover that :math:`f_1(Z)` changes with time as 
 
 Thus, the more general situation I'm considering is a mix of label shift/base rate changes, together with small to moderate changes in the distribution of the *exceptional class only*. By "exceptional class", I mean "sick" (in disease prediction), "fraud" (in fraud prevention), essentially the uncommon label which corresponds to something anomalous.
 
-In general, it is impossible to solve this problem [#impossibility]_. However, if we stay away from this degenerate case, it's actually quite possible to solve this problem and estimate both the new shape of :math:`f_1(z)` and :math:`\alpha`. The main restriction is that :math:`f_1(z)` is not too different from the old value, but right now I don't have a good characterization of what "not too different" actually means.
+In general, it is impossible to solve this problem [#impossibility]_. However, if we stay away from this degenerate case (see footnote [#impossibility]_), it's actually quite possible to solve this problem and estimate both the new shape of :math:`f_1(z)` and :math:`\alpha`. The main restriction is that :math:`f_1(z)` is not too different from the old value, but right now I don't have a good characterization of what "not too different" actually means.
 
 Formal statement of the setup
 -----------------------------
@@ -112,10 +123,10 @@ My method
 
 The approach I'm taking is upgrading the maximum likelihood estimation to a max-aposteriori estimation.
 
-I first parameterize the shape of the exceptional label :math:`f_1(z;\vec{q})` with :math:`\vec{q} \in \mathbb{R}^m`. I then construct a Bayesian prior on it which is clustered near :math:`f_1(z)`. It is straightforwardly derived from Bayes rule that:
+I first parameterize the shape of the exceptional label :math:`f_1(z;\vec{q})` with :math:`\vec{q} \in \mathbb{R}^m`. I then construct a Bayesian prior on it which is clustered near :math:`f_1(z)`. It is straightforwardly derived from Bayes rule that x:
 
 .. math::
-   P(\alpha, \vec{q} | \vec{z}) \sim P(\vec{z}|\alpha, \vec{q}) P(\alpha, \vec{q}) = P(\alpha, \vec{q}) \prod_{i=1}^N \left[(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q})\right]
+   P\left(\alpha, \vec{q} | \{z_i\}_{1}^{N} \right) \propto P\left(\{z_i\}_{1}^{N}|\alpha, \vec{q}\right) P(\alpha, \vec{q}) = P(\alpha, \vec{q}) \prod_{i=1}^N \left[(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q})\right]
 
 For simplicity I'm taking :math:`P(\alpha, \vec{q}) = P(\vec{q})`, a uniform prior on :math:`\alpha`.
 
@@ -178,14 +189,19 @@ Defining a prior on a function space - e.g. the space of all probability distrib
 The situation we are attempting to model is a small to moderate *change* in the distribution of :math:`f_1(z)`, particularly in regions where :math:`f_0(z)` is small. So we will define the (unnormalized) prior to be:
 
 .. math::
-   \textrm{prior}(\vec{q}) \sim \textrm{exp} \left( -\beta \int_0^1 \langle f_1(z; \vec{q}) - f_1(z) \rangle^p f_0(z) dz \right)
+   \textrm{prior}(\vec{q}) \sim \textrm{exp} \left( -\beta \int_0^1 \left[g(f_1(z; \vec{q}) - f_1(z))\right]^p f_0(z) dz \right)
 
-where :math:`\langle x \rangle = \sqrt{1+x^2}-1` is a "japanese x". (In scattering theory smoothed versions of :math:`|x|` are often called "japanese x". I don't know the reason, most likely it just became popular first in Japan and then spread to the rest of the world.)
+where :math:`g(x) = \sqrt{1+x^2}-1` is a basically just a smoothed out (differentiable) version of :math:`|x|`. We need a smooth version of :math:`|x|` simply because when we do max-aposteriori later, a smooth curve makes numerical minimization easier.
+
+This prior should not be thought of as a principled Bayesian prior, but merely one chosen for convenience and because it regularizes the method. If we ignore the smoothing, this is analogous to a prior that penalizes deviation from :math:`f_1(z)` in the :math:`L^p(f_0(z) dz)` metric. The measure :math:`f_0(z) dz` is used to penalize deviation more in areas where :math:`f_0(z)` is large. The parameter :math:`\beta` represents the strength of the prior - larger :math:`\beta` means that :math:`f_1(z; \vec{q})` will remain closer to :math:`f_1(z)`.
+
+
+One important note about the power :math:`p`. Because :math:`g(x) = O(x^2)` as :math:`x \rightarrow 0`, choosing :math:`p=1` does NOT actually generate any kind of sparsity penalty, in contrast to using :math:`|x|^1`.
 
 The likelihood is (as per the above):
 
 .. math::
-   \prod_{i=1}^N \left[(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q})\right]
+   \textrm{likelihood}(\alpha, \vec{q}) \equiv P(\{z_i\}_{1}^{N}|\alpha, \vec{q}) = \prod_{i=1}^N \left[(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q})\right]
 
 Computing the log of likelihood times prior (neglecting the normalization term from Bayes rule), we obtain:
 
@@ -193,23 +209,26 @@ Computing the log of likelihood times prior (neglecting the normalization term f
    \log[\textrm{prior}(\vec{q})\textrm{likelihood}(\alpha, \vec{q})] = \left( \sum_{i=1}^N \log \left[(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q})\right] \right)
 
 .. math::
-   - \beta \int_0^1 \langle f_1(z; \vec{q}) - f_1(z) \rangle f_0(z) dz
+   - \beta \int_0^1 \left[g(f_1(z; \vec{q}) - f_1(z))\right]^p f_0(z) dz
 
 The gradient of this with respect to :math:`(\alpha, \vec{q})` is:
 
 .. math::
-   \frac{ \partial \ln(P(\vec{z}|\vec{q},\alpha)}{\partial \alpha} = \sum_{i=1}^N \frac{ f_1(z_i; \vec{q}) - f_0(z_i) }{(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q}) }
+   \frac{ \partial \ln(P(\{z_i\}_{1}^{N}|\vec{q},\alpha)}{\partial \alpha} = \sum_{i=1}^N \frac{ f_1(z_i; \vec{q}) - f_0(z_i) }{(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q}) }
 
 .. math::
-   \nabla_{\vec{q}} \ln(P(\vec{z}|\vec{q},\alpha) = \sum_{i=1}^N \frac{\alpha}{(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q}) } \nabla_{\vec{q}} f_1(z_i; \vec{q})
+   \nabla_{\vec{q}} \ln(P(\{z_i\}_{1}^{N}|\vec{q},\alpha) = \sum_{i=1}^N \frac{\alpha}{(1-\alpha)f_0(z_i) + \alpha f_1(z_i; \vec{q}) } \nabla_{\vec{q}} f_1(z_i; \vec{q})
 
 .. math::
-   - \beta \int_0^1 p \langle f_1(z; \vec{q}) - f_1(z) \rangle^{p-1} \frac{[f_1(z; \vec{q}) - f_1(z)] }{\sqrt{1+[f_1(z; \vec{q}) - f_1(z)]^2}}\left[ \nabla_{\vec{q}} f_1(z;\vec{q}) \right] f_0(z) dz
+   - \beta \int_0^1 p g( f_1(\zeta; \vec{q}) - f_1(\zeta) )^{p-1} \frac{[f_1(\zeta; \vec{q}) - f_1(\zeta)] }{\sqrt{1+[f_1(\zeta; \vec{q}) - f_1(\zeta)]^2}}\left[ \nabla_{\vec{q}} f_1(\zeta;\vec{q}) \right] f_0(\zeta) d\zeta
 
 Using this objective function and gradient, it is straightforward to use `scipy.optimize.minimize <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html>`_ to simultaneously find both :math:`\vec{q}` and :math:`\alpha`.
 
+========
 Examples
 ========
+
+**Note:** All of the examples here are computed in this `Jupyter notebook <|filename|blog_media/2020/calibrated_classifier_base_rates/dynamic_calibration.ipynb>`_. For more specific details on how they were performed, the notebook is the place to look.
 
 Here's an example. I took a distribution of 97.7% negative samples, with a relatively simple prior distribution. I simulated a significant change of shape in the distribution of :math:`z` scores of the positive class, which is illustrated in red in the graph below. As can be seen, the approximation (the orange line) is reasonably good. Moreover, we recover :math:`\alpha` with reasonable accuracy - the measured :math:`\alpha` was 0.0225 while the true :math:`\alpha` was 0.0234.
 
@@ -261,6 +280,18 @@ The `Brier Score <https://en.wikipedia.org/wiki/Brier_score>`_ - an explicit met
 
 The `average precision score <https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html>`_ also tends to increase over *multiple batches* with different :math:`\alpha, \vec{q}`.
 
+Comparison to more standard label shift methods
+-----------------------------------------------
+
+Another approach (the approach of papers linked in footnote [#saerens]_) is to simply fit :math:`\alpha` and do not allow :math:`f_1(z)` to change.
+
+In experiments, I've noticed that fitting :math:`\alpha` without allowing :math:`f_1(z)` to change generally produces a more accurate estimate of :math:`\alpha`, even in situations where the true distribution differs significantly from :math:`f_1(z)`.
+
+However, in spite of a more accurate estimate of :math:`\alpha`, the resulting calibration curves from fitting only :math:`\alpha` do not tend to be as accurate. The curve that comes from fitting :math:`\alpha, \vec{q}` is more accurate than the fit of :math:`\alpha` alone:
+
+.. image:: |filename|blog_media/2020/calibrated_classifier_base_rates/compare_to_mlls.png
+
+===========
 Future work
 ===========
 
@@ -279,7 +310,8 @@ As one additional note, I'll mention that I have some work (which I'll write abo
 
 .. rubric:: **Notes**
 
-.. [#saerens] `Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure <|filename|blog_media/2020/calibrated_classifier_base_rates/Adjusting_the_Outputs_of_a_Classifier_to_New_a_Priori_Probabilities_A_Simple_Procedure__Saerens2002a.pdf>`_, by Marco Saerens, Patrice Latinne & Christine Decaestecker. Another useful paper is `EM with Bias-Corrected Calibration is Hard-To-Beat at Label Shift Adaptation <|filename|blog_media/2020/calibrated_classifier_base_rates/EM_with_Bias_Corrected_Calibration_is_Hard_To_Beat_at_Label_Shift_Adaptation__1901.06852v4.pdf>`_ which compares the maximum likelihood method with other more complex methods and finds it's generally competitive.
+.. [#lifeexpectancycalc] In reality 78 should be replaced with life expectancy *at the time of diagnosis*, which is typically larger than the mean population life expectancy. This is a technical detail irrelevant for this post.
+.. [#saerens] `Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure <|filename|blog_media/2020/calibrated_classifier_base_rates/Adjusting_the_Outputs_of_a_Classifier_to_New_a_Priori_Probabilities_A_Simple_Procedure__Saerens2002a.pdf>`_, by Marco Saerens, Patrice Latinne & Christine Decaestecker. Another useful paper is `EM with Bias-Corrected Calibration is Hard-To-Beat at Label Shift Adaptation <|filename|blog_media/2020/calibrated_classifier_base_rates/EM_with_Bias_Corrected_Calibration_is_Hard_To_Beat_at_Label_Shift_Adaptation__1901.06852v4.pdf>`_ which compares the maximum likelihood method with other more complex methods and finds it's generally competitive. This `paper <|filename|blog_media/2020/calibrated_classifier_base_ratesA_Unified_View_of_Label_Shift_Estimation__2003.07554v1.pdf>`_ also suggests max likelihood type methods are usually the best.
 .. [#serensdiff] The approach taken in the papers cited in [#saerens]_ are a bit different - they do expectation maximization and actually generate parameters representing outcome variables, requiring use of expectation maximization. The approach I'm describing just represents likelihoods of z-scores and ignores outcomes. But in principle these approaches are quite similar, and in testing the version I use tends to be a bit simpler and still works.
 .. [#betakde] `Adaptive Estimation of a Density Function Using Beta Kernels <|filename|blog_media/2020/calibrated_classifier_base_rates/Adaptive_Estimation_of_a_Density_Function_Using_Beta_Kernels__BK-2014.pdf>`_ by Karine Bertin and Nicolas Klutchnikoff.
 .. [#impossibility] Suppose that the distribution :math:`f_1(z)` changes so that :math:`f_1(z)=f_0(z)`. Then for all :math:`\alpha_0, \alpha_1 \in [0,1]`, :math:`[(1-\alpha_0)f_0(Z) + \alpha_0 f_1(Z)] \equiv [(1-\alpha_1)f_0(Z) + \alpha_1 f_1(Z)]` and therefore it is impossible to distinguish between different values of :math:`\alpha` from the distribution of :math:`z` alone.
