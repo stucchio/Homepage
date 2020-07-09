@@ -53,9 +53,15 @@ A loss function might represent the loss in `QUALYs <https://en.wikipedia.org/wi
 Let us also suppose that we have a calibrated risk score, i.e. a monotonically increasing function :math:`c: [0,1]->[0,1]` with the property that :math:`c(z)=P(y=1|z)`. For a given patient, the expected loss from treatment is therefore:
 
 .. math::
-   E[L(\textrm{treat}; y)] = (1-c(z)) \cdot 0.05 + c(z) \cdot 1 = 0.05 + 0.95 c(z)
+   E[L(\textrm{treat}; y)] = (1-c(z)) \cdot 0.05
 
-This is positive when :math:`c(z) > 0.05/0.95 \approx 0.0526`, so the optimal decision rule is to treat every patient with a risk score larger than 0.0526 while letting the others go untreated.
+while the loss from non-treatment is:
+
+.. math::
+   E[L(\textrm{no~treat}; y)] = c(z) \cdot 1 = c(z)
+
+
+The expected loss from treatment exceeds the expected loss from non-treatment when :math:`c(z) > 0.05/1.05 \approx 0.0526`, so the optimal decision rule is to treat every patient with a (calibrated) risk score larger than 0.0526 while letting the others go untreated.
 
 The effect of label shift on calibration
 ----------------------------------------
