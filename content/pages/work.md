@@ -3,7 +3,7 @@ URL: work.html
 Save_as: work.html
 menubar: true
 
-I am a Data Scientist (formerly known as "Statistician") and I am currently the director of data science at [Simpl](http://getsimpl.com/), the top Pay Later product in India.
+I am a Data Scientist (formerly known as "Statistician") and I am currently doing anti-fraud machine learning at [Affirm](https://affirm.com).
 
 Things I'm good at:
 
